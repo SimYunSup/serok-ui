@@ -1,0 +1,11 @@
+{
+  "name": "storybook",
+  "private": true,
+  "version": "0.0.1",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "dependencies": {
+    "@serok/registry-package": "workspace:*",
+    "@storybook/react-vite": "workspace:*"
+  }
+}
