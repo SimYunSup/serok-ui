@@ -1,0 +1,40 @@
+name: Publish docs via GitHub Pages
+on:
+  push:
+    branches: [ 'main' ]
+    paths: [ '.github/workflows/**', 'app/**', 'packages/registry-package/**' ]
+permissions:
+  contents: write
+  pages: write
+jobs:
+  deploy-to-github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: "./.nvmrc"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: "./package.json"
+          run_install: |
+            - recursive: true
+              args: [--ignore-scripts, --frozen-lockfile]
+
+
+      - name: Build Storybook
+        run: |
+          pnpm build:storybook
+
+      - name: Add .nojekyll file
+        run: touch storybook-static/.nojekyll
+
+      - name: Commit wwwroot to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          BRANCH: docs
+          FOLDER: storybook-static

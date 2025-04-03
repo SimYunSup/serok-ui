@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "lib": ["Decorators", "DOM", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true
+  },
+  "includes": [
+    "**/stories/**/*.stories.tsx",
+    "**/stories/**/*.stories.ts",
+  ]
+}

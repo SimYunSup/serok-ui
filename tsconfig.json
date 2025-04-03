@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compileOnSave": false,
+  "display": "Default",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "rootDir": ".",
+    "declaration": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "preserveWatchOutput": true,
+    "strict": true
+  },
+  "exclude": ["node_modules"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.storybook.json"
+    }
+  ]
+}

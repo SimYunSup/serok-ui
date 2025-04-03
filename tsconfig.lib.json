@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "./lib/**/*.tsx",
+    "./lib/**/*.ts",
+    "./lib/shim.d.ts"
+  ],
+  "exclude": [
+    "**/stories/**/*.stories.tsx"
+  ]
+}
