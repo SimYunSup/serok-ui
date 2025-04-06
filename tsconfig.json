@@ -12,7 +12,8 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "preserveWatchOutput": true,
-    "strict": true
+    "strict": true,
+    "noErrorTruncation": true
   },
   "exclude": ["node_modules"],
   "references": [

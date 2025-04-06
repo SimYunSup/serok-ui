@@ -33,8 +33,12 @@
   },
   "packageManager": "pnpm@10.7.1",
   "dependencies": {
-    "@spectrum-web-components/button": "^1.4.0",
     "@spectrum-web-components/styles": "^1.4.0",
+    "@swc-react/button": "^1.2.0",
+    "@swc-react/checkbox": "^1.2.0",
+    "@swc-react/picker": "^1.2.0",
+    "@swc-react/switch": "^1.2.0",
+    "@swc-react/textfield": "^1.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },

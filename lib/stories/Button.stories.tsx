@@ -22,12 +22,12 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["accent", "primary", "secondary", "negative", "white", "black"],
+      options: ["accent", "secondary", "primary", "negative", "white", "black"],
       description: "버튼 색깔",
     },
     size: {
       control: "select",
-      options: ["xxs", "xs", "s", "m", "l", "xl", "xxl"],
+      options: ["s", "m", "l", "xl"],
       description: "버튼 크기",
     },
     treatment: {

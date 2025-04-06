@@ -7,6 +7,11 @@
 
 @layer serok {
   .serok-root {
+    font-family: var(--spectrum-sans-font-family-stack);
+    --spectrum-sans-serif-font-family: "Pretendard";    --spectrum-sans-font-family-stack: "Pretendard Variable",
+    var(--spectrum-sans-serif-font-family), 'Source Sans Pro', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS',
+    'Lucida Grande', sans-serif;
     --white: #ffffff;
     --black: #000000;
     --serok-static-primary-100: #ebd4fe;
