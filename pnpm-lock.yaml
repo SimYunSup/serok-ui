@@ -17,6 +17,9 @@ importers:
       '@swc-react/checkbox':
         specifier: ^1.2.0
         version: 1.2.0(@types/react@19.1.0)
+      '@swc-react/menu':
+        specifier: ^1.2.0
+        version: 1.2.0(@types/react@19.1.0)
       '@swc-react/picker':
         specifier: ^1.2.0
         version: 1.2.0(@types/react@19.1.0)
@@ -837,6 +840,14 @@ packages:
 
   '@swc-react/checkbox@1.2.0':
     resolution: {integrity: sha512-mJlSuHGwG9uHNCzvrVPEzMMKNHY9xsu6xLQpzEHiA9+ZvfsGYLdbPphZ2CflLkKcSP7HJXwbch83xzujK4OukA==}
+    peerDependencies:
+      next: ~13.4 || ~14
+    peerDependenciesMeta:
+      next:
+        optional: true
+
+  '@swc-react/menu@1.2.0':
+    resolution: {integrity: sha512-qwFMLMNHVyOyE8+CENTnsQY80K2Uy6nqgYabzMqjXQhFG7N/wt+57OCVyufW84XWha7sYtWEUFJ6sNZNIlyejQ==}
     peerDependencies:
       next: ~13.4 || ~14
     peerDependenciesMeta:
@@ -2807,6 +2818,13 @@ snapshots:
     dependencies:
       '@lit/react': 1.0.7(@types/react@19.1.0)
       '@spectrum-web-components/checkbox': 1.4.0
+    transitivePeerDependencies:
+      - '@types/react'
+
+  '@swc-react/menu@1.2.0(@types/react@19.1.0)':
+    dependencies:
+      '@lit/react': 1.0.7(@types/react@19.1.0)
+      '@spectrum-web-components/menu': 1.4.0
     transitivePeerDependencies:
       - '@types/react'
 

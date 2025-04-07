@@ -36,6 +36,7 @@
     "@spectrum-web-components/styles": "^1.4.0",
     "@swc-react/button": "^1.2.0",
     "@swc-react/checkbox": "^1.2.0",
+    "@swc-react/menu": "^1.2.0",
     "@swc-react/picker": "^1.2.0",
     "@swc-react/switch": "^1.2.0",
     "@swc-react/textfield": "^1.2.0",
