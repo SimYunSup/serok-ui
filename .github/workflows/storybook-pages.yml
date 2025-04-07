@@ -2,7 +2,7 @@ name: Publish docs via GitHub Pages
 on:
   push:
     branches: [ 'main' ]
-    paths: [ '.github/workflows/**', 'app/**', 'packages/registry-package/**' ]
+    paths: [ '.github/workflows/**', 'lib/**' ]
 permissions:
   contents: write
   pages: write
