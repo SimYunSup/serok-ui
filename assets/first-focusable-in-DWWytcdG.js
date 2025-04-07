@@ -1,0 +1,1 @@
+const o=["button","[focusable]","[href]","input","label","select","textarea","[tabindex]"],t=':not([tabindex="-1"])',s=o.join(`${t}, `)+t,n=e=>e.querySelector(s),c=e=>e.assignedElements().find(a=>a.matches(s));export{c as a,n as f,s as u};

@@ -1,0 +1,1 @@
+function u(t,e,n){const r=t.getAttribute(e);let i=r?r.split(/\s+/):[];i=i.filter(o=>!n.find(s=>o===s)),i.length?t.setAttribute(e,i.join(" ")):t.removeAttribute(e)}function A(t,e,n){const r=Array.isArray(n)?n:[n],i=t.getAttribute(e),o=i?i.split(/\s+/):[];return r.every(s=>o.indexOf(s)>-1)?()=>{}:(o.push(...r),t.setAttribute(e,o.join(" ")),()=>u(t,e,r))}export{A as c};
