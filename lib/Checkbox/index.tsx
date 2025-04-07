@@ -1,16 +1,19 @@
 import { Checkbox as SpCheckbox } from "@swc-react/checkbox";
 import "./styles.css";
 
-interface CheckboxProps extends React.ComponentProps<typeof SpCheckbox> {
+interface CheckboxProps extends Omit<React.ComponentProps<typeof SpCheckbox>, "emphasized"> {
   variant: "default" | "accent" | "secondary";
 }
 
-export function Checkbox(props: CheckboxProps) {
+export function Checkbox({
+  variant,
+  ...props
+}: CheckboxProps) {
   return (
     <SpCheckbox
       {...props}
-      emphasized={props.variant !== "default"}
-      data-variant={props.variant}
+      emphasized={variant !== "default"}
+      data-variant={variant}
     />
   );
 }

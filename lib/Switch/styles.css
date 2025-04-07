@@ -1,0 +1,24 @@
+@layer serok {
+  .serok-root sp-switch {
+    &[data-variant="accent"][emphasized] {
+      --mod-switch-background-color-selected-default: var(--spectrum-accent-color-700);
+      --mod-switch-background-color-selected-hover: var(--spectrum-accent-color-800);
+      --mod-switch-background-color-selected-down: var(--spectrum-accent-color-800);
+      --mod-switch-background-color-selected-focus: var(--spectrum-accent-color-800);
+      --mod-switch-handle-border-color-selected-default: var(--spectrum-accent-color-800);
+      --mod-switch-handle-border-color-selected-hover: var(--spectrum-accent-color-900);
+      --mod-switch-handle-border-color-selected-down: var(--spectrum-accent-color-900);
+      --mod-switch-handle-border-color-selected-focus: var(--spectrum-accent-color-900);
+    }
+    &[data-variant="secondary"][emphasized] {
+      --mod-switch-background-color-selected-default: var(--spectrum-secondary-color-700);
+      --mod-switch-background-color-selected-hover: var(--spectrum-secondary-color-800);
+      --mod-switch-background-color-selected-down: var(--spectrum-secondary-color-800);
+      --mod-switch-background-color-selected-focus: var(--spectrum-secondary-color-800);
+      --mod-switch-handle-border-color-selected-default: var(--spectrum-secondary-color-800);
+      --mod-switch-handle-border-color-selected-hover: var(--spectrum-secondary-color-900);
+      --mod-switch-handle-border-color-selected-down: var(--spectrum-secondary-color-900);
+      --mod-switch-handle-border-color-selected-focus: var(--spectrum-secondary-color-900);
+    }
+  }
+}
