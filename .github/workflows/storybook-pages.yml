@@ -38,26 +38,24 @@ jobs:
             - recursive: true
               args: [--ignore-scripts, --frozen-lockfile]
 
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Build Storybook
         run: |
           pnpm build:storybook
 
-      - name: Add .nojekyll file
-        run: touch storybook-static/.nojekyll
-
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./storybook-static"
+          path: "${{ github.workspace }}/storybook-static"
+        continue-on-error: true
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
