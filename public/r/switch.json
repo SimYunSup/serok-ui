@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "switch",
+  "type": "registry:ui",
+  "title": "Switch",
+  "description": "Component: Switch",
+  "dependencies": [
+    "@swc-react/switch"
+  ],
+  "files": [
+    {
+      "path": "lib/Switch/index.tsx",
+      "content": "import { Switch as SpSwitch } from \"@swc-react/switch\";\nimport \"./styles.css\";\n\ninterface SwitchProps extends Omit<React.ComponentProps<typeof SpSwitch>, \"emphasized\"> {\n  variant: \"default\" | \"accent\" | \"secondary\";\n}\n\nexport function Switch({\n  variant,\n  ...props\n}: SwitchProps) {\n  return (\n    <SpSwitch\n      {...props}\n      emphasized={variant !== \"default\"}\n      data-variant={variant}\n    />\n  );\n}\n",
+      "type": "registry:component"
+    },
+    {
+      "path": "lib/Switch/styles.css",
+      "content": "@layer serok {\n  .serok-root sp-switch {\n    &[data-variant=\"accent\"][emphasized] {\n      --mod-switch-background-color-selected-default: var(--spectrum-accent-color-700);\n      --mod-switch-background-color-selected-hover: var(--spectrum-accent-color-800);\n      --mod-switch-background-color-selected-down: var(--spectrum-accent-color-800);\n      --mod-switch-background-color-selected-focus: var(--spectrum-accent-color-800);\n      --mod-switch-handle-border-color-selected-default: var(--spectrum-accent-color-800);\n      --mod-switch-handle-border-color-selected-hover: var(--spectrum-accent-color-900);\n      --mod-switch-handle-border-color-selected-down: var(--spectrum-accent-color-900);\n      --mod-switch-handle-border-color-selected-focus: var(--spectrum-accent-color-900);\n    }\n    &[data-variant=\"secondary\"][emphasized] {\n      --mod-switch-background-color-selected-default: var(--spectrum-secondary-color-700);\n      --mod-switch-background-color-selected-hover: var(--spectrum-secondary-color-800);\n      --mod-switch-background-color-selected-down: var(--spectrum-secondary-color-800);\n      --mod-switch-background-color-selected-focus: var(--spectrum-secondary-color-800);\n      --mod-switch-handle-border-color-selected-default: var(--spectrum-secondary-color-800);\n      --mod-switch-handle-border-color-selected-hover: var(--spectrum-secondary-color-900);\n      --mod-switch-handle-border-color-selected-down: var(--spectrum-secondary-color-900);\n      --mod-switch-handle-border-color-selected-focus: var(--spectrum-secondary-color-900);\n    }\n  }\n}\n",
+      "type": "registry:component"
+    }
+  ]
+}

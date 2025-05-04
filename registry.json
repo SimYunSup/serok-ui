@@ -1,0 +1,132 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "serok-ui",
+  "homepage": "https://your-project-homepage.com",
+  "items": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Component: Button",
+      "dependencies": [
+        "@swc-react/button"
+      ],
+      "files": [
+        {
+          "path": "lib/Button/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/Button/styles.css",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Component: Checkbox",
+      "dependencies": [
+        "@swc-react/checkbox"
+      ],
+      "files": [
+        {
+          "path": "lib/Checkbox/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/Checkbox/styles.css",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Component: Input",
+      "dependencies": [
+        "@swc-react/textfield"
+      ],
+      "files": [
+        {
+          "path": "lib/Input/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "Component: Menu",
+      "dependencies": [
+        "@swc-react/menu"
+      ],
+      "files": [
+        {
+          "path": "lib/Menu/index.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "provider",
+      "type": "registry:ui",
+      "title": "Provider",
+      "description": "Component: Provider",
+      "dependencies": [
+        "react"
+      ],
+      "files": [
+        {
+          "path": "lib/Provider/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/Provider/style.css",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Component: Select",
+      "dependencies": [
+        "@swc-react/picker"
+      ],
+      "files": [
+        {
+          "path": "lib/Select/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/Select/styles.css",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Component: Switch",
+      "dependencies": [
+        "@swc-react/switch"
+      ],
+      "files": [
+        {
+          "path": "lib/Switch/index.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "lib/Switch/styles.css",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
