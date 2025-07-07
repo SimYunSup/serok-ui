@@ -89,7 +89,7 @@ const getDependencies = (content: string): string[] => {
   await fs.mkdir(targetPath, { recursive: true });
 
   // build start
-  await Promise.allSettled(
+  await Promise.all(
     filteredFolders.map(async (folderName) => {
       console.log(`build start: ${folderName}`);
 
