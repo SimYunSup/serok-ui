@@ -42,7 +42,6 @@
     "@swc-react/picker": "^1.2.0",
     "@swc-react/switch": "^1.2.0",
     "@swc-react/textfield": "^1.2.0",
-    "css-tree": "^3.1.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tsx": "^4.19.4"
