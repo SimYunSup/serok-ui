@@ -57,3 +57,4 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
 *storybook.log
+registry.json
