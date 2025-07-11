@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import "../style/serok/index.css";
+import "../style/serok.css";
 import { Switch } from "../component/Switch";
 
 const meta: Meta<typeof Switch> = {

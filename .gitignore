@@ -58,4 +58,4 @@ vitest.config.*.timestamp*
 
 *storybook.log
 registry.json
-r/**/*
+**/r/**/*

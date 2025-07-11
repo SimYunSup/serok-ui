@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import "../style/serok/index.css";
+import "../style/serok.css";
 import { Checkbox } from "../component/Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
