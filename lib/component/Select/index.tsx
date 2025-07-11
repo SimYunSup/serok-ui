@@ -1,3 +1,4 @@
+/* type: registry:component */
 import { Picker as SpPicker } from "@swc-react/picker";
 import "./styles.css";
 

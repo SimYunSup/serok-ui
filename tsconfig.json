@@ -8,12 +8,16 @@
     "isolatedModules": true,
     "rootDir": ".",
     "declaration": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
+    "target": "esnext",
     "skipLibCheck": true,
     "baseUrl": ".",
     "preserveWatchOutput": true,
     "strict": true,
-    "noErrorTruncation": true
+    "noErrorTruncation": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "exclude": ["node_modules"],
   "references": [

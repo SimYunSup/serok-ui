@@ -1,18 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Select } from "../Select";
-import { MenuItem } from "../Menu";
-import { Provider } from "../Provider";
+import "../style/serok/index.css";
+import { Select } from "../component/Select";
+import { MenuItem } from "../component/Menu";
 
 const meta: Meta<typeof Select> = {
   title: "Example/Select",
   component: Select,
   decorators: [
     (Story) => (
-      <Provider>
-        <Story />
-      </Provider>
+      <Story />
     ),
   ],
   parameters: {

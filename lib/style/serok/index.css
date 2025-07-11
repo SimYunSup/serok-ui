@@ -1,3 +1,4 @@
+/* type: registry:style */
 @import "@spectrum-web-components/styles/typography.css" layer(spectrum);
 @import "@spectrum-web-components/styles/tokens-v2/global-vars.css" layer(spectrum);
 @import "@spectrum-web-components/styles/tokens-v2/medium-vars.css" layer(spectrum);

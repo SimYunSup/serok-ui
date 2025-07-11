@@ -11,8 +11,8 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "build:registry-item": "tsx script/buildRegistryItem.ts",
-    "build:registry": "tsx script/buildRegistry.ts && pnpm dlx shadcn@latest build"
+    "build:shadcn": "shadcn build",
+    "build:registry": "tsx script/buildRegistry.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
@@ -29,9 +29,11 @@
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.23.0",
     "eslint-plugin-storybook": "^0.12.0",
+    "shadcn": "2.9.0-canary.1",
     "storybook": "^8.6.12",
     "typescript-eslint": "^8.29.0",
-    "vite": "^6.2.5"
+    "vite": "^6.2.5",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "packageManager": "pnpm@10.7.1",
   "dependencies": {

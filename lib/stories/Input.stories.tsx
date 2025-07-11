@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Input } from "../Input";
-import { Provider } from "../Provider";
+import "../style/serok/index.css";
+import { Input } from "../component/Input";
 
 const meta: Meta<typeof Input> = {
   title: "Example/Input",
   component: Input,
   decorators: [
     (Story) => (
-      <Provider>
-        <Story />
-      </Provider>
+      <Story />
     ),
   ],
   parameters: {
