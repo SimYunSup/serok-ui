@@ -4,9 +4,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
+import { readPackageJSON } from "pkg-types";
 
 const cwd = process.cwd();
-
+const packageJSON = await readPackageJSON(cwd);
 const LIB_FOLDER = "lib"; // 라이브러리 소스 파일이 있는 디렉토리 이름
 
 const libDirectory = path.join(cwd, LIB_FOLDER);
@@ -23,16 +24,17 @@ interface RegistryItemEntry {
   title: string; // 컴포넌트 제목 (첫 글자 대문자)
   description: string; // 컴포넌트 설명
   dependencies?: string[]; // 외부 의존성 목록
-  registryDependencies?: string[]; // 레지스트리 의존성 목록 (예: ui, block 등)
-  files: ComponentFile[];
+  registryDependencies?: string[];
+  css?: Record<string, any>; // CSS 내용 (스타일 블록)
+  files?: ComponentFile[];
 }
 
 const types = ["block", "ui", "lib", "component", "hook", "file", "style"] as const;
 
 const registry = {
   $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "serok-ui", // 레지스트리 이름 (예: serok-ui)
-  homepage: "https://your-project-homepage.com", // 프로젝트 홈페이지 URL
+  name: packageJSON.name, // 레지스트리 이름 (예: serok-ui)
+  homepage: packageJSON.homepage, // 프로젝트 홈페이지 URL
   items: [] as RegistryItemEntry[], // 컴포넌트 항목 목록
 }
 
@@ -76,6 +78,87 @@ const extractDependenciesFromCSS = (content: string): string[] => {
   return Array.from(dependencies);
 };
 
+// CSS 문자열을 JSON 객체로 변환하는 함수
+const transformCssToJson = (css: string): Record<string, any> => {
+  // 1. 전처리: 주석 제거 및 공백 정리
+  css = css.replace(/\/\*[\s\S]*?\*\/|([^:]|^)\/\/.*$/gm, "$1").trim();
+
+  const result: Record<string, any> = {};
+  let i = 0;
+  const len = css.length;
+
+  // 현재 경로에 값을 설정하는 visitor 함수
+  const visitor = (path: string[], value: any) => {
+    let current = result;
+    for (let j = 0; j < path.length - 1; j++) {
+      const segment = path[j];
+      if (!current[segment]) {
+        current[segment] = {};
+      }
+      current = current[segment];
+    }
+    const lastSegment = path[path.length - 1];
+    // 여러 선택자 (예: "h1, h2")에 대한 기존 선언을 병합합니다.
+    current[lastSegment] = { ...(current[lastSegment] || {}), ...value };
+  };
+
+  const parse = (currentPath: string[] = [], depth = 0) => {
+    let selector = '';
+    let declarations: Record<string, any> = {};
+
+    while (i < len) {
+      const char = css[i];
+      if (char === '{') {
+        i++;
+        const blockKey = selector.trim();
+        selector = ''; // 셀렉터 초기화
+
+        // @-규칙 블록 내부를 재귀적으로 파싱
+        if (blockKey.startsWith('@')) {
+          parse([...currentPath, blockKey], depth + 1);
+        } else { // 일반 규칙 블록
+          const contentEnd = css.indexOf('}', i);
+          if (contentEnd === -1) break; // 닫는 괄호가 없으면 중단
+
+          const declarationStr = css.substring(i, contentEnd);
+          declarations = {};
+          declarationStr.split(';').forEach(decl => {
+            if (decl.trim()) {
+              const parts = decl.split(':');
+              const key = parts.shift()?.trim();
+              const value = parts.join(':').trim();
+              if (key && value) {
+                declarations[key] = value;
+              }
+            }
+          });
+
+          // 여러 선택자 (예: "from, to" 또는 ".a, .b") 처리
+          blockKey.split(',').forEach(sel => {
+            visitor([...currentPath, sel.trim()], declarations);
+          });
+
+          i = contentEnd; // 파싱한 부분 건너뛰기
+        }
+      } else if (char === '}') {
+        i++;
+        // 현재 깊이의 파싱이 끝나면 반환
+        if (depth > 0) return;
+      } else if (char === ';' && depth === 0) {
+        result[selector.trim() + ";"] = {};
+        selector = '';
+        i++;
+      } else {
+        selector += char;
+        i++;
+      }
+    }
+  };
+
+  parse(); // 최상위 레벨에서 파싱 시작
+  return result;
+};
+
 // 문자열의 첫 글자를 대문자로 변환하는 함수
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -90,6 +173,21 @@ try {
     const items = await fs.readdir(typeDir, { withFileTypes: true });
 
     if (type === "style") {
+      for (const item of items) {
+        if (item.isFile()) {
+          const filePath = path.join(typeDir, item.name);
+          const content = await fs.readFile(filePath, "utf-8");
+          const dependencies = extractDependenciesFromCSS(content);
+          registry.items.push({
+            name: item.name.replace(".css", ""),
+            type: "registry:style",
+            title: `style: ${capitalize(item.name.replace(".css", ""))}`,
+            description: "",
+            css: transformCssToJson(content),
+            dependencies: dependencies.length > 0 ? dependencies : undefined,
+          });
+        }
+      }
       continue;
     }
 
