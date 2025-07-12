@@ -50,6 +50,14 @@ jobs:
 
       - name: Build Storybook
         run: |
+          pnpm build:registry
+          # Ensure the registry.json is generated before building shadcn components
+          if [ ! -f registry.json ]; then
+            echo "registry.json not found, exiting."
+            exit 1
+          fi
+          # Build shadcn components and Storybook
+          pnpm build:shadcn
           pnpm build:storybook
 
       - name: Upload artifact

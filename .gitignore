@@ -14,6 +14,8 @@ coverage
 out/
 build
 
+public
+
 # misc
 .DS_Store
 *.pem
@@ -55,3 +57,5 @@ vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
 *storybook.log
+registry.json
+**/r/**/*

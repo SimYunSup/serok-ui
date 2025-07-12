@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Switch } from "../Switch";
-import { Provider } from "../Provider";
+import "../style/serok.css";
+import { Switch } from "../component/Switch";
 
 const meta: Meta<typeof Switch> = {
   title: "Example/Switch",
   component: Switch,
   decorators: [
     (Story) => (
-      <Provider>
-        <Story />
-      </Provider>
+      <Story />
     ),
   ],
   parameters: {

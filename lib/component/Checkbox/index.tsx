@@ -1,3 +1,4 @@
+/* type: registry:component */
 import { Checkbox as SpCheckbox } from "@swc-react/checkbox";
 import "./styles.css";
 

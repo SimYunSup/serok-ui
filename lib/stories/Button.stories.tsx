@@ -1,17 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
-import { Button } from "../Button";
-import { Provider } from "../Provider";
+import "../style/serok.css";
+import { Button } from "../component/Button";
 
 const meta: Meta<typeof Button> = {
   title: "Example/Button",
   component: Button,
   decorators: [
     (Story) => (
-      <Provider>
-        <Story />
-      </Provider>
+      <Story />
     ),
   ],
   parameters: {

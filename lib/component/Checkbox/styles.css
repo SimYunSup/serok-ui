@@ -1,3 +1,4 @@
+/* type: registry:component */
 @layer serok {
   .serok-root sp-checkbox {
     &[data-variant="accent"][emphasized] {
