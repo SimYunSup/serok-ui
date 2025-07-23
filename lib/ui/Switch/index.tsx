@@ -1,3 +1,4 @@
+/* type: registry:ui */
 import { Switch as SpSwitch } from "@swc-react/switch";
 import "./styles.css";
 

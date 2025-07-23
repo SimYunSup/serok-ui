@@ -1,4 +1,4 @@
-/* type: registry:component */
+/* type: registry:ui */
 import { Textfield as SpTextfield } from "@swc-react/textfield";
 
 interface InputProps extends React.ComponentProps<typeof SpTextfield> { }

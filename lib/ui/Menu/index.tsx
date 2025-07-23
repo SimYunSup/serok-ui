@@ -1,4 +1,4 @@
-/* type: registry:component */
+/* type: registry:ui */
 import {
   Menu as SpMenu,
   MenuDivider as SpMenuDivider,

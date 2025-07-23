@@ -1,4 +1,4 @@
-/* type: registry:component */
+/* type: registry:ui */
 import { Button as SpButton } from "@swc-react/button";
 import "./styles.css";
 

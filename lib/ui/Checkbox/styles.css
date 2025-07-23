@@ -1,12 +1,13 @@
-/* type: registry:component */
+/* type: registry:ui */
 @layer serok {
   .serok-root sp-checkbox {
     &[data-variant="accent"][emphasized] {
-    --mod-checkbox-emphasized-color-default: var(--spectrum-accent-color-700);
-    --mod-checkbox-emphasized-color-hover: var(--spectrum-accent-color-800);
-    --mod-checkbox-emphasized-color-down: var(--spectrum-accent-color-900);
-    --mod-checkbox-emphasized-color-key-focus: var(--spectrum-accent-color-800);
+      --mod-checkbox-emphasized-color-default: var(--spectrum-accent-color-700);
+      --mod-checkbox-emphasized-color-hover: var(--spectrum-accent-color-800);
+      --mod-checkbox-emphasized-color-down: var(--spectrum-accent-color-900);
+      --mod-checkbox-emphasized-color-key-focus: var(--spectrum-accent-color-800);
     }
+
     &[data-variant="secondary"][emphasized] {
       --mod-checkbox-emphasized-color-default: var(--spectrum-secondary-color-700);
       --mod-checkbox-emphasized-color-hover: var(--spectrum-secondary-color-800);

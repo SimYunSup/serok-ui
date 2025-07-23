@@ -26,7 +26,7 @@ interface RegistryItemEntry {
   dependencies?: string[]; // 외부 의존성 목록
   registryDependencies?: string[];
   css?: Record<string, any>; // CSS 내용 (스타일 블록)
-  files?: ComponentFile[];
+  files: ComponentFile[];
 }
 
 const types = ["block", "ui", "lib", "component", "hook", "file", "style"] as const;
@@ -61,7 +61,7 @@ const extractDependenciesFromJS = (content: string): string[] => {
 const extractDependenciesFromCSS = (content: string): string[] => {
   const dependencies = new Set<string>();
   const importRegex =
-  /@import\s+["'](.*?)["']/g;
+    /@import\s+["'](.*?)["']/g;
   let match: RegExpExecArray | null = null;
 
   while ((match = importRegex.exec(content)) !== null) {
@@ -184,6 +184,7 @@ try {
             title: `style: ${capitalize(item.name.replace(".css", ""))}`,
             description: "",
             css: transformCssToJson(content),
+            files: [],
             dependencies: dependencies.length > 0 ? dependencies : undefined,
           });
         }
@@ -205,7 +206,7 @@ try {
             const content = await fs.readFile(filePath, "utf-8");
             const fileType = content.match(/\/\*[\s\S]*registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromJS(content);
-            const relativePath = path.relative(cwd, filePath);
+            const relativePath = path.relative(cwd, filePath).replace("lib/", "");
             fileData.push({
               path: relativePath,
               type: fileType ? `registry:${fileType}` : "registry:component",
@@ -217,11 +218,12 @@ try {
           else if (file.isFile() && file.name.endsWith(".css")) {
             const filePath = path.join(componentPath, file.name);
             const content = await fs.readFile(filePath, "utf-8");
+            const fileType = content.match(/\/\*[\s\S]*registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromCSS(content);
-            const relativePath = path.relative(cwd, filePath);
+            const relativePath = path.relative(cwd, filePath).replace("lib/", "");
             fileData.push({
               path: relativePath,
-              type: "registry:component",
+              type: fileType ? `registry:${fileType}` : "registry:component",
             });
             dependencies.forEach(dep => {
               externalDependencies.add(dep);
