@@ -1,4 +1,4 @@
-/* type: registry:component */
+/* type: registry:ui */
 @layer serok {
   .serok-root sp-picker {
     --mod-picker-background-color-default: var(--spectrum-white);
