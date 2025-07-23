@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "@storybook/test";
 
 import "../style/serok.css";
 import { Checkbox } from "../ui/Checkbox";
 
 const meta: Meta<typeof Checkbox> = {
-  title: "Example/Checkbox",
+  title: "1. Example/Checkbox",
   component: Checkbox,
   decorators: [
     (Story) => (
