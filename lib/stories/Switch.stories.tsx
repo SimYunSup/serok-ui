@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 import "../style/serok.css";
-import { Switch } from "../component/Switch";
+import { Switch } from "../ui/Switch";
 
 const meta: Meta<typeof Switch> = {
   title: "Example/Switch",
@@ -56,7 +56,6 @@ export const Default: Story = {
     size: "m",
     checked: false,
     variant: "default",
-    invalid: false,
     disabled: false,
     children: "Switch on",
   },

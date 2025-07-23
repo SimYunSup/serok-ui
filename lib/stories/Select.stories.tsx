@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 
 import "../style/serok.css";
-import { Select } from "../component/Select";
-import { MenuItem } from "../component/Menu";
+import { Select } from "../ui/Select";
+import { MenuItem } from "../ui/Menu";
 
 const meta: Meta<typeof Select> = {
   title: "Example/Select",
