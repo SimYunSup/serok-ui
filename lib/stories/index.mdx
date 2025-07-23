@@ -1,0 +1,83 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="0. Installation" />
+
+# Manual Installation
+
+Follow the steps below to manually add components to your project.
+
+## 1. Add file
+
+Copy and paste the file in your repository and change `tailwind.css` to your global CSS file path.
+
+```json
+// components.json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "{Your Global CSS File}",
+    "baseColor": "stone",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+```
+
+## 2. Edit tsconfig.json and config file
+
+Edit `tsconfig.json` and bundler config file(`vite.config.ts`, `webpack.config.js`, ...) for alias.
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+    // ...
+  }
+}
+```
+
+ex. `vite.config.ts`
+
+```ts
+import path from "path";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
+```
+
+## 3. Install theme and components.
+
+```sh
+
+# theme
+npx shadcn@latest add https://simyunsup.github.io/serok-ui/r/serok.json
+
+# button component
+npx shadcn@latest add https://simyunsup.github.io/serok-ui/r/button.json
+```

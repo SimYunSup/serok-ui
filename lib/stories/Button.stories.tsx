@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "@storybook/test";
 
 import "../style/serok.css";
 import { Button } from "../ui/Button";
 
 const meta: Meta<typeof Button> = {
-  title: "Example/Button",
+  title: "1. Example/Button",
   component: Button,
   decorators: [
     (Story) => (

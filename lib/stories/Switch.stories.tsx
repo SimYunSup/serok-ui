@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { fn } from "@storybook/test";
 
 import "../style/serok.css";
 import { Switch } from "../ui/Switch";
 
 const meta: Meta<typeof Switch> = {
-  title: "Example/Switch",
+  title: "1. Example/Switch",
   component: Switch,
   decorators: [
     (Story) => (
