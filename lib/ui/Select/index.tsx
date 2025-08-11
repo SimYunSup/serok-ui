@@ -1,4 +1,6 @@
-/* type: registry:ui */
+/* type: registry:ui
+ * registryDependenies: ["menu"]
+ */
 import { Picker as SpPicker } from "@swc-react/picker";
 import "./styles.css";
 
