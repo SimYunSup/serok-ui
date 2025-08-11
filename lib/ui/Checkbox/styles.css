@@ -1,6 +1,8 @@
 /* type: registry:ui */
 @layer serok {
-  .serok-root sp-checkbox {
+  :root sp-checkbox {
+    --spectrum-checkbox-line-height: var(--spectrum-line-height-200);
+
     &[data-variant="accent"][emphasized] {
       --mod-checkbox-emphasized-color-default: var(--spectrum-accent-color-700);
       --mod-checkbox-emphasized-color-hover: var(--spectrum-accent-color-800);

@@ -1,6 +1,6 @@
 /* type: registry:ui */
 @layer serok {
-  .serok-root sp-switch {
+  :root sp-switch {
     &[data-variant="accent"][emphasized] {
       --mod-switch-background-color-selected-default: var(--spectrum-accent-color-700);
       --mod-switch-background-color-selected-hover: var(--spectrum-accent-color-800);

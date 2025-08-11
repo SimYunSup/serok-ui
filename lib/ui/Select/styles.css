@@ -1,6 +1,6 @@
 /* type: registry:ui */
 @layer serok {
-  .serok-root sp-picker {
+  :root sp-picker {
     --mod-picker-background-color-default: var(--spectrum-white);
     --mod-picker-background-color-hover: var(--spectrum-global-color-gray-50);
     --mod-picker-background-color-key-focus: var(--spectrum-global-color-gray-50);

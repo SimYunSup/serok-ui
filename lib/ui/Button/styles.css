@@ -1,6 +1,6 @@
 /* type: registry:ui */
 @layer serok {
-  .serok-root sp-button {
+  :root sp-button {
     --spectrum-button-border-radius: var(--mod-button-border-radius, calc(var(--spectrum-button-height) / 4));
 
     &[variant="secondary"]:not([treatment="outline"]) {
