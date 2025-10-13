@@ -13,8 +13,8 @@
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
     "build:shadcn": "shadcn build ../registry.json --output=../.storybook/static/r/ --cwd=lib",
-    "build:registry": "tsx script/buildRegistry.ts",
-    "build:sd": "style-dictionary build --config sd.config.mjs",
+    "build:registry": "tsx ./script/buildRegistry.ts",
+    "build:sd": "style-dictionary build --config ./sd.config.mjs",
     "clean:sd": "style-dictionary clean --config ./sd.config.mjs"
   },
   "devDependencies": {
