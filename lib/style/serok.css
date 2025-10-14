@@ -4,7 +4,10 @@
 @import "@spectrum-web-components/styles/tokens-v2/medium-vars.css" layer(spectrum);
 @import "@spectrum-web-components/styles/tokens-v2/light-vars.css" layer(spectrum);
 @import "@spectrum-web-components/styles/tokens-v2/system-theme-bridge.css" layer(spectrum);
+
 @layer spectrum, serok;
+
+@import "./colors.css" layer(serok);
 
 @layer serok {
   :root {

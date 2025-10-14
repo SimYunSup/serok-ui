@@ -36,7 +36,7 @@ const registry = {
   name: packageJSON.name, // 레지스트리 이름 (예: serok-ui)
   homepage: packageJSON.homepage, // 프로젝트 홈페이지 URL
   items: [] as RegistryItemEntry[], // 컴포넌트 항목 목록
-}
+};
 
 // 파일 내용에서 import 문을 분석하여 외부 의존성을 추출하는 함수
 const extractDependenciesFromJS = (content: string): string[] => {
@@ -58,10 +58,10 @@ const extractDependenciesFromJS = (content: string): string[] => {
   }
   return Array.from(dependencies);
 };
+
 const extractDependenciesFromCSS = (content: string): string[] => {
   const dependencies = new Set<string>();
-  const importRegex =
-    /@import\s+["'](.*?)["']/g;
+  const importRegex = /@import\s+["'](.*?)["']/g;
   let match: RegExpExecArray | null = null;
 
   while ((match = importRegex.exec(content)) !== null) {
@@ -103,30 +103,31 @@ const transformCssToJson = (css: string): Record<string, any> => {
   };
 
   const parse = (currentPath: string[] = [], depth = 0) => {
-    let selector = '';
+    let selector = "";
     let declarations: Record<string, any> = {};
 
     while (i < len) {
       const char = css[i];
-      if (char === '{') {
+      if (char === "{") {
         i++;
         const blockKey = selector.trim();
-        selector = ''; // 셀렉터 초기화
+        selector = ""; // 셀렉터 초기화
 
         // @-규칙 블록 내부를 재귀적으로 파싱
-        if (blockKey.startsWith('@')) {
+        if (blockKey.startsWith("@")) {
           parse([...currentPath, blockKey], depth + 1);
-        } else { // 일반 규칙 블록
-          const contentEnd = css.indexOf('}', i);
+        } else {
+          // 일반 규칙 블록
+          const contentEnd = css.indexOf("}", i);
           if (contentEnd === -1) break; // 닫는 괄호가 없으면 중단
 
           const declarationStr = css.substring(i, contentEnd);
           declarations = {};
-          declarationStr.split(';').forEach(decl => {
+          declarationStr.split(";").forEach((decl) => {
             if (decl.trim()) {
-              const parts = decl.split(':');
+              const parts = decl.split(":");
               const key = parts.shift()?.trim();
-              const value = parts.join(':').trim();
+              const value = parts.join(":").trim();
               if (key && value) {
                 declarations[key] = value;
               }
@@ -134,19 +135,19 @@ const transformCssToJson = (css: string): Record<string, any> => {
           });
 
           // 여러 선택자 (예: "from, to" 또는 ".a, .b") 처리
-          blockKey.split(',').forEach(sel => {
+          blockKey.split(",").forEach((sel) => {
             visitor([...currentPath, sel.trim()], declarations);
           });
 
           i = contentEnd; // 파싱한 부분 건너뛰기
         }
-      } else if (char === '}') {
+      } else if (char === "}") {
         i++;
         // 현재 깊이의 파싱이 끝나면 반환
         if (depth > 0) return;
-      } else if (char === ';' && depth === 0) {
+      } else if (char === ";" && depth === 0) {
         result[selector.trim() + ";"] = {};
-        selector = '';
+        selector = "";
         i++;
       } else {
         selector += char;
@@ -162,33 +163,74 @@ const transformCssToJson = (css: string): Record<string, any> => {
 // 문자열의 첫 글자를 대문자로 변환하는 함수
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
+// 상대 CSS @import를 파일 내용으로 재귀 인라인
+const inlineLocalCssImports = async (content: string, baseDir: string) => {
+  const importRegex = /@import\s+["'](\.\/[^"']+\.css)["'](?:\s+layer\(([^)]+)\))?;?/g;
+
+  // 비동기 문자열 치환 함수
+  const replaceAsync = async (str: string, re: RegExp, fn: (...m: any[]) => Promise<string>) => {
+    const parts: string[] = [];
+    
+    let lastIndex = 0;
+    for (let m; (m = re.exec(str)); ) {
+      parts.push(str.slice(lastIndex, m.index), await fn(...m));
+      lastIndex = m.index + m[0].length;
+    }
+
+    parts.push(str.slice(lastIndex));
+
+    return parts.join("");
+  };
+
+  return replaceAsync(content, importRegex, async (_all, relPath, layer) => {
+    const filePath = path.resolve(baseDir, relPath);
+    let child = await fs.readFile(filePath, "utf-8");
+    
+    // 자식 파일 내부의 상대 import 처리
+    child = child.replace(/^\uFEFF/, "");
+    child = await inlineLocalCssImports(child, path.dirname(filePath));
+    
+    // 자식이 스스로 @layer 블록을 갖지 않고, import에 layer(...)가 붙어있는 경우 처리
+    if (!/@layer\s+[^{]+\{/.test(child) && layer) {
+      child = `@layer ${layer} {\n${child}\n}\n`;
+    }
+
+    return child;
+  });
+};
 
 try {
   for (const type of types) {
     const typeDir = path.join(libDirectory, type);
     const exists = await fs.access(typeDir).then(() => true).catch(() => false);
-    if (!exists) {
-      continue;
-    }
+
+    if (!exists) continue;
+
     const items = await fs.readdir(typeDir, { withFileTypes: true });
 
+    // style 디렉토리의 css파일들은 serok.css 단일 파일로 만들어 처리
     if (type === "style") {
-      for (const item of items) {
-        if (item.isFile()) {
-          const filePath = path.join(typeDir, item.name);
-          const content = await fs.readFile(filePath, "utf-8");
-          const dependencies = extractDependenciesFromCSS(content);
-          registry.items.push({
-            name: item.name.replace(".css", ""),
-            type: "registry:style",
-            title: `style: ${capitalize(item.name.replace(".css", ""))}`,
-            description: "",
-            css: transformCssToJson(content),
-            files: [],
-            dependencies: dependencies.length > 0 ? dependencies : undefined,
-          });
-        }
-      }
+      const styleFiles = items.filter((f) => f.isFile() && f.name.endsWith(".css"));
+      if (styleFiles.length === 0) continue;
+
+      const entry = styleFiles.find((f) => f.name === "serok.css") ?? styleFiles[0];
+      const targetPath = path.join(typeDir, entry.name);
+
+      // 로컬 import를 실제 내용으로 치환
+      let content = await fs.readFile(targetPath, "utf-8");
+      content = await inlineLocalCssImports(content, path.dirname(targetPath));
+      const deps = new Set<string>(extractDependenciesFromCSS(content));
+
+      registry.items.push({
+        name: "serok",
+        type: "registry:style",
+        title: "style: Serok",
+        description: "",
+        css: transformCssToJson(content),
+        files: [],
+        dependencies: deps.size ? Array.from(deps) : undefined,
+      });
+
       continue;
     }
 
@@ -211,11 +253,10 @@ try {
               path: relativePath,
               type: fileType ? `registry:${fileType}` : "registry:component",
             });
-            dependencies.forEach(dep => {
+            dependencies.forEach((dep) => {
               externalDependencies.add(dep);
             });
-          }
-          else if (file.isFile() && file.name.endsWith(".css")) {
+          } else if (file.isFile() && file.name.endsWith(".css")) {
             const filePath = path.join(componentPath, file.name);
             const content = await fs.readFile(filePath, "utf-8");
             const fileType = content.match(/\/\*[\s\S]*registry:([a-z]*)[\s\S]*?\*\//)?.[1];
@@ -225,7 +266,7 @@ try {
               path: relativePath,
               type: fileType ? `registry:${fileType}` : "registry:component",
             });
-            dependencies.forEach(dep => {
+            dependencies.forEach((dep) => {
               externalDependencies.add(dep);
             });
           }
@@ -237,20 +278,19 @@ try {
           title: capitalize(componentName),
           description: `${type}: ${capitalize(componentName)}`,
           dependencies: Array.from(externalDependencies),
-          registryDependencies: registryDependencies.size > 0 ? Array.from(registryDependencies) : undefined,
+          registryDependencies:
+            registryDependencies.size > 0
+              ? Array.from(registryDependencies)
+              : undefined,
           files: fileData,
         });
       }
     }
   }
+
   await fs.writeFile(OUTPUT_FILE, JSON.stringify(registry, null, 2));
-  console.log(
-    `\nSuccessfully generated registry.json with ${registry.items.length} items at ${OUTPUT_FILE}`
-  );
+  console.log(`\nSuccessfully generated registry.json with ${registry.items.length} items at ${OUTPUT_FILE}`);
 } catch (error) {
-  console.error(
-    "An unexpected error occurred during registry generation:",
-    error
-  );
+  console.error("An unexpected error occurred during registry generation:", error);
   process.exit(1);
 }
