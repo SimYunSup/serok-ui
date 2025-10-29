@@ -27,4 +27,21 @@
     --spectrum-background-color-down: var(--spectrum-secondary-color-400);
     --spectrum-background-color-key-focus: var(--spectrum-secondary-color-200);
   }
+
+  font-size: var(--spectrum-global-dimension-static-font-size-150);
+  height: auto;
+
+  /* https://github.com/adobe/spectrum-web-components/blob/main/packages/button/src/spectrum-button.css */
+
+  &[data-size="s"] {
+    padding: var(--spectrum-global-dimension-size-75) calc(var(--spectrum-global-dimension-size-200) - var(--spectrum-global-dimension-size-75));
+  }
+
+  &[data-size="m"] {
+    padding: calc(var(--spectrum-global-dimension-size-200) - var(--spectrum-global-dimension-size-75)) var(--spectrum-global-dimension-static-size-400);
+  }
+
+  &[data-size="l"] {
+    padding: var(--spectrum-global-dimension-static-size-200) calc(var(--spectrum-global-dimension-size-1200) + var(--spectrum-global-dimension-size-25));
+  }
 }

@@ -8,6 +8,7 @@ export function SerokProvider(props: React.ComponentProps<typeof SpProvider>) {
     <SpProvider
       UNSAFE_className="serok-provider"
       theme={theme}
+      scale="large"
       {...props}
     />
   );

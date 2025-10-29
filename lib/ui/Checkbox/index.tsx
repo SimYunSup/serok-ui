@@ -13,6 +13,7 @@ export function Checkbox({
   return (
     <SpCheckbox
       {...props}
+      UNSAFE_className="serok-checkbox"
       isEmphasized={variant !== "default"}
       data-variant={variant}
     />

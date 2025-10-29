@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   isRouteErrorResponse,
   Links,
@@ -26,10 +27,35 @@ export const links: Route.LinksFunction = () => [
   {
     rel: 'stylesheet',
     href: 'https://unpkg.com/pretendard@1.3.9/dist/web/static/pretendard.css',
-  },
+  }
 ];
 
+function useColorScheme() {
+  const [colorScheme, setColorScheme] = React.useState<'light' | 'dark'>('dark');
+
+  React.useEffect(() => {
+    requestAnimationFrame(() => {
+      console.log(document.documentElement.style.colorScheme);
+      setColorScheme(
+        document.documentElement.style.colorScheme === 'dark' ? 'dark' : 'light'
+      );
+    });
+    const mutationObserver = new MutationObserver(() => {
+      const isDark = document.documentElement.style.colorScheme === 'dark';
+      setColorScheme(isDark ? 'dark' : 'light');
+    });
+
+    mutationObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
+  }, []);
+
+  return colorScheme;
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const colorScheme = useColorScheme();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -40,7 +66,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex flex-col min-h-screen">
-        <SerokProvider>
+        <SerokProvider colorScheme={colorScheme}>
           <RootProvider search={{ SearchDialog }}>
             {children}
           </RootProvider>

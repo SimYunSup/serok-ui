@@ -3,6 +3,11 @@ title: Button
 description: 다양한 스타일과 상태의 버튼 컴포넌트입니다.
 ---
 
+```sh
+npx shadcn@latest add https://serok.ethansup.net//r/button.json
+```
+
+
 <PreviewWrapper>
   <Button variant="accent">버튼</Button>
 </PreviewWrapper>
@@ -56,25 +61,40 @@ export default function ButtonExample() {
 
 ### 크기 변형
 
+<PreviewWrapper>
+<Button variant="accent" size="s">Small</Button>
+<Button variant="accent" size="m">Medium</Button>
+<Button variant="accent" size="l">Large</Button>
+</PreviewWrapper>
+
 ```tsx
-<Button size="s">Small</Button>
-<Button size="m">Medium</Button>
-<Button size="l">Large</Button>
-<Button size="xl">Extra Large</Button>
+<Button variant="accent" size="s">Small</Button>
+<Button variant="accent" size="m">Medium</Button>
+<Button variant="accent" size="l">Large</Button>
 ```
 
 ### 스타일 변형
 
+<PreviewWrapper>
+  <Button variant="accent" style="fill">Fill</Button>
+  <Button variant="accent" style="outline">Outline</Button>
+</PreviewWrapper>
+
 ```tsx
-<Button style="fill">Fill</Button>
-<Button style="outline">Outline</Button>
+<Button variant="accent" style="fill">Fill</Button>
+<Button variant="accent" style="outline">Outline</Button>
 ```
 
 ### 상태
 
+<PreviewWrapper>
+  <Button variant="accent" isDisabled>Disabled</Button>
+  <Button variant="accent" isPending>Loading</Button>
+</PreviewWrapper>
+
 ```tsx
-<Button isDisabled>Disabled</Button>
-<Button isPending>Loading</Button>
+<Button variant="accent" isDisabled>Disabled</Button>
+<Button variant="accent" isPending>Loading</Button>
 ```
 
 ## 예제

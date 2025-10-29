@@ -1,10 +1,10 @@
 /* type: registry:ui */
 @layer serok {
-  :root sp-picker {
-    --mod-picker-background-color-default: var(--spectrum-white);
-    --mod-picker-background-color-hover: var(--spectrum-global-color-gray-50);
-    --mod-picker-background-color-key-focus: var(--spectrum-global-color-gray-50);
-    --mod-picker-background-color-hover-open: var(--spectrum-global-color-gray-100);
-    --mod-picker-background-color-active: var(--spectrum-global-color-gray-50);
+  :root .serok-provider .serok-select {
+    --spectrum-picker-background-color-default: var(--spectrum-white);
+    --spectrum-picker-background-color-hover: var(--spectrum-global-color-gray-50);
+    --spectrum-picker-background-color-key-focus: var(--spectrum-global-color-gray-50);
+    --spectrum-picker-background-color-hover-open: var(--spectrum-global-color-gray-100);
+    --spectrum-picker-background-color-active: var(--spectrum-global-color-gray-50);
   }
 }

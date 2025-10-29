@@ -4,4 +4,5 @@ export default [
   index('routes/home.tsx'),
   route('docs/*', 'docs/page.tsx'),
   route('api/search', 'docs/search.ts'),
+  route('llms-full.txt', 'routes/llms-full.ts'),
 ] satisfies RouteConfig;

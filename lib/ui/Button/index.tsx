@@ -9,13 +9,14 @@ interface ButtonProps extends React.ComponentProps<typeof SpButton> {
 }
 
 export function Button(props: ButtonProps) {
-  const { size, href, variant, ...rest } = props;
+  const { size, variant, ...rest } = props;
 
   return (
     <SpButton
       UNSAFE_className={`serok-button serok-button--${size} ${variant === 'secondary' ? 'serok-button--secondary' : ''}`}
       variant={variant === 'secondary' ? 'primary' : variant}
       {...rest}
+      data-size={size ?? 'M'}
       style={rest.style ?? 'fill'}
     />
   );
