@@ -64,7 +64,7 @@ importers:
         version: 7.1.12(@types/node@24.9.2)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.20.6)
     devDependencies:
       '@eslint/js':
-        specifier: ^9.3.0
+        specifier: ^9.38.0
         version: 9.38.0
       '@stylistic/eslint-plugin':
         specifier: ^5.5.0
@@ -11958,7 +11958,7 @@ snapshots:
     dependencies:
       '@next/env': 16.0.0
       '@swc/helpers': 0.5.15
-      caniuse-lite: 1.0.30001709
+      caniuse-lite: 1.0.30001751
       postcss: 8.4.31
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
