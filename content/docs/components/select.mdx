@@ -3,6 +3,10 @@ title: Select
 description: 드롭다운 선택 메뉴 컴포넌트입니다.
 ---
 
+```sh
+npx shadcn@latest add https://serok.ethansup.net//r/select.json
+```
+
 <PreviewWrapper>
   <Select>
     <Item key="option1">Option 1</Item>
@@ -15,7 +19,6 @@ description: 드롭다운 선택 메뉴 컴포넌트입니다.
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `size` | "s" \| "m" \| "l" \| "xl" | 선택 메뉴의 크기 |
 | `selectedKey` | string \| number | 선택된 항목 키 (제어되는 값) |
 | `defaultSelectedKey` | string \| number | 초기 선택된 항목 키 (제어되지 않는 값) |
 | `isDisabled` | boolean | 선택 메뉴 비활성화 여부 |
@@ -61,28 +64,21 @@ export default function SelectExample() {
 }
 ```
 
-## 크기 변형
-
-```tsx
-<Select size="s">
-  <Item>Small</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="m">
-  <Item>Medium</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="l">
-  <Item>Large</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="xl">
-  <Item>Extra Large</Item>
-  <Item>Option 2</Item>
-</Select>
-```
-
 ## 상태
+
+<PreviewWrapper>
+  <Select isInvalid>
+    <Item key="option1">Invalid state</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+  <Select isDisabled>
+    <Item key="option1">Disabled state</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+  <Select isLoading>
+    <Item key="option1">Loading...</Item>
+  </Select>
+</PreviewWrapper>
 
 ```tsx
 <Select isInvalid>
@@ -99,6 +95,13 @@ export default function SelectExample() {
 ```
 
 ## 스타일 옵션
+
+<PreviewWrapper>
+  <Select isQuiet>
+    <Item key="option1">Quiet style (no border)</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+</PreviewWrapper>
 
 ```tsx
 <Select isQuiet>

@@ -3,6 +3,10 @@ title: Switch
 description: 토글 스위치 컴포넌트입니다. 이진 옵션을 활성화하거나 비활성화합니다.
 ---
 
+```sh
+npx shadcn@latest add https://serok.ethansup.net//r/switch.json
+```
+
 <PreviewWrapper>
   <Switch>스위치</Switch>
 </PreviewWrapper>
@@ -13,7 +17,6 @@ description: 토글 스위치 컴포넌트입니다. 이진 옵션을 활성화�
 |------|------|-------------|
 | `isSelected` | boolean | 스위치의 선택 상태 (제어되는 값) |
 | `defaultSelected` | boolean | 초기 선택 상태 (제어되지 않는 값) |
-| `size` | "s" \| "m" \| "l" \| "xl" | 스위치의 크기 |
 | `isDisabled` | boolean | 스위치 비활성화 여부 |
 | `isReadOnly` | boolean | 읽기 전용 모드 |
 | `isEmphasized` | boolean | 강조 시각 스타일 적용 |
@@ -42,16 +45,13 @@ export default function SwitchExample() {
 }
 ```
 
-## 크기 변형
-
-```tsx
-<Switch size="s">Small</Switch>
-<Switch size="m">Medium</Switch>
-<Switch size="l">Large</Switch>
-<Switch size="xl">Extra Large</Switch>
-```
-
 ## 색상 변형
+
+<PreviewWrapper>
+<Switch variant="default">Default</Switch>
+<Switch variant="accent">Accent</Switch>
+<Switch variant="secondary">Secondary</Switch>
+</PreviewWrapper>
 
 ```tsx
 <Switch variant="default">Default</Switch>
@@ -60,6 +60,11 @@ export default function SwitchExample() {
 ```
 
 ## 상태
+
+<PreviewWrapper>
+  <Switch isSelected>Enabled</Switch>
+  <Switch isDisabled>Disabled</Switch>
+</PreviewWrapper>
 
 ```tsx
 <Switch isSelected>Enabled</Switch>

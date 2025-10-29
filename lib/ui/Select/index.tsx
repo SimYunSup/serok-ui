@@ -7,6 +7,7 @@ import "./styles.css";
 export function Select(props: React.ComponentProps<typeof SpPicker>) {
   return (
     <SpPicker
+      UNSAFE_className="serok-select"
       {...props}
     />
   );
