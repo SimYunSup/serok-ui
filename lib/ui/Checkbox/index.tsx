@@ -1,5 +1,5 @@
 /* type: registry:ui */
-import { Checkbox as SpCheckbox } from "@swc-react/checkbox";
+import { Checkbox as SpCheckbox } from "@react-spectrum/checkbox";
 import "./styles.css";
 
 interface CheckboxProps extends Omit<React.ComponentProps<typeof SpCheckbox>, "emphasized"> {
@@ -13,7 +13,7 @@ export function Checkbox({
   return (
     <SpCheckbox
       {...props}
-      emphasized={variant !== "default"}
+      isEmphasized={variant !== "default"}
       data-variant={variant}
     />
   );

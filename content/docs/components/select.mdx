@@ -1,0 +1,153 @@
+---
+title: Select
+descrption: 드롭다운 선택 메뉴 컴포넌트입니다.
+---
+import { PreviewWrapper } from "../../../app/components/PreviewWrapper"
+import { Select, Item } from "../../../lib/ui/Select";
+
+<PreviewWrapper>
+  <Select>
+    <Item key="option1">Option 1</Item>
+    <Item key="option2">Option 2</Item>
+    <Item key="option3">Option 3</Item>
+  </Select>
+</PreviewWrapper>
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `size` | "s" \| "m" \| "l" \| "xl" | 선택 메뉴의 크기 |
+| `selectedKey` | string \| number | 선택된 항목 키 (제어되는 값) |
+| `defaultSelectedKey` | string \| number | 초기 선택된 항목 키 (제어되지 않는 값) |
+| `isDisabled` | boolean | 선택 메뉴 비활성화 여부 |
+| `isLoading` | boolean | 로딩 상태 여부 |
+| `isQuiet` | boolean | 테두리 없이 표시할 여부 |
+| `isInvalid` | boolean | 유효성 검사 실패 여부 |
+| `isRequired` | boolean | 필수 선택 여부 |
+| `label` | string | 선택 메뉴의 라벨 |
+| `placeholder` | string | 플레이스홀더 텍스트 |
+| `description` | string | 선택 메뉴의 설명 텍스트 |
+| `errorMessage` | string | 유효성 검사 실패 시 오류 메시지 |
+| `onSelectionChange` | (key: string \| number) => void | 선택 변경 이벤트 핸들러 |
+| `children` | React.ReactNode | Item 컴포넌트 (선택지) |
+
+## Item Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `key` | string \| number | 옵션의 고유 키 |
+| `children` | string | 옵션의 표시 텍스트 |
+
+이외의 Props들은 [React Spectrum Picker](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props) 문서를 참고하세요.
+
+## 기본 사용법
+
+```tsx
+import { Select, Item } from "@/components/ui/Select";
+import { useState } from "react";
+
+export default function SelectExample() {
+  const [selected, setSelected] = useState("option1");
+
+  return (
+    <Select
+      selectedKey={selected}
+      onSelectionChange={setSelected}
+    >
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## 크기 변형
+
+```tsx
+<Select size="s">
+  <Item>Small</Item>
+  <Item>Option 2</Item>
+</Select>
+<Select size="m">
+  <Item>Medium</Item>
+  <Item>Option 2</Item>
+</Select>
+<Select size="l">
+  <Item>Large</Item>
+  <Item>Option 2</Item>
+</Select>
+<Select size="xl">
+  <Item>Extra Large</Item>
+  <Item>Option 2</Item>
+</Select>
+```
+
+## 상태
+
+```tsx
+<Select isInvalid>
+  <Item key="option1">Invalid state</Item>
+  <Item key="option2">Option 2</Item>
+</Select>
+<Select isDisabled>
+  <Item key="option1">Disabled state</Item>
+  <Item key="option2">Option 2</Item>
+</Select>
+<Select isLoading>
+  <Item key="option1">Loading...</Item>
+</Select>
+```
+
+## 스타일 옵션
+
+```tsx
+<Select isQuiet>
+  <Item key="option1">Quiet style (no border)</Item>
+  <Item key="option2">Option 2</Item>
+</Select>
+```
+
+## 예제
+
+```tsx
+import { Select, Item } from "@/components/ui/Select";
+import { useState } from "react";
+
+export default function CountrySelector() {
+  const [country, setCountry] = useState("us");
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <Select
+        selectedKey={country}
+        onSelectionChange={setCountry}
+        size="m"
+        label="Select your country"
+      >
+        <Item key="us">United States</Item>
+        <Item key="uk">United Kingdom</Item>
+        <Item key="ca">Canada</Item>
+        <Item key="au">Australia</Item>
+        <Item key="de">Germany</Item>
+        <Item key="fr">France</Item>
+        <Item key="jp">Japan</Item>
+        <Item key="kr">South Korea</Item>
+      </Select>
+    </div>
+  );
+}
+```
+
+## 다양한 옵션 구조
+
+```tsx
+<Select size="m">
+  <Item key="category1">Category 1</Item>
+  <Item key="category2">Category 2</Item>
+  <Item key="category3">Category 3</Item>
+  <Item key="category4">Category 4</Item>
+  <Item key="category5">Category 5</Item>
+</Select>
+```

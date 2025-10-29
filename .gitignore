@@ -14,7 +14,7 @@ coverage
 out/
 build
 
-public
+public/r/**/*
 
 # misc
 .DS_Store
@@ -59,3 +59,6 @@ vitest.config.*.timestamp*
 *storybook.log
 registry.json
 **/r/**/*
+.playwright-mcp/
+.source/
+.react-router/
