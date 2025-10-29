@@ -182,7 +182,7 @@ export default function Home() {
                 <button className="text-xs font-semibold text-gray-400 hover:text-gray-300">복사</button>
               </div>
               <code className="text-sm text-green-400 font-mono">
-                npx shadcn@latest add <span className="text-blue-400">https://serok.ethansup.net//r/provider.json</span>
+                npx shadcn@latest add <span className="text-blue-400">https://serok.ethansup.net/r/provider.json</span>
               </code>
             </div>
 
