@@ -66,6 +66,20 @@ export default function SelectExample() {
 
 ## 상태
 
+<PreviewWrapper>
+  <Select isInvalid>
+    <Item key="option1">Invalid state</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+  <Select isDisabled>
+    <Item key="option1">Disabled state</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+  <Select isLoading>
+    <Item key="option1">Loading...</Item>
+  </Select>
+</PreviewWrapper>
+
 ```tsx
 <Select isInvalid>
   <Item key="option1">Invalid state</Item>
@@ -81,6 +95,13 @@ export default function SelectExample() {
 ```
 
 ## 스타일 옵션
+
+<PreviewWrapper>
+  <Select isQuiet>
+    <Item key="option1">Quiet style (no border)</Item>
+    <Item key="option2">Option 2</Item>
+  </Select>
+</PreviewWrapper>
 
 ```tsx
 <Select isQuiet>
