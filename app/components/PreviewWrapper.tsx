@@ -26,7 +26,7 @@ export function PreviewWrapper({
           )}
         </div>
       )}
-      <div className="w-full flex justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-8">
+      <div className="w-full flex justify-center items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-8 gap-2">
         {children}
       </div>
     </div>
