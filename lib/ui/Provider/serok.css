@@ -10,7 +10,7 @@
       BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS',
       'Lucida Grande', sans-serif;
 
-    &:focus {
+    &:focus-visible {
       outline: 2px solid var(--spectrum-accent-color-800);
     }
   }
