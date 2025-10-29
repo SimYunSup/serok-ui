@@ -35,7 +35,6 @@ function useColorScheme() {
 
   React.useEffect(() => {
     requestAnimationFrame(() => {
-      console.log(document.documentElement.style.colorScheme);
       setColorScheme(
         document.documentElement.style.colorScheme === 'dark' ? 'dark' : 'light'
       );
