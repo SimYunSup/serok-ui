@@ -7,9 +7,9 @@ import * as MdxConfig from './source.config';
 
 export default defineConfig({
   plugins: [
+    mdx(MdxConfig),
     tailwindcss(),
     reactRouter(),
-    mdx(MdxConfig),
     tsconfigPaths(),
   ],
   ssr: {

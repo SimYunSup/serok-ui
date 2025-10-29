@@ -10,6 +10,9 @@ export const docs = defineDocs({
 
 export default defineConfig({
   mdxOptions: {
+    remarkImageOptions: {
+      useImport: true,
+    },
     remarkNpmOptions: {
       persist: {
         id: 'package-manager',

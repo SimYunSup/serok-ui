@@ -12,6 +12,22 @@ import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { docs } from '~/.source';
 import { toClientRenderer } from 'fumadocs-mdx/runtime/vite';
 import { baseOptions } from '~/lib/layout.shared';
+import { PreviewWrapper } from '../components/PreviewWrapper';
+import { Button } from '@/lib/ui/Button';
+import { Item, Select } from '@/lib/ui/Select';
+import { Checkbox } from '@/lib/ui/Checkbox';
+import { Input } from '@/lib/ui/Input';
+import { Switch } from '@/lib/ui/Switch';
+
+const usingMdxComponents = {
+  PreviewWrapper,
+  Button,
+  Checkbox,
+  Input,
+  Select,
+  Item,
+  Switch,
+};
 
 export async function loader({ params }: Route.LoaderArgs) {
   const slugs = params['*'].split('/').filter((v) => v.length > 0);
@@ -34,7 +50,7 @@ const renderer = toClientRenderer(
         <DocsTitle>{frontmatter.title}</DocsTitle>
         <DocsDescription>{frontmatter.description}</DocsDescription>
         <DocsBody>
-          <Mdx components={{ ...defaultMdxComponents }} />
+          <Mdx components={{ ...defaultMdxComponents, ...usingMdxComponents }} />
         </DocsBody>
       </DocsPage>
     );

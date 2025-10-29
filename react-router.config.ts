@@ -5,6 +5,7 @@ import { createGetUrl, getSlugs } from 'fumadocs-core/source';
 const getUrl = createGetUrl('/docs');
 
 export default {
+  // disable SSR
   ssr: false,
 
   async prerender({ getStaticPaths }) {
