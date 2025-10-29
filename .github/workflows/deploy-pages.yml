@@ -48,7 +48,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Build Storybook
+      - name: Build fumadocs
         run: |
           pnpm build:registry
           # Ensure the registry.json is generated before building shadcn components
@@ -63,7 +63,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "${{ github.workspace }}/storybook-static"
+          path: "${{ github.workspace }}/build/client"
         continue-on-error: true
 
       - name: Deploy to GitHub Pages
