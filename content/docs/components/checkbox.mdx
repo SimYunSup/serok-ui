@@ -17,7 +17,6 @@ npx shadcn@latest add https://serok.ethansup.net//r/checkbox.json
 |------|------|-------------|
 | `isSelected` | boolean | 체크박스의 선택 상태 (제어되는 값) |
 | `defaultSelected` | boolean | 초기 선택 상태 (제어되지 않는 값) |
-| `size` | "s" \| "m" \| "l" \| "xl" | 체크박스의 크기 |
 | `isIndeterminate` | boolean | 불확정 상태 (부분 선택) |
 | `isInvalid` | boolean | 유효성 검사 실패 여부 |
 | `isDisabled` | boolean | 체크박스 비활성화 여부 |
@@ -46,15 +45,6 @@ export default function CheckboxExample() {
     </Checkbox>
   );
 }
-```
-
-## 크기 변형
-
-```tsx
-<Checkbox size="s">Small</Checkbox>
-<Checkbox size="m">Medium</Checkbox>
-<Checkbox size="l">Large</Checkbox>
-<Checkbox size="xl">Extra Large</Checkbox>
 ```
 
 ## 색상 변형

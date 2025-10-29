@@ -17,7 +17,6 @@ npx shadcn@latest add https://serok.ethansup.net//r/switch.json
 |------|------|-------------|
 | `isSelected` | boolean | 스위치의 선택 상태 (제어되는 값) |
 | `defaultSelected` | boolean | 초기 선택 상태 (제어되지 않는 값) |
-| `size` | "s" \| "m" \| "l" \| "xl" | 스위치의 크기 |
 | `isDisabled` | boolean | 스위치 비활성화 여부 |
 | `isReadOnly` | boolean | 읽기 전용 모드 |
 | `isEmphasized` | boolean | 강조 시각 스타일 적용 |
@@ -44,15 +43,6 @@ export default function SwitchExample() {
     </Switch>
   );
 }
-```
-
-## 크기 변형
-
-```tsx
-<Switch size="s">Small</Switch>
-<Switch size="m">Medium</Switch>
-<Switch size="l">Large</Switch>
-<Switch size="xl">Extra Large</Switch>
 ```
 
 ## 색상 변형

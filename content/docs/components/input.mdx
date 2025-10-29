@@ -17,7 +17,6 @@ npx shadcn@latest add https://serok.ethansup.net//r/input.json
 | Prop | Type | Description |
 |------|------|-------------|
 | `id` | string | 입력 필드의 고유 ID |
-| `size` | "s" \| "m" \| "l" \| "xl" | 입력 필드의 크기 |
 | `value` | string | 입력 필드의 값 (제어되는 값) |
 | `defaultValue` | string | 입력 필드의 초기 값 (제어되지 않는 값) |
 | `isInvalid` | boolean | 유효성 검사 실패 여부 |
@@ -55,15 +54,6 @@ export default function InputExample() {
 }
 ```
 
-## 크기 변형
-
-```tsx
-<Input size="s" placeholder="Small" />
-<Input size="m" placeholder="Medium" />
-<Input size="l" placeholder="Large" />
-<Input size="xl" placeholder="Extra Large" />
-```
-
 ## 입력 타입
 
 ```tsx
@@ -75,6 +65,13 @@ export default function InputExample() {
 ```
 
 ## 상태
+
+<PreviewWrapper>
+<Input validationState="valid" placeholder="Valid input" />
+<Input validationState="invalid" placeholder="Invalid input" />
+<Input isDisabled placeholder="Disabled input" />
+<Input isQuiet placeholder="Quiet input" />
+</PreviewWrapper>
 
 ```tsx
 <Input validationState="valid" placeholder="Valid input" />

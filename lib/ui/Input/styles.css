@@ -1,0 +1,4 @@
+/* type: registry:ui */
+:root .serok-provider .serok-input {
+  --spectrum-alias-border-color-focus: var(--spectrum-accent-color-800);
+}

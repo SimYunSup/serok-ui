@@ -19,7 +19,6 @@ npx shadcn@latest add https://serok.ethansup.net//r/select.json
 
 | Prop | Type | Description |
 |------|------|-------------|
-| `size` | "s" \| "m" \| "l" \| "xl" | 선택 메뉴의 크기 |
 | `selectedKey` | string \| number | 선택된 항목 키 (제어되는 값) |
 | `defaultSelectedKey` | string \| number | 초기 선택된 항목 키 (제어되지 않는 값) |
 | `isDisabled` | boolean | 선택 메뉴 비활성화 여부 |
@@ -63,27 +62,6 @@ export default function SelectExample() {
     </Select>
   );
 }
-```
-
-## 크기 변형
-
-```tsx
-<Select size="s">
-  <Item>Small</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="m">
-  <Item>Medium</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="l">
-  <Item>Large</Item>
-  <Item>Option 2</Item>
-</Select>
-<Select size="xl">
-  <Item>Extra Large</Item>
-  <Item>Option 2</Item>
-</Select>
 ```
 
 ## 상태
