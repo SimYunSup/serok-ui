@@ -8,6 +8,12 @@ export function meta({ }: Route.MetaArgs) {
   return [
     { title: 'Serok UI - 현대적인 컴포넌트 라이브러리' },
     { name: 'description', content: 'React Spectrum 기반의 접근성 있고 아름다운 컴포넌트 라이브러리' },
+    { property: 'og:title', content: 'Serok UI - 현대적인 컴포넌트 라이브러리' },
+    { property: 'og:description', content: 'React Spectrum 기반의 접근성 있고 아름다운 컴포넌트 라이브러리' },
+    { property: 'og:image', content: '/og.png' },
+    { property: 'og:type', content: 'website' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:image', content: '/og.png' },
   ];
 }
 
@@ -22,150 +28,175 @@ export default function Home() {
 
   return (
     <HomeLayout {...baseOptions()}>
-      <div className="flex flex-col items-center justify-center text-center flex-1 space-y-12 py-12">
+      <div className="flex flex-col w-full">
         {/* Hero Section */}
-        <div className="space-y-6 max-w-2xl px-4">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-accent to-blue-600 bg-clip-text text-transparent">
-            Serok UI
-          </h1>
-          <p className="text-lg text-fd-muted-foreground">
-            React Spectrum 기반의 접근성 있는 컴포넌트. shadcn/ui와 호환되어 빠르게 시작할 수 있습니다.
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-sm">
-              <span>🎯</span> React Spectrum 기반
-            </span>
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-sm">
-              <span>⚡</span> shadcn/ui 호환
-            </span>
-          </div>
+        <div className="relative overflow-hidden py-20 md:py-32 px-4">
+          <div className="absolute inset-0 bg-gradient-to-b from-green-500/5 via-transparent to-transparent pointer-events-none" />
+          <div className="relative max-w-4xl mx-auto text-center space-y-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/20 bg-green-500/5">
+                <span className="text-xs font-semibold text-green-600">✨ 새로운 설계 시스템</span>
+              </div>
+              <h1 className="text-6xl md:text-7xl font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                  Serok UI
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                React Spectrum 기반의 접근성 있는 컴포넌트 라이브러리.
+                <br className="hidden sm:block" />
+                shadcn/ui와 완벽하게 호환되며, 아름답고 빠르게 구축할 수 있습니다.
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button
-              variant="accent"
-              size="l"
-              style="fill"
-              href="/docs/installation"
-            >
-              시작하기
-            </Button>
-            <Button
-              variant="secondary"
-              size="l"
-              style="outline"
-              href="/docs/components/button"
-            >
-              컴포넌트 보기
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button
+                variant="accent"
+                size="l"
+                style="fill"
+                href="/docs"
+              >
+                시작하기 →
+              </Button>
+              <Button
+                variant="secondary"
+                size="l"
+                style="outline"
+                href="/docs/components/button"
+              >
+                컴포넌트 보기
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-6 pt-8">
+              <div className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">React Spectrum 기반</span> 컴포넌트
+              </div>
+              <div className="w-px bg-gray-200" />
+              <div className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">완전한</span> TypeScript 지원
+              </div>
+              <div className="w-px bg-gray-200" />
+              <div className="text-sm text-gray-600">
+                <span className="font-semibold text-gray-900">WCAG 2.1</span> 준수
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Features Section */}
-        <div className="space-y-6 max-w-4xl px-4 py-8 w-full">
-          <h2 className="text-3xl font-bold">왜 Serok UI를 선택할까요?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* React Spectrum Section */}
-            <div className="p-8 rounded-lg border-2 border-accent/50 bg-gradient-to-br from-accent/5 to-transparent">
-              <div className="space-y-4">
-                <div className="text-4xl">♿</div>
-                <h3 className="font-bold text-xl text-left">React Spectrum 기반</h3>
-                <p className="text-fd-muted-foreground text-sm text-left">
-                  Adobe의 React Spectrum을 기반으로 엔터프라이즈급 접근성을 제공합니다. 모든 컴포넌트는 WAI-ARIA를 준수하며 완전한 키보드 네비게이션과 스크린 리더 지원을 제공합니다.
-                </p>
-                <ul className="text-sm text-left space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent">✓</span>
-                    <span>WCAG 2.1 AA 준수</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent">✓</span>
-                    <span>완전한 키보드 지원</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-accent">✓</span>
-                    <span>스크린 리더 호환</span>
-                  </li>
-                </ul>
-              </div>
+        <div className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">왜 Serok UI인가?</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                전문적이고 신뢰할 수 있는 컴포넌트 라이브러리로 프로젝트를 빠르게 구축하세요.
+              </p>
             </div>
 
-            {/* shadcn/ui Section */}
-            <div className="p-8 rounded-lg border-2 border-blue-500/50 bg-gradient-to-br from-blue-500/5 to-transparent">
-              <div className="space-y-4">
-                <div className="text-4xl">⚡</div>
-                <h3 className="font-bold text-xl text-left">shadcn/ui 호환</h3>
-                <p className="text-fd-muted-foreground text-sm text-left">
-                  shadcn/ui 워크플로우로 바로 복사-붙여넣기 가능합니다. 종속성 없이 완전히 제어하고 자유롭게 커스터마이징할 수 있습니다.
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <div className="group p-8 rounded-xl border border-gray-200 bg-white hover:border-green-500/50 hover:bg-green-50/30 transition-all duration-300">
+                <div className="text-5xl mb-4">♿</div>
+                <h3 className="text-xl font-bold mb-3">접근성 우선</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Adobe의 React Spectrum 기반으로 엔터프라이즈급 접근성을 제공합니다. WCAG 2.1 AA 준수, 완전한 키보드 지원, 스크린 리더 호환.
                 </p>
-                <ul className="text-sm text-left space-y-2">
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500">✓</span>
-                    <span>복사-붙여넣기 가능</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500">✓</span>
-                    <span>완전한 소스 제어</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-blue-500">✓</span>
-                    <span>런타임 종속성 없음</span>
-                  </li>
-                </ul>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="group p-8 rounded-xl border border-gray-200 bg-white hover:border-green-500/50 hover:bg-green-50/30 transition-all duration-300">
+                <div className="text-5xl mb-4">⚡</div>
+                <h3 className="text-xl font-bold mb-3">복사-붙여넣기</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  shadcn/ui 스타일의 복사-붙여넣기 방식. 번들에 추가되지 않으며, 당신의 코드베이스에 완전히 통합되어 자유롭게 커스터마이징할 수 있습니다.
+                </p>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="group p-8 rounded-xl border border-gray-200 bg-white hover:border-green-500/50 hover:bg-green-50/30 transition-all duration-300">
+                <div className="text-5xl mb-4">🎨</div>
+                <h3 className="text-xl font-bold mb-3">완전히 커스터마이징 가능</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  CSS 변수를 사용해 색상, 크기, 스타일을 자유롭게 변경하세요. 당신의 디자인 시스템과 완벽하게 통합됩니다.
+                </p>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Additional Feature */}
-          <div className="p-6 rounded-lg border border-border bg-fd-card">
-            <div className="text-3xl mb-3">🎨</div>
-            <h3 className="font-semibold text-lg mb-2">완전히 커스터마이징 가능</h3>
-            <p className="text-fd-muted-foreground text-sm">
-              CSS 변수를 사용해 색상, 크기, 스타일을 자유롭게 커스터마이징할 수 있습니다. 모든 컴포넌트는 당신의 디자인 시스템과 완벽하게 통합되도록 설계되었습니다.
-            </p>
+        {/* OG Image Preview Section */}
+        <div className="py-12 px-4 flex justify-center">
+          <div className="max-w-2xl w-full rounded-xl border-2 border-green-500/30 bg-gradient-to-br from-green-50 to-transparent p-4 overflow-hidden">
+            <img
+              src="/og.png"
+              alt="Serok UI OG Image"
+              className="w-full rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+            />
           </div>
         </div>
 
         {/* Components Preview Section */}
-        <div className="space-y-8 max-w-4xl px-4 py-8 w-full">
-          <div>
-            <h2 className="text-3xl font-bold mb-2">사용 가능한 컴포넌트</h2>
-            <p className="text-fd-muted-foreground">우리의 UI 컴포넌트 모음으로 빠르게 시작하세요</p>
-          </div>
+        <div className="py-20 px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">완벽한 컴포넌트 집합</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                시작하는 데 필요한 모든 필수 컴포넌트를 제공합니다.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {components.map((component) => (
-              <Link
-                key={component.name}
-                to={`/docs/components/${component.name.toLowerCase()}`}
-                className="p-4 rounded-lg border border-border bg-fd-card hover:bg-fd-accent/10 transition-colors group"
-              >
-                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
-                  {component.icon}
-                </div>
-                <h4 className="font-semibold text-sm mb-1">{component.name}</h4>
-                <p className="text-xs text-fd-muted-foreground">{component.description}</p>
-              </Link>
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {components.map((component) => (
+                <Link
+                  key={component.name}
+                  to={`/docs/components/${component.name.toLowerCase()}`}
+                  className="group relative p-6 rounded-xl border border-gray-200 bg-white hover:border-green-500/50 hover:shadow-lg hover:bg-green-50/30 transition-all duration-300 cursor-pointer"
+                >
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {component.icon}
+                  </div>
+                  <h4 className="font-bold text-lg mb-1">{component.name}</h4>
+                  <p className="text-sm text-gray-600">{component.description}</p>
+                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-lg">→</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Installation Preview Section */}
-        <div className="space-y-6 max-w-2xl px-4 py-8 w-full text-left">
-          <h2 className="text-3xl font-bold text-center">빠른 시작</h2>
-          <div className="bg-fd-card border border-border rounded-lg p-6">
-            <p className="text-sm text-fd-muted-foreground mb-4">한 가지 명령어로 테마를 설치하세요:</p>
-            <code className="block bg-black/50 text-green-400 p-4 rounded text-sm overflow-x-auto">
-              npx shadcn@latest add https://simyunsup.github.io/serok-ui/r/provider.json
-            </code>
-          </div>
-          <div className="text-center">
-            <Button
-              variant="accent"
-              style="outline"
-              onPress={() => window.location.href = '/docs/installation'}
-            >
-              전체 문서 읽기
-            </Button>
+        <div className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
+          <div className="max-w-2xl mx-auto space-y-8">
+            <div className="text-center space-y-4">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">단 한 줄로 시작하세요</h2>
+              <p className="text-xl text-gray-600">
+                설정이 거의 필요 없습니다. 바로 시작할 수 있습니다.
+              </p>
+            </div>
+
+            <div className="bg-gradient-to-b from-gray-900 to-gray-950 rounded-xl p-6 border border-gray-800">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-xs font-semibold text-gray-400">터미널</span>
+                <button className="text-xs font-semibold text-gray-400 hover:text-gray-300">복사</button>
+              </div>
+              <code className="text-sm text-green-400 font-mono">
+                npx shadcn@latest add <span className="text-blue-400">https://simyunsup.github.io/serok-ui/r/provider.json</span>
+              </code>
+            </div>
+
+            <div className="text-center">
+              <Button
+                variant="accent"
+                size="l"
+                style="outline"
+                href="/docs"
+              >
+                설치 가이드 읽기
+              </Button>
+            </div>
           </div>
         </div>
       </div>

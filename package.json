@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "license": "MIT",
+  "homepage": "https://serok.ethansup.net",
   "description": "Serok UI - Design System Workspace",
   "packageManager": "pnpm@10.20.0",
   "scripts": {
