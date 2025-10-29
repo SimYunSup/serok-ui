@@ -1,31 +1,46 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "compileOnSave": false,
-  "display": "Default",
   "compilerOptions": {
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "rootDir": ".",
-    "declaration": true,
-    "moduleResolution": "Node",
-    "target": "esnext",
-    "skipLibCheck": true,
     "baseUrl": ".",
-    "preserveWatchOutput": true,
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
     "strict": true,
-    "noErrorTruncation": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
     "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "exclude": ["node_modules"],
-  "references": [
-    {
-      "path": "./tsconfig.lib.json"
+      "~/.source": [
+        "./.source/index.ts"
+      ],
+      "@/*": [
+        "./*"
+      ],
+      "~/*": [
+        "./app/*"
+      ]
     },
-    {
-      "path": "./tsconfig.storybook.json"
-    }
+    "rootDirs": [
+      ".",
+      "./.react-router/types"
+    ]
+  },
+  "include": [
+    ".react-router/types/**/*",
+    "**/*.ts",
+    "**/*.tsx",
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

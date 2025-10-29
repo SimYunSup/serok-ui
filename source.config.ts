@@ -1,0 +1,29 @@
+import { fileGenerator, remarkDocGen } from 'fumadocs-docgen';
+import { frontmatterSchema, defineConfig, defineDocs } from 'fumadocs-mdx/config';
+
+export const docs = defineDocs({
+  dir: 'content/docs',
+  docs: {
+    schema: frontmatterSchema,
+  },
+});
+
+export default defineConfig({
+  mdxOptions: {
+    remarkNpmOptions: {
+      persist: {
+        id: 'package-manager',
+      },
+    },
+    remarkPlugins: [[remarkDocGen, { generators: [fileGenerator({})] }]],
+    rehypeCodeOptions: {
+      lazy: true,
+      langs: ['ts', 'js', 'html', 'tsx', 'mdx'],
+      inline: 'tailing-curly-colon',
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
+  },
+});

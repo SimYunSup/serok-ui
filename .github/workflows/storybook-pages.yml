@@ -58,7 +58,7 @@ jobs:
           fi
           # Build shadcn components and Storybook
           pnpm build:shadcn
-          pnpm build:storybook
+          pnpm build:docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

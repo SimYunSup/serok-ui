@@ -31,7 +31,7 @@ export default {
     css: {
       transformGroup: "css",
       transforms: ["name/serok-kebab", "color/css"],
-      buildPath: "lib/style/",
+      buildPath: "lib/ui/Provider/",
       files: [
         {
           destination: "colors.css",
