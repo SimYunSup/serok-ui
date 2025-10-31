@@ -2,7 +2,7 @@
   "default": true,
   "extends": "markdownlint/style/relaxed",
   "line-length": {
-    "line_length": 120,
+    "line_length": 200,
     "code_block_line_length": 999,
     "code_blocks": true,
     "tables": false
