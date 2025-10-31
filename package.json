@@ -13,7 +13,7 @@
     "typecheck": "react-router typegen && tsc",
     "postinstall": "react-router typegen",
     "build:shadcn": "shadcn build ../registry.json --output=../public/r/ --cwd=./lib",
-    "build:registry": "tsx ./script/buildRegistry.ts",
+    "build:registry": "tsx ./scripts/buildRegistry.ts",
     "build:sd": "style-dictionary build --config ./sd.config.mjs",
     "clean:sd": "style-dictionary clean --config ./sd.config.mjs",
     "lint": "pnpm --filter @serok-ui/library lint",

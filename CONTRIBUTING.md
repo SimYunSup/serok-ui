@@ -8,9 +8,9 @@ All Serok UI components must be documented in an LLM-friendly format to ensure b
 
 ### Getting Started with Component Documentation
 
-1. **Read the Template**: Start with [.specify/templates/component-docs-template.md](.specify/templates/component-docs-template.md)
-2. **Follow the Checklist**: Use [.specify/templates/component-docs-checklist.md](.specify/templates/component-docs-checklist.md) to verify your work
-3. **Review Examples**: Look at existing component documentation for reference
+1. **Review Examples**: Look at existing component documentation in `content/en/docs/components/` for reference
+2. **Follow the Standards**: Ensure all 10 required sections are included
+3. **Review Examples**: Check `content/en/docs/examples/` for example patterns
 
 ### Documentation Requirements
 
@@ -27,10 +27,10 @@ Every component must include:
 
 ```bash
 # 1. Create the documentation file
-touch content/docs/components/[component-name].mdx
+touch content/en/docs/components/[component-name].mdx
 
-# 2. Copy template and customize
-cat .specify/templates/component-docs-template.md > content/docs/components/[component-name].mdx
+# 2. Review existing component documentation for reference
+# Check content/en/docs/components/ for examples
 
 # 3. Validate your work
 pnpm docs:validate [component-name]
@@ -166,19 +166,17 @@ Copy this checklist to your PR description:
 
 ## Related Resources
 
-- **Template**: [.specify/templates/component-docs-template.md](.specify/templates/component-docs-template.md)
-- **Checklist**: [.specify/templates/component-docs-checklist.md](.specify/templates/component-docs-checklist.md)
 - **Review Guide**: [docs/REVIEW_CHECKLIST.md](docs/REVIEW_CHECKLIST.md)
-- **Quick Start**: [specs/001-llm-friendly-docs/quickstart.md](specs/001-llm-friendly-docs/quickstart.md)
 - **Deployment**: [docs/deployment.md](docs/deployment.md)
 - **Component Index**: [docs/components/index.md](docs/components/index.md)
+- **Component Examples**: [content/en/docs/examples/](content/en/docs/examples/)
 
 ## Questions?
 
 If you have questions about documentation:
 
-1. Check the [Quick Start Guide](specs/001-llm-friendly-docs/quickstart.md)
-2. Review existing component documentation examples
+1. Review existing component documentation in `content/en/docs/components/`
+2. Check the examples in `content/en/docs/examples/`
 3. Open an issue with your question
 4. Contact the documentation maintainers
 
