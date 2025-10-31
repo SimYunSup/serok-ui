@@ -1,0 +1,44 @@
+{
+  "default": true,
+  "extends": "markdownlint/style/relaxed",
+  "line-length": {
+    "line_length": 200,
+    "code_block_line_length": 999,
+    "code_blocks": true,
+    "tables": false
+  },
+  "no-hard-tabs": true,
+  "no-multiple-spaces": {
+    "per_line": false
+  },
+  "no-trailing-spaces": true,
+  "no-blank-lines-eof": true,
+  "require-space-before-heading": true,
+  "heading-increment": true,
+  "first-line-h1": false,
+  "first-heading-h1": false,
+  "list-marker-space": true,
+  "blanks-around-lists": true,
+  "blanks-around-headings": true,
+  "no-inline-html": false,
+  "ul-indent": {
+    "indent": 2
+  },
+  "list-indent": true,
+  "no-reversed-links": true,
+  "no-bare-urls": true,
+  "no-duplicate-header": {
+    "siblings_only": true
+  },
+  "no-multiple-blanks": {
+    "maximum": 1
+  },
+  "no-trailing-punctuation": false,
+  "proper-names": false,
+  "code-blocks": {
+    "language": "required"
+  },
+  "fenced-code-language": true,
+  "table-pipes": true,
+  "table-headers": true
+}

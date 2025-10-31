@@ -1,0 +1,261 @@
+---
+title: Button
+componentName: Button
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/button"
+description: "Interactive element that triggers actions when activated. Supports 4 color variants (primary, secondary, accent, negative) and 4 sizes (s, m, l, xl). Fully keyboard accessible with ARIA support."
+---
+
+# Button
+
+## Overview
+
+A button is an interactive element that triggers an action or event when activated. Buttons are the primary way users interact with your application, from submitting forms to triggering async operations. Serok UI's Button component extends React Spectrum's Button with custom variants and sizing options.
+
+## Quick Start
+
+Minimal working example showing the most common usage pattern:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function MyComponent() {
+  return <Button variant="primary" onPress={() => alert('Clicked!')}>Click Me</Button>;
+}
+```
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | Yes | — | Visual style variant controlling button color and emphasis |
+| `size` | `"s" \| "m" \| "l" \| "xl"` | No | `"m"` | Button size (small, medium, large, extra-large) |
+| `isDisabled` | `boolean` | No | `false` | Disable user interaction and apply disabled styling |
+| `isPending` | `boolean` | No | `false` | Show loading/pending state and disable interaction |
+| `onPress` | `(e: PressEvent) => void` | No | — | Called when button is pressed or activated |
+| `children` | `ReactNode` | Yes | — | Button text or content |
+| `href` | `string` | No | — | Makes button behave as a link when provided |
+
+**Additional Notes**:
+- All props follow React Spectrum naming conventions
+- Props are case-sensitive
+- Default values are shown exactly as they appear in code
+- Extends all props from React Spectrum's `@react-spectrum/button` component
+
+## Variants & States
+
+### Visual Variants
+
+| Variant | Props | Use Case |
+|---------|-------|----------|
+| Primary | `variant="primary"` | Main calls-to-action, primary user actions |
+| Secondary | `variant="secondary"` | Alternative or less important actions |
+| Accent | `variant="accent"` | Attention-drawing secondary actions |
+| Negative | `variant="negative"` | Destructive actions, deletions, warnings |
+
+### Size Options
+
+| Size | Props | Use Case |
+|------|-------|----------|
+| Small | `size="s"` | Compact layouts, inline actions, toolbars |
+| Medium | `size="m"` | Standard buttons, most use cases (default) |
+| Large | `size="l"` | Prominent buttons, mobile-friendly layouts |
+| Extra Large | `size="xl"` | Hero buttons, primary CTAs, hero sections |
+
+### Behavioral States
+
+- **Enabled**: Normal interaction possible
+- **Disabled** (`isDisabled={true}`): No interaction possible, grayed out, `aria-disabled="true"`
+- **Pending** (`isPending={true}`): Shows loading state, interaction disabled
+- **Focused**: Keyboard focus visible, managed by browser
+
+## Examples
+
+### Basic Usage
+
+Simplest way to use the Button component with a primary variant.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function BasicExample() {
+  return <Button variant="primary">Click Me</Button>;
+}
+```
+
+### All Variants
+
+Example showing all four available visual variants side-by-side.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button variant="primary">Primary</Button>
+      <Button variant="secondary">Secondary</Button>
+      <Button variant="accent">Accent</Button>
+      <Button variant="negative">Negative</Button>
+    </div>
+  );
+}
+```
+
+### All Sizes
+
+Example demonstrating all four button sizes.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function SizesExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button variant="primary" size="s">Small</Button>
+      <Button variant="primary" size="m">Medium</Button>
+      <Button variant="primary" size="l">Large</Button>
+      <Button variant="primary" size="xl">Extra Large</Button>
+    </div>
+  );
+}
+```
+
+### With Event Handler
+
+Example showing how to respond to button press events with state updates.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function InteractiveExample() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Button variant="primary" onPress={() => setCount(c => c + 1)}>
+      Clicked {count} times
+    </Button>
+  );
+}
+```
+
+### Disabled State
+
+Example showing disabled button states across different variants.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button variant="primary" isDisabled>Disabled Primary</Button>
+      <Button variant="secondary" isDisabled>Disabled Secondary</Button>
+      <Button variant="accent" isDisabled>Disabled Accent</Button>
+      <Button variant="negative" isDisabled>Disabled Negative</Button>
+    </div>
+  );
+}
+```
+
+### Pending/Loading State
+
+Example showing button in pending state for async operations.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function PendingExample() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button variant="primary" isPending={isLoading} onPress={handleClick}>
+      {isLoading ? 'Loading...' : 'Submit'}
+    </Button>
+  );
+}
+```
+
+## CSS Customization
+
+### CSS Variables
+
+The Button component uses these CSS variables for theming:
+
+```css
+/* Color variants */
+--serok-button-color-primary: #007bff;
+--serok-button-color-secondary: #6c757d;
+--serok-button-color-accent: #ffc107;
+--serok-button-color-negative: #dc3545;
+
+/* Disabled state */
+--serok-button-opacity-disabled: 0.5;
+
+/* Size-specific padding */
+--serok-button-padding-small: 0.25rem 0.75rem;
+--serok-button-padding-medium: 0.5rem 1rem;
+--serok-button-padding-large: 0.75rem 1.5rem;
+--serok-button-padding-xl: 1rem 2rem;
+```
+
+### Using CSS Variables
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import './custom-button-styles.css';
+
+export function CustomStyleExample() {
+  return <Button variant="primary" className="custom-primary">Styled Button</Button>;
+}
+```
+
+```css
+/* custom-button-styles.css */
+.custom-primary {
+  --serok-button-color-primary: #e91e63;
+  --serok-button-padding-medium: 1rem 2rem;
+}
+```
+
+## API Reference
+
+For comprehensive props documentation, refer to the [React Spectrum Button documentation](https://react-spectrum.adobe.com/react-spectrum/Button.html#props).
+
+### Serok UI Specific Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | — | Serok UI color variant |
+| `size` | `"s" \| "m" \| "l" \| "xl"` | `"m"` | Serok UI size option |
+
+All other props are inherited from React Spectrum's Button component. Refer to the [React Spectrum Button Props](https://react-spectrum.adobe.com/react-spectrum/Button.html#props) for the complete list of available props.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Button/index.tsx`
+- **Styles**: `lib/ui/Button/styles.css`
+- **Export**: Named export from `@/components/ui/Button`
+- **React Spectrum Base**: Yes (@react-spectrum/button)
+- **CSS Customizable**: Yes
+- **Testing**: Use `data-testid="button"`
+
+---
+
+**Last Updated**: 2025-10-31
+**Status**: ✅ Complete and LLM-optimized

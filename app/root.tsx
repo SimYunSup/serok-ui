@@ -11,7 +11,7 @@ import { RootProvider } from 'fumadocs-ui/provider/react-router';
 import type { Route } from './+types/root';
 import './app.css';
 import { SerokProvider } from '@/lib/ui/Provider';
-import SearchDialog from '~/components/search';
+
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -55,8 +55,9 @@ function useColorScheme() {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const colorScheme = useColorScheme();
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.svg" />
@@ -66,7 +67,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="flex flex-col min-h-screen">
         <SerokProvider colorScheme={colorScheme}>
-          <RootProvider search={{ SearchDialog }}>
+          <RootProvider
+            search={{ enabled: false }}
+          >
             {children}
           </RootProvider>
         </SerokProvider>

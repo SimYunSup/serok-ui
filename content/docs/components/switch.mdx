@@ -1,114 +1,281 @@
 ---
 title: Switch
-description: 토글 스위치 컴포넌트입니다. 이진 옵션을 활성화하거나 비활성화합니다.
+componentName: Switch
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/switch"
 ---
 
-```sh
-npx shadcn@latest add https://serok.ethansup.net/r/switch.json
-```
+## 개요
 
-<PreviewWrapper>
-  <Switch>스위치</Switch>
-</PreviewWrapper>
+스위치는 사용자가 이진 옵션을 켜거나 끌 수 있는 양식 컨트롤입니다. 스위치는 일반적으로 설정, 기본 설정 및 기능 토글에 사용됩니다. Serok UI의 Switch 컴포넌트는 React Spectrum의 Switch를 확장하고 Serok 디자인 시스템에 맞는 사용자 정의 변형과 스타일을 제공합니다.
+
+## 빠른 시작
+
+가장 일반적인 사용 패턴을 보여주는 최소한의 작동 예제입니다.
+
+```tsx
+import { Switch } from '@/components/ui/Switch';
+
+export function MyComponent() {
+  return <Switch>알림 활성화</Switch>;
+}
+```
 
 ## Props
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `isSelected` | boolean | 스위치의 선택 상태 (제어되는 값) |
-| `defaultSelected` | boolean | 초기 선택 상태 (제어되지 않는 값) |
-| `isDisabled` | boolean | 스위치 비활성화 여부 |
-| `isReadOnly` | boolean | 읽기 전용 모드 |
-| `isEmphasized` | boolean | 강조 시각 스타일 적용 |
-| `children` | React.ReactNode | 라벨 텍스트 |
-| `onChange` | (isSelected: boolean) => void | 값 변경 이벤트 핸들러 |
+| Prop | Type | 필수 | 기본값 | 설명 |
+|------|------|------|-------|------|
+| `isSelected` | `boolean` | No | — | 제어된 선택 상태 |
+| `defaultSelected` | `boolean` | No | `false` | 비제어 초기 선택 상태 |
+| `onChange` | `(isSelected: boolean) => void` | No | — | 선택 상태가 변경될 때 호출됨 |
+| `isDisabled` | `boolean` | No | `false` | 사용자 상호작용 비활성화 |
+| `isReadOnly` | `boolean` | No | `false` | 읽기 전용 모드, 상호작용 불가능 |
+| `variant` | `"default" \| "accent" \| "secondary"` | No | `"default"` | 시각적 스타일 변형 |
+| `isEmphasized` | `boolean` | No | `false` | 강조 스타일 적용 |
+| `children` | `ReactNode` | Yes | — | 스위치 라벨 텍스트 또는 콘텐츠 |
 
-이외의 Props들은 [React Spectrum Switch](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props) 문서를 참고하세요.
+**추가 참고사항**:
 
-## 기본 사용법
+- 모든 props는 React Spectrum 명명 규칙을 따릅니다
+- Props는 대소문자를 구분합니다
+- 기본값은 코드에 나타나는 대로 정확하게 표시됩니다
+- React Spectrum의 `@react-spectrum/switch` 컴포넌트의 모든 props를 확장합니다
+
+## 변형 & 상태
+
+### 시각적 변형
+
+| 변형 | Props | 사용 사례 |
+|------|-------|---------|
+| 기본 | `variant="default"` | 표준 스위치, 중립 스타일 |
+| 강조 | `variant="accent"` | 중요한 토글, 강조된 스위치 |
+| 보조 | `variant="secondary"` | 덜 중요한 토글, 보조 선택 |
+
+### 동작 상태
+
+- **활성화됨**: 정상 상호작용 가능
+- **선택됨** (`isSelected={true}`): 스위치가 켜짐
+- **선택 안 됨** (`isSelected={false}`): 스위치가 꺼짐
+- **비활성화됨** (`isDisabled={true}`): 상호작용 불가능, 회색으로 표시
+- **읽기 전용** (`isReadOnly={true}`): 상태를 표시하지만 상호작용 불가능
+- **강조됨** (`isEmphasized={true}`): 강조된 시각적 스타일
+
+## 예제
+
+### 기본 사용법
+
+Switch 컴포넌트의 가장 간단한 사용 방법입니다.
 
 ```tsx
-import { Switch } from "@/components/ui/Switch";
-import { useState } from "react";
+import { Switch } from '@/components/ui/Switch';
 
-export default function SwitchExample() {
-  const [enabled, setEnabled] = useState(false);
+export function BasicExample() {
+  return <Switch>알림 활성화</Switch>;
+}
+```
 
+### 비제어 Switch
+
+자신의 상태를 스스로 관리하는 스위치입니다.
+
+```tsx
+import { Switch } from '@/components/ui/Switch';
+
+export function UncontrolledExample() {
   return (
-    <Switch
-      isSelected={enabled}
-      onChange={setEnabled}
-    >
-      {enabled ? "Enabled" : "Disabled"}
+    <Switch defaultSelected={false}>
+      뉴스레터 구독
     </Switch>
   );
 }
 ```
 
-## 색상 변형
+### 제어 Switch
 
-<PreviewWrapper>
-<Switch variant="default">Default</Switch>
-<Switch variant="accent">Accent</Switch>
-<Switch variant="secondary">Secondary</Switch>
-</PreviewWrapper>
+부모 컴포넌트에 의해 상태가 관리되는 스위치입니다.
 
 ```tsx
-<Switch variant="default">Default</Switch>
-<Switch variant="accent">Accent</Switch>
-<Switch variant="secondary">Secondary</Switch>
-```
+import { Switch } from '@/components/ui/Switch';
+import { useState } from 'react';
 
-## 상태
-
-<PreviewWrapper>
-  <Switch isSelected>Enabled</Switch>
-  <Switch isDisabled>Disabled</Switch>
-</PreviewWrapper>
-
-```tsx
-<Switch isSelected>Enabled</Switch>
-<Switch isDisabled>Disabled</Switch>
-```
-
-## 예제
-
-```tsx
-import { Switch } from "@/components/ui/Switch";
-import { useState } from "react";
-
-export default function SettingsExample() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [notifications, setNotifications] = useState(true);
+export function ControlledExample() {
+  const [isSelected, setIsSelected] = useState(false);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <label>Dark Mode</label>
-        <Switch
-          isSelected={darkMode}
-          onChange={setDarkMode}
-        />
-      </div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <label>Notifications</label>
-        <Switch
-          isSelected={notifications}
-          onChange={setNotifications}
-        />
-      </div>
+    <Switch
+      isSelected={isSelected}
+      onChange={setIsSelected}
+    >
+      다크 모드
+    </Switch>
+  );
+}
+```
+
+### 모든 변형
+
+사용 가능한 모든 시각적 변형을 보여줍니다.
+
+```tsx
+import { Switch } from '@/components/ui/Switch';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Switch variant="default">기본</Switch>
+      <Switch variant="accent">강조</Switch>
+      <Switch variant="secondary">보조</Switch>
     </div>
   );
 }
 ```
 
-## 라벨과 함께 사용
+### 비활성화 상태
+
+비활성화된 스위치 상태를 보여줍니다.
 
 ```tsx
-<Switch isSelected>
-  Notifications enabled
-</Switch>
-<Switch isDisabled>
-  Disabled setting
-</Switch>
+import { Switch } from '@/components/ui/Switch';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Switch isDisabled>비활성화 (꺼짐)</Switch>
+      <Switch isDisabled isSelected={true}>
+        비활성화 (켜짐)
+      </Switch>
+    </div>
+  );
+}
 ```
+
+### 읽기 전용 Switch
+
+읽기 전용 스위치 상태를 보여줍니다.
+
+```tsx
+import { Switch } from '@/components/ui/Switch';
+
+export function ReadOnlyExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Switch isReadOnly>읽기 전용 (꺼짐)</Switch>
+      <Switch isReadOnly isSelected={true}>
+        읽기 전용 (켜짐)
+      </Switch>
+    </div>
+  );
+}
+```
+
+## 접근성
+
+### 키보드 지원
+
+| 키 | 동작 |
+|----|------|
+| `Space` | 스위치 켜기/끄기 |
+| `Tab` | 다음 요소로 포커스 이동 |
+| `Shift+Tab` | 이전 요소로 포커스 이동 |
+
+### ARIA
+
+- `role="switch"`: 스위치 컨트롤의 의미론적 역할
+- `aria-checked="true\|false"`: 현재 선택 상태
+- `aria-disabled="true"`: 비활성화 상태 표시
+- `aria-readonly="true"`: 읽기 전용 상태 표시
+
+### WCAG 준수
+
+- Level AA: 스위치는 키보드 네비게이션 및 스크린 리더를 지원합니다
+- 포커스 표시: 키보드 사용자를 위한 명확한 포커스 표시
+- 색상 독립적: 정보 전달을 위해 색상에만 의존하지 않습니다
+
+## CSS 커스터마이징
+
+### CSS 변수
+
+Switch 컴포넌트는 테마 설정을 위해 다음 CSS 변수를 사용합니다.
+
+```css
+/* 색상 변형 */
+--serok-switch-color-default: #6c757d;
+--serok-switch-color-accent: #007bff;
+--serok-switch-color-secondary: #ffc107;
+
+/* 비활성화 상태 */
+--serok-switch-opacity-disabled: 0.5;
+
+/* 크기 */
+--serok-switch-size-track-width: 2.5rem;
+--serok-switch-size-track-height: 1.5rem;
+--serok-switch-size-thumb: 1.25rem;
+```
+
+### CSS 변수 사용
+
+```tsx
+import { Switch } from '@/components/ui/Switch';
+import './custom-switch-styles.css';
+
+export function CustomStyleExample() {
+  return <Switch variant="default" className="custom-switch">토글</Switch>;
+}
+```
+
+```css
+/* custom-switch-styles.css */
+.custom-switch {
+  --serok-switch-color-default: #e91e63;
+}
+```
+
+## 모범 사례
+
+- 스위치가 제어하는 내용을 명확하고 간결하게 설명하는 라벨을 사용하세요
+- 스위치를 제어하는 설정 근처에 배치하세요
+- 스위치가 상태를 변경할 때 피드백을 제공하세요 (예: 시각적 변경, 확인 메시지)
+- 추가 확인이 필요한 작업에는 스위치를 사용하지 마세요
+- 맥락을 고려하세요: 즉각적인 설정에는 스위치를 사용하고, 중요한 결정에는 사용하지 마세요
+
+## 일반적인 문제
+
+**문제**: 라벨을 클릭해도 스위치가 업데이트되지 않습니다
+**해결책**: 라벨이 별도의 라벨 요소가 아닌 자식 요소로 포함되어 있는지 확인하세요. React Spectrum은 라벨 연결을 내부적으로 처리합니다.
+
+**문제**: onChange 핸들러를 찾을 수 없습니다
+**해결책**: `onChange` prop을 사용하세요 (`onPress` 또는 `onCheck`가 아님). 부울 매개변수를 받습니다: `onChange={(isSelected) => ...}`
+
+**문제**: 비활성화된 스위치가 여전히 상호작용합니다
+**해결책**: `isDisabled` prop이 `true` (boolean)로 설정되어 있는지 확인하세요 (`"true"` 문자열이 아님).
+
+## API 참고
+
+포괄적인 props 문서는 [React Spectrum Switch 문서](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props)를 참고하세요.
+
+### Serok UI 특정 Props
+
+| Prop | Type | 기본값 | 설명 |
+|------|------|-------|------|
+| `variant` | `"default" \| "accent" \| "secondary"` | `"default"` | Serok UI 색상 변형 |
+| `isEmphasized` | `boolean` | `false` | 강조 스타일 적용 |
+
+기타 props는 React Spectrum의 Switch 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Switch Props](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props)를 참고하세요.
+
+---
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Switch/index.tsx`
+- **스타일**: `lib/ui/Switch/styles.css`
+- **내보내기**: `@/components/ui/Switch`에서 명명 내보내기
+- **React Spectrum 기반**: Yes (@react-spectrum/switch)
+- **CSS 커스터마이징 가능**: Yes
+- **테스트**: `data-testid="switch"` 사용
+
+---
+
+**마지막 업데이트**: 2025-10-31
+**상태**: ✅ 완료 및 LLM 최적화됨

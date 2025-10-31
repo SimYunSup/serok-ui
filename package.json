@@ -13,10 +13,11 @@
     "typecheck": "react-router typegen && tsc",
     "postinstall": "react-router typegen",
     "build:shadcn": "shadcn build ../registry.json --output=../public/r/ --cwd=./lib",
-    "build:registry": "tsx ./script/buildRegistry.ts",
+    "build:registry": "tsx ./scripts/buildRegistry.ts",
     "build:sd": "style-dictionary build --config ./sd.config.mjs",
     "clean:sd": "style-dictionary clean --config ./sd.config.mjs",
-    "lint": "pnpm --filter @serok-ui/library lint"
+    "lint": "pnpm --filter @serok-ui/library lint",
+    "docs:lint": "markdownlint --config .markdownlintrc.json content/docs/components/*.mdx"
   },
   "dependencies": {
     "@orama/orama": "^3.1.16",
@@ -49,6 +50,7 @@
     "@typescript-eslint/parser": "^8.46.2",
     "eslint": "^9.38.0",
     "fumadocs-docgen": "^3.0.3",
+    "markdownlint-cli": "^0.39.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "shadcn": "^3.5.0",
