@@ -1,0 +1,463 @@
+---
+title: Provider
+componentName: Provider
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/provider"
+---
+
+## 개요
+
+Provider는 애플리케이션의 최상위에 위치하여 Serok UI 디자인 시스템의 테마, 색상 스킴, 그리고 디자인 토큰을 모든 자식 컴포넌트에 적용하는 래퍼 컴포넌트입니다. 이 컴포넌트는 필수적이며, Provider 없이는 Serok UI 컴포넌트들이 제대로 작동하지 않습니다.
+
+## 빠른 시작
+
+애플리케이션의 최상위에서 Provider로 감싸주세요:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+## Props (속성)
+
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
+|------|------|------|--------|------|
+| `colorScheme` | `"light" \| "dark" \| "auto"` | No | `"light"` | 전체 애플리케이션의 색상 스킴 |
+| `children` | `ReactNode` | Yes | — | Provider로 감쌀 하위 컴포넌트들 |
+| `locale` | `string` | No | `"en-US"` | 국제화를 위한 로케일 |
+| `scale` | `"large" \| "medium"` | No | `"large"` | 전역 UI 크기 조정 |
+| `theme` | `Theme` | No | `default` | 테마 객체 (기본값: Serok 테마) |
+
+## 색상 스킴 (Color Scheme)
+
+### 지원하는 색상 스킴
+
+| 스킴 | Props | 설명 |
+|------|-------|------|
+| 라이트 | `colorScheme="light"` | 밝은 배경에 어두운 텍스트 (기본값) |
+| 다크 | `colorScheme="dark"` | 어두운 배경에 밝은 텍스트 |
+| 자동 | `colorScheme="auto"` | 시스템 설정을 따라 자동 전환 |
+
+### 스케일 (Scale)
+
+전체 애플리케이션의 간격과 크기를 조정합니다:
+
+| 스케일 | Props | 사용 사례 |
+|--------|-------|----------|
+| 중간 | `scale="medium"` | 콤팩트한 UI, 밀집된 레이아웃 |
+| 큼 | `scale="large"` | 여유있는 UI, 편안한 레이아웃 (기본값) |
+
+## 사용 예제
+
+### 기본 설정
+
+가장 간단한 Provider 설정입니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { Button } from '@/components/ui/Button';
+
+export function App() {
+  return (
+    <SerokProvider>
+      <Button variant="primary">Serok UI 시작</Button>
+    </SerokProvider>
+  );
+}
+```
+
+### 라이트 모드
+
+명시적으로 라이트 색상 스킴을 설정합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+### 다크 모드
+
+다크 모드로 설정합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="dark">
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+### 자동 색상 스킴 감지
+
+시스템 설정을 따라 자동으로 색상 스킴을 전환합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { useState, useEffect } from 'react';
+
+export function App() {
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    // 시스템의 다크모드 설정 감지
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setColorScheme(e.matches ? 'dark' : 'light');
+    };
+
+    // 초기 상태 설정
+    setColorScheme(darkModeQuery.matches ? 'dark' : 'light');
+
+    // 변경 감지 리스너 추가
+    darkModeQuery.addEventListener('change', handleChange);
+
+    // 클린업
+    return () => darkModeQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return (
+    <SerokProvider colorScheme={colorScheme}>
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+### 테마 전환 기능
+
+사용자가 수동으로 색상 스킴을 선택할 수 있게 합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function App() {
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
+
+  const toggleTheme = () => {
+    setColorScheme(colorScheme === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <SerokProvider colorScheme={colorScheme}>
+      <div style={{ padding: '1rem' }}>
+        <Button variant="secondary" onPress={toggleTheme}>
+          {colorScheme === 'light' ? '🌙 다크모드' : '☀️ 라이트모드'}
+        </Button>
+        {/* 애플리케이션 콘텐츠 */}
+      </div>
+    </SerokProvider>
+  );
+}
+```
+
+### 국제화 설정
+
+특정 로케일로 애플리케이션을 초기화합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider locale="ko-KR">
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+### 전체 설정
+
+모든 설정 옵션을 함께 사용하는 예제입니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider
+      colorScheme="dark"
+      locale="ko-KR"
+      scale="large"
+    >
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+## CSS 커스터마이제이션
+
+### CSS 변수 (Design Tokens)
+
+Serok Provider는 테마 커스터마이징을 위해 다음과 같은 CSS 변수를 제공합니다:
+
+```css
+/* 기본 색상 */
+--serok-color-primary-50: #f0f9ff;
+--serok-color-primary-100: #e0f2fe;
+--serok-color-primary-500: #0ea5e9;
+--serok-color-primary-900: #0c2d6b;
+
+/* 중성 색상 */
+--serok-color-neutral-50: #fafafa;
+--serok-color-neutral-900: #171717;
+
+/* 의미론적 색상 */
+--serok-color-success: #10b981;      /* 성공 */
+--serok-color-warning: #f59e0b;      /* 경고 */
+--serok-color-error: #ef4444;        /* 오류 */
+
+/* 간격 */
+--serok-spacing-xs: 0.25rem;
+--serok-spacing-sm: 0.5rem;
+--serok-spacing-md: 1rem;
+--serok-spacing-lg: 1.5rem;
+--serok-spacing-xl: 2rem;
+```
+
+### CSS 변수로 스타일 커스터마이징
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import './custom-theme.css';
+
+export function App() {
+  return (
+    <SerokProvider className="custom-theme">
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+```css
+/* custom-theme.css */
+.custom-theme {
+  --serok-color-primary-500: #ec4899;  /* 분홍색으로 변경 */
+  --serok-color-primary-600: #db2777;
+}
+```
+
+### 다크 모드 스타일
+
+다크 모드에 특화된 색상 설정 예제입니다:
+
+```css
+/* dark-mode-overrides.css */
+.serok-provider[data-color-scheme="dark"] {
+  --serok-color-primary-500: #38bdf8;     /* 더 밝은 파란색 */
+  --serok-color-primary-600: #0284c7;
+  --serok-color-neutral-900: #0f172a;     /* 더 어두운 배경 */
+}
+```
+
+## 자주 묻는 질문 (FAQ)
+
+### Q: Provider를 여러 개 사용할 수 있나요?
+
+A: 권장하지 않습니다. 애플리케이션의 최상위에서 한 번만 사용하세요. 중첩된 Provider는 예상치 못한 동작을 발생시킬 수 있습니다.
+
+```tsx
+// ❌ 잘못된 사용
+<SerokProvider colorScheme="light">
+  <SerokProvider colorScheme="dark">
+    {/* 충돌 가능! */}
+  </SerokProvider>
+</SerokProvider>
+
+// ✅ 올바른 사용
+<SerokProvider colorScheme="light">
+  {/* 모든 컴포넌트 */}
+</SerokProvider>
+```
+
+### Q: Provider 없이 버튼을 사용할 수 있나요?
+
+A: 아니오, Provider로 감싸야 합니다. Provider는 필수적인 테마와 스타일을 제공합니다.
+
+```tsx
+// ❌ 작동하지 않음
+<Button variant="primary">클릭</Button>
+
+// ✅ 올바른 사용
+<SerokProvider>
+  <Button variant="primary">클릭</Button>
+</SerokProvider>
+```
+
+### Q: 색상 스킴을 자주 바꿔야 하나요?
+
+A: 앱 초기화 시점에 한 번 설정하는 것이 최선입니다. 필요시 상태 관리를 사용하여 변경할 수 있지만, 성능을 위해 변경을 최소화하세요.
+
+```tsx
+// 권장: 초기화 시 한 번 설정
+<SerokProvider colorScheme="light">
+  {/* ... */}
+</SerokProvider>
+
+// 필요시: 상태로 관리
+const [colorScheme, setColorScheme] = useState('light');
+<SerokProvider colorScheme={colorScheme}>
+  {/* 토글 버튼으로 변경 가능 */}
+</SerokProvider>
+```
+
+### Q: 로케일을 동적으로 변경할 수 있나요?
+
+A: 네, 로케일을 상태로 관리하면 됩니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { useState } from 'react';
+
+export function App() {
+  const [locale, setLocale] = useState('en-US');
+
+  return (
+    <SerokProvider locale={locale}>
+      <select value={locale} onChange={(e) => setLocale(e.target.value)}>
+        <option value="en-US">English</option>
+        <option value="ko-KR">한국어</option>
+        <option value="ja-JP">日本語</option>
+      </select>
+    </SerokProvider>
+  );
+}
+```
+
+## 실제 사용 패턴
+
+### 1. 완전한 앱 래핑
+
+가장 일반적인 사용 패턴입니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { Button } from '@/components/ui/Button';
+
+export default function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      <header>
+        <h1>Serok UI 애플리케이션</h1>
+      </header>
+      <main>
+        <Button variant="primary">시작하기</Button>
+      </main>
+    </SerokProvider>
+  );
+}
+```
+
+### 2. Next.js root layout
+
+Next.js에서 root layout에 Provider를 배치합니다:
+
+```tsx
+// app/layout.tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import type { ReactNode } from 'react';
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="ko">
+      <body>
+        <SerokProvider colorScheme="light">
+          {children}
+        </SerokProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### 3. 사용자 테마 설정 저장
+
+사용자의 테마 선택을 localStorage에 저장합니다:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { useEffect, useState } from 'react';
+
+export function App() {
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark'>('light');
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // localStorage에서 저장된 테마 가져오기
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
+    if (savedTheme) {
+      setColorScheme(savedTheme);
+    } else {
+      // 시스템 설정 감지
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setColorScheme(isDark ? 'dark' : 'light');
+    }
+    setMounted(true);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = colorScheme === 'light' ? 'dark' : 'light';
+    setColorScheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  if (!mounted) return null;
+
+  return (
+    <SerokProvider colorScheme={colorScheme}>
+      <button onClick={toggleTheme}>
+        현재 테마: {colorScheme}
+      </button>
+      {/* 애플리케이션 콘텐츠 */}
+    </SerokProvider>
+  );
+}
+```
+
+## API 참고
+
+자세한 Props 문서는 [React Spectrum Provider 문서](https://react-spectrum.adobe.com/react-spectrum/Provider.html#props)를 참조하세요.
+
+### Serok UI 커스텀 Props
+
+| Props | 타입 | 기본값 | 설명 |
+|-------|------|--------|------|
+| `colorScheme` | `"light" \| "dark" \| "auto"` | `"light"` | Serok UI 색상 스킴 |
+| `locale` | `string` | `"en-US"` | 국제화 로케일 |
+| `scale` | `"large" \| "medium"` | `"large"` | 전역 UI 스케일 |
+
+나머지 모든 Props는 React Spectrum의 Provider 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Provider Props](https://react-spectrum.adobe.com/react-spectrum/Provider.html#props) 문서에서 확인하실 수 있습니다.
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Provider/index.tsx`
+- **스타일**: `lib/ui/Provider/serok.css`
+- **내보내기**: `@/components/ui/Provider`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/provider)
+- **CSS 커스터마이징**: 지원
+- **필수**: 예 (전체 앱 래핑 필요)

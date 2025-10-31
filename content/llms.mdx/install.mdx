@@ -1,0 +1,256 @@
+---
+title: Getting Started
+description: Install and configure Serok UI components in your project
+---
+
+# Getting Started with Serok UI
+
+Serok UI is an advanced component library built on Adobe React Spectrum. Follow the steps below to add components to your project.
+
+## Overview
+
+Serok UI is an accessibility-focused component library built on Adobe React Spectrum. It provides production-ready, high-quality UI components that you can use immediately in your projects.
+
+---
+
+## Step 1: Create Configuration File
+
+Create a `components.json` file in your project root and update the CSS file path to match your global CSS location.
+
+```json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "{your global CSS path}",
+    "baseColor": "stone",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
+}
+```
+
+This configuration defines:
+
+- **style**: Component style preset
+- **rsc**: React Server Component support
+- **tsx**: TypeScript usage
+- **tailwind**: Style configuration and paths (not required)
+- **aliases**: Module path aliases
+- **iconLibrary**: Icon library (using Lucide)
+
+---
+
+## Step 2: Configure Path Aliases
+
+### Update TypeScript Configuration
+
+Add path mappings to `tsconfig.json` to enable absolute imports:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/hooks/*": ["./src/hooks/*"]
+    }
+  }
+}
+```
+
+Using path aliases provides:
+- Simple import paths even in deeply nested directories
+- Better code readability
+- No need to update imports when moving files
+
+### Update Bundler Configuration
+
+Configure your bundler to use path aliases.
+
+**Vite example:**
+
+```ts
+import path from "path";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});
+```
+
+**Next.js example:**
+
+Next.js automatically recognizes paths from `tsconfig.json`, so no additional configuration is needed.
+
+---
+
+## Step 3: Install Theme and Components
+
+Use the shadcn CLI to install the theme and desired components. The theme is required, while other components are optional.
+
+```sh
+# Install theme (required)
+npx shadcn@latest add https://serok.ethansup.net/r/provider.json
+
+# Install components as needed
+npx shadcn@latest add https://serok.ethansup.net/r/button.json
+npx shadcn@latest add https://serok.ethansup.net/r/checkbox.json
+npx shadcn@latest add https://serok.ethansup.net/r/input.json
+npx shadcn@latest add https://serok.ethansup.net/r/select.json
+npx shadcn@latest add https://serok.ethansup.net/r/switch.json
+```
+
+shadcn automatically installs all required dependencies (React Spectrum, theme, etc.) during the installation process.
+
+---
+
+## Step 4: Basic Setup
+
+### Provider Setup
+
+Wrap your root component with `SerokProvider`:
+
+```jsx
+import { SerokProvider } from "@/ui/components/Provider"
+
+export function App() {
+  return (
+    <SerokProvider>
+      <YourAppContent />
+    </SerokProvider>
+  )
+}
+```
+
+---
+
+## Usage Examples
+
+### Basic Button
+
+```jsx
+import { Button } from "@/ui/components/Button"
+
+export function MyComponent() {
+  return (
+    <Button>
+      Click me
+    </Button>
+  )
+}
+```
+
+### Checkbox
+
+```jsx
+import { Checkbox } from "@/ui/components/Checkbox"
+import { useState } from "react"
+
+export function MyCheckbox() {
+  const [isSelected, setIsSelected] = useState(false)
+
+  return (
+    <Checkbox
+      isSelected={isSelected}
+      onChange={setIsSelected}
+    >
+      I agree
+    </Checkbox>
+  )
+}
+```
+
+### Complete Form Example
+
+```jsx
+import { SerokProvider } from "@/ui/components/Provider"
+import { Button } from "@/ui/components/Button"
+import { Input } from "@/ui/components/Input"
+import { Checkbox } from "@/ui/components/Checkbox"
+import { useState } from "react"
+
+export function MyForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    agreed: false,
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+  }
+
+  return (
+    <SerokProvider>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          label="Name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
+        <Checkbox
+          isSelected={formData.agreed}
+          onChange={(agreed) => setFormData({ ...formData, agreed })}
+        >
+          I agree to the terms
+        </Checkbox>
+        <Button type="submit">Submit</Button>
+      </form>
+    </SerokProvider>
+  )
+}
+```
+
+---
+
+## Next Steps
+
+You're all set! Here's what you can explore next:
+
+- **Component Documentation**: Check each component's props, examples, and accessibility information
+- **Examples**: View and experiment with working code examples
+- **Theme Customization**: Adjust colors, sizes, and other properties to match your project
+- **Accessibility**: All components are designed with accessibility in mind
+
+---
+
+## Troubleshooting
+
+### Styles not applying to components
+
+- Verify that your CSS file is included in your global styles
+- Check that `components.json` paths are correct
+
+### TypeScript errors
+
+- Ensure TypeScript version is 4.0 or higher
+- Verify `tsconfig.json` paths are correct
+
+### Provider errors
+
+- Ensure `SerokProvider` wraps your entire app at the root level
+- Check the order of providers if using multiple providers
+
+---
+
+For more information and support, refer to the official documentation.

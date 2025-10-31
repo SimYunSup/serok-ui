@@ -1,15 +1,22 @@
-import { defineConfig } from "vite"
-import tsconfigPaths from 'vite-tsconfig-paths'
-import react from "@vitejs/plugin-react"
+import { defineConfig } from 'vite';
+import { reactRouter } from '@react-router/dev/vite';
+import tailwindcss from '@tailwindcss/vite';
+import mdx from 'fumadocs-mdx/vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
+import * as MdxConfig from './source.config';
 
 export default defineConfig({
-  // resolve: {
-  //   alias: {
-  //     "@spectrum-web-components/styles": "./node_modules/@spectrum-web-components/styles",
-  //   }
-  // },
   plugins: [
-    react(),
+    mdx(MdxConfig),
+    tailwindcss(),
+    reactRouter(),
     tsconfigPaths(),
   ],
-})
+  ssr: {
+    noExternal: [
+      '@adobe/react-spectrum',
+      /^@react-spectrum\/.*/,
+      /^@spectrum-icons\/.*/,
+    ]
+  }
+});

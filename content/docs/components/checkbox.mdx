@@ -1,0 +1,506 @@
+---
+title: Checkbox
+componentName: Checkbox
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/checkbox"
+---
+
+## 개요
+
+체크박스는 사용자가 하나의 옵션을 선택하거나 해제할 수 있는 폼 컨트롤입니다. 일반적으로 여러 개의 선택지 중에서 여러 개를 동시에 선택할 수 있는 상황에서 사용됩니다. "전체 선택" 같은 계층적 선택 패턴에서도 활용됩니다. Serok UI의 체크박스는 React Spectrum을 기반으로 3가지 시각 스타일을 제공합니다.
+
+## 빠른 시작
+
+가장 기본적인 체크박스 사용 방법입니다:
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function MyComponent() {
+  return <Checkbox variant="default">약관에 동의합니다</Checkbox>;
+}
+```
+
+## Props (속성)
+
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
+|------|------|------|--------|------|
+| `variant` | `"default" \| "accent" \| "secondary"` | No | `"default"` | 시각적 스타일 변형 |
+| `isSelected` | `boolean` | No | — | 선택 상태 (제어 모드) |
+| `defaultSelected` | `boolean` | No | `false` | 초기 선택 상태 (비제어 모드) |
+| `onChange` | `(isSelected: boolean) => void` | No | — | 선택 상태 변경 시 호출 함수 |
+| `isIndeterminate` | `boolean` | No | `false` | 중간 상태 (부분 선택) |
+| `isDisabled` | `boolean` | No | `false` | 비활성화 여부 |
+| `isReadOnly` | `boolean` | No | `false` | 읽기 전용 모드 |
+| `isRequired` | `boolean` | No | `false` | 필수 필드 표시 |
+| `isInvalid` | `boolean` | No | `false` | 유효성 검사 실패 상태 |
+| `children` | `ReactNode` | Yes | — | 체크박스 라벨 텍스트 또는 콘텐츠 |
+| `value` | `string` | No | — | 폼 제출 시 사용될 값 |
+
+## 변형 및 상태
+
+### 시각적 변형
+
+| 변형 | Props | 사용 사례 |
+|------|-------|----------|
+| 기본 | `variant="default"` | 표준 체크박스, 중립적 스타일 |
+| 강조 | `variant="accent"` | 중요한 선택, 강조된 체크박스 |
+| 보조 | `variant="secondary"` | 덜 중요한 선택, 보조적 옵션 |
+
+### 상태 종류
+
+- **선택 해제 (Unchecked)**: 체크박스가 비어있는 상태
+- **선택됨 (Checked)** (`isSelected={true}`): 체크표시가 있는 상태
+- **중간 상태 (Indeterminate)** (`isIndeterminate={true}`): 부분 선택 상태
+- **비활성 (Disabled)** (`isDisabled={true}`): 클릭 불가, 회색 처리됨
+- **읽기 전용 (Read-only)** (`isReadOnly={true}`): 상태 표시만 가능, 변경 불가
+
+## 사용 예제
+
+### 기본 사용법
+
+가장 간단한 체크박스 사용 방법입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function BasicExample() {
+  return <Checkbox variant="default">동의합니다</Checkbox>;
+}
+```
+
+### 비제어 체크박스
+
+자신의 상태를 관리하는 체크박스입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function UncontrolledExample() {
+  return (
+    <Checkbox variant="default" defaultSelected={false}>
+      뉴스레터 구독
+    </Checkbox>
+  );
+}
+```
+
+### 제어 체크박스
+
+부모 컴포넌트에서 상태를 관리하는 체크박스입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [isSelected, setIsSelected] = useState(false);
+
+  return (
+    <Checkbox
+      variant="default"
+      isSelected={isSelected}
+      onChange={setIsSelected}
+    >
+      이용약관에 동의합니다
+    </Checkbox>
+  );
+}
+```
+
+### 모든 시각적 변형
+
+3가지 변형을 모두 보여주는 예제입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox variant="default">기본 스타일</Checkbox>
+      <Checkbox variant="accent">강조 스타일</Checkbox>
+      <Checkbox variant="secondary">보조 스타일</Checkbox>
+    </div>
+  );
+}
+```
+
+### 중간 상태 (전체 선택 패턴)
+
+"전체 선택" 기능을 구현하는 예제입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { useState } from 'react';
+
+export function IndeterminateExample() {
+  const [items, setItems] = useState({
+    item1: false,
+    item2: true,
+    item3: false,
+  });
+
+  // 모든 항목이 선택되었는지 확인
+  const allSelected = Object.values(items).every(Boolean);
+  // 일부 항목이 선택되었는지 확인
+  const someSelected = Object.values(items).some(Boolean);
+
+  const handleSelectAll = (isSelected: boolean) => {
+    const newItems: typeof items = {};
+    Object.keys(items).forEach(key => {
+      newItems[key as keyof typeof items] = isSelected;
+    });
+    setItems(newItems);
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox
+        variant="default"
+        isSelected={allSelected}
+        isIndeterminate={someSelected && !allSelected}
+        onChange={handleSelectAll}
+      >
+        모든 항목 선택
+      </Checkbox>
+
+      <div style={{ marginLeft: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {Object.entries(items).map(([key, value]) => (
+          <Checkbox
+            key={key}
+            variant="default"
+            isSelected={value}
+            onChange={(checked) => setItems({ ...items, [key]: checked })}
+          >
+            {key}
+          </Checkbox>
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+### 비활성 상태
+
+비활성화된 체크박스를 보여주는 예제입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox variant="default" isDisabled>
+        비활성 (선택 해제)
+      </Checkbox>
+      <Checkbox variant="default" defaultSelected isDisabled>
+        비활성 (선택됨)
+      </Checkbox>
+    </div>
+  );
+}
+```
+
+### 유효성 검사
+
+체크박스 유효성 검사 예제입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { useState } from 'react';
+
+export function ValidationExample() {
+  const [isAgreed, setIsAgreed] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = () => {
+    if (!isAgreed) {
+      alert('약관에 동의해주세요.');
+      return;
+    }
+    setSubmitted(true);
+    alert('제출되었습니다!');
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox
+        variant="default"
+        isSelected={isAgreed}
+        onChange={setIsAgreed}
+        isInvalid={submitted && !isAgreed}
+        isRequired
+      >
+        필수 약관에 동의합니다
+      </Checkbox>
+      <button onClick={handleSubmit}>제출</button>
+    </div>
+  );
+}
+```
+
+### 여러 체크박스 그룹
+
+여러 체크박스를 그룹으로 관리하는 예제입니다.
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { useState } from 'react';
+
+export function CheckboxGroupExample() {
+  const [selected, setSelected] = useState({
+    notifications: false,
+    marketing: false,
+    analytics: false,
+  });
+
+  const handleChange = (key: keyof typeof selected) => {
+    setSelected(prev => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <fieldset>
+        <legend style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          알림 설정
+        </legend>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          <Checkbox
+            variant="default"
+            isSelected={selected.notifications}
+            onChange={() => handleChange('notifications')}
+          >
+            알림 수신
+          </Checkbox>
+
+          <Checkbox
+            variant="default"
+            isSelected={selected.marketing}
+            onChange={() => handleChange('marketing')}
+          >
+            마케팅 이메일
+          </Checkbox>
+
+          <Checkbox
+            variant="default"
+            isSelected={selected.analytics}
+            onChange={() => handleChange('analytics')}
+          >
+            분석 데이터 제공
+          </Checkbox>
+        </div>
+      </fieldset>
+
+      <div>
+        <p>선택된 항목: {Object.values(selected).filter(Boolean).length}개</p>
+      </div>
+    </div>
+  );
+}
+```
+
+## CSS 커스터마이제이션
+
+### CSS 변수
+
+체크박스는 다음과 같은 CSS 변수를 사용합니다:
+
+```css
+/* 색상 변수 */
+--serok-checkbox-color-default: #007bff;       /* 기본 색상 */
+--serok-checkbox-color-accent: #ffc107;        /* 강조 색상 */
+--serok-checkbox-color-secondary: #6c757d;     /* 보조 색상 */
+
+/* 상태별 설정 */
+--serok-checkbox-opacity-disabled: 0.5;        /* 비활성 투명도 */
+
+/* 테두리 및 크기 */
+--serok-checkbox-border-color: #d0d7de;        /* 테두리 색상 */
+--serok-checkbox-border-radius: 0.25rem;       /* 테두리 반경 */
+--serok-checkbox-size: 1.25rem;                /* 체크박스 크기 */
+```
+
+### CSS 변수로 스타일 커스터마이징
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import './custom-checkbox-styles.css';
+
+export function CustomStyleExample() {
+  return <Checkbox variant="default" className="custom-accent">커스텀 스타일</Checkbox>;
+}
+```
+
+```css
+/* custom-checkbox-styles.css */
+.custom-accent {
+  --serok-checkbox-color-accent: #e91e63;      /* 분홍색으로 변경 */
+}
+```
+
+## 자주 묻는 질문 (FAQ)
+
+### Q: Switch와 Checkbox의 차이는 뭔가요?
+
+A: 체크박스는 여러 옵션 중 여러 개를 선택할 수 있고, Switch는 단일 토글입니다. 보통 "전체 선택" 같은 여러 항목 선택에는 체크박스, "알림 활성화" 같은 켜기/끄기에는 Switch를 사용합니다.
+
+### Q: 체크박스에 아이콘을 추가할 수 있나요?
+
+A: 네, `children`에 아이콘과 텍스트를 함께 전달하면 됩니다:
+
+```tsx
+<Checkbox variant="default">
+  ✅ 약관에 동의합니다
+</Checkbox>
+```
+
+### Q: 체크박스 그룹을 쉽게 관리하려면?
+
+A: 배열이나 객체로 상태를 관리하는 것이 좋습니다:
+
+```tsx
+const [selected, setSelected] = useState({
+  option1: false,
+  option2: true,
+});
+
+const handleChange = (key) => {
+  setSelected(prev => ({ ...prev, [key]: !prev[key] }));
+};
+```
+
+## 실제 사용 패턴
+
+### 1. 약관 동의 폼
+
+가장 흔한 사용 패턴입니다:
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function TermsAgreementExample() {
+  const [terms, setTerms] = useState(false);
+  const [privacy, setPrivacy] = useState(false);
+
+  const canSubmit = terms && privacy;
+
+  return (
+    <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <Checkbox
+        variant="default"
+        isSelected={terms}
+        onChange={setTerms}
+        isRequired
+      >
+        서비스 이용약관에 동의합니다
+      </Checkbox>
+
+      <Checkbox
+        variant="default"
+        isSelected={privacy}
+        onChange={setPrivacy}
+        isRequired
+      >
+        개인정보 처리방침에 동의합니다
+      </Checkbox>
+
+      <Button variant="primary" isDisabled={!canSubmit}>
+        회원가입
+      </Button>
+    </form>
+  );
+}
+```
+
+### 2. 필터링 기능
+
+여러 필터를 선택하는 예제입니다:
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+import { useState } from 'react';
+
+export function FilterExample() {
+  const [filters, setFilters] = useState({
+    online: false,
+    inStock: false,
+    discount: false,
+  });
+
+  const toggleFilter = (key: keyof typeof filters) => {
+    setFilters(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const activeFilters = Object.entries(filters)
+    .filter(([, value]) => value)
+    .map(([key]) => key);
+
+  return (
+    <div>
+      <h3>필터</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <Checkbox
+          variant="default"
+          isSelected={filters.online}
+          onChange={() => toggleFilter('online')}
+        >
+          온라인 상품
+        </Checkbox>
+
+        <Checkbox
+          variant="default"
+          isSelected={filters.inStock}
+          onChange={() => toggleFilter('inStock')}
+        >
+          재고 있음
+        </Checkbox>
+
+        <Checkbox
+          variant="default"
+          isSelected={filters.discount}
+          onChange={() => toggleFilter('discount')}
+        >
+          할인 상품
+        </Checkbox>
+      </div>
+
+      {activeFilters.length > 0 && (
+        <p style={{ marginTop: '1rem' }}>
+          활성 필터: {activeFilters.join(', ')}
+        </p>
+      )}
+    </div>
+  );
+}
+```
+
+## API 참고
+
+자세한 Props 문서는 [React Spectrum Checkbox 문서](https://react-spectrum.adobe.com/react-spectrum/Checkbox.html#props)를 참조하세요.
+
+### Serok UI 커스텀 Props
+
+| Props | 타입 | 기본값 | 설명 |
+|-------|------|--------|------|
+| `variant` | `"default" \| "accent" \| "secondary"` | `"default"` | Serok UI 시각적 변형 |
+
+나머지 모든 Props는 React Spectrum의 Checkbox 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Checkbox Props](https://react-spectrum.adobe.com/react-spectrum/Checkbox.html#props) 문서에서 확인하실 수 있습니다.
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Checkbox/index.tsx`
+- **스타일**: `lib/ui/Checkbox/styles.css`
+- **내보내기**: `@/components/ui/Checkbox`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/checkbox)
+- **CSS 커스터마이징**: 지원
+- **테스팅**: `data-testid="checkbox"` 사용

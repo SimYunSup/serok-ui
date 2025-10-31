@@ -1,0 +1,291 @@
+---
+title: Input
+componentName: Input
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/textfield"
+description: "Text input form control supporting 5 input types (text, email, password, tel, url). Supports validation, error messages, character limits, disabled/readonly states, and controlled/uncontrolled modes."
+---
+
+# Input
+
+## Overview
+
+An input field is a form control that allows users to enter and edit text. Input fields support various input types including text, email, password, telephone, and URL. Serok UI's Input component extends React Spectrum's TextField with custom styling.
+
+## Quick Start
+
+Minimal working example showing the most common usage pattern:
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function MyComponent() {
+  return <Input label="Username" placeholder="Enter your name" />;
+}
+```
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `string \| ReactNode` | No | — | Input label displayed above the field |
+| `placeholder` | `string` | No | — | Placeholder text when field is empty |
+| `type` | `"text" \| "email" \| "password" \| "tel" \| "url"` | No | `"text"` | Input type determines validation and keyboard |
+| `value` | `string` | No | — | Controlled input value |
+| `defaultValue` | `string` | No | — | Uncontrolled initial value |
+| `isDisabled` | `boolean` | No | `false` | Disable user input |
+| `isReadOnly` | `boolean` | No | `false` | Read-only mode, no editing allowed |
+| `isRequired` | `boolean` | No | `false` | Mark as required field |
+| `isInvalid` | `boolean` | No | `false` | Validation failure state |
+| `validationState` | `"valid" \| "invalid"` | No | — | Validation state |
+| `errorMessage` | `string` | No | — | Error message for validation failures |
+| `description` | `string` | No | — | Description text below the field |
+| `onChange` | `(value: string) => void` | No | — | Called when input value changes |
+| `isQuiet` | `boolean` | No | `false` | Minimal styling, border not visible |
+| `autoFocus` | `boolean` | No | `false` | Auto-focus when mounted |
+| `maxLength` | `number` | No | — | Maximum characters allowed |
+
+**Additional Notes**:
+- All props follow React Spectrum naming conventions
+- Props are case-sensitive
+- Extends all props from React Spectrum's `@react-spectrum/textfield` component
+
+## Input Types
+
+### Supported Input Types
+
+| Type | Props | Use Case |
+|------|-------|----------|
+| Text | `type="text"` | General text input (default) |
+| Email | `type="email"` | Email addresses with validation |
+| Password | `type="password"` | Secure password input, hidden text |
+| Telephone | `type="tel"` | Phone numbers with tel keyboard |
+| URL | `type="url"` | Web URLs with validation |
+
+### Behavioral States
+
+- **Enabled**: Normal input possible
+- **Disabled** (`isDisabled={true}`): No input allowed, grayed out
+- **Read-only** (`isReadOnly={true}`): Shows value but no editing
+- **Invalid** (`isInvalid={true}`): Validation error state
+- **Quiet** (`isQuiet={true}`): Minimal styling, border hidden
+
+## Examples
+
+### Basic Usage
+
+Simplest way to use the Input component with a label.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function BasicExample() {
+  return <Input label="Name" placeholder="Enter your full name" />;
+}
+```
+
+### Uncontrolled Input
+
+Input managing its own state with initial value.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function UncontrolledExample() {
+  return (
+    <Input
+      label="Email"
+      type="email"
+      placeholder="your@email.com"
+      defaultValue="user@example.com"
+    />
+  );
+}
+```
+
+### Controlled Input
+
+Input with state managed by parent component.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Input
+      label="Username"
+      value={value}
+      onChange={setValue}
+      placeholder="Enter username"
+    />
+  );
+}
+```
+
+### All Input Types
+
+Example showing all supported input types.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function InputTypesExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="Name" type="text" placeholder="John Doe" />
+      <Input label="Email" type="email" placeholder="john@example.com" />
+      <Input label="Password" type="password" placeholder="••••••••" />
+      <Input label="Phone" type="tel" placeholder="+1 (555) 123-4567" />
+      <Input label="Website" type="url" placeholder="https://example.com" />
+    </div>
+  );
+}
+```
+
+### With Validation
+
+Example showing input with validation and error messages.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ValidationExample() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const validateEmail = (value: string) => {
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    if (!isValid && value) {
+      setError('Please enter a valid email address');
+    } else {
+      setError('');
+    }
+    setEmail(value);
+  };
+
+  return (
+    <Input
+      label="Email"
+      type="email"
+      value={email}
+      onChange={validateEmail}
+      isInvalid={!!error}
+      errorMessage={error}
+      description="We'll never share your email"
+    />
+  );
+}
+```
+
+### Disabled State
+
+Example showing disabled input states.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="Disabled" isDisabled value="Cannot edit" />
+      <Input label="Read-only" isReadOnly value="Can view only" />
+    </div>
+  );
+}
+```
+
+### With Character Limit
+
+Example showing input with maximum character limit.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function CharacterLimitExample() {
+  const [value, setValue] = useState('');
+  const maxLength = 50;
+
+  return (
+    <Input
+      label="Bio"
+      value={value}
+      onChange={setValue}
+      maxLength={maxLength}
+      placeholder="Tell us about yourself"
+      description={`${value.length}/${maxLength} characters`}
+    />
+  );
+}
+```
+
+## CSS Customization
+
+### CSS Variables
+
+The Input component uses these CSS variables for theming:
+
+```css
+/* Border colors */
+--serok-input-border-color: #d0d7de;
+--serok-input-border-color-focus: #0ea5e9;
+--serok-input-border-color-invalid: #ef4444;
+
+/* Background and text */
+--serok-input-background: #ffffff;
+--serok-input-text-color: #171717;
+--serok-input-placeholder-color: #a1a1a1;
+
+/* Disabled state */
+--serok-input-opacity-disabled: 0.5;
+
+/* Sizing */
+--serok-input-padding: 0.5rem 0.75rem;
+--serok-input-border-radius: 0.25rem;
+```
+
+### Using CSS Variables
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import './custom-input-styles.css';
+
+export function CustomStyleExample() {
+  return <Input label="Custom" className="custom-input" />;
+}
+```
+
+```css
+/* custom-input-styles.css */
+.custom-input {
+  --serok-input-border-color-focus: #e91e63;
+}
+```
+
+## API Reference
+
+For comprehensive props documentation, refer to the [React Spectrum TextField documentation](https://react-spectrum.adobe.com/react-spectrum/TextField.html#props).
+
+All Input props are inherited from React Spectrum's TextField component. Refer to the [React Spectrum TextField Props](https://react-spectrum.adobe.com/react-spectrum/TextField.html#props) for the complete list of available props.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Input/index.tsx`
+- **Styles**: `lib/ui/Input/styles.css`
+- **Export**: Named export from `@/components/ui/Input`
+- **React Spectrum Base**: Yes (@react-spectrum/textfield)
+- **CSS Customizable**: Yes
+- **Testing**: Use `data-testid="input"`
+
+---
+
+**Last Updated**: 2025-10-31
+**Status**: ✅ Complete and LLM-optimized

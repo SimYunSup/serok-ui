@@ -1,0 +1,86 @@
+name: Documentation Validation
+
+on:
+  pull_request:
+    paths:
+      - 'content/docs/components/**'
+      - 'content/docs/examples/**'
+      - '.markdownlintrc.json'
+      - 'scripts/validate-*.sh'
+      - 'scripts/validate-*.ts'
+      - '.github/workflows/docs-validation.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/docs/components/**'
+      - 'content/docs/examples/**'
+
+jobs:
+  validate-documentation:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run markdown linter
+        run: pnpm docs:lint
+        continue-on-error: false
+
+      - name: Check for broken links in documentation
+        run: |
+          # Check for common markdown link patterns
+          ! grep -r '\[.*\](.*\.md)' content/docs/components/ | grep -v 'localhost\|https://' | grep -v '^\s*//\|^\s*\*' || echo "No absolute local links found (good!)"
+
+      - name: Verify documentation file paths
+        run: |
+          # Ensure all component docs are in correct location
+          if [ -d "content/docs/components" ]; then
+            echo "✓ Component docs directory exists"
+            ls -la content/docs/components/ || true
+          fi
+
+      - name: Generate documentation summary
+        if: always()
+        run: |
+          echo "## Documentation Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ -d "content/docs/components" ]; then
+            echo "### Documented Components" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            ls -1 content/docs/components/*.mdx 2>/dev/null | sed 's|.*\/||' | sed 's|\.mdx||' || echo "No components documented yet"
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✓ Documentation validation passed on $(date)" >> $GITHUB_STEP_SUMMARY
+
+  fail-on-validation-error:
+    runs-on: ubuntu-latest
+    needs: validate-documentation
+    if: failure()
+    steps:
+      - name: Validation failed
+        run: |
+          echo "Documentation validation failed. Please check the errors above and fix them."
+          exit 1

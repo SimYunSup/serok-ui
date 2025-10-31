@@ -1,32 +1,47 @@
 /* type: registry:ui */
-@layer serok {
-  :root sp-button {
-    --spectrum-button-border-radius: var(--mod-button-border-radius, calc(var(--spectrum-button-height) / 4));
+:root .serok-provider .serok-button {
+  --spectrum-button-border-radius: calc(var(--spectrum-alias-border-radius-large) * 3 / 4);
 
-    &[variant="secondary"]:not([treatment="outline"]) {
-      --mod-button-background-color-default: var(--spectrum-secondary-color-800);
-      --mod-button-background-color-hover: var(--spectrum-secondary-color-900);
-      --mod-button-background-color-down: var(--spectrum-secondary-color-900);
-      --mod-button-background-color-key-focus: var(--spectrum-secondary-color-900);
-      --mod-button-content-color-default: var(--white);
-      --mod-button-content-color-hover: var(--white);
-      --mod-button-content-color-down: var(--white);
-      --mod-button-content-color-key-focus: var(--white);
-    }
+  &.serok-button--secondary:not([data-style="outline"]) {
+    --spectrum-button-color: var(--spectrum-secondary-color-800);
+    --spectrum-button-color-hover: var(--spectrum-secondary-color-900);
+    --spectrum-button-color-down: var(--spectrum-secondary-color-900);
+    --spectrum-button-color-key-focus: var(--spectrum-secondary-color-900);
+    --spectrum-content-color-default: var(--white);
+    --spectrum-content-color-hover: var(--white);
+    --spectrum-content-color-down: var(--white);
+    --spectrum-content-color-key-focus: var(--white);
+  }
 
-    &[variant="secondary"] {
-      --mod-button-border-color-default: var(--spectrum-secondary-color-800);
-      --mod-button-border-color-hover: var(--spectrum-secondary-color-900);
-      --mod-button-border-color-down: var(--spectrum-secondary-color-900);
-      --mod-button-border-color-key-focus: var(--spectrum-secondary-color-900);
-      --mod-button-content-color-default: var(--spectrum-secondary-color-800);
-      --mod-button-content-color-hover: var(--spectrum-secondary-color-900);
-      --mod-button-content-color-down: var(--spectrum-secondary-color-900);
-      --mod-button-content-color-key-focus: var(--spectrum-secondary-color-900);
-      --mod-button-background-color-default: var(--white);
-      --mod-button-background-color-hover: var(--spectrum-secondary-color-200);
-      --mod-button-background-color-down: var(--spectrum-secondary-color-400);
-      --mod-button-background-color-key-focus: var(--spectrum-secondary-color-200);
-    }
+  &.serok-button--secondary {
+    --spectrum-border-color-default: var(--spectrum-secondary-color-800);
+    --spectrum-border-color-hover: var(--spectrum-secondary-color-900);
+    --spectrum-border-color-down: var(--spectrum-secondary-color-900);
+    --spectrum-border-color-key-focus: var(--spectrum-secondary-color-900);
+    --spectrum-content-color-default: var(--spectrum-secondary-color-800);
+    --spectrum-content-color-hover: var(--spectrum-secondary-color-900);
+    --spectrum-content-color-down: var(--spectrum-secondary-color-900);
+    --spectrum-content-color-key-focus: var(--spectrum-secondary-color-900);
+    --spectrum-background-color-default: var(--white);
+    --spectrum-background-color-hover: var(--spectrum-secondary-color-200);
+    --spectrum-background-color-down: var(--spectrum-secondary-color-400);
+    --spectrum-background-color-key-focus: var(--spectrum-secondary-color-200);
+  }
+
+  font-size: var(--spectrum-global-dimension-static-font-size-150);
+  height: auto;
+
+  /* https://github.com/adobe/spectrum-web-components/blob/main/packages/button/src/spectrum-button.css */
+
+  &[data-size="s"] {
+    padding: var(--spectrum-global-dimension-size-75) calc(var(--spectrum-global-dimension-size-200) - var(--spectrum-global-dimension-size-75));
+  }
+
+  &[data-size="m"] {
+    padding: calc(var(--spectrum-global-dimension-size-200) - var(--spectrum-global-dimension-size-75)) var(--spectrum-global-dimension-static-size-400);
+  }
+
+  &[data-size="l"] {
+    padding: var(--spectrum-global-dimension-static-size-200) calc(var(--spectrum-global-dimension-size-1200) + var(--spectrum-global-dimension-size-25));
   }
 }

@@ -1,0 +1,336 @@
+---
+title: Select
+componentName: Select
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/picker"
+description: "Dropdown selection component for single-item selection from collapsible list. Supports controlled/uncontrolled modes, disabled options, loading states, validation, and customizable item behavior."
+---
+
+# Select
+
+## Overview
+
+A select (picker) component allows users to choose a single option from a collapsible list when space is limited. It displays the currently selected option and expands to show all available choices. Serok UI's Select component extends React Spectrum's Picker with custom styling.
+
+## Quick Start
+
+Minimal working example showing the most common usage pattern:
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function MyComponent() {
+  return (
+    <Select label="Choose an option">
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `string \| ReactNode` | No | — | Select label displayed above the field |
+| `placeholder` | `string` | No | — | Placeholder text when no option selected |
+| `selectedKey` | `string \| number` | No | — | Controlled selected item key |
+| `defaultSelectedKey` | `string \| number` | No | — | Uncontrolled initial selected key |
+| `onSelectionChange` | `(key: string \| number) => void` | No | — | Called when selection changes |
+| `isDisabled` | `boolean` | No | `false` | Disable user selection |
+| `isLoading` | `boolean` | No | `false` | Show loading state |
+| `isQuiet` | `boolean` | No | `false` | Minimal styling, border not visible |
+| `isInvalid` | `boolean` | No | `false` | Validation failure state |
+| `isRequired` | `boolean` | No | `false` | Mark as required field |
+| `description` | `string` | No | — | Description text below the field |
+| `errorMessage` | `string` | No | — | Error message for validation failures |
+| `children` | `Item[]` | Yes | — | Item options as children |
+
+**Additional Notes**:
+- All props follow React Spectrum naming conventions
+- Props are case-sensitive
+- Single selection only (not multi-select)
+- Extends all props from React Spectrum's `@react-spectrum/picker` component
+
+## Item Props
+
+The `Item` component (exported from Select) accepts these props:
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `key` | `string \| number` | Yes | — | Unique identifier for the option |
+| `children` | `ReactNode` | Yes | — | Display text or content for the option |
+| `isDisabled` | `boolean` | No | `false` | Disable this specific option |
+| `textValue` | `string` | No | — | Text used for filtering/searching |
+
+## Behavioral States
+
+- **Enabled**: Normal selection possible
+- **Disabled** (`isDisabled={true}`): No selection allowed, grayed out
+- **Loading** (`isLoading={true}`): Shows loading state
+- **Invalid** (`isInvalid={true}`): Validation error state
+- **Quiet** (`isQuiet={true}`): Minimal styling, border hidden
+
+## Examples
+
+### Basic Usage
+
+Simplest way to use the Select component with items.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function BasicExample() {
+  return (
+    <Select label="Select a fruit">
+      <Item key="apple">Apple</Item>
+      <Item key="banana">Banana</Item>
+      <Item key="orange">Orange</Item>
+    </Select>
+  );
+}
+```
+
+### Uncontrolled Select
+
+Select managing its own state with default selection.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function UncontrolledExample() {
+  return (
+    <Select label="Default selection" defaultSelectedKey="option2">
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+### Controlled Select
+
+Select with state managed by parent component.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [selected, setSelected] = useState('option1');
+
+  return (
+    <Select
+      label="Choose option"
+      selectedKey={selected}
+      onSelectionChange={setSelected}
+    >
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+### With Placeholder
+
+Example showing select with placeholder text.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function PlaceholderExample() {
+  return (
+    <Select label="Country" placeholder="Select your country">
+      <Item key="us">United States</Item>
+      <Item key="uk">United Kingdom</Item>
+      <Item key="ca">Canada</Item>
+      <Item key="au">Australia</Item>
+    </Select>
+  );
+}
+```
+
+### With Description
+
+Example showing select with description and error messaging.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import { useState } from 'react';
+
+export function DescriptionExample() {
+  const [selected, setSelected] = useState('');
+  const isInvalid = !selected;
+
+  return (
+    <Select
+      label="Select an option"
+      selectedKey={selected}
+      onSelectionChange={setSelected}
+      isRequired
+      isInvalid={isInvalid}
+      errorMessage={isInvalid ? 'This field is required' : ''}
+      description="You must select an option"
+    >
+      <Item key="opt1">Option 1</Item>
+      <Item key="opt2">Option 2</Item>
+      <Item key="opt3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+### Disabled Options
+
+Example showing disabled options within the select.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function DisabledOptionsExample() {
+  return (
+    <Select label="Select status">
+      <Item key="active">Active</Item>
+      <Item key="inactive" isDisabled>Inactive</Item>
+      <Item key="pending">Pending</Item>
+      <Item key="archived" isDisabled>Archived</Item>
+    </Select>
+  );
+}
+```
+
+### Disabled Select
+
+Example showing completely disabled select.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function DisabledSelectExample() {
+  return (
+    <Select label="Select option" isDisabled defaultSelectedKey="opt1">
+      <Item key="opt1">Option 1</Item>
+      <Item key="opt2">Option 2</Item>
+      <Item key="opt3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+### Loading State
+
+Example showing select with loading state.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import { useState } from 'react';
+
+export function LoadingExample() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSelectionChange = async (key: string | number) => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Selected:', key);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Select
+      label="Select option"
+      isLoading={isLoading}
+      onSelectionChange={handleSelectionChange}
+    >
+      <Item key="opt1">Option 1</Item>
+      <Item key="opt2">Option 2</Item>
+      <Item key="opt3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## CSS Customization
+
+### CSS Variables
+
+The Select component uses these CSS variables for theming:
+
+```css
+/* Border colors */
+--serok-select-border-color: #d0d7de;
+--serok-select-border-color-focus: #0ea5e9;
+--serok-select-border-color-invalid: #ef4444;
+
+/* Background and text */
+--serok-select-background: #ffffff;
+--serok-select-text-color: #171717;
+--serok-select-placeholder-color: #a1a1a1;
+
+/* Disabled state */
+--serok-select-opacity-disabled: 0.5;
+
+/* Sizing */
+--serok-select-padding: 0.5rem 0.75rem;
+--serok-select-border-radius: 0.25rem;
+
+/* Popover */
+--serok-select-popover-background: #ffffff;
+--serok-select-popover-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+```
+
+### Using CSS Variables
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import './custom-select-styles.css';
+
+export function CustomStyleExample() {
+  return (
+    <Select label="Custom" className="custom-select">
+      <Item key="opt1">Option 1</Item>
+      <Item key="opt2">Option 2</Item>
+    </Select>
+  );
+}
+```
+
+```css
+/* custom-select-styles.css */
+.custom-select {
+  --serok-select-border-color-focus: #e91e63;
+}
+```
+
+## API Reference
+
+For comprehensive props documentation, refer to the [React Spectrum Picker documentation](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props).
+
+For Item props and behavior, refer to the [React Spectrum Item documentation](https://react-spectrum.adobe.com/react-spectrum/Item.html#props).
+
+All Select props are inherited from React Spectrum's Picker component. Refer to the [React Spectrum Picker Props](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props) for the complete list of available props.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Select/index.tsx`
+- **Styles**: `lib/ui/Select/styles.css`
+- **Export**: Named export (Select, Item) from `@/components/ui/Select`
+- **React Spectrum Base**: Yes (@react-spectrum/picker)
+- **CSS Customizable**: Yes
+- **Testing**: Use `data-testid="select"`
+
+---
+
+**Last Updated**: 2025-10-31
+**Status**: ✅ Complete and LLM-optimized

@@ -1,11 +1,13 @@
 /* type: registry:ui */
-import { Textfield as SpTextfield } from "@swc-react/textfield";
+import { TextField as SpTextField } from "@react-spectrum/textfield";
+import "./styles.css";
 
-interface InputProps extends React.ComponentProps<typeof SpTextfield> { }
+interface InputProps extends React.ComponentProps<typeof SpTextField> { }
 
 export function Input(props: InputProps) {
   return (
-    <SpTextfield
+    <SpTextField
+      UNSAFE_className="serok-input"
       {...props}
     />
   );

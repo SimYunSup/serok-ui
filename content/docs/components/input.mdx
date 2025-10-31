@@ -1,0 +1,510 @@
+---
+title: Input
+componentName: Input
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/textfield"
+---
+
+## 개요
+
+인풋은 사용자가 텍스트를 입력하고 편집할 수 있는 폼 컨트롤입니다. 일반적인 텍스트 입력 외에도 이메일, 비밀번호, 전화번호, URL 등 다양한 입력 타입을 지원합니다. Serok UI의 인풋 컴포넌트는 React Spectrum의 TextField를 기반으로 합니다.
+
+## 빠른 시작
+
+가장 기본적인 인풋 사용 방법입니다:
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function MyComponent() {
+  return <Input label="사용자명" placeholder="이름을 입력하세요" />;
+}
+```
+
+## Props (속성)
+
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
+|------|------|------|--------|------|
+| `label` | `string \| ReactNode` | No | — | 인풋 위에 표시될 라벨 |
+| `placeholder` | `string` | No | — | 입력창이 비어있을 때 표시될 텍스트 |
+| `type` | `"text" \| "email" \| "password" \| "tel" \| "url"` | No | `"text"` | 입력 타입 |
+| `value` | `string` | No | — | 입력 값 (제어 모드) |
+| `defaultValue` | `string` | No | — | 초기 입력 값 (비제어 모드) |
+| `isDisabled` | `boolean` | No | `false` | 입력 비활성화 여부 |
+| `isReadOnly` | `boolean` | No | `false` | 읽기 전용 모드 |
+| `isRequired` | `boolean` | No | `false` | 필수 필드 표시 |
+| `isInvalid` | `boolean` | No | `false` | 유효성 검사 실패 상태 |
+| `validationState` | `"valid" \| "invalid"` | No | — | 유효성 검사 상태 |
+| `errorMessage` | `string` | No | — | 유효성 검사 실패 메시지 |
+| `description` | `string` | No | — | 입력창 아래 표시될 설명 텍스트 |
+| `onChange` | `(value: string) => void` | No | — | 입력 값 변경 시 호출 함수 |
+| `isQuiet` | `boolean` | No | `false` | 미니멀 스타일, 테두리 숨김 |
+| `autoFocus` | `boolean` | No | `false` | 마운트 시 자동 포커스 |
+| `maxLength` | `number` | No | — | 최대 입력 글자 수 |
+
+## 입력 타입
+
+### 지원하는 입력 타입
+
+| 타입 | Props | 사용 사례 |
+|------|-------|----------|
+| 텍스트 | `type="text"` | 일반 텍스트 입력 (기본값) |
+| 이메일 | `type="email"` | 이메일 주소 입력 |
+| 비밀번호 | `type="password"` | 비밀번호 입력 (텍스트 숨김) |
+| 전화번호 | `type="tel"` | 전화번호 입력 |
+| URL | `type="url"` | 웹 주소 입력 |
+
+### 상태 종류
+
+- **활성 (Enabled)**: 정상적으로 입력 가능
+- **비활성 (Disabled)** (`isDisabled={true}`): 입력 불가, 회색 처리됨
+- **읽기 전용 (Read-only)** (`isReadOnly={true}`): 값 표시만 가능, 편집 불가
+- **유효성 검사 실패 (Invalid)** (`isInvalid={true}`): 오류 상태
+- **미니멀 (Quiet)** (`isQuiet={true}`): 미니멀 스타일, 테두리 숨김
+
+## 사용 예제
+
+### 기본 사용법
+
+가장 간단한 인풋 사용 방법입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function BasicExample() {
+  return <Input label="이름" placeholder="전체 이름을 입력하세요" />;
+}
+```
+
+### 비제어 인풋
+
+자신의 상태를 관리하는 인풋입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function UncontrolledExample() {
+  return (
+    <Input
+      label="이메일"
+      type="email"
+      placeholder="your@email.com"
+      defaultValue="user@example.com"
+    />
+  );
+}
+```
+
+### 제어 인풋
+
+부모 컴포넌트에서 상태를 관리하는 인풋입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Input
+      label="사용자명"
+      value={value}
+      onChange={setValue}
+      placeholder="사용자명 입력"
+    />
+  );
+}
+```
+
+### 모든 입력 타입
+
+지원하는 모든 입력 타입을 보여주는 예제입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function InputTypesExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="이름" type="text" placeholder="김철수" />
+      <Input label="이메일" type="email" placeholder="kim@example.com" />
+      <Input label="비밀번호" type="password" placeholder="••••••••" />
+      <Input label="전화번호" type="tel" placeholder="010-1234-5678" />
+      <Input label="웹사이트" type="url" placeholder="https://example.com" />
+    </div>
+  );
+}
+```
+
+### 유효성 검사
+
+유효성 검사와 오류 메시지를 표시하는 예제입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ValidationExample() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const validateEmail = (value: string) => {
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    if (!isValid && value) {
+      setError('올바른 이메일 주소를 입력해주세요');
+    } else {
+      setError('');
+    }
+    setEmail(value);
+  };
+
+  return (
+    <Input
+      label="이메일"
+      type="email"
+      value={email}
+      onChange={validateEmail}
+      isInvalid={!!error}
+      errorMessage={error}
+      description="귀하의 이메일은 공개되지 않습니다"
+    />
+  );
+}
+```
+
+### 비활성 상태
+
+비활성화된 인풋을 보여주는 예제입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="비활성" isDisabled value="편집 불가" />
+      <Input label="읽기전용" isReadOnly value="읽기만 가능" />
+    </div>
+  );
+}
+```
+
+### 글자 수 제한
+
+최대 글자 수 제한을 설정하는 예제입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function CharacterLimitExample() {
+  const [value, setValue] = useState('');
+  const maxLength = 50;
+
+  return (
+    <Input
+      label="자기소개"
+      value={value}
+      onChange={setValue}
+      maxLength={maxLength}
+      placeholder="자신을 소개해주세요"
+      description={`${value.length}/${maxLength} 글자`}
+    />
+  );
+}
+```
+
+### 검색 입력
+
+검색 기능이 있는 인풋 예제입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function SearchExample() {
+  const [searchValue, setSearchValue] = useState('');
+  const [results, setResults] = useState<string[]>([]);
+
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+
+    if (value.length < 2) {
+      setResults([]);
+      return;
+    }
+
+    // 검색 시뮬레이션
+    const mockData = ['Apple', 'Apricot', 'Android', 'Amazon'];
+    setResults(
+      mockData.filter(item =>
+        item.toLowerCase().includes(value.toLowerCase())
+      )
+    );
+  };
+
+  return (
+    <div>
+      <Input
+        label="검색"
+        type="text"
+        value={searchValue}
+        onChange={handleSearch}
+        placeholder="검색어를 입력하세요"
+        description={results.length > 0 ? `${results.length}개의 결과` : ''}
+      />
+
+      {results.length > 0 && (
+        <ul style={{ marginTop: '1rem', listStyle: 'none', padding: 0 }}>
+          {results.map((result, index) => (
+            <li key={index} style={{ padding: '0.5rem', borderBottom: '1px solid #eee' }}>
+              {result}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
+
+## CSS 커스터마이제이션
+
+### CSS 변수
+
+인풋은 다음과 같은 CSS 변수를 사용합니다:
+
+```css
+/* 테두리 색상 */
+--serok-input-border-color: #d0d7de;           /* 기본 테두리 */
+--serok-input-border-color-focus: #0ea5e9;     /* 포커스 테두리 */
+--serok-input-border-color-invalid: #ef4444;   /* 오류 테두리 */
+
+/* 배경과 텍스트 */
+--serok-input-background: #ffffff;             /* 배경색 */
+--serok-input-text-color: #171717;             /* 텍스트 색상 */
+--serok-input-placeholder-color: #a1a1a1;      /* 플레이스홀더 색상 */
+
+/* 비활성 상태 */
+--serok-input-opacity-disabled: 0.5;           /* 비활성 투명도 */
+
+/* 크기 */
+--serok-input-padding: 0.5rem 0.75rem;         /* 패딩 */
+--serok-input-border-radius: 0.25rem;          /* 테두리 반경 */
+```
+
+### CSS 변수로 스타일 커스터마이징
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import './custom-input-styles.css';
+
+export function CustomStyleExample() {
+  return <Input label="커스텀" className="custom-input" />;
+}
+```
+
+```css
+/* custom-input-styles.css */
+.custom-input {
+  --serok-input-border-color-focus: #e91e63;  /* 분홍색 포커스 테두리 */
+}
+```
+
+## 자주 묻는 질문 (FAQ)
+
+### Q: 인풋 값을 동적으로 검증할 수 있나요?
+
+A: 네, `onChange` 핸들러에서 실시간 검증할 수 있습니다:
+
+```tsx
+const [email, setEmail] = useState('');
+const [error, setError] = useState('');
+
+const handleEmailChange = (value: string) => {
+  setEmail(value);
+  const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  setError(isValid || !value ? '' : '올바른 이메일을 입력하세요');
+};
+```
+
+### Q: 인풋에서 값을 초기화할 수 있나요?
+
+A: 네, 상태를 `''`로 초기화하거나 `defaultValue`를 사용하세요:
+
+```tsx
+const [value, setValue] = useState('');
+
+const reset = () => setValue('');
+
+return (
+  <>
+    <Input value={value} onChange={setValue} />
+    <button onClick={reset}>초기화</button>
+  </>
+);
+```
+
+### Q: 숫자만 입력받을 수 있나요?
+
+A: 네, `onChange`에서 필터링하거나 유효성 검사하세요:
+
+```tsx
+const handleNumberChange = (value: string) => {
+  const numValue = value.replace(/[^0-9]/g, '');
+  setNumber(numValue);
+};
+```
+
+## 실제 사용 패턴
+
+### 1. 로그인 폼
+
+가장 흔한 사용 패턴입니다:
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function LoginFormExample() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Record<string, string> = {};
+
+    if (!email) newErrors.email = '이메일은 필수입니다';
+    if (!password) newErrors.password = '비밀번호는 필수입니다';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    console.log('로그인:', { email, password });
+    alert('로그인 되었습니다!');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input
+        label="이메일"
+        type="email"
+        value={email}
+        onChange={setEmail}
+        isInvalid={!!errors.email}
+        errorMessage={errors.email}
+        isRequired
+      />
+
+      <Input
+        label="비밀번호"
+        type="password"
+        value={password}
+        onChange={setPassword}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password}
+        isRequired
+      />
+
+      <Button variant="primary">로그인</Button>
+    </form>
+  );
+}
+```
+
+### 2. 회원가입 폼
+
+여러 인풋 필드를 관리하는 예제입니다:
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function SignUpFormExample() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert('비밀번호가 일치하지 않습니다');
+      return;
+    }
+    console.log('가입:', formData);
+    alert('가입 완료되었습니다!');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input
+        label="이름"
+        type="text"
+        value={formData.name}
+        onChange={(v) => handleChange('name', v)}
+        placeholder="전체 이름"
+        isRequired
+      />
+
+      <Input
+        label="이메일"
+        type="email"
+        value={formData.email}
+        onChange={(v) => handleChange('email', v)}
+        placeholder="email@example.com"
+        isRequired
+      />
+
+      <Input
+        label="비밀번호"
+        type="password"
+        value={formData.password}
+        onChange={(v) => handleChange('password', v)}
+        placeholder="최소 8자"
+        isRequired
+      />
+
+      <Input
+        label="비밀번호 확인"
+        type="password"
+        value={formData.confirmPassword}
+        onChange={(v) => handleChange('confirmPassword', v)}
+        placeholder="비밀번호 재입력"
+        isRequired
+      />
+
+      <Button variant="primary">회원가입</Button>
+    </form>
+  );
+}
+```
+
+## API 참고
+
+자세한 Props 문서는 [React Spectrum TextField 문서](https://react-spectrum.adobe.com/react-spectrum/TextField.html#props)를 참조하세요.
+
+모든 인풋 Props는 React Spectrum의 TextField 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum TextField Props](https://react-spectrum.adobe.com/react-spectrum/TextField.html#props) 문서에서 확인하실 수 있습니다.
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Input/index.tsx`
+- **스타일**: `lib/ui/Input/styles.css`
+- **내보내기**: `@/components/ui/Input`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/textfield)
+- **CSS 커스터마이징**: 지원
+- **테스팅**: `data-testid="input"` 사용
