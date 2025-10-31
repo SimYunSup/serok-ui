@@ -17,7 +17,6 @@
   "heading-increment": true,
   "first-line-h1": false,
   "first-heading-h1": false,
-  "no-multiple-blanks": true,
   "list-marker-space": true,
   "blanks-around-lists": true,
   "blanks-around-headings": true,

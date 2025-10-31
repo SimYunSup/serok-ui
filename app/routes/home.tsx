@@ -17,7 +17,7 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export default function Home({ params }: Route.ComponentProps) {
+export default function Home() {
   const components = [
     { name: 'Button', icon: '🔘', description: '다양한 스타일의 버튼' },
     { name: 'Input', icon: '📝', description: '유효성 검사가 있는 입력 필드' },

@@ -20,7 +20,6 @@ export default {
       if (exclude.includes(url)) continue;
       paths.push(url);
     }
-    console.log('Pre-render paths:', paths);
     return paths;
   },
 } satisfies Config;
