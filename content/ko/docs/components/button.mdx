@@ -1,0 +1,477 @@
+---
+title: 버튼
+componentName: Button
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/button"
+---
+
+# 버튼
+
+## 개요
+
+버튼은 사용자가 클릭하여 특정 작업을 수행하도록 하는 대화형 요소입니다. 폼 제출, 모달 열기, 데이터 저장 등 다양한 상황에서 사용됩니다. Serok UI의 버튼 컴포넌트는 React Spectrum의 버튼을 기반으로 하며, Serok 디자인 시스템에 맞춘 4가지 색상 변형과 4가지 크기 옵션을 제공합니다.
+
+## 빠른 시작
+
+가장 기본적인 사용 방법입니다:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function MyComponent() {
+  return <Button variant="primary" onPress={() => alert('버튼 클릭!')}>클릭하세요</Button>;
+}
+```
+
+## Props (속성)
+
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
+|------|------|------|--------|------|
+| `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | Yes | — | 버튼의 색상 스타일 |
+| `size` | `"s" \| "m" \| "l" \| "xl"` | No | `"m"` | 버튼 크기 (작음, 중간, 큼, 매우큼) |
+| `isDisabled` | `boolean` | No | `false` | 버튼 비활성화 여부 |
+| `isPending` | `boolean` | No | `false` | 로딩/대기 중 상태 표시 |
+| `onPress` | `(e: PressEvent) => void` | No | — | 버튼을 눌렀을 때 호출되는 함수 |
+| `children` | `ReactNode` | Yes | — | 버튼에 표시될 텍스트 또는 콘텐츠 |
+| `href` | `string` | No | — | 제공될 경우 버튼이 링크처럼 동작 |
+
+## 변형 및 상태
+
+### 색상 변형
+
+| 변형 | Props | 사용 사례 |
+|------|-------|----------|
+| Primary (주색) | `variant="primary"` | 중요한 작업, 메인 CTA (Call-to-Action) |
+| Secondary (보조색) | `variant="secondary"` | 부수적인 작업, 덜 중요한 액션 |
+| Accent (강조색) | `variant="accent"` | 주목을 끌어야 하는 보조 액션 |
+| Negative (부정색) | `variant="negative"` | 삭제, 취소 등 위험한 작업 |
+
+### 크기 옵션
+
+| 크기 | Props | 사용 사례 |
+|------|-------|----------|
+| 작음 | `size="s"` | 좁은 공간, 인라인 액션, 툴바 |
+| 중간 | `size="m"` | 표준 버튼, 가장 흔한 사용 (기본값) |
+| 큼 | `size="l"` | 눈에 띄는 버튼, 모바일 친화적 |
+| 매우 큼 | `size="xl"` | 메인 CTA, 히어로 섹션 |
+
+### 상태 종류
+
+- **활성 (Enabled)**: 사용자가 클릭할 수 있는 정상 상태
+- **비활성 (Disabled)** (`isDisabled={true}`): 클릭 불가, 회색 처리됨
+- **로딩 중 (Pending)** (`isPending={true}`): 로딩 표시, 상호작용 불가
+- **포커스 (Focused)**: 키보드로 선택된 상태, 브라우저에서 자동 관리
+
+## 사용 예제
+
+### 기본 사용법
+
+가장 기본적인 버튼 사용 방법입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function BasicExample() {
+  return <Button variant="primary">클릭하세요</Button>;
+}
+```
+
+### 모든 색상 변형
+
+4가지 색상 변형을 모두 보여주는 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button variant="primary">주색 버튼</Button>
+      <Button variant="secondary">보조색 버튼</Button>
+      <Button variant="accent">강조색 버튼</Button>
+      <Button variant="negative">부정색 버튼</Button>
+    </div>
+  );
+}
+```
+
+### 모든 크기
+
+4가지 크기를 보여주는 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function SizesExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      <Button variant="primary" size="s">작음</Button>
+      <Button variant="primary" size="m">중간</Button>
+      <Button variant="primary" size="l">큼</Button>
+      <Button variant="primary" size="xl">매우 큼</Button>
+    </div>
+  );
+}
+```
+
+### 클릭 이벤트 처리
+
+버튼 클릭 시 동작을 정의하는 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function InteractiveExample() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Button variant="primary" onPress={() => setCount(c => c + 1)}>
+      클릭 횟수: {count}번
+    </Button>
+  );
+}
+```
+
+### 비활성 상태
+
+비활성화된 버튼들을 보여주는 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button variant="primary" isDisabled>비활성 주색</Button>
+      <Button variant="secondary" isDisabled>비활성 보조색</Button>
+      <Button variant="accent" isDisabled>비활성 강조색</Button>
+      <Button variant="negative" isDisabled>비활성 부정색</Button>
+    </div>
+  );
+}
+```
+
+### 로딩 상태
+
+비동기 작업 중 로딩 상태를 표시하는 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function PendingExample() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    try {
+      // 서버에 요청하는 작업 시뮬레이션 (2초 대기)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      alert('작업 완료!');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button variant="primary" isPending={isLoading} onPress={handleClick}>
+      {isLoading ? '처리 중...' : '제출하기'}
+    </Button>
+  );
+}
+```
+
+### 폼 제출 예제
+
+실제 폼 제출 상황의 예제입니다.
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function FormExample() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '' });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // 폼 제출 시뮬레이션
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      console.log('제출됨:', formData);
+      alert('폼이 제출되었습니다!');
+      setFormData({ name: '', email: '' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <input
+        type="text"
+        placeholder="이름"
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ddd' }}
+      />
+      <input
+        type="email"
+        placeholder="이메일"
+        value={formData.email}
+        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ddd' }}
+      />
+      <div style={{ display: 'flex', gap: '1rem' }}>
+        <Button variant="primary" type="submit" isPending={isSubmitting}>
+          {isSubmitting ? '제출 중...' : '제출'}
+        </Button>
+        <Button variant="secondary">취소</Button>
+      </div>
+    </form>
+  );
+}
+```
+
+## CSS 커스터마이제이션
+
+### CSS 변수
+
+버튼은 다음과 같은 CSS 변수를 사용합니다:
+
+```css
+/* 색상 변수 */
+--serok-button-color-primary: #007bff;      /* 주색 */
+--serok-button-color-secondary: #6c757d;    /* 보조색 */
+--serok-button-color-accent: #ffc107;       /* 강조색 */
+--serok-button-color-negative: #dc3545;     /* 부정색 */
+
+/* 상태별 설정 */
+--serok-button-opacity-disabled: 0.5;       /* 비활성 상태 투명도 */
+
+/* 크기별 패딩 */
+--serok-button-padding-small: 0.25rem 0.75rem;    /* 작음 */
+--serok-button-padding-medium: 0.5rem 1rem;       /* 중간 */
+--serok-button-padding-large: 0.75rem 1.5rem;     /* 큼 */
+--serok-button-padding-xl: 1rem 2rem;             /* 매우 큼 */
+```
+
+### CSS 변수로 스타일 커스터마이징
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import './custom-button-styles.css';
+
+export function CustomStyleExample() {
+  return <Button variant="primary" className="custom-primary">스타일된 버튼</Button>;
+}
+```
+
+```css
+/* custom-button-styles.css */
+.custom-primary {
+  --serok-button-color-primary: #e91e63;           /* 분홍색으로 변경 */
+  --serok-button-padding-medium: 1rem 2rem;        /* 패딩 확대 */
+}
+```
+
+### 어두운 테마 예제
+
+다크모드에 맞춘 색상 설정 예제입니다.
+
+```css
+/* dark-theme.css */
+.dark-theme .serok-button {
+  --serok-button-color-primary: #0ea5e9;          /* 더 밝은 파란색 */
+  --serok-button-color-secondary: #a1a1a1;        /* 더 밝은 회색 */
+}
+```
+
+## 자주 묻는 질문 (FAQ)
+
+### Q: 버튼에 아이콘을 추가할 수 있나요?
+
+A: 네, `children` 속성에 아이콘과 텍스트를 함께 전달하면 됩니다:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { SaveIcon } from 'some-icon-library';
+
+export function IconButtonExample() {
+  return (
+    <Button variant="primary">
+      <SaveIcon /> 저장하기
+    </Button>
+  );
+}
+```
+
+### Q: 버튼을 링크처럼 사용할 수 있나요?
+
+A: 네, `href` 속성을 사용하면 됩니다:
+
+```tsx
+<Button variant="primary" href="/dashboard">
+  대시보드로 이동
+</Button>
+```
+
+### Q: 여러 버튼을 그룹으로 배치하는 방법은?
+
+A: `display: flex`와 `gap`을 사용하면 됩니다:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function ButtonGroupExample() {
+  return (
+    <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <Button variant="primary" size="m">저장</Button>
+      <Button variant="secondary" size="m">취소</Button>
+    </div>
+  );
+}
+```
+
+### Q: 버튼 텍스트가 길 때 어떻게 하나요?
+
+A: 더 큰 크기를 사용하거나, 텍스트를 줄여보세요:
+
+```tsx
+// 방법 1: 더 큰 크기 사용
+<Button variant="primary" size="l">긴 버튼 텍스트</Button>
+
+// 방법 2: 텍스트 단축
+<Button variant="primary" size="m">저장</Button>
+
+// 방법 3: 컨테이너 너비 조정
+<div style={{ width: '200px' }}>
+  <Button variant="primary">버튼 텍스트</Button>
+</div>
+```
+
+## 실제 사용 패턴
+
+### 1. 폼 액션 버튼
+
+가장 흔한 사용 패턴입니다:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+
+export function FormActionExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+      <Button variant="secondary">취소</Button>
+      <Button variant="primary">저장</Button>
+    </div>
+  );
+}
+```
+
+### 2. 확인/취소 다이얼로그
+
+사용자 확인이 필요한 경우:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function ConfirmDialogExample() {
+  const [showDialog, setShowDialog] = useState(false);
+
+  const handleDelete = () => {
+    console.log('삭제 완료');
+    setShowDialog(false);
+  };
+
+  return (
+    <>
+      <Button variant="negative" onPress={() => setShowDialog(true)}>
+        삭제하기
+      </Button>
+
+      {showDialog && (
+        <div style={{ padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '0.5rem' }}>
+          <p>정말 삭제하시겠습니까?</p>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <Button variant="secondary" onPress={() => setShowDialog(false)}>
+              취소
+            </Button>
+            <Button variant="negative" onPress={handleDelete}>
+              삭제
+            </Button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+```
+
+### 3. 작업 진행 중 상태
+
+비동기 작업을 처리할 때:
+
+```tsx
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function AsyncActionExample() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState('');
+
+  const handleFetchData = async () => {
+    setIsLoading(true);
+    setResult('');
+
+    try {
+      // API 호출 시뮬레이션
+      const response = await new Promise(resolve =>
+        setTimeout(() => resolve('데이터 로드 완료'), 2000)
+      );
+      setResult(response as string);
+    } catch (error) {
+      setResult('오류가 발생했습니다');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <Button variant="primary" isPending={isLoading} onPress={handleFetchData}>
+        데이터 로드
+      </Button>
+      {result && <p style={{ marginTop: '1rem' }}>{result}</p>}
+    </div>
+  );
+}
+```
+
+## API 참고
+
+자세한 Props 문서는 [React Spectrum Button 문서](https://react-spectrum.adobe.com/react-spectrum/Button.html#props)를 참조하세요.
+
+### Serok UI 커스텀 Props
+
+| Props | 타입 | 기본값 | 설명 |
+|-------|------|--------|------|
+| `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | — | Serok UI 색상 변형 |
+| `size` | `"s" \| "m" \| "l" \| "xl"` | `"m"` | Serok UI 크기 옵션 |
+
+나머지 모든 Props는 React Spectrum의 Button 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Button Props](https://react-spectrum.adobe.com/react-spectrum/Button.html#props) 문서에서 확인하실 수 있습니다.
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Button/index.tsx`
+- **스타일**: `lib/ui/Button/styles.css`
+- **내보내기**: `@/components/ui/Button`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/button)
+- **CSS 커스터마이징**: 지원
+- **테스팅**: `data-testid="button"` 사용

@@ -1,0 +1,268 @@
+---
+title: Provider
+componentName: Provider
+status: stable
+lastUpdated: "2025-10-31"
+spectrumBased: true
+spectrumReference: "@react-spectrum/provider"
+llm:
+  title: Provider Component
+  summary: "Root configuration wrapper that applies Serok design system theme, color schemes (light/dark/auto), and design tokens to all child components. Must wrap entire application."
+---
+
+# Provider
+
+## Overview
+
+The Provider component is a wrapper that configures the Serok UI design system for your entire application. It applies theme settings, color schemes, and design tokens from the Serok design system to all child components. This is the foundation component that must wrap your application for other Serok UI components to work correctly.
+
+## Quick Start
+
+Wrap your application with the Provider component at the root level:
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      {/* Your application content */}
+    </SerokProvider>
+  );
+}
+```
+
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `colorScheme` | `"light" \| "dark" \| "auto"` | No | `"light"` | Color scheme for the entire application |
+| `children` | `ReactNode` | Yes | — | Child components to be wrapped by the provider |
+| `locale` | `string` | No | `"en-US"` | Locale for internationalization |
+| `scale` | `"large" \| "medium"` | No | `"large"` | Global scale factor for UI components |
+| `theme` | `Theme` | No | `default` | Theme object (defaults to Serok theme) |
+
+**Additional Notes**:
+- All props follow React Spectrum naming conventions
+- Must be placed at the root level of your application
+- All other Serok UI components must be descendants of Provider
+- Defaults to Serok's custom theme and large scale
+
+## Configuration Options
+
+### Color Schemes
+
+The Provider supports three color scheme options:
+
+| Scheme | Props | Description |
+|--------|-------|-------------|
+| Light | `colorScheme="light"` | Light background with dark text (default) |
+| Dark | `colorScheme="dark"` | Dark background with light text |
+| Auto | `colorScheme="auto"` | Automatically follows system preference |
+
+### Scale
+
+The Provider controls the global scale for spacing and sizing:
+
+| Scale | Props | Use Case |
+|-------|-------|----------|
+| Medium | `scale="medium"` | Compact UI, dense layouts |
+| Large | `scale="large"` | Spacious UI, comfortable layouts (default) |
+
+## Examples
+
+### Basic Setup
+
+Simplest way to initialize the Provider with default settings.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { Button } from '@/components/ui/Button';
+
+export function App() {
+  return (
+    <SerokProvider>
+      <Button variant="primary">Hello Serok UI</Button>
+    </SerokProvider>
+  );
+}
+```
+
+### With Light Color Scheme
+
+Explicitly set light color scheme.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+### With Dark Color Scheme
+
+Initialize Provider with dark mode.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider colorScheme="dark">
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+### With Auto Color Scheme Detection
+
+Use system preference for color scheme.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import { useState, useEffect } from 'react';
+
+export function App() {
+  const [colorScheme, setColorScheme] = useState('auto');
+
+  useEffect(() => {
+    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      setColorScheme(e.matches ? 'dark' : 'light');
+    };
+    darkModeQuery.addEventListener('change', handleChange);
+    return () => darkModeQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return (
+    <SerokProvider colorScheme={colorScheme}>
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+### With Custom Locale
+
+Set application locale for internationalization.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider locale="ko-KR">
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+### Complete Configuration
+
+Provider with all configuration options set.
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function App() {
+  return (
+    <SerokProvider
+      colorScheme="dark"
+      locale="en-US"
+      scale="large"
+    >
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+## CSS Customization
+
+### Design Tokens
+
+The Serok Provider exposes CSS custom properties (variables) for theming:
+
+```css
+/* Primary colors */
+--serok-color-primary-50: #f0f9ff;
+--serok-color-primary-100: #e0f2fe;
+--serok-color-primary-500: #0ea5e9;
+--serok-color-primary-900: #0c2d6b;
+
+/* Neutral colors */
+--serok-color-neutral-50: #fafafa;
+--serok-color-neutral-900: #171717;
+
+/* Semantic colors */
+--serok-color-success: #10b981;
+--serok-color-warning: #f59e0b;
+--serok-color-error: #ef4444;
+
+/* Spacing */
+--serok-spacing-xs: 0.25rem;
+--serok-spacing-sm: 0.5rem;
+--serok-spacing-md: 1rem;
+--serok-spacing-lg: 1.5rem;
+--serok-spacing-xl: 2rem;
+```
+
+### Using CSS Variables
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+import './custom-theme.css';
+
+export function App() {
+  return (
+    <SerokProvider className="custom-theme">
+      {/* Application content */}
+    </SerokProvider>
+  );
+}
+```
+
+```css
+/* custom-theme.css */
+.custom-theme {
+  --serok-color-primary-500: #ec4899;
+  --serok-color-primary-600: #db2777;
+}
+```
+
+## API Reference
+
+For comprehensive props documentation, refer to the [React Spectrum Provider documentation](https://react-spectrum.adobe.com/react-spectrum/Provider.html#props).
+
+### Serok UI Specific Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `colorScheme` | `"light" \| "dark" \| "auto"` | `"light"` | Serok UI color scheme |
+| `locale` | `string` | `"en-US"` | Locale for internationalization |
+| `scale` | `"large" \| "medium"` | `"large"` | Global UI scale factor |
+
+All other props are inherited from React Spectrum's Provider component. Refer to the [React Spectrum Provider Props](https://react-spectrum.adobe.com/react-spectrum/Provider.html#props) for the complete list of available props.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Provider/index.tsx`
+- **Styles**: `lib/ui/Provider/serok.css`
+- **Export**: Named export from `@/components/ui/Provider`
+- **React Spectrum Base**: Yes (@react-spectrum/provider)
+- **CSS Customizable**: Yes
+- **Required**: Yes (wrap entire app)
+
+---
+
+**Last Updated**: 2025-10-31
+**Status**: ✅ Complete and LLM-optimized

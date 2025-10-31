@@ -1,0 +1,159 @@
+---
+title: Input 예시
+description: 입력 필드 컴포넌트의 다양한 사용 예시
+---
+
+# Input 예시
+
+Input 컴포넌트를 사용하는 다양한 방법을 소개합니다.
+
+## 기본 사용법
+
+Input 컴포넌트의 가장 간단한 사용 방법입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function BasicExample() {
+  return <Input label="이름" placeholder="전체 이름을 입력하세요" />;
+}
+```
+
+## 비제어 Input
+
+자신의 상태를 스스로 관리하는 입력 필드입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function UncontrolledExample() {
+  return (
+    <Input
+      label="이메일"
+      type="email"
+      placeholder="your@email.com"
+      defaultValue="user@example.com"
+    />
+  );
+}
+```
+
+## 제어 Input
+
+부모 컴포넌트에 의해 상태가 관리되는 입력 필드입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Input
+      label="사용자명"
+      value={value}
+      onChange={setValue}
+      placeholder="사용자명을 입력하세요"
+    />
+  );
+}
+```
+
+## 모든 입력 유형
+
+지원하는 모든 입력 유형을 보여줍니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function InputTypesExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="이름" type="text" placeholder="홍길동" />
+      <Input label="이메일" type="email" placeholder="john@example.com" />
+      <Input label="비밀번호" type="password" placeholder="••••••••" />
+      <Input label="전화" type="tel" placeholder="+82 (010) 1234-5678" />
+      <Input label="웹사이트" type="url" placeholder="https://example.com" />
+    </div>
+  );
+}
+```
+
+## 유효성 검사
+
+입력 필드에 유효성 검사와 에러 메시지가 있는 예시입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ValidationExample() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const validateEmail = (value: string) => {
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    if (!isValid && value) {
+      setError('올바른 이메일 주소를 입력하세요');
+    } else {
+      setError('');
+    }
+    setEmail(value);
+  };
+
+  return (
+    <Input
+      label="이메일"
+      type="email"
+      value={email}
+      onChange={validateEmail}
+      isInvalid={!!error}
+      errorMessage={error}
+      description="당신의 이메일은 공유되지 않습니다"
+    />
+  );
+}
+```
+
+## 비활성화 상태
+
+비활성화된 입력 필드의 상태를 보여줍니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="비활성화됨" isDisabled value="편집할 수 없습니다" />
+      <Input label="읽기 전용" isReadOnly value="볼 수만 있습니다" />
+    </div>
+  );
+}
+```
+
+## 문자 제한
+
+최대 문자 수 제한이 있는 입력 필드입니다.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function CharacterLimitExample() {
+  const [value, setValue] = useState('');
+  const maxLength = 50;
+
+  return (
+    <Input
+      label="소개"
+      value={value}
+      onChange={setValue}
+      maxLength={maxLength}
+      placeholder="자신을 소개해주세요"
+      description={`${value.length}/${maxLength} 글자`}
+    />
+  );
+}
+```

@@ -1,0 +1,163 @@
+---
+title: Input Example
+description: Comprehensive Input component examples with types and validation
+---
+
+# Input Example
+
+Complete guide to using the Input component with various configurations.
+
+## Basic Usage
+
+The simplest way to use the Input component with a label.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function BasicExample() {
+  return <Input label="Name" placeholder="Enter your full name" />;
+}
+```
+
+<PreviewWrapper>
+  <Input label="Name" placeholder="Enter your full name" />
+</PreviewWrapper>
+
+## Uncontrolled Input
+
+Input managing its own state with initial value.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function UncontrolledExample() {
+  return (
+    <Input
+      label="Email"
+      type="email"
+      placeholder="your@email.com"
+      defaultValue="user@example.com"
+    />
+  );
+}
+```
+
+## Controlled Input
+
+Input with state managed by parent component.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [value, setValue] = useState('');
+
+  return (
+    <Input
+      label="Username"
+      value={value}
+      onChange={setValue}
+      placeholder="Enter username"
+    />
+  );
+}
+```
+
+## All Input Types
+
+Example showing all supported input types.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function InputTypesExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="Name" type="text" placeholder="John Doe" />
+      <Input label="Email" type="email" placeholder="john@example.com" />
+      <Input label="Password" type="password" placeholder="••••••••" />
+      <Input label="Phone" type="tel" placeholder="+1 (555) 123-4567" />
+      <Input label="Website" type="url" placeholder="https://example.com" />
+    </div>
+  );
+}
+```
+
+## With Validation
+
+Example showing input with validation and error messages.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function ValidationExample() {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+
+  const validateEmail = (value: string) => {
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    if (!isValid && value) {
+      setError('Please enter a valid email address');
+    } else {
+      setError('');
+    }
+    setEmail(value);
+  };
+
+  return (
+    <Input
+      label="Email"
+      type="email"
+      value={email}
+      onChange={validateEmail}
+      isInvalid={!!error}
+      errorMessage={error}
+      description="We'll never share your email"
+    />
+  );
+}
+```
+
+## Disabled State
+
+Example showing disabled input states.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+
+export function DisabledExample() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <Input label="Disabled" isDisabled value="Cannot edit" />
+      <Input label="Read-only" isReadOnly value="Can view only" />
+    </div>
+  );
+}
+```
+
+## With Character Limit
+
+Example showing input with maximum character limit.
+
+```tsx
+import { Input } from '@/components/ui/Input';
+import { useState } from 'react';
+
+export function CharacterLimitExample() {
+  const [value, setValue] = useState('');
+  const maxLength = 50;
+
+  return (
+    <Input
+      label="Bio"
+      value={value}
+      onChange={setValue}
+      maxLength={maxLength}
+      placeholder="Tell us about yourself"
+      description={`${value.length}/${maxLength} characters`}
+    />
+  );
+}
+```

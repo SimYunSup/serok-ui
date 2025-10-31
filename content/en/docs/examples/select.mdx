@@ -1,0 +1,163 @@
+---
+title: Select Example
+description: Comprehensive Select component examples with different configurations
+---
+
+# Select Example
+
+Complete guide to using the Select component with various configurations.
+
+## Basic Usage
+
+The simplest way to use the Select component with items.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function BasicExample() {
+  return (
+    <Select label="Select a fruit">
+      <Item key="apple">Apple</Item>
+      <Item key="banana">Banana</Item>
+      <Item key="orange">Orange</Item>
+    </Select>
+  );
+}
+```
+
+<PreviewWrapper>
+  <Select label="Select a fruit">
+    <Item key="apple">Apple</Item>
+    <Item key="banana">Banana</Item>
+    <Item key="orange">Orange</Item>
+  </Select>
+</PreviewWrapper>
+
+## Uncontrolled Select
+
+Select managing its own state with default selection.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function UncontrolledExample() {
+  return (
+    <Select label="Default selection" defaultSelectedKey="option2">
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## Controlled Select
+
+Select with state managed by parent component.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [selected, setSelected] = useState('option1');
+
+  return (
+    <Select
+      label="Choose option"
+      selectedKey={selected}
+      onSelectionChange={setSelected}
+    >
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## With Placeholder
+
+Example showing select with placeholder text.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function PlaceholderExample() {
+  return (
+    <Select label="Country" placeholder="Select your country">
+      <Item key="us">United States</Item>
+      <Item key="uk">United Kingdom</Item>
+      <Item key="ca">Canada</Item>
+      <Item key="au">Australia</Item>
+    </Select>
+  );
+}
+```
+
+## With Description
+
+Example showing select with description and error messaging.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+import { useState } from 'react';
+
+export function DescriptionExample() {
+  const [selected, setSelected] = useState('');
+  const isInvalid = !selected;
+
+  return (
+    <Select
+      label="Select an option"
+      selectedKey={selected}
+      onSelectionChange={setSelected}
+      isRequired
+      isInvalid={isInvalid}
+      errorMessage={isInvalid ? 'This field is required' : ''}
+      description="You must select an option"
+    >
+      <Item key="opt1">Option 1</Item>
+      <Item key="opt2">Option 2</Item>
+      <Item key="opt3">Option 3</Item>
+    </Select>
+  );
+}
+```
+
+## Disabled Options
+
+Example showing disabled options within the select.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function DisabledOptionsExample() {
+  return (
+    <Select label="Select status">
+      <Item key="active">Active</Item>
+      <Item key="inactive" isDisabled>Inactive</Item>
+      <Item key="pending">Pending</Item>
+      <Item key="archived" isDisabled>Archived</Item>
+    </Select>
+  );
+}
+```
+
+## Disabled Select
+
+Example showing completely disabled select.
+
+```tsx
+import { Select, Item } from '@/components/ui/Select';
+
+export function DisabledSelectExample() {
+  return (
+    <Select label="Disabled select" isDisabled defaultSelectedKey="option1">
+      <Item key="option1">Option 1</Item>
+      <Item key="option2">Option 2</Item>
+      <Item key="option3">Option 3</Item>
+    </Select>
+  );
+}
+```
