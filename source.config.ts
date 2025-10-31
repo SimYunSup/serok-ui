@@ -2,7 +2,14 @@ import { fileGenerator, remarkDocGen } from 'fumadocs-docgen';
 import { frontmatterSchema, defineConfig, defineDocs } from 'fumadocs-mdx/config';
 
 export const docs = defineDocs({
-  dir: 'content/docs',
+  dir: 'content/docs/',
+  docs: {
+    schema: frontmatterSchema,
+  },
+});
+
+export const llmDocs = defineDocs({
+  dir: 'content/llms.mdx',
   docs: {
     schema: frontmatterSchema,
     postprocess: {
@@ -10,6 +17,7 @@ export const docs = defineDocs({
     },
   },
 });
+
 
 export default defineConfig({
   mdxOptions: {
