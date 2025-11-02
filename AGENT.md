@@ -137,19 +137,11 @@ pnpm typecheck
 - **CONTRIBUTING.md** - Component documentation standards
 - **README.md** - Project overview
 - **docs/agent/** - Detailed developer guides (Korean)
-  - `01-overview.md` - Project philosophy and use cases
-  - `02-quick-start.md` - 5-minute setup
-  - `03-setup.md` - Environment setup with troubleshooting
-  - `04-structure.md` - Directory map and file discovery
-  - `05-workflow.md` - Development tasks and workflows
-
-## Next Steps
-
-1. **New to the project?** Start with `docs/agent/02-quick-start.md`
-2. **Setting up development?** Follow `docs/agent/03-setup.md`
-3. **Understanding the codebase?** See `docs/agent/04-structure.md`
-4. **Adding a component?** Check `CONTRIBUTING.md`
-5. **Need details?** Explore `docs/agent/` directory
+  - [`01-overview.md`](./docs/agent/01-overview.md) - Project philosophy and use cases
+  - [`02-quick-start.md`](./docs/agent/02-quick-start.md) - 5-minute setup
+  - [`03-setup.md`](./docs/agent/03-setup.md) - Environment setup with troubleshooting
+  - [`04-structure.md`](./docs/agent/04-structure.md) - Directory map and file discovery
+  - [`05-workflow.md`](./docs/agent/05-workflow.md) - Development tasks and workflows
 
 ## Resources
 
