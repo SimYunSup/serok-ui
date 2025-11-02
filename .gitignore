@@ -62,3 +62,6 @@ registry.json
 .playwright-mcp/
 .source/
 .react-router/
+.specify/
+.claude/commands/
+specs/
