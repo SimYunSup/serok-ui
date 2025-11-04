@@ -18,7 +18,8 @@ import { Item, Select } from '@/lib/ui/Select';
 import { Checkbox } from '@/lib/ui/Checkbox';
 import { Input } from '@/lib/ui/Input';
 import { Switch } from '@/lib/ui/Switch';
-import { ControlledSwitchExample } from '../components/Example';
+import * as Example from '../components/Example';
+import { CopyToMarkdown } from '@/app/components/CopyToMarkdown';
 
 const usingMdxComponents = {
   PreviewWrapper,
@@ -28,7 +29,8 @@ const usingMdxComponents = {
   Select,
   Item,
   Switch,
-  ControlledSwitchExample,
+  ...Example,
+  CopyToMarkdown,
 };
 
 export async function loader({ params }: Route.LoaderArgs) {

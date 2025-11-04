@@ -13,6 +13,9 @@ export default [
         "docs/**/*.tsx",
         "vite.config.ts",
       ],
+      languageOptions: {
+        sourceType: "module",
+      },
       plugins: {
         "@stylistic": stylistic,
       },
@@ -24,5 +27,6 @@ export default [
     },
     eslint.configs.recommended,
     typescriptEslint.configs.recommended,
+    stylistic.configs.recommended,
   )
 ];

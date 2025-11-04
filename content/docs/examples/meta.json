@@ -1,0 +1,11 @@
+{
+  "title": "예시",
+  "description": "Serok UI 컴포넌트의 예시 모음입니다. 각 예시는 컴포넌트의 사용법과 기능을 보여줍니다.",
+  "pages": [
+    "button",
+    "checkbox",
+    "switch",
+    "input",
+    "select"
+  ]
+}
