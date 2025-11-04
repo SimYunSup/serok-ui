@@ -5,7 +5,7 @@
 Minimum requirements to develop with Serok UI:
 
 - **Node.js 18+**: Check with `node --version`
-- **pnpm 10.20.0+**: Check with `pnpm --version` (recommended)
+- **pnpm 10.20.0+**: Check with `pnpm --version` (Recommended install via `corepack`)
 - **TypeScript 5.0+** (optional): For optimal IDE experience
 
 ## Installation Steps
@@ -28,7 +28,7 @@ pnpm --version  # 10.20.0 or higher recommended
 
 **Node.js version incorrect?**
 - macOS/Linux: Use `nvm use` (if `.nvmrc` file exists, it automatically selects the correct version)
-- Windows: Try [nodenv](https://github.com/nodenv/nodenv) or [fnm](https://github.com/Schniz/fnm)
+- Windows: Try [nvm-windows](https://github.com/coreybutler/nvm-windows) or [fnm](https://github.com/Schniz/fnm)
 
 ### Step 3: Install Dependencies
 

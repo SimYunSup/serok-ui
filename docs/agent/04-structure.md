@@ -20,30 +20,27 @@ serok-ui/
 ├── .github/                # GitHub configuration and CI/CD
 │   └── workflows/          # GitHub Actions workflows
 ├── build/                  # Build output and artifacts
-├── .specify/               # Project specifications and planning
-├── .claude/                # Claude development configuration
 ├── docs/                   # Developer guides and documentation
 │   └── agent/              # Detailed AGENT.md reference files
 ├── package.json            # Project dependencies
 ├── pnpm-lock.yaml          # pnpm lock file
 ├── AGENT.md                # AI assistant and developer quick reference
-├── CLAUDE.md               # AI assistant conventions
 ├── CONTRIBUTING.md         # Component documentation standards
 └── README.md               # Project overview
 ```
 
 ## Key Directories Explained
 
-### lib/ui/ - Component Implementations
+### lib/ - Registry Implementations
 
 This is the core of Serok UI. All component code is built on React Spectrum. Each component like Button, Dialog, and Select has its own folder containing:
 
 - TypeScript component implementation
-- Tailwind CSS styling
+- Not Tailwind based styles, using global CSS (Not CSS Modules).
 - Component-specific utility functions
 - Accessibility (a11y) implementations
 
-When adding a new component, start in the `lib/ui/` directory.
+When adding a new component, start in the `lib/ui` directory. And when create another file, follow the same structure as shadcn/ui.
 
 ### app/ - Documentation Site
 

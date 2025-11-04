@@ -17,7 +17,6 @@
 - **TypeScript**: [typescriptlang.org](https://typescriptlang.org/docs/) - Type system documentation
 
 ### Styling & Design
-- **Tailwind CSS**: [tailwindcss.com](https://tailwindcss.com) - Utility-first CSS framework
 - **CSS Variables**: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/--*) - Custom properties for theming
 
 ### Development Tools

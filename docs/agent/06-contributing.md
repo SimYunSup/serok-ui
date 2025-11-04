@@ -18,7 +18,7 @@
 
 Format: `NNN-feature-name` (e.g., `001-new-button`, `042-fix-colors`)
 
-- `NNN`: Sequential 3-digit number
+- `NNN`: Sequential 3-digit number from issue tracker
 - Use kebab-case (hyphens, lowercase)
 
 ### 3. Development Process
