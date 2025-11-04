@@ -55,7 +55,7 @@ export default function Home() {
                 variant="accent"
                 size="l"
                 style="fill"
-                href={`/docs`}
+                href={`/docs/start/install`}
               >
                 시작하기 →
               </Button>
@@ -192,7 +192,7 @@ export default function Home() {
                 variant="accent"
                 size="l"
                 style="outline"
-                href={`/docs/installation`}
+                href={`/docs/start/install`}
               >
                 설치 가이드 읽기
               </Button>
