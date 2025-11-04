@@ -1,0 +1,8 @@
+{
+  "title": "컴포넌트",
+  "description": "Serok UI 컴포넌트에 대한 자세한 문서입니다. 각 컴포넌트의 사용법, 속성 및 예제를 포함합니다.",
+  "pages": [
+    "installation",
+    "external:[llms-full.txt](/llms-full.txt)"
+  ]
+}
