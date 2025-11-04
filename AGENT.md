@@ -9,7 +9,7 @@ This document provides a quick reference for AI agents and developers working wi
 - **Repository**: [github.com/SimYunSup/serok-ui](https://github.com/SimYunSup/serok-ui)
 - **Documentation**: [serok.ethansup.net](https://serok.ethansup.net)
 - **Primary Language**: Korean (문서는 한국어)
-- **Tech Stack**: React 19+, React Spectrum, TypeScript 5.0+, Tailwind CSS, pnpm
+- **Tech Stack**: React 19+, React Spectrum, TypeScript 5.0+, pnpm
 
 ## Quick Start
 
@@ -39,7 +39,7 @@ See: [`docs/agent/04-structure.md`](./docs/agent/04-structure.md)
 - `app/` - Documentation site (React Router SPA)
 - `content/` - Markdown documentation
 - `.github/workflows/` - CI/CD automation
-- `docs/agent/` - Developer guides (Korean)
+- `docs/agent/` - Developer guides (English)
 
 ## Development Workflow
 
