@@ -348,37 +348,6 @@ export function DynamicExample() {
 | `End` | 마지막 탭으로 이동 |
 | `Enter` 또는 `Space` | 포커스된 탭 활성화 |
 
-### WCAG 준수
-
-- Level AA: 탭은 키보드 네비게이션 및 스크린 리더를 지원합니다
-- 포커스 표시: 키보드 사용자를 위한 명확한 포커스 표시
-- 색상 독립적: 정보 전달을 위해 색상에만 의존하지 않습니다
-- 시맨틱 HTML: 적절한 ARIA 역할 및 속성 사용
-
-## 모범 사례
-
-- 탭 레이블은 짧고 명확하게 유지하세요 (1-2 단어)
-- 너무 많은 탭을 사용하지 마세요 (5-7개 이하 권장)
-- 관련된 콘텐츠를 그룹화하는 데 탭을 사용하세요
-- 탭이 선형 워크플로우를 나타내는 경우 스텝퍼(Stepper)를 고려하세요
-- 모바일에서는 탭 대신 아코디언이나 다른 패턴을 고려하세요
-- 각 탭에 충분한 콘텐츠가 있는지 확인하세요
-- 탭 키는 일관되고 예측 가능하게 유지하세요
-
-## 일반적인 문제
-
-**문제**: TabList와 TabPanels의 TabItem 키가 일치하지 않습니다
-**해결책**: TabList와 TabPanels의 각 TabItem이 동일한 키를 가지고 있는지 확인하세요. 키가 일치해야 탭과 콘텐츠가 올바르게 연결됩니다.
-
-**문제**: onSelectionChange 핸들러가 호출되지 않습니다
-**해결책**: `selectedKey`와 `onSelectionChange`를 함께 사용하여 제어 컴포넌트를 만들거나, `defaultSelectedKey`만 사용하여 비제어 컴포넌트를 만드세요.
-
-**문제**: 특정 탭이 비활성화되지 않습니다
-**해결책**: `disabledKeys` prop에 배열이나 Set을 전달하세요: `disabledKeys={['key1', 'key2']}` 또는 `disabledKeys={new Set(['key1'])}`
-
-**문제**: 수직 탭이 제대로 정렬되지 않습니다
-**해결책**: 부모 컨테이너에 적절한 높이가 설정되어 있는지 확인하세요. 수직 탭은 높이를 채우기 위해 충분한 공간이 필요합니다.
-
 ## API 참고
 
 포괄적인 props 문서는 [React Spectrum Tabs 문서](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.

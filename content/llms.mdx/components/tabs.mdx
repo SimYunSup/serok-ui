@@ -303,37 +303,6 @@ export function DynamicExample() {
 | `End` | Move to last tab |
 | `Enter` or `Space` | Activate focused tab |
 
-### WCAG Compliance
-
-- Level AA: Tabs support keyboard navigation and screen readers
-- Focus visible: Clear focus indicator for keyboard users
-- Color independent: Not relying on color alone to convey information
-- Semantic HTML: Proper ARIA roles and attributes
-
-## Best Practices
-
-- Keep tab labels short and clear (1-2 words)
-- Don't use too many tabs (5-7 max recommended)
-- Use tabs to group related content
-- Consider a stepper if tabs represent a linear workflow
-- Consider accordion or other patterns instead of tabs on mobile
-- Ensure each tab has sufficient content to justify separation
-- Keep tab keys consistent and predictable
-
-## Common Issues
-
-**Issue**: TabItem keys in TabList and TabPanels don't match
-**Solution**: Ensure each TabItem in TabList and TabPanels has the same key. Keys must match for tabs to connect to their content correctly.
-
-**Issue**: onSelectionChange handler not being called
-**Solution**: Use `selectedKey` and `onSelectionChange` together for controlled component, or use only `defaultSelectedKey` for uncontrolled component.
-
-**Issue**: Specific tabs not being disabled
-**Solution**: Pass an array or Set to `disabledKeys` prop: `disabledKeys={['key1', 'key2']}` or `disabledKeys={new Set(['key1'])}`
-
-**Issue**: Vertical tabs not aligning properly
-**Solution**: Ensure the parent container has proper height set. Vertical tabs need sufficient space to fill height.
-
 ## API Reference
 
 For comprehensive props documentation, refer to the [React Spectrum Tabs documentation](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props).
