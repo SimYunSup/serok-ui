@@ -38,7 +38,7 @@ WCAG 2.1 AA 준수? 이건 우리가 "꼭 해야겠다"고 목표했던 게 아�
 
 #### 방법 1: 네임스페이스 사용 (권장)
 
-`components.json`에 registries를 설정하면 간단하게 설치할 수 있습니다:
+`components.json`에 `registries`를 추가하면 간단하게 설치할 수 있습니다:
 
 ```json
 {
