@@ -4,57 +4,65 @@ This guide covers CSS styling conventions and best practices for Serok UI compon
 
 ## Core Principles
 
-1. **Use Provider colors** - Reference existing color tokens from Provider
-2. **Minimal custom variables** - Only add CSS variables when absolutely necessary
-3. **Keep styles simple** - Let React Spectrum handle most styling
-4. **Consistent naming** - Use `serok-` prefix with kebab-case
+1. **Use React Spectrum variables first** - Leverage semantic variables like `--spectrum-accent-content-color-default`
+2. **Use Provider colors as fallback** - Only when Spectrum variables don't fit
+3. **Minimal custom variables** - Only add CSS variables when absolutely necessary
+4. **Keep styles simple** - Let React Spectrum handle most styling
+5. **Consistent naming** - Use `serok-` prefix with kebab-case
 
-## Provider Color System
+## React Spectrum Variable System
 
-### Available Color Tokens
+### Semantic Variables (USE THESE FIRST)
 
-Serok UI has a comprehensive color system defined in `lib/ui/Provider/colors.css`:
+React Spectrum provides semantic variables that automatically work with themes:
 
 ```css
-/* Grayscale */
---serok-gray-0: #ffffff;
---serok-gray-50: #fafafa;
---serok-gray-100: #f5f5f5;
-/* ... through gray-900 */
+/* Accent colors (Primary actions, selected states) */
+--spectrum-accent-content-color-default
+--spectrum-accent-content-color-hover
+--spectrum-accent-content-color-down
+--spectrum-accent-content-color-key-focus
+--spectrum-accent-background-color-default
+--spectrum-accent-background-color-hover
 
-/* Accent Colors (Purple) */
---serok-purple-100: #f5ebff;
---serok-purple-200: #ddb1fe;
-/* ... through purple-1400 */
+/* Gray/Neutral colors */
+--spectrum-gray-50 through --spectrum-gray-900
+--spectrum-global-color-gray-*
 
-/* Secondary Colors (Yellow) */
---serok-yellow-100: #fdf3e2;
---serok-yellow-200: #fbeacc;
-/* ... through yellow-1400 */
-
-/* Additional Color Scales */
---serok-red-*     /* Red scale */
---serok-blue-*    /* Blue scale */
---serok-green-*   /* Green scale */
-/* ... and more */
+/* Semantic states */
+--spectrum-negative-color-*     /* Errors */
+--spectrum-positive-color-*     /* Success */
+--spectrum-informative-color-*  /* Info */
+--spectrum-notice-color-*       /* Warnings */
 ```
 
-### Using Provider Colors
+### Using React Spectrum Variables
 
-**DO**: Reference Provider color variables
+**DO**: Use Spectrum's semantic variables
 ```css
-.serok-tabs {
-  --serok-tabs-color-default: var(--serok-gray-600);
-  --serok-tabs-color-selected: var(--serok-purple-700);
-  --serok-tabs-color-hover: var(--serok-purple-800);
+.serok-tabs [aria-selected="true"] {
+  color: var(--spectrum-accent-content-color-default);
+  border-bottom-color: var(--spectrum-accent-content-color-default);
+}
+
+.serok-tabs [role="tab"]:hover {
+  color: var(--spectrum-accent-content-color-hover);
+}
+```
+
+**ONLY IF NEEDED**: Fall back to Provider colors
+```css
+.serok-custom-element {
+  /* Use Provider colors only when Spectrum doesn't provide what you need */
+  background: var(--serok-purple-100);
 }
 ```
 
 **DON'T**: Hardcode color values
 ```css
 .serok-tabs {
-  --serok-tabs-color-default: #6c757d;
-  --serok-tabs-color-selected: #007bff;
+  color: #6c757d;  /* ❌ Bad */
+  background: #ffffff;  /* ❌ Bad */
 }
 ```
 
@@ -63,63 +71,54 @@ Serok UI has a comprehensive color system defined in `lib/ui/Provider/colors.css
 ### Basic Structure
 
 ```css
-/* Component-level variables (only if needed) */
-.serok-component-name {
-  /* Reference Provider colors */
-  --serok-component-color-primary: var(--serok-purple-700);
-  --serok-component-color-hover: var(--serok-purple-800);
-
-  /* Component-specific spacing/sizing */
-  --serok-component-padding: 0.5rem;
-}
-
-/* Element-level styles */
+/* Use React Spectrum's semantic variables directly */
 .serok-component-name [role="element"] {
-  color: var(--serok-component-color-primary);
-  padding: var(--serok-component-padding);
+  color: var(--spectrum-accent-content-color-default);
 }
 
-/* State modifiers */
-.serok-component-name [aria-selected="true"] {
-  color: var(--serok-component-color-selected);
+.serok-component-name [role="element"]:hover {
+  color: var(--spectrum-accent-content-color-hover);
+}
+
+/* Only add component-specific variables if you need to override */
+.serok-component-name {
+  /* Override only when necessary */
+  --custom-spacing: 0.5rem;
 }
 ```
 
 ## Real-World Example: Tabs Component
 
-### Before (Over-Engineered)
+### Preferred Approach (Use Spectrum Variables)
 
 ```css
-:root {
-  --serok-tabs-color-default: #6c757d;
-  --serok-tabs-color-selected: #007bff;
-  --serok-tabs-color-hover: #0056b3;
-  --serok-tabs-color-emphasized: #28a745;
-  --serok-tabs-color-compact: #6c757d;
-  --serok-tabs-border-color: #dee2e6;
-  --serok-tabs-background-hover: rgba(0, 123, 255, 0.1);
-  --serok-tabs-spacing-compact: 0.5rem;
-  --serok-tabs-spacing-regular: 1rem;
-  --serok-tabs-font-size: 0.875rem;
-  --serok-tabs-font-weight: 500;
-  --serok-tabs-font-weight-selected: 600;
+.serok-tabs [aria-selected="true"] {
+  color: var(--spectrum-accent-content-color-default);
+  border-bottom-color: var(--spectrum-accent-content-color-default);
 }
 
-.serok-tabs--default { /* ... */ }
-.serok-tabs--compact { /* ... */ }
-.serok-tabs--emphasized { /* ... */ }
+.serok-tabs [role="tab"]:hover {
+  color: var(--spectrum-accent-content-color-hover);
+  background-color: var(--spectrum-accent-background-color-hover);
+}
+
+.serok-tabs [role="tab"] {
+  color: var(--spectrum-gray-700);
+}
+
+.serok-tabs [role="tab"]:focus-visible {
+  outline: 2px solid var(--spectrum-accent-content-color-key-focus);
+}
 ```
 
-### After (Simplified)
+### Only When Needed (Provider Colors)
 
 ```css
+/* Use Provider colors only for custom styling not covered by Spectrum */
 .serok-tabs {
-  /* Only essential overrides using Provider colors */
-  --serok-tabs-color-selected: var(--serok-purple-700);
-  --serok-tabs-border-color: var(--serok-gray-300);
+  /* Example: Custom background that Spectrum doesn't provide */
+  --custom-panel-background: var(--serok-purple-50);
 }
-
-/* Let React Spectrum handle the rest */
 ```
 
 ## CSS Variable Guidelines
@@ -192,81 +191,132 @@ Always scope styles to prevent conflicts:
 
 ## Common Patterns
 
-### Pattern 1: Color Overrides
+### Pattern 1: Using Spectrum Semantic Variables
 
 ```css
-.serok-component {
-  --serok-component-primary: var(--serok-purple-700);
-  --serok-component-hover: var(--serok-purple-800);
-  --serok-component-border: var(--serok-gray-300);
-}
-
+/* ✅ Best - Use Spectrum's semantic variables */
 .serok-component [role="element"] {
-  color: var(--serok-component-primary);
-  border-color: var(--serok-component-border);
+  color: var(--spectrum-accent-content-color-default);
 }
 
 .serok-component [role="element"]:hover {
-  color: var(--serok-component-hover);
+  color: var(--spectrum-accent-content-color-hover);
+}
+
+.serok-component [role="element"]:focus {
+  outline-color: var(--spectrum-accent-content-color-key-focus);
 }
 ```
 
-### Pattern 2: State-Based Styling
+### Pattern 2: State-Based Styling with Spectrum
 
 ```css
 .serok-component [aria-selected="true"] {
-  color: var(--serok-purple-700);
-  font-weight: 600;
+  color: var(--spectrum-accent-content-color-default);
+  background-color: var(--spectrum-accent-background-color-default);
 }
 
 .serok-component [aria-disabled="true"] {
-  opacity: 0.5;
+  opacity: var(--spectrum-global-opacity-disabled, 0.5);
   cursor: not-allowed;
 }
 ```
 
-### Pattern 3: Focus Styles
+### Pattern 3: Fallback to Provider Colors
 
 ```css
-.serok-component [role="element"]:focus-visible {
-  outline: 2px solid var(--serok-purple-700);
-  outline-offset: 2px;
+/* Only when Spectrum doesn't provide what you need */
+.serok-component-custom-background {
+  background: var(--serok-purple-50);  /* Light accent background */
+  border: 1px solid var(--serok-purple-200);
 }
 ```
 
-## Choosing Colors from Provider
+## Color Selection Guide
 
-### Primary Actions & Selection
+### Priority Order
 
-Use **purple** (accent color):
+1. **React Spectrum Semantic Variables** (FIRST CHOICE)
+   ```css
+   --spectrum-accent-content-color-*
+   --spectrum-gray-*
+   --spectrum-negative-color-*
+   --spectrum-positive-color-*
+   ```
+
+2. **Provider Colors** (SECOND CHOICE - when Spectrum doesn't fit)
+   ```css
+   --serok-purple-*  /* Accent colors */
+   --serok-gray-*    /* Neutral colors */
+   --serok-red-*     /* Error states */
+   ```
+
+3. **Never Hardcode** (❌ AVOID)
+   ```css
+   color: #6c757d;  /* ❌ Don't do this */
+   ```
+
+### Using Spectrum Variables by Context
+
+**Primary Actions & Selection**
 ```css
---serok-purple-700  /* Selected/Active states */
---serok-purple-800  /* Hover states */
+/* ✅ Use Spectrum accent variables */
+.serok-button-primary {
+  background: var(--spectrum-accent-background-color-default);
+  color: var(--spectrum-white);
+}
+
+.serok-button-primary:hover {
+  background: var(--spectrum-accent-background-color-hover);
+}
 ```
 
-### Secondary Actions
-
-Use **yellow** (secondary color):
+**Secondary Actions**
 ```css
---serok-yellow-700  /* Secondary buttons */
---serok-yellow-800  /* Secondary hover */
+/* ✅ Use Spectrum secondary variables */
+.serok-button-secondary {
+  background: var(--spectrum-secondary-background-color-default);
+  color: var(--spectrum-white);
+}
 ```
 
-### Neutral Elements
-
-Use **gray** scale:
+**Neutral Elements**
 ```css
---serok-gray-600    /* Default text/borders */
---serok-gray-300    /* Light borders */
---serok-gray-100    /* Backgrounds */
+/* ✅ Use Spectrum gray scale */
+.serok-tabs [role="tab"] {
+  color: var(--spectrum-gray-700);
+  border-bottom: 2px solid var(--spectrum-gray-300);
+}
 ```
 
-### Status Colors
+**Status Colors**
+```css
+/* ✅ Use Spectrum semantic colors */
+.serok-alert-error {
+  background: var(--spectrum-negative-background-color-default);
+  color: var(--spectrum-negative-color-text-large);
+}
+
+.serok-alert-success {
+  background: var(--spectrum-positive-background-color-default);
+  color: var(--spectrum-positive-color-text-large);
+}
+```
+
+### When to Use Provider Colors
+
+Only use Provider colors when:
+- Spectrum doesn't provide the specific shade you need
+- Creating custom design elements outside Spectrum's patterns
+- Need specific brand colors for unique components
 
 ```css
---serok-red-600     /* Errors/Danger */
---serok-green-700   /* Success/Positive */
---serok-blue-700    /* Info/Links */
+/* Example: Custom notification badge */
+.serok-notification-badge {
+  /* Spectrum doesn't have light purple backgrounds, so use Provider */
+  background: var(--serok-purple-100);
+  border: 1px solid var(--serok-purple-300);
+}
 ```
 
 ## UNSAFE_className Usage
@@ -289,29 +339,31 @@ This allows you to:
 
 ## Don't Over-Style
 
-### ❌ Anti-Pattern: Fighting React Spectrum
+### ❌ Anti-Pattern: Custom Variables for Everything
 
 ```css
-/* Bad - Trying to completely restyle Spectrum */
+/* Bad - Creating custom variables when Spectrum has them */
 .serok-tabs {
-  /* 50+ lines of CSS trying to override everything */
-  border: none !important;
-  background: custom !important;
-  padding: custom !important;
-  /* ... */
+  --serok-tabs-color-default: var(--serok-gray-700);
+  --serok-tabs-color-selected: var(--serok-purple-700);
+  --serok-tabs-color-hover: var(--serok-purple-800);
 }
 ```
 
-### ✅ Pattern: Work With React Spectrum
+### ✅ Pattern: Use Spectrum Variables Directly
 
 ```css
-/* Good - Minimal overrides for branding */
-.serok-tabs {
-  --serok-tabs-color-selected: var(--serok-purple-700);
+/* Good - Use Spectrum's variables directly */
+.serok-tabs [role="tab"] {
+  color: var(--spectrum-gray-700);
 }
 
 .serok-tabs [aria-selected="true"] {
-  color: var(--serok-tabs-color-selected);
+  color: var(--spectrum-accent-content-color-default);
+}
+
+.serok-tabs [role="tab"]:hover {
+  color: var(--spectrum-accent-content-color-hover);
 }
 ```
 
@@ -364,7 +416,9 @@ Don't document in CSS - put it in MDX:
 
 Before committing CSS:
 
-- [ ] Uses Provider color variables (no hardcoded colors)
+- [ ] Uses React Spectrum semantic variables where possible
+- [ ] Only uses Provider colors when Spectrum doesn't fit
+- [ ] No hardcoded color values
 - [ ] Scoped with `.serok-{component}` prefix
 - [ ] Minimal CSS variables (only what's needed)
 - [ ] Works with keyboard navigation
@@ -374,28 +428,54 @@ Before committing CSS:
 
 ## Common Mistakes
 
-### ❌ Too Many CSS Variables
+### ❌ Not Using Spectrum Variables
 
 ```css
-/* Bad - Exposing every possible customization */
-.serok-tabs {
-  --serok-tabs-padding-top: 0.5rem;
-  --serok-tabs-padding-right: 0.75rem;
-  --serok-tabs-padding-bottom: 0.5rem;
-  --serok-tabs-padding-left: 0.75rem;
-  --serok-tabs-margin-top: 0;
-  /* ... 50+ more variables */
+/* Bad - Using Provider colors when Spectrum has them */
+.serok-button {
+  background: var(--serok-purple-700);
+  color: var(--serok-gray-0);
+}
+
+.serok-button:hover {
+  background: var(--serok-purple-800);
 }
 ```
 
-### ❌ Hardcoded Colors
+**Fix:**
+```css
+/* Good - Use Spectrum semantic variables */
+.serok-button {
+  background: var(--spectrum-accent-background-color-default);
+  color: var(--spectrum-white);
+}
+
+.serok-button:hover {
+  background: var(--spectrum-accent-background-color-hover);
+}
+```
+
+### ❌ Too Many Custom CSS Variables
 
 ```css
-/* Bad - Not using Provider colors */
+/* Bad - Creating variables when Spectrum provides them */
 .serok-tabs {
-  color: #6c757d;
-  background: #ffffff;
-  border: 1px solid #dee2e6;
+  --serok-tabs-color-default: var(--serok-gray-700);
+  --serok-tabs-color-hover: var(--serok-purple-800);
+  --serok-tabs-background-hover: var(--serok-purple-100);
+}
+```
+
+**Fix:**
+```css
+/* Good - Use Spectrum variables directly */
+.serok-tabs [role="tab"] {
+  color: var(--spectrum-gray-700);
+}
+
+.serok-tabs [role="tab"]:hover {
+  color: var(--spectrum-accent-content-color-hover);
+  background: var(--spectrum-accent-background-color-hover);
 }
 ```
 
@@ -419,7 +499,8 @@ Before committing CSS:
 
 ## Resources
 
-- **Provider Colors**: `lib/ui/Provider/colors.css`
-- **Provider Styles**: `lib/ui/Provider/serok.css`
-- **Existing Components**: `lib/ui/*/styles.css` - Reference implementations
 - **React Spectrum Styling**: [Adobe Spectrum Styling](https://react-spectrum.adobe.com/react-spectrum/styling.html)
+- **Spectrum Variables**: Check browser DevTools to see available `--spectrum-*` variables
+- **Provider Colors**: `lib/ui/Provider/colors.css` - Use as fallback only
+- **Provider Styles**: `lib/ui/Provider/serok.css` - See how Spectrum variables are mapped
+- **Existing Components**: `lib/ui/*/styles.css` - Reference implementations

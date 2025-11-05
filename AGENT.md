@@ -69,7 +69,8 @@ See: [`docs/agent/09-component-development.md`](./docs/agent/09-component-develo
 See: [`docs/agent/10-css-styling.md`](./docs/agent/10-css-styling.md)
 
 **Core Principles:**
-- Use Provider color variables (e.g., `var(--serok-purple-700)`)
+- **Use React Spectrum variables first** (e.g., `var(--spectrum-accent-content-color-default)`)
+- Use Provider colors as fallback only when Spectrum doesn't provide what you need
 - Minimal custom CSS variables
 - Scope styles with `.serok-{component}` prefix
 - Work with React Spectrum, don't fight it
