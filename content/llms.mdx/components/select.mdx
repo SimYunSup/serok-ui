@@ -19,14 +19,14 @@ A select (picker) component allows users to choose a single option from a collap
 Minimal working example showing the most common usage pattern:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function MyComponent() {
   return (
     <Select label="Choose an option">
-      <Item key="option1">Option 1</Item>
-      <Item key="option2">Option 2</Item>
-      <Item key="option3">Option 3</Item>
+      <SelectItem key="option1">Option 1</SelectItem>
+      <SelectItem key="option2">Option 2</SelectItem>
+      <SelectItem key="option3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -48,7 +48,7 @@ export function MyComponent() {
 | `isRequired` | `boolean` | No | `false` | Mark as required field |
 | `description` | `string` | No | — | Description text below the field |
 | `errorMessage` | `string` | No | — | Error message for validation failures |
-| `children` | `Item[]` | Yes | — | Item options as children |
+| `children` | `SelectItem[]` | Yes | — | SelectItem options as children |
 
 **Additional Notes**:
 - All props follow React Spectrum naming conventions
@@ -56,9 +56,9 @@ export function MyComponent() {
 - Single selection only (not multi-select)
 - Extends all props from React Spectrum's `@react-spectrum/picker` component
 
-## Item Props
+## SelectItem Props
 
-The `Item` component (exported from Select) accepts these props:
+The `SelectItem` component (exported from Select) accepts these props:
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
@@ -82,14 +82,14 @@ The `Item` component (exported from Select) accepts these props:
 Simplest way to use the Select component with items.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function BasicExample() {
   return (
     <Select label="Select a fruit">
-      <Item key="apple">Apple</Item>
-      <Item key="banana">Banana</Item>
-      <Item key="orange">Orange</Item>
+      <SelectItem key="apple">Apple</SelectItem>
+      <SelectItem key="banana">Banana</SelectItem>
+      <SelectItem key="orange">Orange</SelectItem>
     </Select>
   );
 }
@@ -100,14 +100,14 @@ export function BasicExample() {
 Select managing its own state with default selection.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function UncontrolledExample() {
   return (
     <Select label="Default selection" defaultSelectedKey="option2">
-      <Item key="option1">Option 1</Item>
-      <Item key="option2">Option 2</Item>
-      <Item key="option3">Option 3</Item>
+      <SelectItem key="option1">Option 1</SelectItem>
+      <SelectItem key="option2">Option 2</SelectItem>
+      <SelectItem key="option3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -118,7 +118,7 @@ export function UncontrolledExample() {
 Select with state managed by parent component.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function ControlledExample() {
@@ -130,9 +130,9 @@ export function ControlledExample() {
       selectedKey={selected}
       onSelectionChange={setSelected}
     >
-      <Item key="option1">Option 1</Item>
-      <Item key="option2">Option 2</Item>
-      <Item key="option3">Option 3</Item>
+      <SelectItem key="option1">Option 1</SelectItem>
+      <SelectItem key="option2">Option 2</SelectItem>
+      <SelectItem key="option3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -143,15 +143,15 @@ export function ControlledExample() {
 Example showing select with placeholder text.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function PlaceholderExample() {
   return (
     <Select label="Country" placeholder="Select your country">
-      <Item key="us">United States</Item>
-      <Item key="uk">United Kingdom</Item>
-      <Item key="ca">Canada</Item>
-      <Item key="au">Australia</Item>
+      <SelectItem key="us">United States</SelectItem>
+      <SelectItem key="uk">United Kingdom</SelectItem>
+      <SelectItem key="ca">Canada</SelectItem>
+      <SelectItem key="au">Australia</SelectItem>
     </Select>
   );
 }
@@ -162,7 +162,7 @@ export function PlaceholderExample() {
 Example showing select with description and error messaging.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function DescriptionExample() {
@@ -179,9 +179,9 @@ export function DescriptionExample() {
       errorMessage={isInvalid ? 'This field is required' : ''}
       description="You must select an option"
     >
-      <Item key="opt1">Option 1</Item>
-      <Item key="opt2">Option 2</Item>
-      <Item key="opt3">Option 3</Item>
+      <SelectItem key="opt1">Option 1</SelectItem>
+      <SelectItem key="opt2">Option 2</SelectItem>
+      <SelectItem key="opt3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -192,15 +192,15 @@ export function DescriptionExample() {
 Example showing disabled options within the select.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function DisabledOptionsExample() {
   return (
     <Select label="Select status">
-      <Item key="active">Active</Item>
-      <Item key="inactive" isDisabled>Inactive</Item>
-      <Item key="pending">Pending</Item>
-      <Item key="archived" isDisabled>Archived</Item>
+      <SelectItem key="active">Active</SelectItem>
+      <SelectItem key="inactive" isDisabled>Inactive</SelectItem>
+      <SelectItem key="pending">Pending</SelectItem>
+      <SelectItem key="archived" isDisabled>Archived</SelectItem>
     </Select>
   );
 }
@@ -211,14 +211,14 @@ export function DisabledOptionsExample() {
 Example showing completely disabled select.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function DisabledSelectExample() {
   return (
     <Select label="Select option" isDisabled defaultSelectedKey="opt1">
-      <Item key="opt1">Option 1</Item>
-      <Item key="opt2">Option 2</Item>
-      <Item key="opt3">Option 3</Item>
+      <SelectItem key="opt1">Option 1</SelectItem>
+      <SelectItem key="opt2">Option 2</SelectItem>
+      <SelectItem key="opt3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -229,7 +229,7 @@ export function DisabledSelectExample() {
 Example showing select with loading state.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function LoadingExample() {
@@ -251,9 +251,9 @@ export function LoadingExample() {
       isLoading={isLoading}
       onSelectionChange={handleSelectionChange}
     >
-      <Item key="opt1">Option 1</Item>
-      <Item key="opt2">Option 2</Item>
-      <Item key="opt3">Option 3</Item>
+      <SelectItem key="opt1">Option 1</SelectItem>
+      <SelectItem key="opt2">Option 2</SelectItem>
+      <SelectItem key="opt3">Option 3</SelectItem>
     </Select>
   );
 }
@@ -291,14 +291,14 @@ The Select component uses these CSS variables for theming:
 ### Using CSS Variables
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import './custom-select-styles.css';
 
 export function CustomStyleExample() {
   return (
     <Select label="Custom" className="custom-select">
-      <Item key="opt1">Option 1</Item>
-      <Item key="opt2">Option 2</Item>
+      <SelectItem key="opt1">Option 1</SelectItem>
+      <SelectItem key="opt2">Option 2</SelectItem>
     </Select>
   );
 }
@@ -315,7 +315,7 @@ export function CustomStyleExample() {
 
 For comprehensive props documentation, refer to the [React Spectrum Picker documentation](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props).
 
-For Item props and behavior, refer to the [React Spectrum Item documentation](https://react-spectrum.adobe.com/react-spectrum/Item.html#props).
+For SelectItem props and behavior, refer to the [React Spectrum Item documentation](https://react-spectrum.adobe.com/react-spectrum/Item.html#props).
 
 All Select props are inherited from React Spectrum's Picker component. Refer to the [React Spectrum Picker Props](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props) for the complete list of available props.
 
@@ -325,7 +325,7 @@ All Select props are inherited from React Spectrum's Picker component. Refer to 
 
 - **Source**: `lib/ui/Select/index.tsx`
 - **Styles**: `lib/ui/Select/styles.css`
-- **Export**: Named export (Select, Item) from `@/components/ui/Select`
+- **Export**: Named export (Select, SelectItem) from `@/components/ui/Select`
 - **React Spectrum Base**: Yes (@react-spectrum/picker)
 - **CSS Customizable**: Yes
 - **Testing**: Use `data-testid="select"`
