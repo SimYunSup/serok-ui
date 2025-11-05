@@ -36,11 +36,31 @@ WCAG 2.1 AA 준수? 이건 우리가 "꼭 해야겠다"고 목표했던 게 아�
 
 ### 설치
 
-단 한 줄의 명령으로 시작할 수 있습니다:
+#### 방법 1: 네임스페이스 사용 (권장)
+
+`components.json`에 `registries`를 추가하면 간단하게 설치할 수 있습니다:
+
+```json
+{
+  "registries": {
+    "@serok": "https://serok.ethansup.net/r/{name}.json"
+  }
+}
+```
+
+```bash
+npx shadcn@latest add @serok/provider
+npx shadcn@latest add @serok/button
+```
+
+#### 방법 2: URL 직접 사용
 
 ```bash
 npx shadcn@latest add https://serok.ethansup.net/r/provider.json
+npx shadcn@latest add https://serok.ethansup.net/r/button.json
 ```
+
+자세한 설치 방법은 [공식 문서](https://serok.ethansup.net/docs/start/install)를 참고하세요.
 
 ### 기본 사용
 

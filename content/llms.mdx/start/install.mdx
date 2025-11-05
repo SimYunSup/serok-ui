@@ -37,6 +37,9 @@ Create a `components.json` file in your project root and update the CSS file pat
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
+  "registries": {
+    "@serok": "https://serok.ethansup.net/r/{name}.json"
+  },
   "iconLibrary": "lucide"
 }
 ```
@@ -48,6 +51,7 @@ This configuration defines:
 - **tsx**: TypeScript usage
 - **tailwind**: Style configuration and paths (not required)
 - **aliases**: Module path aliases
+- **registries**: Namespace registry configuration (enables installing components with `@serok` namespace)
 - **iconLibrary**: Icon library (using Lucide)
 
 ---
@@ -107,6 +111,26 @@ Next.js automatically recognizes paths from `tsconfig.json`, so no additional co
 ## Step 3: Install Theme and Components
 
 Use the shadcn CLI to install the theme and desired components. The theme is required, while other components are optional.
+
+### Method 1: Using Namespace (Recommended)
+
+If you've configured registries in `components.json`, you can install with simple namespaces:
+
+```sh
+# Install theme (required)
+npx shadcn@latest add @serok/provider
+
+# Install components as needed
+npx shadcn@latest add @serok/button
+npx shadcn@latest add @serok/checkbox
+npx shadcn@latest add @serok/input
+npx shadcn@latest add @serok/select
+npx shadcn@latest add @serok/switch
+```
+
+### Method 2: Using Full URL
+
+You can also install directly with URLs without registry configuration:
 
 ```sh
 # Install theme (required)
