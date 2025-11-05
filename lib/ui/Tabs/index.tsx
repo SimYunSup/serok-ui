@@ -3,9 +3,7 @@ import { Tabs as SpTabs } from "@react-spectrum/tabs";
 import type React from "react";
 import "./styles.css";
 
-interface TabsProps extends Omit<React.ComponentProps<typeof SpTabs>, "orientation" | "density"> {
-  variant?: "default" | "compact" | "emphasized";
-}
+interface TabsProps extends React.ComponentProps<typeof SpTabs> { }
 
 export function Tabs({
   children,
