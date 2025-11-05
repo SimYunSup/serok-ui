@@ -18,14 +18,14 @@ spectrumReference: "@react-spectrum/picker"
 가장 기본적인 셀렉트 사용 방법입니다:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function MyComponent() {
   return (
     <Select label="옵션을 선택하세요">
-      <Item key="option1">옵션 1</Item>
-      <Item key="option2">옵션 2</Item>
-      <Item key="option3">옵션 3</Item>
+      <SelectItem key="option1">옵션 1</SelectItem>
+      <SelectItem key="option2">옵션 2</SelectItem>
+      <SelectItem key="option3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -47,9 +47,9 @@ export function MyComponent() {
 | `isRequired` | `boolean` | No | `false` | 필수 필드 표시 |
 | `description` | `string` | No | — | 셀렉트 아래 표시될 설명 텍스트 |
 | `errorMessage` | `string` | No | — | 유효성 검사 실패 메시지 |
-| `children` | `Item[]` | Yes | — | 셀렉트 옵션 (Item 컴포넌트들) |
+| `children` | `SelectItem[]` | Yes | — | 셀렉트 옵션 (SelectItem 컴포넌트들) |
 
-## Item Props (옵션 속성)
+## SelectItem Props (옵션 속성)
 
 | 속성 | 타입 | 필수 | 기본값 | 설명 |
 |------|------|------|--------|------|
@@ -73,14 +73,14 @@ export function MyComponent() {
 가장 간단한 셀렉트 사용 방법입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function BasicExample() {
   return (
     <Select label="과일을 선택하세요">
-      <Item key="apple">사과</Item>
-      <Item key="banana">바나나</Item>
-      <Item key="orange">오렌지</Item>
+      <SelectItem key="apple">사과</SelectItem>
+      <SelectItem key="banana">바나나</SelectItem>
+      <SelectItem key="orange">오렌지</SelectItem>
     </Select>
   );
 }
@@ -91,14 +91,14 @@ export function BasicExample() {
 자신의 상태를 관리하는 셀렉트입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function UncontrolledExample() {
   return (
     <Select label="기본 선택" defaultSelectedKey="option2">
-      <Item key="option1">옵션 1</Item>
-      <Item key="option2">옵션 2</Item>
-      <Item key="option3">옵션 3</Item>
+      <SelectItem key="option1">옵션 1</SelectItem>
+      <SelectItem key="option2">옵션 2</SelectItem>
+      <SelectItem key="option3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -109,7 +109,7 @@ export function UncontrolledExample() {
 부모 컴포넌트에서 상태를 관리하는 셀렉트입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function ControlledExample() {
@@ -121,9 +121,9 @@ export function ControlledExample() {
       selectedKey={selected}
       onSelectionChange={setSelected}
     >
-      <Item key="option1">옵션 1</Item>
-      <Item key="option2">옵션 2</Item>
-      <Item key="option3">옵션 3</Item>
+      <SelectItem key="option1">옵션 1</SelectItem>
+      <SelectItem key="option2">옵션 2</SelectItem>
+      <SelectItem key="option3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -134,15 +134,15 @@ export function ControlledExample() {
 선택되지 않았을 때 표시할 플레이스홀더를 설정합니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function PlaceholderExample() {
   return (
     <Select label="국가" placeholder="국가를 선택하세요">
-      <Item key="kr">대한민국</Item>
-      <Item key="us">미국</Item>
-      <Item key="jp">일본</Item>
-      <Item key="cn">중국</Item>
+      <SelectItem key="kr">대한민국</SelectItem>
+      <SelectItem key="us">미국</SelectItem>
+      <SelectItem key="jp">일본</SelectItem>
+      <SelectItem key="cn">중국</SelectItem>
     </Select>
   );
 }
@@ -153,7 +153,7 @@ export function PlaceholderExample() {
 설명과 오류 메시지를 표시하는 예제입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function DescriptionExample() {
@@ -170,9 +170,9 @@ export function DescriptionExample() {
       errorMessage={isInvalid ? '이 필드는 필수입니다' : ''}
       description="반드시 옵션을 선택하세요"
     >
-      <Item key="opt1">옵션 1</Item>
-      <Item key="opt2">옵션 2</Item>
-      <Item key="opt3">옵션 3</Item>
+      <SelectItem key="opt1">옵션 1</SelectItem>
+      <SelectItem key="opt2">옵션 2</SelectItem>
+      <SelectItem key="opt3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -183,15 +183,15 @@ export function DescriptionExample() {
 특정 옵션만 비활성화하는 예제입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function DisabledOptionsExample() {
   return (
     <Select label="상태를 선택하세요">
-      <Item key="active">활성</Item>
-      <Item key="inactive" isDisabled>비활성</Item>
-      <Item key="pending">대기 중</Item>
-      <Item key="archived" isDisabled>보관됨</Item>
+      <SelectItem key="active">활성</SelectItem>
+      <SelectItem key="inactive" isDisabled>비활성</SelectItem>
+      <SelectItem key="pending">대기 중</SelectItem>
+      <SelectItem key="archived" isDisabled>보관됨</SelectItem>
     </Select>
   );
 }
@@ -202,14 +202,14 @@ export function DisabledOptionsExample() {
 셀렉트 전체를 비활성화하는 예제입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 
 export function DisabledSelectExample() {
   return (
     <Select label="옵션 선택" isDisabled defaultSelectedKey="opt1">
-      <Item key="opt1">옵션 1</Item>
-      <Item key="opt2">옵션 2</Item>
-      <Item key="opt3">옵션 3</Item>
+      <SelectItem key="opt1">옵션 1</SelectItem>
+      <SelectItem key="opt2">옵션 2</SelectItem>
+      <SelectItem key="opt3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -220,7 +220,7 @@ export function DisabledSelectExample() {
 비동기 작업 중 로딩 상태를 표시하는 예제입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function LoadingExample() {
@@ -243,9 +243,9 @@ export function LoadingExample() {
       isLoading={isLoading}
       onSelectionChange={handleSelectionChange}
     >
-      <Item key="opt1">옵션 1</Item>
-      <Item key="opt2">옵션 2</Item>
-      <Item key="opt3">옵션 3</Item>
+      <SelectItem key="opt1">옵션 1</SelectItem>
+      <SelectItem key="opt2">옵션 2</SelectItem>
+      <SelectItem key="opt3">옵션 3</SelectItem>
     </Select>
   );
 }
@@ -256,7 +256,7 @@ export function LoadingExample() {
 서버에서 가져온 데이터로 옵션을 생성하는 예제입니다.
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState, useEffect } from 'react';
 
 export function DynamicOptionsExample() {
@@ -278,7 +278,7 @@ export function DynamicOptionsExample() {
   return (
     <Select label="도시를 선택하세요" isLoading={isLoading}>
       {options.map(option => (
-        <Item key={option.id}>{option.name}</Item>
+        <SelectItem key={option.id}>{option.name}</SelectItem>
       ))}
     </Select>
   );
@@ -317,14 +317,14 @@ export function DynamicOptionsExample() {
 ### CSS 변수로 스타일 커스터마이징
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import './custom-select-styles.css';
 
 export function CustomStyleExample() {
   return (
     <Select label="커스텀" className="custom-select">
-      <Item key="opt1">옵션 1</Item>
-      <Item key="opt2">옵션 2</Item>
+      <SelectItem key="opt1">옵션 1</SelectItem>
+      <SelectItem key="opt2">옵션 2</SelectItem>
     </Select>
   );
 }
@@ -348,17 +348,17 @@ A: 아니요, 셀렉트는 단일 선택만 지원합니다. 여러 선택이 �
 A: React Spectrum Picker의 Section 컴포넌트를 사용할 수 있습니다:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { Section } from '@react-spectrum/picker';
 
 <Select label="선택하세요">
   <Section title="과일">
-    <Item key="apple">사과</Item>
-    <Item key="banana">바나나</Item>
+    <SelectItem key="apple">사과</SelectItem>
+    <SelectItem key="banana">바나나</SelectItem>
   </Section>
   <Section title="채소">
-    <Item key="carrot">당근</Item>
-    <Item key="broccoli">브로콜리</Item>
+    <SelectItem key="carrot">당근</SelectItem>
+    <SelectItem key="broccoli">브로콜리</SelectItem>
   </Section>
 </Select>
 ```
@@ -374,7 +374,7 @@ A: Picker는 스크롤 가능한 드롭다운을 제공합니다. 검색 기능�
 가장 흔한 사용 패턴입니다:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import { useState } from 'react';
 
@@ -397,10 +397,10 @@ export function FormSelectionExample() {
         onSelectionChange={setCategory}
         isRequired
       >
-        <Item key="electronics">전자제품</Item>
-        <Item key="books">책</Item>
-        <Item key="clothing">의류</Item>
-        <Item key="food">음식</Item>
+        <SelectItem key="electronics">전자제품</SelectItem>
+        <SelectItem key="books">책</SelectItem>
+        <SelectItem key="clothing">의류</SelectItem>
+        <SelectItem key="food">음식</SelectItem>
       </Select>
 
       <Button variant="primary" onPress={handleSubmit}>
@@ -416,7 +416,7 @@ export function FormSelectionExample() {
 여러 셀렉트를 조합하여 필터링하는 예제입니다:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function FilteringExample() {
@@ -433,10 +433,10 @@ export function FilteringExample() {
         onSelectionChange={setCategory}
         placeholder="선택하세요"
       >
-        <Item key="all">전체</Item>
-        <Item key="electronics">전자제품</Item>
-        <Item key="books">책</Item>
-        <Item key="clothing">의류</Item>
+        <SelectItem key="all">전체</SelectItem>
+        <SelectItem key="electronics">전자제품</SelectItem>
+        <SelectItem key="books">책</SelectItem>
+        <SelectItem key="clothing">의류</SelectItem>
       </Select>
 
       <Select
@@ -445,10 +445,10 @@ export function FilteringExample() {
         onSelectionChange={setPrice}
         placeholder="선택하세요"
       >
-        <Item key="all">전체</Item>
-        <Item key="low">10,000원 이하</Item>
-        <Item key="mid">10,000 ~ 50,000원</Item>
-        <Item key="high">50,000원 이상</Item>
+        <SelectItem key="all">전체</SelectItem>
+        <SelectItem key="low">10,000원 이하</SelectItem>
+        <SelectItem key="mid">10,000 ~ 50,000원</SelectItem>
+        <SelectItem key="high">50,000원 이상</SelectItem>
       </Select>
 
       {(category || price) && (
@@ -467,7 +467,7 @@ export function FilteringExample() {
 첫 번째 선택에 따라 두 번째 옵션이 변경되는 예제입니다:
 
 ```tsx
-import { Select, Item } from '@/components/ui/Select';
+import { Select, SelectItem } from '@/components/ui/Select';
 import { useState } from 'react';
 
 export function DependentSelectExample() {
@@ -486,14 +486,14 @@ export function DependentSelectExample() {
         selectedKey={country}
         onSelectionChange={(value) => setCountry(value as string)}
       >
-        <Item key="kr">대한민국</Item>
-        <Item key="us">미국</Item>
-        <Item key="jp">일본</Item>
+        <SelectItem key="kr">대한민국</SelectItem>
+        <SelectItem key="us">미국</SelectItem>
+        <SelectItem key="jp">일본</SelectItem>
       </Select>
 
       <Select label="도시">
         {cities[country]?.map(city => (
-          <Item key={city}>{city}</Item>
+          <SelectItem key={city}>{city}</SelectItem>
         ))}
       </Select>
     </div>
@@ -506,7 +506,7 @@ export function DependentSelectExample() {
 자세한 Props 문서는 다음을 참조하세요:
 
 - [React Spectrum Picker 문서](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props)
-- [React Spectrum Item 문서](https://react-spectrum.adobe.com/react-spectrum/Item.html#props)
+- [React Spectrum SelectItem 문서](https://react-spectrum.adobe.com/react-spectrum/SelectItem.html#props)
 
 모든 셀렉트 Props는 React Spectrum의 Picker 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Picker Props](https://react-spectrum.adobe.com/react-spectrum/Picker.html#props) 문서에서 확인하실 수 있습니다.
 

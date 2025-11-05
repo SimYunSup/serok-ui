@@ -14,11 +14,12 @@ import { toClientRenderer } from 'fumadocs-mdx/runtime/vite';
 import { baseOptions } from '~/lib/layout.shared';
 import { PreviewWrapper } from '../components/PreviewWrapper';
 import { Button } from '@/lib/ui/Button';
-import { Item, Select } from '@/lib/ui/Select';
+import * as Select from '@/lib/ui/Select';
 import { Checkbox } from '@/lib/ui/Checkbox';
 import { Input } from '@/lib/ui/Input';
 import { Switch } from '@/lib/ui/Switch';
 import * as Example from '../components/Example';
+import * as Tabs from '@/lib/ui/Tabs';
 import { CopyToMarkdown } from '@/app/components/CopyToMarkdown';
 
 const usingMdxComponents = {
@@ -26,10 +27,10 @@ const usingMdxComponents = {
   Button,
   Checkbox,
   Input,
-  Select,
-  Item,
+  ...Select,
   Switch,
   ...Example,
+  ...Tabs,
   CopyToMarkdown,
 };
 

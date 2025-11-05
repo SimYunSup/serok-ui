@@ -1,7 +1,7 @@
 /* type: registry:ui
  * registryDependenies: ["menu"]
  */
-import { Picker as SpPicker, Item as SpItem } from "@react-spectrum/picker";
+import { Picker as SpPicker } from "@react-spectrum/picker";
 import "./styles.css";
 
 export function Select(props: React.ComponentProps<typeof SpPicker>) {
@@ -13,4 +13,4 @@ export function Select(props: React.ComponentProps<typeof SpPicker>) {
   );
 }
 
-export const Item = SpItem;
+export { Item as SelectItem } from "@react-spectrum/picker";

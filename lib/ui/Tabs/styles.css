@@ -1,105 +1,24 @@
 /* Tabs Component Styles */
 
-.serok-tabs {
-  /* Default variant colors - using Provider's gray and accent scale */
-  --serok-tabs-color-default: var(--serok-gray-600);
-  --serok-tabs-color-selected: var(--serok-purple-700);
-  --serok-tabs-color-hover: var(--serok-purple-800);
+.serok-provider .serok-tabs {
+  --spectrum-tabs-item-gap: 0;
+  --spectrum-tabs-selection-indicator-color: var(--spectrum-accent-content-color-default);
+  --spectrum-tabs-focus-ring-height: var(--spectrum-global-dimension-size-600);
 
-  /* Emphasized variant - using Provider's accent scale */
-  --serok-tabs-color-emphasized: var(--serok-purple-800);
+  /* Emphasized variant */
+  & [role="tab"] {
+    color: var(--serok-tabs-color-emphasized);
+    font-weight: var(--serok-tabs-font-weight-selected);
+    padding: 0 var(--spectrum-global-dimension-static-size-150);
+    --spectrum-tabs-focus-ring-color: var(--spectrum-accent-content-color-default);
 
-  /* Borders and backgrounds */
-  --serok-tabs-border-color: var(--serok-gray-300);
-  --serok-tabs-background-hover: var(--serok-purple-100);
+    &:focus-visible {
+      outline: none;
+    }
+  }
 
-  /* Spacing - using default values */
-  --serok-tabs-spacing-compact: 0.5rem;
-  --serok-tabs-spacing-regular: 1rem;
-
-  /* Typography - using default values */
-  --serok-tabs-font-size: 0.875rem;
-  --serok-tabs-font-weight: 500;
-  --serok-tabs-font-weight-selected: 600;
-}
-
-/* Default variant */
-.serok-tabs--default [role="tab"] {
-  color: var(--serok-tabs-color-default);
-  font-size: var(--serok-tabs-font-size);
-  font-weight: var(--serok-tabs-font-weight);
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.serok-tabs--default [role="tab"][aria-selected="true"] {
-  color: var(--serok-tabs-color-selected);
-  font-weight: var(--serok-tabs-font-weight-selected);
-  border-bottom-color: var(--serok-tabs-color-selected);
-}
-
-.serok-tabs--default [role="tab"]:hover:not([aria-disabled="true"]) {
-  color: var(--serok-tabs-color-hover);
-  background-color: var(--serok-tabs-background-hover);
-}
-
-/* Compact variant */
-.serok-tabs--compact [role="tablist"] {
-  gap: var(--serok-tabs-spacing-compact);
-}
-
-.serok-tabs--compact [role="tab"] {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.813rem;
-}
-
-/* Emphasized variant */
-.serok-tabs--emphasized [role="tab"][aria-selected="true"] {
-  color: var(--serok-tabs-color-emphasized);
-  border-bottom-color: var(--serok-tabs-color-emphasized);
-  font-weight: var(--serok-tabs-font-weight-selected);
-}
-
-/* Disabled state */
-.serok-tabs [role="tab"][aria-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Focus styles for accessibility */
-.serok-tabs [role="tab"]:focus-visible {
-  outline: 2px solid var(--serok-tabs-color-selected);
-  outline-offset: 2px;
-  border-radius: 2px;
-}
-
-/* Tab panels */
-.serok-tabs [role="tabpanel"] {
-  padding: var(--serok-tabs-spacing-regular);
-  outline: none;
-}
-
-.serok-tabs [role="tabpanel"]:focus-visible {
-  outline: 2px solid var(--serok-tabs-color-selected);
-  outline-offset: 2px;
-}
-
-/* Vertical orientation */
-.serok-tabs[data-orientation="vertical"] {
-  display: flex;
-  gap: var(--serok-tabs-spacing-regular);
-}
-
-.serok-tabs[data-orientation="vertical"] [role="tablist"] {
-  flex-direction: column;
-  border-right: 1px solid var(--serok-tabs-border-color);
-  border-bottom: none;
-}
-
-.serok-tabs[data-orientation="vertical"] [role="tab"] {
-  border-right: 2px solid transparent;
-  border-bottom: none;
-}
-
-.serok-tabs[data-orientation="vertical"] [role="tab"][aria-selected="true"] {
-  border-right-color: var(--serok-tabs-color-selected);
+  & [role="tab"]:hover {
+    background-color: var(--spectrum-accent-color-100);
+    color: var(--spectrum-accent-content-color-hover);
+  }
 }
