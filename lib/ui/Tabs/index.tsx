@@ -8,15 +8,13 @@ interface TabsProps extends Omit<React.ComponentProps<typeof SpTabs>, "orientati
 }
 
 export function Tabs({
-  variant = "default",
   children,
   ...props
 }: TabsProps) {
   return (
     <SpTabs
       {...props}
-      UNSAFE_className={`serok-tabs serok-tabs--${variant}`}
-      data-variant={variant}
+      UNSAFE_className="serok-tabs"
     >
       {children}
     </SpTabs>
