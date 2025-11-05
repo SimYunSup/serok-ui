@@ -6,8 +6,6 @@
 
   /* Emphasized variant */
   & [role="tab"] {
-    color: var(--serok-tabs-color-emphasized);
-    font-weight: var(--serok-tabs-font-weight-selected);
     padding: 0 var(--spectrum-global-dimension-static-size-150);
     --spectrum-tabs-focus-ring-color: var(--spectrum-accent-content-color-default);
 
