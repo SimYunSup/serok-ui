@@ -11,7 +11,7 @@ spectrumReference: "@react-spectrum/tabs"
 
 ## 개요
 
-Tabs는 관련된 콘텐츠를 여러 패널로 구성하여 사용자가 한 번에 하나의 패널만 볼 수 있도록 하는 컴포넌트입니다. 탭은 일반적으로 복잡한 정보를 구성하거나 여러 보기 간에 전환하는 데 사용됩니다. Serok UI의 Tabs 컴포넌트는 React Spectrum의 Tabs를 확장하고 Serok 디자인 시스템에 맞는 사용자 정의 변형과 스타일을 제공합니다.
+Tabs는 관련된 콘텐츠를 여러 패널로 구성하여 사용자가 한 번에 하나의 패널만 볼 수 있도록 하는 컴포넌트입니다. 탭은 일반적으로 복잡한 정보를 구성하거나 여러 보기 간에 전환하는 데 사용됩니다. Serok UI의 Tabs 컴포넌트는 React Spectrum의 Tabs를 확장하고 Serok 디자인 시스템에 맞는 사용자 정의 스타일을 제공합니다.
 
 ## 빠른 시작
 
@@ -64,7 +64,6 @@ export function MyComponent() {
 | `onSelectionChange` | `(key: Key) => void` | No | — | 선택된 탭이 변경될 때 호출됨 |
 | `isDisabled` | `boolean` | No | `false` | 모든 탭 비활성화 |
 | `disabledKeys` | `Iterable<Key>` | No | — | 비활성화할 특정 탭의 키 목록 |
-| `variant` | `"default" \| "compact" \| "emphasized"` | No | `"default"` | 시각적 스타일 변형 |
 | `orientation` | `"horizontal" \| "vertical"` | No | `"horizontal"` | 탭 목록의 방향 |
 | `density` | `"compact" \| "regular"` | No | `"regular"` | 탭 간격 밀도 |
 | `children` | `ReactNode` | Yes | — | TabList와 TabPanels 컴포넌트 |
@@ -85,14 +84,6 @@ export function MyComponent() {
 | `children` | `ReactNode` | Yes | 탭 레이블 또는 패널 콘텐츠 |
 
 ## 변형 & 상태
-
-### 시각적 변형
-
-| 변형 | Props | 사용 사례 |
-|------|-------|---------|
-| 기본 | `variant="default"` | 표준 탭, 중립 스타일 |
-| 컴팩트 | `variant="compact"` | 공간이 제한된 UI, 더 작은 탭 |
-| 강조 | `variant="emphasized"` | 중요한 내비게이션, 강조된 선택 표시 |
 
 ### 방향
 
@@ -173,68 +164,6 @@ export function ControlledExample() {
           <TabItem key="reviews">리뷰 콘텐츠</TabItem>
         </TabPanels>
       </Tabs>
-    </div>
-  );
-}
-```
-
-### 모든 변형
-
-사용 가능한 모든 시각적 변형을 보여줍니다.
-
-```tsx
-import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
-
-export function VariantsExample() {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      <div>
-        <h3>기본</h3>
-        <Tabs variant="default">
-          <TabList>
-            <TabItem key="1">탭 1</TabItem>
-            <TabItem key="2">탭 2</TabItem>
-            <TabItem key="3">탭 3</TabItem>
-          </TabList>
-          <TabPanels>
-            <TabItem key="1">기본 변형 - 탭 1</TabItem>
-            <TabItem key="2">기본 변형 - 탭 2</TabItem>
-            <TabItem key="3">기본 변형 - 탭 3</TabItem>
-          </TabPanels>
-        </Tabs>
-      </div>
-
-      <div>
-        <h3>컴팩트</h3>
-        <Tabs variant="compact">
-          <TabList>
-            <TabItem key="1">탭 1</TabItem>
-            <TabItem key="2">탭 2</TabItem>
-            <TabItem key="3">탭 3</TabItem>
-          </TabList>
-          <TabPanels>
-            <TabItem key="1">컴팩트 변형 - 탭 1</TabItem>
-            <TabItem key="2">컴팩트 변형 - 탭 2</TabItem>
-            <TabItem key="3">컴팩트 변형 - 탭 3</TabItem>
-          </TabPanels>
-        </Tabs>
-      </div>
-
-      <div>
-        <h3>강조</h3>
-        <Tabs variant="emphasized">
-          <TabList>
-            <TabItem key="1">탭 1</TabItem>
-            <TabItem key="2">탭 2</TabItem>
-            <TabItem key="3">탭 3</TabItem>
-          </TabList>
-          <TabPanels>
-            <TabItem key="1">강조 변형 - 탭 1</TabItem>
-            <TabItem key="2">강조 변형 - 탭 2</TabItem>
-            <TabItem key="3">강조 변형 - 탭 3</TabItem>
-          </TabPanels>
-        </Tabs>
-      </div>
     </div>
   );
 }
@@ -454,15 +383,7 @@ export function DynamicExample() {
 
 포괄적인 props 문서는 [React Spectrum Tabs 문서](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
 
-### Serok UI 특정 Props
-
-| Prop | Type | 기본값 | 설명 |
-|------|------|-------|------|
-| `variant` | `"default" \| "compact" \| "emphasized"` | `"default"` | Serok UI 시각적 변형 |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | 탭 목록 방향 |
-| `density` | `"compact" \| "regular"` | `"regular"` | 탭 간격 밀도 |
-
-기타 props는 React Spectrum의 Tabs 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
+모든 props는 React Spectrum의 Tabs 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
 
 ---
 
