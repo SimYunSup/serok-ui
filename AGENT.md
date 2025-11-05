@@ -53,6 +53,27 @@ pnpm lint         # Check code style
 pnpm build:docs   # Build documentation
 ```
 
+## Component Development
+
+See: [`docs/agent/09-component-development.md`](./docs/agent/09-component-development.md)
+
+**Key Guidelines:**
+- Use React Spectrum defaults - avoid custom variants
+- Rename generic exports (e.g., `Item` → `TabItem`, `SelectItem`)
+- Extend React Spectrum props directly
+- Keep implementation simple - minimal abstraction
+- Document in Korean and English (LLM-optimized)
+
+## CSS Styling
+
+See: [`docs/agent/10-css-styling.md`](./docs/agent/10-css-styling.md)
+
+**Core Principles:**
+- Use Provider color variables (e.g., `var(--serok-purple-700)`)
+- Minimal custom CSS variables
+- Scope styles with `.serok-{component}` prefix
+- Work with React Spectrum, don't fight it
+
 ## Architecture & Philosophy
 
 See: [`docs/agent/01-overview.md`](./docs/agent/01-overview.md)
@@ -136,12 +157,17 @@ pnpm typecheck
 - **CLAUDE.md** - AI-specific conventions
 - **CONTRIBUTING.md** - Component documentation standards
 - **README.md** - Project overview
-- **docs/agent/** - Detailed developer guides (Korean)
+- **docs/agent/** - Detailed developer guides
   - [`01-overview.md`](./docs/agent/01-overview.md) - Project philosophy and use cases
   - [`02-quick-start.md`](./docs/agent/02-quick-start.md) - 5-minute setup
   - [`03-setup.md`](./docs/agent/03-setup.md) - Environment setup with troubleshooting
   - [`04-structure.md`](./docs/agent/04-structure.md) - Directory map and file discovery
   - [`05-workflow.md`](./docs/agent/05-workflow.md) - Development tasks and workflows
+  - [`06-contributing.md`](./docs/agent/06-contributing.md) - Contribution guidelines
+  - [`07-troubleshooting.md`](./docs/agent/07-troubleshooting.md) - Common issues and solutions
+  - [`08-resources.md`](./docs/agent/08-resources.md) - External resources and references
+  - [`09-component-development.md`](./docs/agent/09-component-development.md) - **Component development best practices**
+  - [`10-css-styling.md`](./docs/agent/10-css-styling.md) - **CSS styling guide and conventions**
 
 ## Resources
 
@@ -153,6 +179,6 @@ pnpm typecheck
 
 ---
 
-**Last Updated**: 2025-11-02
+**Last Updated**: 2025-11-05
 **Status**: Active Development
 **Maintainer**: Serok UI Team
