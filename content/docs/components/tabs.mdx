@@ -1,0 +1,370 @@
+---
+title: Tabs
+componentName: Tabs
+status: stable
+lastUpdated: "2025-11-05"
+spectrumBased: true
+spectrumReference: "@react-spectrum/tabs"
+---
+
+<CopyToMarkdown />
+
+## 개요
+
+Tabs는 관련된 콘텐츠를 여러 패널로 구성하여 사용자가 한 번에 하나의 패널만 볼 수 있도록 하는 컴포넌트입니다. 탭은 일반적으로 복잡한 정보를 구성하거나 여러 보기 간에 전환하는 데 사용됩니다. Serok UI의 Tabs 컴포넌트는 React Spectrum의 Tabs를 확장하고 Serok 디자인 시스템에 맞는 사용자 정의 스타일을 제공합니다.
+
+## 빠른 시작
+
+가장 일반적인 사용 패턴을 보여주는 최소한의 작동 예제입니다.
+
+<PreviewWrapper>
+  <Tabs>
+    <TabList>
+      <TabItem key="tab1">탭 1</TabItem>
+      <TabItem key="tab2">탭 2</TabItem>
+      <TabItem key="tab3">탭 3</TabItem>
+    </TabList>
+    <TabPanels>
+      <TabItem key="tab1">탭 1의 콘텐츠</TabItem>
+      <TabItem key="tab2">탭 2의 콘텐츠</TabItem>
+      <TabItem key="tab3">탭 3의 콘텐츠</TabItem>
+    </TabPanels>
+  </Tabs>
+</PreviewWrapper>
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function MyComponent() {
+  return (
+    <Tabs>
+      <TabList>
+        <TabItem key="tab1">탭 1</TabItem>
+        <TabItem key="tab2">탭 2</TabItem>
+        <TabItem key="tab3">탭 3</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="tab1">탭 1의 콘텐츠</TabItem>
+        <TabItem key="tab2">탭 2의 콘텐츠</TabItem>
+        <TabItem key="tab3">탭 3의 콘텐츠</TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+## Props
+
+### Tabs Props
+
+| Prop | Type | 필수 | 기본값 | 설명 |
+|------|------|------|-------|------|
+| `selectedKey` | `Key` | No | — | 제어된 선택 탭의 키 |
+| `defaultSelectedKey` | `Key` | No | — | 비제어 초기 선택 탭의 키 |
+| `onSelectionChange` | `(key: Key) => void` | No | — | 선택된 탭이 변경될 때 호출됨 |
+| `isDisabled` | `boolean` | No | `false` | 모든 탭 비활성화 |
+| `disabledKeys` | `Iterable<Key>` | No | — | 비활성화할 특정 탭의 키 목록 |
+| `orientation` | `"horizontal" \| "vertical"` | No | `"horizontal"` | 탭 목록의 방향 |
+| `density` | `"compact" \| "regular"` | No | `"regular"` | 탭 간격 밀도 |
+| `children` | `ReactNode` | Yes | — | TabList와 TabPanels 컴포넌트 |
+
+**추가 참고사항**:
+
+- 모든 props는 React Spectrum 명명 규칙을 따릅니다
+- Props는 대소문자를 구분합니다
+- 기본값은 코드에 나타나는 대로 정확하게 표시됩니다
+- React Spectrum의 `@react-spectrum/tabs` 컴포넌트의 모든 props를 확장합니다
+
+### TabItem Props
+
+| Prop | Type | 필수 | 설명 |
+|------|------|------|------|
+| `key` | `Key` | Yes | 탭/패널의 고유 식별자 |
+| `textValue` | `string` | No | 탭의 텍스트 표현 (접근성용) |
+| `children` | `ReactNode` | Yes | 탭 레이블 또는 패널 콘텐츠 |
+
+## 변형 & 상태
+
+### 방향
+
+| 방향 | Props | 사용 사례 |
+|------|-------|---------|
+| 수평 | `orientation="horizontal"` | 기본, 탭이 상단에 가로로 배치 |
+| 수직 | `orientation="vertical"` | 사이드바 스타일, 탭이 측면에 세로로 배치 |
+
+### 동작 상태
+
+- **활성화됨**: 정상 상호작용 가능
+- **선택됨**: 현재 활성 탭 및 표시되는 패널
+- **비활성화됨** (`isDisabled={true}`): 모든 탭 상호작용 불가능
+- **부분 비활성화** (`disabledKeys={["key1", "key2"]}`): 특정 탭만 비활성화
+
+## 예제
+
+### 기본 사용법
+
+Tabs 컴포넌트의 가장 간단한 사용 방법입니다.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function BasicExample() {
+  return (
+    <Tabs>
+      <TabList>
+        <TabItem key="home">홈</TabItem>
+        <TabItem key="profile">프로필</TabItem>
+        <TabItem key="settings">설정</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="home">
+          <h2>홈 페이지</h2>
+          <p>홈 페이지에 오신 것을 환영합니다.</p>
+        </TabItem>
+        <TabItem key="profile">
+          <h2>프로필</h2>
+          <p>여기에서 프로필 정보를 확인할 수 있습니다.</p>
+        </TabItem>
+        <TabItem key="settings">
+          <h2>설정</h2>
+          <p>애플리케이션 설정을 관리합니다.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### 제어 Tabs
+
+부모 컴포넌트에 의해 상태가 관리되는 탭입니다.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [selectedTab, setSelectedTab] = useState('overview');
+
+  return (
+    <div>
+      <p>현재 선택된 탭: {selectedTab}</p>
+      <Tabs
+        selectedKey={selectedTab}
+        onSelectionChange={setSelectedTab}
+      >
+        <TabList>
+          <TabItem key="overview">개요</TabItem>
+          <TabItem key="details">세부정보</TabItem>
+          <TabItem key="reviews">리뷰</TabItem>
+        </TabList>
+        <TabPanels>
+          <TabItem key="overview">개요 콘텐츠</TabItem>
+          <TabItem key="details">세부정보 콘텐츠</TabItem>
+          <TabItem key="reviews">리뷰 콘텐츠</TabItem>
+        </TabPanels>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+### 수직 방향
+
+수직 방향의 탭 레이아웃입니다.
+
+<PreviewWrapper>
+<Tabs orientation="vertical">
+  <TabList>
+    <TabItem key="general">일반</TabItem>
+    <TabItem key="security">보안</TabItem>
+    <TabItem key="notifications">알림</TabItem>
+    <TabItem key="privacy">개인정보</TabItem>
+  </TabList>
+  <TabPanels>
+    <TabItem key="general">
+      <h3>일반 설정</h3>
+      <p>일반적인 애플리케이션 설정을 관리합니다.</p>
+    </TabItem>
+    <TabItem key="security">
+      <h3>보안 설정</h3>
+      <p>계정 보안 및 인증 설정을 구성합니다.</p>
+    </TabItem>
+    <TabItem key="notifications">
+      <h3>알림 설정</h3>
+      <p>알림 기본 설정을 사용자 정의합니다.</p>
+    </TabItem>
+    <TabItem key="privacy">
+      <h3>개인정보 설정</h3>
+      <p>개인정보 및 데이터 공유 옵션을 제어합니다.</p>
+    </TabItem>
+  </TabPanels>
+</Tabs>
+</PreviewWrapper>
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function VerticalExample() {
+  return (
+    <Tabs orientation="vertical">
+      <TabList>
+        <TabItem key="general">일반</TabItem>
+        <TabItem key="security">보안</TabItem>
+        <TabItem key="notifications">알림</TabItem>
+        <TabItem key="privacy">개인정보</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="general">
+          <h3>일반 설정</h3>
+          <p>일반적인 애플리케이션 설정을 관리합니다.</p>
+        </TabItem>
+        <TabItem key="security">
+          <h3>보안 설정</h3>
+          <p>계정 보안 및 인증 설정을 구성합니다.</p>
+        </TabItem>
+        <TabItem key="notifications">
+          <h3>알림 설정</h3>
+          <p>알림 기본 설정을 사용자 정의합니다.</p>
+        </TabItem>
+        <TabItem key="privacy">
+          <h3>개인정보 설정</h3>
+          <p>개인정보 및 데이터 공유 옵션을 제어합니다.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### 비활성화 상태
+
+특정 탭을 비활성화하는 방법입니다.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function DisabledExample() {
+  return (
+    <Tabs disabledKeys={['premium', 'enterprise']}>
+      <TabList>
+        <TabItem key="free">무료</TabItem>
+        <TabItem key="premium">프리미엄</TabItem>
+        <TabItem key="enterprise">엔터프라이즈</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="free">
+          <h3>무료 플랜</h3>
+          <p>기본 기능에 액세스할 수 있습니다.</p>
+        </TabItem>
+        <TabItem key="premium">
+          <h3>프리미엄 플랜</h3>
+          <p>고급 기능 및 우선 지원이 제공됩니다.</p>
+        </TabItem>
+        <TabItem key="enterprise">
+          <h3>엔터프라이즈 플랜</h3>
+          <p>전체 기능 및 전담 지원이 포함됩니다.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### 컴팩트 밀도
+
+더 작은 간격의 컴팩트 탭입니다.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function CompactDensityExample() {
+  return (
+    <Tabs density="compact">
+      <TabList>
+        <TabItem key="dashboard">대시보드</TabItem>
+        <TabItem key="analytics">분석</TabItem>
+        <TabItem key="reports">보고서</TabItem>
+        <TabItem key="exports">내보내기</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="dashboard">대시보드 콘텐츠</TabItem>
+        <TabItem key="analytics">분석 콘텐츠</TabItem>
+        <TabItem key="reports">보고서 콘텐츠</TabItem>
+        <TabItem key="exports">내보내기 콘텐츠</TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### 동적 탭
+
+동적으로 생성된 탭 목록입니다.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function DynamicExample() {
+  const tabs = [
+    { id: '1', title: '월요일', content: '월요일 일정' },
+    { id: '2', title: '화요일', content: '화요일 일정' },
+    { id: '3', title: '수요일', content: '수요일 일정' },
+    { id: '4', title: '목요일', content: '목요일 일정' },
+    { id: '5', title: '금요일', content: '금요일 일정' },
+  ];
+
+  return (
+    <Tabs>
+      <TabList>
+        {tabs.map((tab) => (
+          <TabItem key={tab.id}>{tab.title}</TabItem>
+        ))}
+      </TabList>
+      <TabPanels>
+        {tabs.map((tab) => (
+          <TabItem key={tab.id}>
+            <h3>{tab.title}</h3>
+            <p>{tab.content}</p>
+          </TabItem>
+        ))}
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+## 접근성
+
+### 키보드 지원
+
+| 키 | 동작 |
+|----|------|
+| `Tab` | 탭 목록으로 포커스 이동 또는 다음 요소로 이동 |
+| `Arrow Left/Right` | 수평 방향에서 이전/다음 탭으로 이동 |
+| `Arrow Up/Down` | 수직 방향에서 이전/다음 탭으로 이동 |
+| `Home` | 첫 번째 탭으로 이동 |
+| `End` | 마지막 탭으로 이동 |
+| `Enter` 또는 `Space` | 포커스된 탭 활성화 |
+
+## API 참고
+
+포괄적인 props 문서는 [React Spectrum Tabs 문서](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
+
+모든 props는 React Spectrum의 Tabs 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
+
+---
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Tabs/index.tsx`
+- **스타일**: `lib/ui/Tabs/styles.css`
+- **내보내기**: `@/components/ui/Tabs`에서 명명 내보내기
+- **React Spectrum 기반**: Yes (@react-spectrum/tabs)
+- **CSS 커스터마이징 가능**: Yes
+- **테스트**: `data-testid="tabs"` 사용
+
+---
+
+**마지막 업데이트**: 2025-11-05
+**상태**: ✅ 완료 및 LLM 최적화됨

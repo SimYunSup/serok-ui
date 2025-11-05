@@ -1,0 +1,21 @@
+/* Tabs Component Styles */
+
+.serok-provider .serok-tabs {
+  --spectrum-tabs-selection-indicator-color: var(--spectrum-accent-content-color-default);
+  --spectrum-tabs-focus-ring-height: var(--spectrum-global-dimension-size-600);
+
+  /* Emphasized variant */
+  & [role="tab"] {
+    padding: 0 var(--spectrum-global-dimension-static-size-150);
+    --spectrum-tabs-focus-ring-color: var(--spectrum-accent-content-color-default);
+
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  & [role="tab"]:hover {
+    background-color: var(--spectrum-accent-color-100);
+    color: var(--spectrum-accent-content-color-hover);
+  }
+}

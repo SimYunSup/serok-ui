@@ -280,4 +280,5 @@ function main(): void {
 // Run extraction
 main();
 
-export { extractComponentMetadata, extractAllComponentMetadata, ComponentMetadata };
+export { extractComponentMetadata, extractAllComponentMetadata };
+export type { ComponentMetadata };

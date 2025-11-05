@@ -8,6 +8,8 @@
     "checkbox",
     "switch",
     "input",
-    "select"
+    "select",
+    "--- 내비게이션 ---",
+    "tabs"
   ]
 }

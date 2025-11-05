@@ -1,0 +1,321 @@
+---
+title: Tabs
+componentName: Tabs
+status: stable
+lastUpdated: "2025-11-05"
+spectrumBased: true
+spectrumReference: "@react-spectrum/tabs"
+description: "Tab navigation component for organizing related content into multiple panels. Supports horizontal/vertical orientations, controlled/uncontrolled modes, and disabled tabs."
+---
+
+# Tabs
+
+## Overview
+
+Tabs organize related content into multiple panels, allowing users to view one panel at a time. Tabs are commonly used to organize complex information or switch between multiple views. Serok UI's Tabs component extends React Spectrum's Tabs with custom styling.
+
+## Quick Start
+
+Minimal working example showing the most common usage pattern:
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function MyComponent() {
+  return (
+    <Tabs>
+      <TabList>
+        <TabItem key="tab1">Tab 1</TabItem>
+        <TabItem key="tab2">Tab 2</TabItem>
+        <TabItem key="tab3">Tab 3</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="tab1">Tab 1 content</TabItem>
+        <TabItem key="tab2">Tab 2 content</TabItem>
+        <TabItem key="tab3">Tab 3 content</TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+## Props
+
+### Tabs Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `selectedKey` | `Key` | No | — | Controlled selected tab key |
+| `defaultSelectedKey` | `Key` | No | — | Uncontrolled initial selected tab key |
+| `onSelectionChange` | `(key: Key) => void` | No | — | Called when selected tab changes |
+| `isDisabled` | `boolean` | No | `false` | Disable all tabs |
+| `disabledKeys` | `Iterable<Key>` | No | — | Keys of specific tabs to disable |
+| `orientation` | `"horizontal" \| "vertical"` | No | `"horizontal"` | Tab list orientation |
+| `density` | `"compact" \| "regular"` | No | `"regular"` | Tab spacing density |
+| `children` | `ReactNode` | Yes | — | TabList and TabPanels components |
+
+**Additional Notes**:
+- All props follow React Spectrum naming conventions
+- Props are case-sensitive
+- Default values are shown exactly as they appear in code
+- Extends all props from React Spectrum's `@react-spectrum/tabs` component
+
+### TabItem Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| `key` | `Key` | Yes | Unique identifier for tab/panel |
+| `textValue` | `string` | No | Text representation of tab (for accessibility) |
+| `children` | `ReactNode` | Yes | Tab label or panel content |
+
+## Variants & States
+
+### Orientation
+
+| Orientation | Props | Use Case |
+|-------------|-------|----------|
+| Horizontal | `orientation="horizontal"` | Default, tabs arranged horizontally at top |
+| Vertical | `orientation="vertical"` | Sidebar style, tabs arranged vertically on side |
+
+### Behavioral States
+
+- **Enabled**: Normal interaction possible
+- **Selected**: Currently active tab and displayed panel
+- **Disabled** (`isDisabled={true}`): No interaction with any tabs
+- **Partially Disabled** (`disabledKeys={["key1", "key2"]}`): Only specific tabs disabled
+
+## Examples
+
+### Basic Usage
+
+Simplest way to use the Tabs component.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function BasicExample() {
+  return (
+    <Tabs>
+      <TabList>
+        <TabItem key="home">Home</TabItem>
+        <TabItem key="profile">Profile</TabItem>
+        <TabItem key="settings">Settings</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="home">
+          <h2>Home Page</h2>
+          <p>Welcome to the home page.</p>
+        </TabItem>
+        <TabItem key="profile">
+          <h2>Profile</h2>
+          <p>View your profile information here.</p>
+        </TabItem>
+        <TabItem key="settings">
+          <h2>Settings</h2>
+          <p>Manage your application settings.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### Controlled Tabs
+
+Tabs with state managed by parent component.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+import { useState } from 'react';
+
+export function ControlledExample() {
+  const [selectedTab, setSelectedTab] = useState('overview');
+
+  return (
+    <div>
+      <p>Currently selected: {selectedTab}</p>
+      <Tabs
+        selectedKey={selectedTab}
+        onSelectionChange={setSelectedTab}
+      >
+        <TabList>
+          <TabItem key="overview">Overview</TabItem>
+          <TabItem key="details">Details</TabItem>
+          <TabItem key="reviews">Reviews</TabItem>
+        </TabList>
+        <TabPanels>
+          <TabItem key="overview">Overview content</TabItem>
+          <TabItem key="details">Details content</TabItem>
+          <TabItem key="reviews">Reviews content</TabItem>
+        </TabPanels>
+      </Tabs>
+    </div>
+  );
+}
+```
+
+### Vertical Orientation
+
+Vertical tab layout example.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function VerticalExample() {
+  return (
+    <Tabs orientation="vertical">
+      <TabList>
+        <TabItem key="general">General</TabItem>
+        <TabItem key="security">Security</TabItem>
+        <TabItem key="notifications">Notifications</TabItem>
+        <TabItem key="privacy">Privacy</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="general">
+          <h3>General Settings</h3>
+          <p>Manage general application settings.</p>
+        </TabItem>
+        <TabItem key="security">
+          <h3>Security Settings</h3>
+          <p>Configure account security and authentication settings.</p>
+        </TabItem>
+        <TabItem key="notifications">
+          <h3>Notification Settings</h3>
+          <p>Customize your notification preferences.</p>
+        </TabItem>
+        <TabItem key="privacy">
+          <h3>Privacy Settings</h3>
+          <p>Control privacy and data sharing options.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### Disabled State
+
+Example showing how to disable specific tabs.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function DisabledExample() {
+  return (
+    <Tabs disabledKeys={['premium', 'enterprise']}>
+      <TabList>
+        <TabItem key="free">Free</TabItem>
+        <TabItem key="premium">Premium</TabItem>
+        <TabItem key="enterprise">Enterprise</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="free">
+          <h3>Free Plan</h3>
+          <p>Access to basic features.</p>
+        </TabItem>
+        <TabItem key="premium">
+          <h3>Premium Plan</h3>
+          <p>Advanced features and priority support.</p>
+        </TabItem>
+        <TabItem key="enterprise">
+          <h3>Enterprise Plan</h3>
+          <p>Full features and dedicated support.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### Compact Density
+
+Tabs with compact spacing.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function CompactDensityExample() {
+  return (
+    <Tabs density="compact">
+      <TabList>
+        <TabItem key="dashboard">Dashboard</TabItem>
+        <TabItem key="analytics">Analytics</TabItem>
+        <TabItem key="reports">Reports</TabItem>
+        <TabItem key="exports">Exports</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="dashboard">Dashboard content</TabItem>
+        <TabItem key="analytics">Analytics content</TabItem>
+        <TabItem key="reports">Reports content</TabItem>
+        <TabItem key="exports">Exports content</TabItem>
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+### Dynamic Tabs
+
+Dynamically generated tab list.
+
+```tsx
+import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
+
+export function DynamicExample() {
+  const tabs = [
+    { id: '1', title: 'Monday', content: 'Monday schedule' },
+    { id: '2', title: 'Tuesday', content: 'Tuesday schedule' },
+    { id: '3', title: 'Wednesday', content: 'Wednesday schedule' },
+    { id: '4', title: 'Thursday', content: 'Thursday schedule' },
+    { id: '5', title: 'Friday', content: 'Friday schedule' },
+  ];
+
+  return (
+    <Tabs>
+      <TabList>
+        {tabs.map((tab) => (
+          <TabItem key={tab.id}>{tab.title}</TabItem>
+        ))}
+      </TabList>
+      <TabPanels>
+        {tabs.map((tab) => (
+          <TabItem key={tab.id}>
+            <h3>{tab.title}</h3>
+            <p>{tab.content}</p>
+          </TabItem>
+        ))}
+      </TabPanels>
+    </Tabs>
+  );
+}
+```
+
+## Accessibility
+
+### Keyboard Support
+
+| Key | Behavior |
+|-----|----------|
+| `Tab` | Move focus to tab list or next element |
+| `Arrow Left/Right` | Navigate to previous/next tab in horizontal orientation |
+| `Arrow Up/Down` | Navigate to previous/next tab in vertical orientation |
+| `Home` | Move to first tab |
+| `End` | Move to last tab |
+| `Enter` or `Space` | Activate focused tab |
+
+## API Reference
+
+For comprehensive props documentation, refer to the [React Spectrum Tabs documentation](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props).
+
+All props are inherited from React Spectrum's Tabs component. Refer to the [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props) for the complete list of available props.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Tabs/index.tsx`
+- **Styles**: `lib/ui/Tabs/styles.css`
+- **Export**: Named export from `@/components/ui/Tabs`
+- **React Spectrum Base**: Yes (@react-spectrum/tabs)
+- **CSS Customizable**: Yes
+- **Testing**: Use `data-testid="tabs"`
