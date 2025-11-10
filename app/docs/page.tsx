@@ -17,10 +17,11 @@ import { Button } from '@/lib/ui/Button';
 import * as Select from '@/lib/ui/Select';
 import { Checkbox } from '@/lib/ui/Checkbox';
 import { Input } from '@/lib/ui/Input';
+import * as Tabs from '@/lib/ui/Tabs';
 import { Switch } from '@/lib/ui/Switch';
 import * as Example from '../components/Example';
-import * as Tabs from '@/lib/ui/Tabs';
-import { CopyToMarkdown } from '@/app/components/CopyToMarkdown';
+import { CopyToMarkdown } from '../components/CopyToMarkdown';
+import ColorsPage from '../components/ColorPalette';
 
 const usingMdxComponents = {
   PreviewWrapper,
@@ -32,6 +33,7 @@ const usingMdxComponents = {
   ...Example,
   ...Tabs,
   CopyToMarkdown,
+  ColorsPage
 };
 
 export async function loader({ params }: Route.LoaderArgs) {

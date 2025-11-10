@@ -1,7 +1,7 @@
 import { ColorAnalysisCharts } from "~/components/ColorPalette/ColorAnalysisCharts";
 import { APCAContrastTable } from "~/components/ColorPalette/APCAContrastTable";
-import { analyzeColorTokens, groupColorsByFamily } from "../../scripts/colorAnalysis";
-import colorTokens from "../../tokens/colors.json";
+import { analyzeColorTokens, groupColorsByFamily } from "../../../scripts/colorAnalysis";
+import colorTokens from "../../../tokens/colors.json";
 
 export default function ColorsPage() {
   // Analyze all color tokens
