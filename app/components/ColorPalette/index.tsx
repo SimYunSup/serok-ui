@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { UnifiedColorCharts } from "~/components/ColorPalette/UnifiedColorCharts";
 import { APCAContrastTable } from "~/components/ColorPalette/APCAContrastTable";
-import { Tabs, TabList, TabPanels, TabItem } from "@/lib/ui/Tabs";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { analyzeColorTokens, groupColorsByFamily } from "~/lib/utils/colorAnalysis";
 import colorTokens from "../../../tokens/colors.json";
 
@@ -110,42 +109,34 @@ export default function ColorsPage() {
             </div>
           </div>
 
-          <Tabs>
-            <TabList>
-              {colorFamilies.map((family) => (
-                <TabItem key={family}>
-                  <span className="capitalize">{family}</span>
-                </TabItem>
-              ))}
-            </TabList>
-            <TabPanels>
-              {colorFamilies.map((family) => {
-                const colors = colorsByFamily[family];
-                return (
-                  <TabItem key={family}>
-                    <div className="space-y-8 pt-4">
+          <Tabs items={colorFamilies}>
+            {colorFamilies.map((family) => {
+              const colors = colorsByFamily[family];
+              return (
+                <Tab key={family} value={family}>
+                  <div className="space-y-8 pt-4">
+                    <h3 className="text-xl font-semibold capitalize mb-4">{family}</h3>
+                    <APCAContrastTable
+                      colors={colors}
+                      backgroundColor="#ffffff"
+                      backgroundName="흰색 배경 (#ffffff)"
+                    />
+                    <APCAContrastTable
+                      colors={colors}
+                      backgroundColor="#000000"
+                      backgroundName="검은색 배경 (#000000)"
+                    />
+                    {family === "gray" && colors.length > 0 && (
                       <APCAContrastTable
                         colors={colors}
-                        backgroundColor="#ffffff"
-                        backgroundName="흰색 배경 (#ffffff)"
+                        backgroundColor={colors[Math.floor(colors.length / 2)].hex}
+                        backgroundName={`${family} 중간톤`}
                       />
-                      <APCAContrastTable
-                        colors={colors}
-                        backgroundColor="#000000"
-                        backgroundName="검은색 배경 (#000000)"
-                      />
-                      {family === "gray" && colors.length > 0 && (
-                        <APCAContrastTable
-                          colors={colors}
-                          backgroundColor={colors[Math.floor(colors.length / 2)].hex}
-                          backgroundName={`${family} 중간톤`}
-                        />
-                      )}
-                    </div>
-                  </TabItem>
-                );
-              })}
-            </TabPanels>
+                    )}
+                  </div>
+                </Tab>
+              );
+            })}
           </Tabs>
         </div>
 
