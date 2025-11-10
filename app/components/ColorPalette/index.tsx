@@ -242,27 +242,46 @@ export default function ColorsPage() {
 
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                ⚠️ 한계 및 개선 방향
+                ⚠️ 색상 팔레트의 한계 및 개선 방향
               </h3>
               <ul className="list-disc list-inside ml-4 space-y-2">
                 <li>
-                  <strong>브라우저 지원</strong>: OKLCH는 최신 브라우저에서만
-                  지원되며, 구형 브라우저를 위한 fallback이 필요할 수 있음
+                  <strong>불균일한 명도 분포</strong>: 위 그래프에서 확인할 수 있듯이,
+                  gray와 yellow 계열의 lightness가 일정한 기울기로 증가하지 않고
+                  중간 구간에서 급격한 변화를 보임. 이상적으로는 모든 색상 단계가
+                  지각적으로 균일한 간격을 가져야 하지만, 현재는 시각적으로 불균형한
+                  느낌을 줄 수 있음
                 </li>
                 <li>
-                  <strong>디자인 도구 통합</strong>: Figma, Adobe XD 등 주요 디자인
-                  도구에서 OKLCH 지원이 제한적이어서 디자이너와의 협업에 어려움이
-                  있을 수 있음
+                  <strong>APCA 기준 미충족 색상 존재</strong>: 색상 팔레트 생성 시
+                  APCA 대비를 사전에 고려하지 않아, 일부 색상 조합이 접근성 기준을
+                  만족하지 못함. 특히 밝은 색상들은 흰색 배경에서, 어두운 색상들은
+                  검은색 배경에서 충분한 대비를 확보하지 못하는 경우가 많음
                 </li>
                 <li>
-                  <strong>실시간 검증</strong>: 현재는 빌드 타임에만 색상 변환이
-                  이루어지므로, 개발 중 실시간으로 대비를 확인하는 기능이 필요
+                  <strong>체계적 생성 방법론 부재</strong>: 현재 색상 팔레트는
+                  수동으로 선택된 hex 값을 기반으로 하며, Adobe Leonardo의 색상
+                  생성 기능을 활용하지 않음. 대신 기존 hex 값을 OKLCH로 변환만 하여,
+                  색상 간의 관계나 대비가 체계적으로 설계되지 않았음
                 </li>
                 <li>
-                  <strong>색상 조합 추천</strong>: 단순 검증을 넘어, APCA 기준을
-                  만족하는 색상 조합을 자동으로 추천하는 기능이 있으면 더 유용할 것
+                  <strong>시맨틱 컬러 정의 부족</strong>: 단순히 색상 이름(red,
+                  blue)과 숫자(100, 200)로만 구성되어 있어, 실제 사용 맥락(primary,
+                  danger, success 등)과의 연결이 명확하지 않음. 이는 개발자가 어떤
+                  색상을 언제 사용해야 할지 판단하기 어렵게 만듦
+                </li>
+                <li>
+                  <strong>다크 모드 고려 부족</strong>: 현재 팔레트는 라이트 모드를
+                  기준으로 설계되었으며, 다크 모드에서의 색상 역할이나 대비에 대한
+                  고려가 부족함. OKLCH로 전환했지만, 이를 활용한 자동 다크 모드 색상
+                  생성 등의 기능은 구현되지 않음
                 </li>
               </ul>
+              <p className="mt-4 text-sm text-gray-600">
+                💡 <strong>개선 제안</strong>: Adobe Leonardo의 색상 생성 기능을
+                활용하여 목표 대비율(APCA)을 만족하는 색상 팔레트를 자동 생성하고,
+                지각적으로 균일한 lightness 분포를 확보하는 것이 필요합니다.
+              </p>
             </div>
 
             <div>
@@ -270,35 +289,52 @@ export default function ColorsPage() {
                 🎯 Serok UI 철학과의 정합성
               </h3>
               <p className="mb-2">
-                이 색상 분석 시스템은 Serok UI의 핵심 철학을 충실히 반영합니다:
+                이 색상 분석 시스템과 현재 접근 방식은 Serok UI 철학을 부분적으로
+                반영하지만, 개선의 여지도 있습니다:
               </p>
-              <ul className="list-disc list-inside ml-4 space-y-2">
-                <li>
-                  <strong>"검증된 기반 위에 구축"</strong>: Adobe Leonardo와 culori
-                  같은 업계 표준 라이브러리를 활용하여, 직접 구현의 위험을 피하고
-                  안정성 확보
-                </li>
-                <li>
-                  <strong>"접근성을 자연스럽게"</strong>: APCA 분석을 통해 접근성이
-                  사후 검토가 아닌 설계 단계부터 고려되도록 함
-                </li>
-                <li>
-                  <strong>"제한된 리소스 존중"</strong>: 복잡한 색상 이론을 직접
-                  구현하지 않고, 기존 도구를 조합하여 효율적으로 목표 달성
-                </li>
-                <li>
-                  <strong>"copy-paste 가능"</strong>: 색상 토큰이 CSS 변수로
-                  출력되어, 어떤 프로젝트든 쉽게 복사하여 사용 가능
-                </li>
-              </ul>
+
+              <div className="mb-4">
+                <h4 className="font-semibold text-gray-800 mb-1">✅ 철학 준수 측면</h4>
+                <ul className="list-disc list-inside ml-4 space-y-1 text-sm">
+                  <li>
+                    <strong>"검증된 기반 위에 구축"</strong>: Adobe Leonardo와 culori
+                    같은 업계 표준 라이브러리 활용
+                  </li>
+                  <li>
+                    <strong>"제한된 리소스 존중"</strong>: 복잡한 색상 이론을 직접
+                    구현하지 않고, 기존 도구를 조합하여 효율적으로 구현
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-1">⚠️ 철학 미준수 측면</h4>
+                <ul className="list-disc list-inside ml-4 space-y-1 text-sm">
+                  <li>
+                    <strong>"접근성을 자연스럽게"</strong>: APCA 분석 도구는 제공하지만,
+                    색상 팔레트 자체가 접근성을 <em>사전에</em> 고려하여 설계되지 않음.
+                    사후 검증으로는 접근성을 "자연스럽게" 만들었다고 보기 어려움
+                  </li>
+                  <li>
+                    <strong>"검증된 기반 활용의 불완전성"</strong>: Leonardo의 색상
+                    생성 기능을 활용하지 않고, 단순히 검증 도구로만 사용. 라이브러리의
+                    핵심 가치를 충분히 활용하지 못함
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div className="mt-6 p-4 bg-white rounded-lg border-l-4 border-purple-500">
-              <p className="text-sm italic text-gray-700">
-                "완벽한 색상 시스템을 처음부터 만드는 대신, 입증된 도구들을
-                조합하여 실용적인 솔루션을 구축했습니다. 이것이 바로 Serok UI의
-                방식입니다 - 똑똑하게 빌리고, 현명하게 통합하며, 접근 가능하게
-                제공하는 것."
+              <p className="text-sm italic text-gray-700 mb-2">
+                "이 분석 도구는 <strong>현재 색상 팔레트의 문제점을 명확히
+                드러냄</strong>으로써 가치를 제공합니다. 완벽한 색상 시스템을
+                구축하지는 못했지만, 무엇이 부족한지 정직하게 보여주는 것 —
+                이것 역시 Serok UI의 방식입니다."
+              </p>
+              <p className="text-xs text-gray-600 mt-3">
+                📌 다음 단계: Adobe Leonardo의 색상 생성 API를 활용하여 APCA
+                기준을 만족하는 새로운 팔레트를 자동 생성하고, 지각적으로 균일한
+                색상 체계를 구축하는 것이 필요합니다.
               </p>
             </div>
           </div>
