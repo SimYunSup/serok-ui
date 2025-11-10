@@ -13,13 +13,10 @@ export default function ColorsPage() {
   const colorFamilies = Object.keys(colorsByFamily).sort();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            색상 팔레트 분석
-          </h1>
           <p className="text-lg text-gray-600 mb-6">
             Serok UI 디자인 시스템의 색상 팔레트에 대한 OKLCH 색상 공간 기반 분석 및
             APCA 대비 검증 결과입니다.
@@ -40,24 +37,6 @@ export default function ColorsPage() {
               <li>더 정확한 색상 대비 계산</li>
               <li>현대 디스플레이를 위한 넓은 색영역 지원</li>
             </ul>
-          </div>
-        </div>
-
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-            <div className="text-3xl font-bold text-gray-900">{allColors.length}</div>
-            <div className="text-gray-600">총 색상 수</div>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
-            <div className="text-3xl font-bold text-gray-900">
-              {colorFamilies.length}
-            </div>
-            <div className="text-gray-600">색상 패밀리</div>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500">
-            <div className="text-3xl font-bold text-gray-900">OKLCH</div>
-            <div className="text-gray-600">색상 공간</div>
           </div>
         </div>
 
@@ -277,11 +256,6 @@ export default function ColorsPage() {
                   생성 등의 기능은 구현되지 않음
                 </li>
               </ul>
-              <p className="mt-4 text-sm text-gray-600">
-                💡 <strong>개선 제안</strong>: Adobe Leonardo의 색상 생성 기능을
-                활용하여 목표 대비율(APCA)을 만족하는 색상 팔레트를 자동 생성하고,
-                지각적으로 균일한 lightness 분포를 확보하는 것이 필요합니다.
-              </p>
             </div>
 
             <div>
@@ -327,14 +301,9 @@ export default function ColorsPage() {
             <div className="mt-6 p-4 bg-white rounded-lg border-l-4 border-purple-500">
               <p className="text-sm italic text-gray-700 mb-2">
                 "이 분석 도구는 <strong>현재 색상 팔레트의 문제점을 명확히
-                드러냄</strong>으로써 가치를 제공합니다. 완벽한 색상 시스템을
+                  드러냄</strong>으로써 가치를 제공합니다. 완벽한 색상 시스템을
                 구축하지는 못했지만, 무엇이 부족한지 정직하게 보여주는 것 —
                 이것 역시 Serok UI의 방식입니다."
-              </p>
-              <p className="text-xs text-gray-600 mt-3">
-                📌 다음 단계: Adobe Leonardo의 색상 생성 API를 활용하여 APCA
-                기준을 만족하는 새로운 팔레트를 자동 생성하고, 지각적으로 균일한
-                색상 체계를 구축하는 것이 필요합니다.
               </p>
             </div>
           </div>
