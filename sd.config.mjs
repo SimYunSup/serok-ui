@@ -1,5 +1,5 @@
 import StyleDictionary from "style-dictionary";
-import { hexToOklch } from "./scripts/colorUtils.ts";
+import { hexToOklch } from "./app/lib/utils/colorUtils.ts";
 
 /**
  * 변수명 설정
@@ -40,7 +40,7 @@ StyleDictionary.registerFormat({
       .map((p) => `    --${p.name}: ${p.value};`)
       .join("\n");
 
-    return ["@layer serok {", "  :root {", body, "  }", "}", ""].join("\n");
+    return ["/* registry:ui */", "@layer serok {", "  :root {", body, "  }", "}", ""].join("\n");
   },
 });
 
