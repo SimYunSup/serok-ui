@@ -1,6 +1,6 @@
 import React from "react";
-import type { ColorInfo, ContrastInfo } from "../../../scripts/colorAnalysis";
-import { analyzeContrast } from "../../../scripts/colorAnalysis";
+import type { ColorInfo, ContrastInfo } from "~/lib/utils/colorAnalysis";
+import { analyzeContrast } from "~/lib/utils/colorAnalysis";
 
 interface APCAContrastTableProps {
   colors: ColorInfo[];

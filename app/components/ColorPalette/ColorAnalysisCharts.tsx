@@ -11,7 +11,7 @@ import {
   BarChart,
   Bar,
 } from "recharts";
-import type { ColorInfo } from "../../../scripts/colorAnalysis";
+import type { ColorInfo } from "~/lib/utils/colorAnalysis";
 
 interface ColorAnalysisChartsProps {
   colors: ColorInfo[];

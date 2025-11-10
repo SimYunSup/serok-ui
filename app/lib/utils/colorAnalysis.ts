@@ -1,5 +1,5 @@
 import { contrast } from "@adobe/leonardo-contrast-colors";
-import { hexToOklchObject, hexToRgb } from "./colorUtils";
+import { hexToOklchObject, hexToRgb } from "~/lib/utils/colorUtils";
 import type { Oklch } from "culori";
 
 export interface ColorInfo {
