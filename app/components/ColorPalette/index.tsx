@@ -4,13 +4,14 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { analyzeColorTokens, groupColorsByFamily } from "~/lib/utils/colorAnalysis";
 import colorTokens from "../../../tokens/colors.json";
 
-export default function ColorsPage() {
-  // Analyze all color tokens
-  const allColors = analyzeColorTokens(colorTokens);
-  const colorsByFamily = groupColorsByFamily(allColors);
+// Analyze all color tokens
+const allColors = analyzeColorTokens(colorTokens);
+const colorsByFamily = groupColorsByFamily(allColors);
 
-  // Get color families sorted
-  const colorFamilies = Object.keys(colorsByFamily).sort();
+// Get color families sorted
+const colorFamilies = Object.keys(colorsByFamily).sort();
+
+export default function ColorsPage() {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8">

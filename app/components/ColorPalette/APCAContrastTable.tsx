@@ -1,11 +1,17 @@
 import React from "react";
 import type { ColorInfo, ContrastInfo } from "~/lib/utils/colorAnalysis";
-import { analyzeContrast } from "~/lib/utils/colorAnalysis";
+import { analyzeContrast, passesAPCA } from "~/lib/utils/colorAnalysis";
 
 interface APCAContrastTableProps {
   colors: ColorInfo[];
   backgroundColor: string;
   backgroundName?: string;
+}
+interface ExtendedContrastResult extends ContrastInfo {
+  name: string;
+  hex: string;
+  passesLargeText: boolean;
+  passesUI: boolean;
 }
 
 export function APCAContrastTable({
@@ -14,30 +20,24 @@ export function APCAContrastTable({
   backgroundName = "Background",
 }: APCAContrastTableProps) {
   // Calculate APCA contrast for each color against the background
-  interface ExtendedContrastResult extends ContrastInfo {
-    name: string;
-    hex: string;
-    passesLargeText: boolean;
-    passesUI: boolean;
-  }
 
-  const contrastResults: ExtendedContrastResult[] = colors.map(
-    (color) => {
-      const bodyText = analyzeContrast(color.hex, backgroundColor, "body-text");
-      const largeText = analyzeContrast(color.hex, backgroundColor, "large-text");
-      const ui = analyzeContrast(color.hex, backgroundColor, "ui");
 
-      return {
-        name: color.name,
-        hex: color.hex,
-        foreground: color.hex,
-        background: backgroundColor,
-        apca: bodyText.apca,
-        passes: bodyText.passes,
-        passesLargeText: largeText.passes,
-        passesUI: ui.passes,
-      };
-    }
+  const contrastResults: ExtendedContrastResult[] = React.useMemo(
+    () =>
+      colors.map((color) => {
+        const { apca } = analyzeContrast(color.hex, backgroundColor);
+        return {
+          name: color.name,
+          hex: color.hex,
+          foreground: color.hex,
+          background: backgroundColor,
+          apca,
+          passes: passesAPCA(apca, "body-text"),
+          passesLargeText: passesAPCA(apca, "large-text"),
+          passesUI: passesAPCA(apca, "ui"),
+        };
+      }),
+    [colors, backgroundColor]
   );
 
   return (
@@ -100,33 +100,30 @@ export function APCAContrastTable({
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
                   <span
-                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
-                      result.passes
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
+                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${result.passes
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                      }`}
                   >
                     {result.passes ? "✓ Pass" : "✗ Fail"}
                   </span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
                   <span
-                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
-                      result.passesLargeText
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
+                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${result.passesLargeText
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                      }`}
                   >
                     {result.passesLargeText ? "✓ Pass" : "✗ Fail"}
                   </span>
                 </td>
                 <td className="border border-gray-300 px-4 py-2 text-center">
                   <span
-                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
-                      result.passesUI
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
-                    }`}
+                    className={`inline-block px-2 py-1 rounded text-xs font-semibold ${result.passesUI
+                      ? "bg-green-100 text-green-800"
+                      : "bg-red-100 text-red-800"
+                      }`}
                   >
                     {result.passesUI ? "✓ Pass" : "✗ Fail"}
                   </span>

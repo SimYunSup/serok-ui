@@ -37,18 +37,6 @@ const familyColors: Record<string, string> = {
 };
 
 export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) {
-  // Prepare data for all families combined
-  const allFamilyData = Object.entries(colorsByFamily).flatMap(([family, colors]) =>
-    colors.map((color, index) => ({
-      family,
-      name: color.name,
-      index,
-      lightness: Number((color.lightness * 100).toFixed(2)),
-      chroma: Number(color.chroma.toFixed(4)),
-      hue: color.hue ?? 0,
-      hex: color.hex,
-    }))
-  );
 
   // Group by shade index for comparison
   const maxShades = Math.max(...Object.values(colorsByFamily).map((c) => c.length));
