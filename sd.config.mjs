@@ -1,4 +1,5 @@
 import StyleDictionary from "style-dictionary";
+import { hexToOklch } from "./app/lib/utils/colorUtils.ts";
 
 /**
  * 변수명 설정
@@ -8,6 +9,24 @@ StyleDictionary.registerTransform({
   name: "name/serok-kebab",
   type: "name",
   transform: (prop) => `serok-${prop.path.join("-")}`,
+});
+
+/**
+ * hex를 oklch로 변환
+ */
+StyleDictionary.registerTransform({
+  name: "color/oklch",
+  type: "value",
+  transitive: true,
+  filter: (prop) => prop.type === "color",
+  transform: (prop) => {
+    try {
+      return hexToOklch(prop.value);
+    } catch (error) {
+      console.warn(`Failed to convert ${prop.value} to oklch:`, error);
+      return prop.value;
+    }
+  },
 });
 
 /**
@@ -21,7 +40,7 @@ StyleDictionary.registerFormat({
       .map((p) => `    --${p.name}: ${p.value};`)
       .join("\n");
 
-    return ["@layer serok {", "  :root {", body, "  }", "}", ""].join("\n");
+    return ["/* registry:ui */", "@layer serok {", "  :root {", body, "  }", "}", ""].join("\n");
   },
 });
 
@@ -30,7 +49,7 @@ export default {
   platforms: {
     css: {
       transformGroup: "css",
-      transforms: ["name/serok-kebab", "color/css"],
+      transforms: ["name/serok-kebab", "color/oklch"],
       buildPath: "lib/ui/Provider/",
       files: [
         {

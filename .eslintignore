@@ -7,3 +7,4 @@ coverage/
 *.min.js
 content/docs/components/**/*.mdx
 public/component-examples/**/*.tsx
+sd.config.mjs
