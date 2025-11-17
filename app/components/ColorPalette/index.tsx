@@ -1,0 +1,44 @@
+import { UnifiedColorCharts } from "~/components/ColorPalette/UnifiedColorCharts";
+import { IntegratedAPCATable } from "~/components/ColorPalette/IntegratedAPCATable";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { analyzeColorTokens, groupColorsByFamily } from "~/lib/utils/colorAnalysis";
+import colorTokens from "../../../tokens/colors.json";
+
+// Analyze all color tokens
+const allColors = analyzeColorTokens(colorTokens);
+const colorsByFamily = groupColorsByFamily(allColors);
+
+// Get color families sorted
+const colorFamilies = Object.keys(colorsByFamily).sort();
+
+export default function ColorsPage() {
+
+  return (
+    <div className="min-h-screen px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Unified Color Analysis Charts */}
+        <div className="mb-16">
+          <UnifiedColorCharts colorsByFamily={colorsByFamily} />
+        </div>
+
+        {/* APCA Contrast Analysis with Tabs */}
+        <div className="mb-16">
+          <Tabs items={colorFamilies}>
+            {colorFamilies.map((family) => {
+              const colors = colorsByFamily[family];
+              return (
+                <Tab key={family} value={family}>
+                  <div className="space-y-8 pt-4">
+                    <h3 className="text-xl font-semibold capitalize mb-4">{family}</h3>
+                    <IntegratedAPCATable colors={colors} />
+                  </div>
+                </Tab>
+              );
+            })}
+          </Tabs>
+        </div>
+
+      </div>
+    </div>
+  );
+}

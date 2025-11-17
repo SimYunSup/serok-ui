@@ -1,4 +1,5 @@
 import type { Route } from './+types/page';
+import { source } from '~/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import {
   DocsBody,
@@ -6,36 +7,15 @@ import {
   DocsPage,
   DocsTitle,
 } from 'fumadocs-ui/page';
-import { source } from '~/lib/source';
+import browserCollections from 'fumadocs-mdx:collections/browser';
 import type * as PageTree from 'fumadocs-core/page-tree';
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import { docs } from '~/.source';
-import { toClientRenderer } from 'fumadocs-mdx/runtime/vite';
 import { baseOptions } from '~/lib/layout.shared';
-import { PreviewWrapper } from '../components/PreviewWrapper';
-import { Button } from '@/lib/ui/Button';
-import * as Select from '@/lib/ui/Select';
-import { Checkbox } from '@/lib/ui/Checkbox';
-import { Input } from '@/lib/ui/Input';
-import { Switch } from '@/lib/ui/Switch';
-import * as Example from '../components/Example';
-import * as Tabs from '@/lib/ui/Tabs';
-import { CopyToMarkdown } from '@/app/components/CopyToMarkdown';
+import { useMdxComponents } from '../hooks/useMdxComponents';
 
-const usingMdxComponents = {
-  PreviewWrapper,
-  Button,
-  Checkbox,
-  Input,
-  ...Select,
-  Switch,
-  ...Example,
-  ...Tabs,
-  CopyToMarkdown,
-};
+
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const slugs = params['*'].split('/').filter((v) => v.length > 0);
+  const slugs = params['*']?.split('/').filter((v) => v.length > 0);
   const page = source.getPage(slugs);
   if (!page) throw new Response('Not found', { status: 404 });
 
@@ -45,9 +25,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   };
 }
 
-const renderer = toClientRenderer(
-  docs.doc,
-  ({ toc, default: Mdx, frontmatter }) => {
+const clientLoader = browserCollections.docs.createClientLoader({
+  component({ toc, default: Mdx, frontmatter }) {
+    const mdxComponents = useMdxComponents();
     return (
       <DocsPage toc={toc}>
         <title>{frontmatter.title}</title>
@@ -55,22 +35,19 @@ const renderer = toClientRenderer(
         <DocsTitle>{frontmatter.title}</DocsTitle>
         <DocsDescription>{frontmatter.description}</DocsDescription>
         <DocsBody>
-          <Mdx components={{ ...defaultMdxComponents, ...usingMdxComponents }} />
+          <Mdx components={{ ...mdxComponents }} />
         </DocsBody>
       </DocsPage>
     );
   },
-);
+});
 
 export default function Page({ loaderData }: Route.ComponentProps) {
   const { tree, path } = loaderData;
-  const Content = renderer[path];
+  const Content = clientLoader.getComponent(path);
 
   return (
-    <DocsLayout
-      {...baseOptions()}
-      tree={tree as PageTree.Root}
-    >
+    <DocsLayout {...baseOptions()} tree={tree as PageTree.Root}>
       <Content />
     </DocsLayout>
   );
