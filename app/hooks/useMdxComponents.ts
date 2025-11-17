@@ -7,7 +7,8 @@ import { Input } from '@/lib/ui/Input';
 import { Switch } from '@/lib/ui/Switch';
 import * as Example from '../components/Example';
 import * as Tabs from '@/lib/ui/Tabs';
-import { CopyToMarkdown } from '@/app/components/CopyToMarkdown';
+import { CopyToMarkdown } from '~/components/CopyToMarkdown';
+import ColorsPage from '~/components/ColorPalette';
 
 const usingMdxComponents = {
   PreviewWrapper,
@@ -19,6 +20,7 @@ const usingMdxComponents = {
   ...Example,
   ...Tabs,
   CopyToMarkdown,
+  ColorsPage,
 };
 
 export function useMdxComponents() {
