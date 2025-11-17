@@ -1,5 +1,5 @@
 import { UnifiedColorCharts } from "~/components/ColorPalette/UnifiedColorCharts";
-import { APCAContrastTable } from "~/components/ColorPalette/APCAContrastTable";
+import { IntegratedAPCATable } from "~/components/ColorPalette/IntegratedAPCATable";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { analyzeColorTokens, groupColorsByFamily } from "~/lib/utils/colorAnalysis";
 import colorTokens from "../../../tokens/colors.json";
@@ -30,23 +30,7 @@ export default function ColorsPage() {
                 <Tab key={family} value={family}>
                   <div className="space-y-8 pt-4">
                     <h3 className="text-xl font-semibold capitalize mb-4">{family}</h3>
-                    <APCAContrastTable
-                      colors={colors}
-                      backgroundColor="#ffffff"
-                      backgroundName="흰색 배경 (#ffffff)"
-                    />
-                    <APCAContrastTable
-                      colors={colors}
-                      backgroundColor="#000000"
-                      backgroundName="검은색 배경 (#000000)"
-                    />
-                    {family === "gray" && colors.length > 0 && (
-                      <APCAContrastTable
-                        colors={colors}
-                        backgroundColor={colors[Math.floor(colors.length / 2)].hex}
-                        backgroundName={`${family} 중간톤`}
-                      />
-                    )}
+                    <IntegratedAPCATable colors={colors} />
                   </div>
                 </Tab>
               );

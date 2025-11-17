@@ -8,10 +8,8 @@ import * as MdxConfig from './source.config';
 export default defineConfig({
   plugins: [
     mdx(MdxConfig),
-    // @ts-expect-error
     tailwindcss(),
     reactRouter(),
-    // @ts-expect-error
     tsconfigPaths(),
   ],
   ssr: {

@@ -4,14 +4,18 @@ import type { Oklch, Rgb } from "culori";
 /**
  * Convert hex color to oklch format
  * @param hex - Hex color string (e.g., "#FF0000")
- * @returns OKLCH color string in CSS format
+ * @returns OKLCH color string in CSS format (3 decimal places)
  */
 export function hexToOklch(hex: string): string {
   const color = oklch(hex);
   if (!color) {
     throw new Error(`Invalid hex color: ${hex}`);
   }
-  return formatCss(color);
+  // Format with 3 decimal places for readability
+  const l = color.l.toFixed(3);
+  const c = color.c.toFixed(3);
+  const h = color.h !== undefined ? color.h.toFixed(1) : "none";
+  return `oklch(${l} ${c} ${h})`;
 }
 
 /**
