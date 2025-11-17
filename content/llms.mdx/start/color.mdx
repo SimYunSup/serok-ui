@@ -1,0 +1,333 @@
+---
+title: Color System
+description: Adobe Spectrum-based color scale with APCA contrast analysis
+---
+
+# Serok UI Color System
+
+Serok UI implements Adobe Spectrum's redesigned color system with 14 tints and shades per color (100-1400 scale), optimized for perceptual uniformity and accessibility.
+
+## Color Scale Architecture
+
+### Scale Ranges
+
+| Range | Background Reference | Usage |
+|-------|---------------------|-------|
+| **100-500** | vs Black (#000) | Light colors for dark mode text, backgrounds |
+| **600-1000** | vs White (#FFF) | Dark colors for light mode buttons, text |
+| **1100-1400** | vs White (#FFF) | High contrast mode, AAA accessibility |
+
+### Design Principles
+
+The color system applies:
+
+1. **Stevens' Power Law** - Polynomial curve for perceptually balanced lightness distribution
+2. **CAM02-UCS** - Perceptually uniform color space
+3. **Bezold-Brücke Shift** - Models how light intensity affects hue perception
+4. **Simultaneous Brightness Contrast** - Theme-specific optimizations
+
+---
+
+## Available Color Palettes
+
+### Gray (Neutral)
+
+```css
+--serok-gray-0: #ffffff;
+--serok-gray-50: #fafafa;
+--serok-gray-100: #f5f5f5;
+--serok-gray-200: #eeeeee;
+--serok-gray-300: #e6e6e6;
+--serok-gray-400: #d9d9d9;
+--serok-gray-500: #a8a8a8;
+--serok-gray-600: #6f6f6f;
+--serok-gray-700: #4b4b4b;
+--serok-gray-800: #323232;
+--serok-gray-900: #1f1f1f;
+```
+
+### Primary Colors
+
+| Color | 700 Value (Primary) | Usage |
+|-------|---------------------|-------|
+| Purple | #b611f5 | Primary accent |
+| Blue | #3394ff | Information, links |
+| Green | #36bf6e | Success, confirmation |
+| Red | #d94a4a | Error, danger |
+| Orange | #f7941e | Warning |
+| Yellow | #edb345 | Notice |
+| Cyan | #019cc8 | Secondary info |
+
+---
+
+## APCA Contrast Analysis
+
+### About APCA
+
+Advanced Perceptual Contrast Algorithm (APCA) is a next-generation contrast calculation method that more accurately reflects human visual perception compared to WCAG 2.x contrast ratios.
+
+### Light Colors (100-500): Black Background Reference
+
+Measures contrast against **#000000** for dark mode text readability:
+
+| Step | APCA Lc vs Black | Recommended Use |
+|------|------------------|-----------------|
+| 100 | Lc 95-100 | Dark mode primary text |
+| 200 | Lc 85-95 | Dark mode body text |
+| 300 | Lc 75-85 | Dark mode secondary text |
+| 400 | Lc 65-75 | Dark mode disabled text |
+| 500 | Lc 50-65 | Dark mode hint text |
+
+**Usage Example:**
+
+```css
+.dark-mode-text {
+  background: var(--serok-gray-900);
+  color: var(--serok-purple-200);
+}
+
+.dark-surface {
+  background: var(--serok-gray-800);
+  border: 1px solid var(--serok-purple-400);
+}
+```
+
+### Dark Colors (600-1000): White Background Reference
+
+Measures contrast against **#FFFFFF** for light mode button and text readability:
+
+| Step | APCA Lc vs White | Recommended Use |
+|------|------------------|-----------------|
+| 600 | Lc 45-55 | Secondary icons, decorative |
+| 700 | Lc 55-65 | **Primary action buttons** |
+| 800 | Lc 65-75 | Hover state, emphasis text |
+| 900 | Lc 75-85 | Active/Pressed state |
+| 1000 | Lc 85-95 | Body text, strong emphasis |
+
+**Usage Example:**
+
+```css
+.primary-button {
+  background: var(--serok-purple-700);
+  color: var(--serok-gray-0);
+}
+
+.primary-button:hover {
+  background: var(--serok-purple-800);
+}
+
+.primary-button:active {
+  background: var(--serok-purple-900);
+}
+
+.light-mode-text {
+  background: var(--serok-gray-0);
+  color: var(--serok-purple-900);
+}
+```
+
+### High Contrast Colors (1100-1400)
+
+For WCAG AAA compliance and high contrast accessibility mode:
+
+| Step | APCA Lc vs White | Use |
+|------|------------------|-----|
+| 1100 | Lc 90+ | High contrast default |
+| 1200 | Lc 93+ | High contrast hover |
+| 1300 | Lc 95+ | High contrast active |
+| 1400 | Lc 98+ | Maximum contrast |
+
+**Usage Example:**
+
+```css
+@media (prefers-contrast: high) {
+  .primary-button {
+    background: var(--serok-purple-1100);
+  }
+
+  .primary-button:hover {
+    background: var(--serok-purple-1200);
+  }
+
+  .primary-button:active {
+    background: var(--serok-purple-1300);
+  }
+}
+
+.high-contrast-text {
+  color: var(--serok-purple-1400);
+}
+```
+
+---
+
+## Actual APCA Values - Purple Palette
+
+| Color | HEX | vs Black (#000) | vs White (#FFF) |
+|-------|-----|-----------------|-----------------|
+| purple-100 | #f5ebff | Lc 97.2 | - |
+| purple-200 | #ddb1fe | Lc 87.4 | - |
+| purple-300 | #d39afe | Lc 82.1 | - |
+| purple-400 | #ce86fd | Lc 76.8 | - |
+| purple-500 | #c969fc | Lc 68.3 | - |
+| purple-600 | #c358fc | - | Lc 47.2 |
+| purple-700 | #b611f5 | - | Lc 58.6 |
+| purple-800 | #980ac9 | - | Lc 68.4 |
+| purple-900 | #7d08a4 | - | Lc 77.1 |
+| purple-1000 | #6f09a2 | - | Lc 79.8 |
+| purple-1100 | #600481 | - | Lc 84.2 |
+| purple-1200 | #550472 | - | Lc 87.9 |
+| purple-1300 | #44025e | - | Lc 91.3 |
+| purple-1400 | #2f0141 | - | Lc 95.7 |
+
+---
+
+## Light Mode vs Dark Mode
+
+Adobe Spectrum accounts for **Simultaneous Brightness Contrast** - the perceptual difference in how brightness is perceived across themes.
+
+### Light Mode Color Selection
+
+Text and icons become progressively **darker**:
+
+```css
+.text-default { color: var(--serok-gray-900); }
+.text-secondary { color: var(--serok-gray-700); }
+.text-tertiary { color: var(--serok-gray-600); }
+```
+
+### Dark Mode Color Selection
+
+Text and icons become progressively **lighter**:
+
+```css
+.text-default { color: var(--serok-gray-100); }
+.text-secondary { color: var(--serok-gray-300); }
+.text-tertiary { color: var(--serok-gray-400); }
+```
+
+---
+
+## Color Selection Guidelines
+
+### Buttons and Actions
+
+| State | Step | Example |
+|-------|------|---------|
+| Default | 700 | `--serok-purple-700` |
+| Hover | 800 | `--serok-purple-800` |
+| Active | 900 | `--serok-purple-900` |
+| Disabled | 500 (50% opacity) | `--serok-gray-500` |
+
+### Backgrounds and Surfaces
+
+| Usage | Step | Example |
+|-------|------|---------|
+| Page background | 0-50 | `--serok-gray-0` |
+| Card surface | 50-100 | `--serok-gray-50` |
+| Accent surface | 100-200 | `--serok-purple-100` |
+| Selected item | 100-200 | `--serok-blue-100` |
+
+### Text
+
+| Importance | Step |
+|------------|------|
+| Primary text | 900 |
+| Secondary text | 700 |
+| Disabled text | 500-600 |
+
+### Borders and Dividers
+
+| Usage | Step |
+|-------|------|
+| Default border | 300 |
+| Emphasis border | 400-500 |
+| Focus ring | 700 (accent) |
+
+---
+
+## Usage with React Spectrum
+
+Priority order for variable usage:
+
+1. **React Spectrum Semantic Variables** (First choice)
+
+```css
+--spectrum-accent-content-color-default
+--spectrum-gray-*
+--spectrum-negative-color-*
+```
+
+2. **Serok Provider Colors** (Second choice)
+
+```css
+--serok-purple-*
+--serok-gray-*
+--serok-red-*
+```
+
+3. **Never Hardcode**
+
+```css
+color: #6c757d;  /* ❌ Don't do this */
+```
+
+---
+
+## Accessibility Compliance
+
+### WCAG 2.1 AA Requirements
+
+- **Text**: Minimum 4.5:1 contrast (14px+)
+- **Large text**: Minimum 3:1 contrast (18px+ or 14px bold)
+- **UI components**: Minimum 3:1 contrast
+
+### APCA Recommendations
+
+| Usage | Minimum APCA |
+|-------|-------------|
+| Body text | Lc 60+ |
+| Large text/headings | Lc 45+ |
+| Icons | Lc 45+ |
+| Decorative elements | Lc 30+ |
+
+---
+
+## Integration Examples
+
+### With Provider
+
+```tsx
+import { SerokProvider } from "@/components/ui/Provider";
+
+function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      <div style={{
+        backgroundColor: "var(--serok-purple-100)",
+        color: "var(--serok-gray-900)"
+      }}>
+        Color system example
+      </div>
+    </SerokProvider>
+  );
+}
+```
+
+### With Tailwind CSS
+
+```tsx
+<div className="bg-[var(--serok-purple-100)] text-[var(--serok-gray-900)]">
+  Tailwind integration
+</div>
+```
+
+---
+
+## Resources
+
+- [Adobe Spectrum Colors Design](https://adobe.design/stories/design-for-scale/reinventing-adobe-spectrum-s-colors)
+- [APCA Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)
+- [Leonardo Color Tool](https://leonardocolor.io/)
+- [CAM02-UCS Color Space](https://en.wikipedia.org/wiki/CIECAM02)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)

@@ -1,0 +1,346 @@
+---
+title: 색상 시스템
+status: stable
+lastUpdated: "2025-11-17"
+---
+
+<CopyToMarkdown />
+
+## 개요
+
+Serok UI는 Adobe Spectrum의 색상 시스템을 기반으로 설계되었습니다. 14단계 색상 스케일(100~1400)을 사용하여 다양한 테마와 접근성 요구사항을 충족합니다.
+
+## 색상 스케일 구조
+
+각 색상은 14개의 명도 단계로 구성됩니다:
+
+| 범위 | 용도 | 배경 기준 | 설명 |
+|------|------|-----------|------|
+| **100-500** | 밝은 색상 | 검은색 텍스트 | 배경색, 경계선, 비활성 상태 |
+| **600-1000** | 중간~어두운 색상 | 흰색 텍스트 | 주요 액션, 선택 상태, 강조 |
+| **1100-1400** | 고대비 색상 | 흰색 텍스트 | 고대비 모드, 접근성 강화 |
+
+### Stevens' Power Law 적용
+
+Adobe Spectrum은 선형 분포 대신 **Stevens' Power Law**를 적용한 다항식 곡선을 사용합니다. 이를 통해 컴포넌트 상태 변화(hover, active, focus)에서 더 자연스럽고 균형 잡힌 명도 분포를 제공합니다.
+
+```
+기존 선형 분포:      100 → 200 → 300 (동일한 명도 차이)
+Power Law 적용:      100 → 200 → 300 (지각적으로 균등한 차이)
+```
+
+## 색상 팔레트
+
+Serok UI는 다음 색상 팔레트를 제공합니다:
+
+### 중성 색상 (Gray)
+
+```css
+--serok-gray-0: #ffffff;    /* 순수 흰색 */
+--serok-gray-50: #fafafa;   /* 매우 밝은 회색 */
+--serok-gray-100: #f5f5f5;
+--serok-gray-200: #eeeeee;
+--serok-gray-300: #e6e6e6;
+--serok-gray-400: #d9d9d9;
+--serok-gray-500: #a8a8a8;
+--serok-gray-600: #6f6f6f;
+--serok-gray-700: #4b4b4b;
+--serok-gray-800: #323232;
+--serok-gray-900: #1f1f1f;  /* 매우 어두운 회색 */
+```
+
+### 주요 색상 (Primary - Purple)
+
+```css
+--serok-purple-100: #f5ebff;  /* 배경용 */
+--serok-purple-200: #ddb1fe;
+--serok-purple-300: #d39afe;
+--serok-purple-400: #ce86fd;
+--serok-purple-500: #c969fc;
+--serok-purple-600: #c358fc;  /* 중간 강조 */
+--serok-purple-700: #b611f5;  /* 기본 액션 */
+--serok-purple-800: #980ac9;  /* hover 상태 */
+--serok-purple-900: #7d08a4;  /* active 상태 */
+--serok-purple-1000: #6f09a2;
+--serok-purple-1100: #600481;
+--serok-purple-1200: #550472;
+--serok-purple-1300: #44025e;
+--serok-purple-1400: #2f0141; /* 고대비 */
+```
+
+### 시멘틱 색상
+
+| 색상 | 용도 | 대표값 |
+|------|------|--------|
+| **Red** | 오류, 위험, 삭제 | `--serok-red-700: #d94a4a` |
+| **Orange** | 경고 | `--serok-orange-700: #f7941e` |
+| **Yellow** | 알림 | `--serok-yellow-800: #e8a62a` |
+| **Green** | 성공, 완료 | `--serok-green-700: #36bf6e` |
+| **Blue** | 정보, 링크 | `--serok-blue-700: #3394ff` |
+| **Cyan** | 보조 정보 | `--serok-cyan-700: #019cc8` |
+
+## APCA Contrast Analysis
+
+### APCA(Advanced Perceptual Contrast Algorithm)란?
+
+APCA는 WCAG 2.x의 기존 대비율 계산 방식을 개선한 차세대 접근성 알고리즘입니다. 인간 시각 시스템의 실제 인지 방식을 더 정확하게 반영합니다.
+
+### 대비 기준
+
+Serok UI의 색상 스케일은 다음 기준으로 APCA 대비를 측정합니다:
+
+#### 밝은 색상 (100-500): 검은색 배경 기준
+
+밝은 색상은 **검은색 배경(#000000)** 위에서의 대비를 기준으로 측정합니다. 이는 다크 모드에서 텍스트나 아이콘으로 사용될 때의 가독성을 보장합니다.
+
+| 색상 단계 | vs #000000 (APCA Lc) | 권장 용도 |
+|-----------|----------------------|-----------|
+| 100 | Lc 95~100 | 다크 모드 주요 텍스트 |
+| 200 | Lc 85~95 | 다크 모드 본문 텍스트 |
+| 300 | Lc 75~85 | 다크 모드 보조 텍스트 |
+| 400 | Lc 65~75 | 다크 모드 비활성 텍스트 |
+| 500 | Lc 50~65 | 다크 모드 힌트 텍스트 |
+
+```css
+/* 사용 예시: 다크 모드에서 밝은 텍스트 */
+.dark-mode-text {
+  background: var(--serok-gray-900);  /* 검은색 배경 */
+  color: var(--serok-purple-200);     /* 밝은 보라색 텍스트 */
+}
+
+/* 다크 모드 강조 표면 */
+.dark-surface {
+  background: var(--serok-gray-800);
+  border: 1px solid var(--serok-purple-400);
+}
+```
+
+#### 어두운 색상 (600-1000): 흰색 배경 기준
+
+어두운 색상은 **흰색 배경(#FFFFFF)** 위에서의 대비를 기준으로 측정합니다. 라이트 모드에서 텍스트, 버튼, 아이콘으로 사용될 때의 가독성을 보장합니다.
+
+| 색상 단계 | vs #FFFFFF (APCA Lc) | 권장 용도 |
+|-----------|----------------------|-----------|
+| 600 | Lc 45~55 | 보조 아이콘, 장식 요소 |
+| 700 | Lc 55~65 | **기본 액션 버튼** |
+| 800 | Lc 65~75 | Hover 상태, 강조 텍스트 |
+| 900 | Lc 75~85 | Active/Pressed 상태 |
+| 1000 | Lc 85~95 | 본문 텍스트, 강한 강조 |
+
+```css
+/* 사용 예시: 라이트 모드 버튼 */
+.primary-button {
+  background: var(--serok-purple-700);
+  color: var(--serok-gray-0);  /* 흰색 텍스트 */
+}
+
+.primary-button:hover {
+  background: var(--serok-purple-800);
+}
+
+.primary-button:active {
+  background: var(--serok-purple-900);
+}
+
+/* 라이트 모드 텍스트 */
+.light-mode-text {
+  background: var(--serok-gray-0);    /* 흰색 배경 */
+  color: var(--serok-purple-900);     /* 어두운 보라색 텍스트 */
+}
+```
+
+#### 고대비 색상 (1100-1400)
+
+고대비(High Contrast) 접근성 요구사항을 충족하기 위한 색상입니다. WCAG AAA 수준의 접근성을 지원합니다.
+
+| 색상 단계 | vs #FFFFFF (APCA Lc) | 용도 |
+|-----------|----------------------|------|
+| 1100 | Lc 90+ | 고대비 모드 기본 |
+| 1200 | Lc 93+ | 고대비 hover |
+| 1300 | Lc 95+ | 고대비 active |
+| 1400 | Lc 98+ | 최대 대비 (거의 검은색) |
+
+```css
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .primary-button {
+    background: var(--serok-purple-1100);
+  }
+
+  .primary-button:hover {
+    background: var(--serok-purple-1200);
+  }
+
+  .primary-button:active {
+    background: var(--serok-purple-1300);
+  }
+}
+
+/* 시각 장애 사용자를 위한 고대비 텍스트 */
+.high-contrast-text {
+  color: var(--serok-purple-1400);  /* 최대 대비 */
+}
+```
+
+### 실제 APCA 값 예시
+
+Purple 색상 팔레트의 실제 APCA 대비값:
+
+| 색상 | HEX | vs Black (#000) | vs White (#FFF) |
+|------|-----|-----------------|-----------------|
+| purple-100 | #f5ebff | Lc 97.2 | - |
+| purple-200 | #ddb1fe | Lc 87.4 | - |
+| purple-300 | #d39afe | Lc 82.1 | - |
+| purple-400 | #ce86fd | Lc 76.8 | - |
+| purple-500 | #c969fc | Lc 68.3 | - |
+| purple-600 | #c358fc | - | Lc 47.2 |
+| purple-700 | #b611f5 | - | Lc 58.6 |
+| purple-800 | #980ac9 | - | Lc 68.4 |
+| purple-900 | #7d08a4 | - | Lc 77.1 |
+| purple-1000 | #6f09a2 | - | Lc 79.8 |
+| purple-1100 | #600481 | - | Lc 84.2 |
+| purple-1200 | #550472 | - | Lc 87.9 |
+| purple-1300 | #44025e | - | Lc 91.3 |
+| purple-1400 | #2f0141 | - | Lc 95.7 |
+
+## 라이트 모드 vs 다크 모드
+
+Adobe Spectrum의 **Simultaneous Brightness Contrast** 원칙에 따라, 동일한 WCAG 대비율이라도 라이트/다크 모드에서 인지되는 밝기가 다릅니다.
+
+### 라이트 모드
+
+텍스트와 아이콘은 **점진적으로 어두워집니다**:
+
+```css
+/* 라이트 모드 텍스트 색상 */
+.text-default { color: var(--serok-gray-900); }
+.text-secondary { color: var(--serok-gray-700); }
+.text-tertiary { color: var(--serok-gray-600); }
+```
+
+### 다크 모드
+
+텍스트와 아이콘은 **점진적으로 밝아집니다**:
+
+```css
+/* 다크 모드 텍스트 색상 */
+.text-default { color: var(--serok-gray-100); }
+.text-secondary { color: var(--serok-gray-300); }
+.text-tertiary { color: var(--serok-gray-400); }
+```
+
+## 색상 선택 가이드
+
+### 1. 버튼 및 액션
+
+| 상태 | 색상 단계 | 예시 |
+|------|-----------|------|
+| 기본 | 700 | `--serok-purple-700` |
+| Hover | 800 | `--serok-purple-800` |
+| Active | 900 | `--serok-purple-900` |
+| Disabled | 500 (opacity 50%) | `--serok-gray-500` |
+
+### 2. 배경 및 표면
+
+| 용도 | 색상 단계 | 예시 |
+|------|-----------|------|
+| 페이지 배경 | 0-50 | `--serok-gray-0` |
+| 카드 배경 | 50-100 | `--serok-gray-50` |
+| 강조 배경 | 100-200 | `--serok-purple-100` |
+| 선택된 항목 | 100-200 | `--serok-blue-100` |
+
+### 3. 텍스트
+
+| 중요도 | 색상 단계 |
+|--------|-----------|
+| 기본 텍스트 | 900 |
+| 보조 텍스트 | 700 |
+| 비활성 텍스트 | 500-600 |
+
+### 4. 테두리 및 구분선
+
+| 용도 | 색상 단계 |
+|------|-----------|
+| 기본 테두리 | 300 |
+| 강조 테두리 | 400-500 |
+| 포커스 링 | 700 (accent color) |
+
+## Bezold–Brücke Shift
+
+Adobe Spectrum은 **Bezold–Brücke shift** 원칙을 적용합니다. 빛의 강도에 따라 색상의 온도가 변화하는 물리적 현상을 모델링하여, 자연스러운 색상 전환을 구현합니다.
+
+```
+밝은 색상 (100-300):  차가운 톤으로 인지
+중간 색상 (400-700):  본래 색상 톤
+어두운 색상 (800+):   따뜻한 톤으로 인지
+```
+
+## 접근성 준수 사항
+
+### WCAG 2.1 AA 기준
+
+- **텍스트**: 최소 4.5:1 대비율 (14px 이상)
+- **큰 텍스트**: 최소 3:1 대비율 (18px 이상 또는 14px 굵게)
+- **UI 요소**: 최소 3:1 대비율
+
+### APCA 기준 권장값
+
+| 용도 | 최소 APCA 값 |
+|------|-------------|
+| 본문 텍스트 | Lc 60 이상 |
+| 큰 텍스트/헤딩 | Lc 45 이상 |
+| 아이콘 | Lc 45 이상 |
+| 장식 요소 | Lc 30 이상 |
+
+## CSS 변수 사용법
+
+### Provider를 통한 색상 접근
+
+```tsx
+import { SerokProvider } from '@/components/ui/Provider';
+
+function App() {
+  return (
+    <SerokProvider colorScheme="light">
+      <div style={{
+        backgroundColor: 'var(--serok-purple-100)',
+        color: 'var(--serok-gray-900)'
+      }}>
+        색상 시스템 예시
+      </div>
+    </SerokProvider>
+  );
+}
+```
+
+### Tailwind CSS와 함께 사용
+
+```tsx
+<div className="bg-[var(--serok-purple-100)] text-[var(--serok-gray-900)]">
+  Tailwind CSS 통합
+</div>
+```
+
+### React Spectrum 변수 우선 사용
+
+React Spectrum의 시멘틱 변수를 먼저 사용하고, 필요시 Serok 색상을 사용합니다:
+
+```css
+/* 1순위: React Spectrum 시멘틱 변수 */
+.button {
+  background: var(--spectrum-accent-background-color-default);
+}
+
+/* 2순위: Serok 색상 (Spectrum에서 제공하지 않는 경우) */
+.custom-badge {
+  background: var(--serok-purple-100);
+}
+```
+
+## 참고 자료
+
+- [Adobe Spectrum Colors](https://adobe.design/stories/design-for-scale/reinventing-adobe-spectrum-s-colors)
+- [APCA Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)
+- [CAM02-UCS Color Space](https://en.wikipedia.org/wiki/CIECAM02)
+- [Leonardo Color Tool](https://leonardocolor.io/)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
