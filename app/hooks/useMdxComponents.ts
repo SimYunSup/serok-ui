@@ -9,6 +9,7 @@ import * as Example from '../components/Example';
 import * as Tabs from '@/lib/ui/Tabs';
 import { CopyToMarkdown } from '~/components/CopyToMarkdown';
 import ColorsPage from '~/components/ColorPalette';
+import { Steps, Step } from '~/components/steps';
 
 const usingMdxComponents = {
   PreviewWrapper,
@@ -21,6 +22,8 @@ const usingMdxComponents = {
   ...Tabs,
   CopyToMarkdown,
   ColorsPage,
+  Steps,
+  Step,
 };
 
 export function useMdxComponents() {

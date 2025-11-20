@@ -13,7 +13,11 @@ Serok UI는 Adobe React Spectrum을 기반으로 구축된 접근성 중심의 �
 
 ---
 
-## 1단계: 설정 파일 생성
+<Steps>
+
+<Step>
+
+## 설정 파일 생성
 
 프로젝트 루트에 `components.json` 파일을 생성하고, CSS 파일 경로를 전역 CSS 파일 위치에 맞게 수정하세요.
 
@@ -54,9 +58,11 @@ Serok UI는 Adobe React Spectrum을 기반으로 구축된 접근성 중심의 �
 - **registries**: 네임스페이스 레지스트리 설정 (`@serok` 네임스페이스로 간편하게 컴포넌트 설치)
 - **iconLibrary**: 아이콘 라이브러리 (Lucide 사용)
 
----
+</Step>
 
-## 2단계: 경로 별칭 설정
+<Step>
+
+## 경로 별칭 설정
 
 ### TypeScript 설정 업데이트
 
@@ -106,9 +112,11 @@ export default defineConfig({
 
 Next.js는 `tsconfig.json`의 paths를 자동으로 인식하므로 별도의 설정이 필요하지 않습니다.
 
----
+</Step>
 
-## 3단계: 테마 및 컴포넌트 설치
+<Step>
+
+## 테마 및 컴포넌트 설치
 
 shadcn CLI를 사용하여 테마와 필요한 컴포넌트를 설치하세요. 테마는 필수이며, 나머지 컴포넌트는 필요에 따라 선택적으로 설치할 수 있습니다.
 
@@ -146,9 +154,11 @@ npx shadcn@latest add https://serok.ethansup.net/r/switch.json
 
 shadcn이 설치 과정에서 필요한 모든 의존성(React Spectrum, 테마 등)을 자동으로 설치합니다.
 
----
+</Step>
 
-## 4단계: 기본 설정
+<Step>
+
+## 기본 설정
 
 ### Provider 설정
 
@@ -165,6 +175,10 @@ export function App() {
   )
 }
 ```
+
+</Step>
+
+</Steps>
 
 ---
 
@@ -264,11 +278,6 @@ export function MyForm() {
 
 - CSS 파일이 전역 스타일에 포함되어 있는지 확인하세요
 - `components.json`의 경로가 올바른지 확인하세요
-
-### 타입 오류 발생
-
-- TypeScript 버전이 4.0 이상인지 확인하세요
-- `tsconfig.json`의 경로가 올바른지 확인하세요
 
 ### Provider 오류
 
