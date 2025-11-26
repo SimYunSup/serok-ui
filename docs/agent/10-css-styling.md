@@ -501,6 +501,6 @@ Before committing CSS:
 
 - **React Spectrum Styling**: [Adobe Spectrum Styling](https://react-spectrum.adobe.com/react-spectrum/styling.html)
 - **Spectrum Variables**: Check browser DevTools to see available `--spectrum-*` variables
-- **Provider Colors**: `lib/ui/Provider/colors.css` - Use as fallback only
-- **Provider Styles**: `lib/ui/Provider/serok.css` - See how Spectrum variables are mapped
+- **Serok Color Tokens**: `lib/style/serok.css` - Base color variables (`--serok-*`) defined in `:root`
+- **Provider Style Mapping**: `lib/ui/Provider/style.css` - Maps Spectrum variables to Serok variables within `.serok-provider` scope
 - **Existing Components**: `lib/ui/*/styles.css` - Reference implementations

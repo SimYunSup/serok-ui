@@ -325,4 +325,5 @@ export { Item } from "@react-spectrum/tabs";
 
 - [React Spectrum Documentation](https://react-spectrum.adobe.com/react-spectrum/)
 - [Existing Components](../../lib/ui/) - Reference implementations
-- [Provider Colors](../../lib/ui/Provider/colors.css) - Available color tokens
+- [Serok Color Tokens](../../lib/style/serok.css) - Base color variables (`--serok-*`)
+- [Provider Style Mapping](../../lib/ui/Provider/style.css) - Spectrum to Serok variable mapping
