@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   LineChart,
   Line,
@@ -10,17 +10,17 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
-} from "recharts";
-import type { ColorInfo } from "~/lib/utils/colorAnalysis";
+} from 'recharts';
+import type { ColorInfo } from '~/lib/utils/colorAnalysis';
 
 interface ColorAnalysisChartsProps {
-  colors: ColorInfo[];
-  colorFamily?: string;
+  colors: ColorInfo[]
+  colorFamily?: string
 }
 
 export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisChartsProps) {
   // Prepare data for charts
-  const chartData = colors.map((color) => ({
+  const chartData = colors.map(color => ({
     name: color.name,
     lightness: (color.lightness * 100).toFixed(2),
     chroma: color.chroma.toFixed(4),
@@ -31,7 +31,11 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
   return (
     <div className="space-y-8">
       {colorFamily && (
-        <h3 className="text-2xl font-bold">{colorFamily} Color Family</h3>
+        <h3 className="text-2xl font-bold">
+          {colorFamily}
+          {' '}
+          Color Family
+        </h3>
       )}
 
       {/* Lightness Chart */}
@@ -41,7 +45,7 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-            <YAxis domain={[0, 100]} label={{ value: "Lightness (%)", angle: -90, position: "insideLeft" }} />
+            <YAxis domain={[0, 100]} label={{ value: 'Lightness (%)', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
             <Legend />
             <Line
@@ -62,7 +66,7 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
           <BarChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-            <YAxis label={{ value: "Chroma", angle: -90, position: "insideLeft" }} />
+            <YAxis label={{ value: 'Chroma', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
             <Legend />
             <Bar dataKey="chroma" fill="#82ca9d" />
@@ -77,7 +81,7 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
           <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" angle={-45} textAnchor="end" height={100} />
-            <YAxis domain={[0, 360]} label={{ value: "Hue (degrees)", angle: -90, position: "insideLeft" }} />
+            <YAxis domain={[0, 360]} label={{ value: 'Hue (degrees)', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
             <Legend />
             <Line
@@ -95,7 +99,7 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h4 className="text-lg font-semibold mb-4">Color Swatches</h4>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {colors.map((color) => (
+          {colors.map(color => (
             <div key={color.name} className="space-y-2">
               <div
                 className="w-full h-24 rounded-lg border-2 border-gray-300"
@@ -105,7 +109,10 @@ export function ColorAnalysisCharts({ colors, colorFamily }: ColorAnalysisCharts
                 <div className="font-semibold">{color.name}</div>
                 <div className="text-gray-600 font-mono text-xs">{color.hex}</div>
                 <div className="text-gray-500 text-xs">
-                  L: {(color.lightness * 100).toFixed(0)}%
+                  L:
+                  {' '}
+                  {(color.lightness * 100).toFixed(0)}
+                  %
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   LineChart,
   Line,
@@ -11,35 +11,34 @@ import {
   ScatterChart,
   Scatter,
   ZAxis,
-} from "recharts";
-import type { ColorInfo } from "~/lib/utils/colorAnalysis";
+} from 'recharts';
+import type { ColorInfo } from '~/lib/utils/colorAnalysis';
 
 interface UnifiedColorChartsProps {
-  colorsByFamily: Record<string, ColorInfo[]>;
+  colorsByFamily: Record<string, ColorInfo[]>
 }
 
 // Color palette for different families
 const familyColors: Record<string, string> = {
-  gray: "#6B7280",
-  red: "#EF4444",
-  orange: "#F97316",
-  yellow: "#EAB308",
-  chartreuse: "#84CC16",
-  celery: "#22C55E",
-  green: "#10B981",
-  cyan: "#06B6D4",
-  seafoam: "#14B8A6",
-  blue: "#3B82F6",
-  indigo: "#6366F1",
-  purple: "#A855F7",
-  fuchsia: "#D946EF",
-  magenta: "#EC4899",
+  gray: '#6B7280',
+  red: '#EF4444',
+  orange: '#F97316',
+  yellow: '#EAB308',
+  chartreuse: '#84CC16',
+  celery: '#22C55E',
+  green: '#10B981',
+  cyan: '#06B6D4',
+  seafoam: '#14B8A6',
+  blue: '#3B82F6',
+  indigo: '#6366F1',
+  purple: '#A855F7',
+  fuchsia: '#D946EF',
+  magenta: '#EC4899',
 };
 
 export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) {
-
   // Group by shade index for comparison
-  const maxShades = Math.max(...Object.values(colorsByFamily).map((c) => c.length));
+  const maxShades = Math.max(...Object.values(colorsByFamily).map(c => c.length));
   const shadeComparisonData = Array.from({ length: maxShades }, (_, index) => {
     const dataPoint: Record<string, string | number> = { shade: index.toString() };
     Object.entries(colorsByFamily).forEach(([family, colors]) => {
@@ -66,20 +65,20 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="shade"
-              label={{ value: "색상 단계", position: "insideBottom", offset: -5 }}
+              label={{ value: '색상 단계', position: 'insideBottom', offset: -5 }}
             />
             <YAxis
               domain={[0, 100]}
-              label={{ value: "명도 (%)", angle: -90, position: "insideLeft" }}
+              label={{ value: '명도 (%)', angle: -90, position: 'insideLeft' }}
             />
             <Tooltip />
             <Legend />
-            {Object.keys(colorsByFamily).map((family) => (
+            {Object.keys(colorsByFamily).map(family => (
               <Line
                 key={family}
                 type="monotone"
                 dataKey={`${family}-lightness`}
-                stroke={familyColors[family] || "#666"}
+                stroke={familyColors[family] || '#666'}
                 strokeWidth={2}
                 dot={{ r: 4 }}
                 name={family}
@@ -101,17 +100,17 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="shade"
-              label={{ value: "색상 단계", position: "insideBottom", offset: -5 }}
+              label={{ value: '색상 단계', position: 'insideBottom', offset: -5 }}
             />
-            <YAxis label={{ value: "채도", angle: -90, position: "insideLeft" }} />
+            <YAxis label={{ value: '채도', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
             <Legend />
-            {Object.keys(colorsByFamily).map((family) => (
+            {Object.keys(colorsByFamily).map(family => (
               <Line
                 key={family}
                 type="monotone"
                 dataKey={`${family}-chroma`}
-                stroke={familyColors[family] || "#666"}
+                stroke={familyColors[family] || '#666'}
                 strokeWidth={2}
                 dot={{ r: 4 }}
                 name={family}
@@ -135,17 +134,17 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
               type="number"
               dataKey="index"
               name="색상 단계"
-              label={{ value: "색상 단계", position: "insideBottom", offset: -5 }}
+              label={{ value: '색상 단계', position: 'insideBottom', offset: -5 }}
             />
             <YAxis
               type="number"
               dataKey="hue"
               name="Hue"
               domain={[0, 360]}
-              label={{ value: "Hue (도)", angle: -90, position: "insideLeft" }}
+              label={{ value: 'Hue (도)', angle: -90, position: 'insideLeft' }}
             />
             <ZAxis range={[60, 60]} />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Tooltip cursor={{ strokeDasharray: '3 3' }} />
             <Legend />
             {Object.entries(colorsByFamily).map(([family, colors]) => (
               <Scatter
@@ -156,7 +155,7 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
                   hue: c.hue ?? 0,
                   name: c.name,
                 }))}
-                fill={familyColors[family] || "#666"}
+                fill={familyColors[family] || '#666'}
               />
             ))}
           </ScatterChart>
@@ -170,7 +169,7 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
           <div key={family} className="mb-8">
             <h5 className="text-lg font-semibold mb-3 capitalize">{family}</h5>
             <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-10 gap-3">
-              {colors.map((color) => (
+              {colors.map(color => (
                 <div key={color.name} className="space-y-1">
                   <div
                     className="w-full h-16 rounded border-2 border-gray-200"
@@ -178,8 +177,11 @@ export function UnifiedColorCharts({ colorsByFamily }: UnifiedColorChartsProps) 
                     title={color.name}
                   />
                   <div className="text-xs text-center">
-                    <div className="font-mono text-gray-500">{color.name.split("-")[1]}</div>
-                    <div className="text-gray-400">L:{(color.lightness * 100).toFixed(0)}</div>
+                    <div className="font-mono text-gray-500">{color.name.split('-')[1]}</div>
+                    <div className="text-gray-400">
+                      L:
+                      {(color.lightness * 100).toFixed(0)}
+                    </div>
                   </div>
                 </div>
               ))}

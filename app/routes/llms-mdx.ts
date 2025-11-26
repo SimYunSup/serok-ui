@@ -3,7 +3,7 @@ import { llmSource } from '~/lib/source';
 import { getLLMText } from '~/lib/get-llm-text';
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const slugs = params['*'].split('/').filter((v) => v.length > 0);
+  const slugs = params['*'].split('/').filter(v => v.length > 0);
   const page = llmSource.getPage(slugs);
   if (!page) {
     return new Response('not found', { status: 404 });

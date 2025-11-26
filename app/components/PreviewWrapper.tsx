@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 
-
 interface PreviewWrapperProps {
-  children: ReactNode;
-  title?: string;
-  description?: string;
+  children: ReactNode
+  title?: string
+  description?: string
 }
 
 export function PreviewWrapper({

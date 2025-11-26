@@ -1,11 +1,11 @@
 /* type: registry:ui */
-import { Button as SpButton } from "@react-spectrum/button";
-import "./styles.css";
+import { Button as SpButton } from '@react-spectrum/button';
+import './styles.css';
 
 interface ButtonProps extends React.ComponentProps<typeof SpButton> {
-  variant: 'primary' | 'secondary' | 'accent' | 'negative';
-  size?: 's' | 'm' | 'l' | 'xl';
-  href?: string;
+  variant: 'primary' | 'secondary' | 'accent' | 'negative'
+  size?: 's' | 'm' | 'l' | 'xl'
+  href?: string
 }
 
 export function Button(props: ButtonProps) {

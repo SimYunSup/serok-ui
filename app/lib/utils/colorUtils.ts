@@ -1,5 +1,5 @@
-import { formatHex, formatCss, oklch, rgb } from "culori";
-import type { Oklch, Rgb } from "culori";
+import { oklch, rgb } from 'culori';
+import type { Oklch, Rgb } from 'culori';
 
 /**
  * Convert hex color to oklch format
@@ -14,7 +14,7 @@ export function hexToOklch(hex: string): string {
   // Format with 3 decimal places for readability
   const l = color.l.toFixed(3);
   const c = color.c.toFixed(3);
-  const h = color.h !== undefined ? color.h.toFixed(1) : "none";
+  const h = color.h !== undefined ? color.h.toFixed(1) : 'none';
   return `oklch(${l} ${c} ${h})`;
 }
 

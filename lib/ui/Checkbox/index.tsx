@@ -1,9 +1,9 @@
 /* type: registry:ui */
-import { Checkbox as SpCheckbox } from "@react-spectrum/checkbox";
-import "./styles.css";
+import { Checkbox as SpCheckbox } from '@react-spectrum/checkbox';
+import './styles.css';
 
-interface CheckboxProps extends Omit<React.ComponentProps<typeof SpCheckbox>, "emphasized"> {
-  variant: "default" | "accent" | "secondary";
+interface CheckboxProps extends Omit<React.ComponentProps<typeof SpCheckbox>, 'emphasized'> {
+  variant: 'default' | 'accent' | 'secondary'
 }
 
 export function Checkbox({
@@ -14,7 +14,7 @@ export function Checkbox({
     <SpCheckbox
       {...props}
       UNSAFE_className="serok-checkbox"
-      isEmphasized={variant !== "default"}
+      isEmphasized={variant !== 'default'}
       data-variant={variant}
     />
   );

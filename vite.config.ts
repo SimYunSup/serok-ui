@@ -17,6 +17,6 @@ export default defineConfig({
       '@adobe/react-spectrum',
       /^@react-spectrum\/.*/,
       /^@spectrum-icons\/.*/,
-    ]
-  }
+    ],
+  },
 });

@@ -12,8 +12,6 @@ import type { Route } from './+types/root';
 import './app.css';
 import { SerokProvider } from '@/lib/ui/Provider';
 
-
-
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
@@ -28,7 +26,7 @@ export const links: Route.LinksFunction = () => [
   {
     rel: 'stylesheet',
     href: 'https://unpkg.com/pretendard@1.3.9/dist/web/static/pretendard.css',
-  }
+  },
 ];
 
 function useColorScheme() {
@@ -37,7 +35,7 @@ function useColorScheme() {
   React.useEffect(() => {
     requestAnimationFrame(() => {
       setColorScheme(
-        document.documentElement.style.colorScheme === 'dark' ? 'dark' : 'light'
+        document.documentElement.style.colorScheme === 'dark' ? 'dark' : 'light',
       );
     });
     const mutationObserver = new MutationObserver(() => {
@@ -92,11 +90,12 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   if (isRouteErrorResponse(error)) {
     message = error.status === 404 ? '404' : 'Error';
-    details =
-      error.status === 404
+    details
+      = error.status === 404
         ? 'The requested page could not be found.'
         : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
+  }
+  else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
   }

@@ -1,21 +1,21 @@
-import { contrast } from "@adobe/leonardo-contrast-colors";
-import { hexToOklchObject, hexToRgb } from "~/lib/utils/colorUtils";
-import type { Oklch } from "culori";
+import { contrast } from '@adobe/leonardo-contrast-colors';
+import { hexToOklchObject, hexToRgb } from '~/lib/utils/colorUtils';
+import type { Oklch } from 'culori';
 
 export interface ColorInfo {
-  name: string;
-  hex: string;
-  oklch: Oklch;
-  lightness: number;
-  chroma: number;
-  hue: number | undefined;
+  name: string
+  hex: string
+  oklch: Oklch
+  lightness: number
+  chroma: number
+  hue: number | undefined
 }
 
 export interface ContrastInfo {
-  foreground: string;
-  background: string;
-  apca: number;
-  passes: boolean;
+  foreground: string
+  background: string
+  apca: number
+  passes: boolean
 }
 
 /**
@@ -56,7 +56,7 @@ export function calculateAPCA(foreground: string, background: string): number {
   ];
 
   // Leonardo's contrast function with 'wcag3' calculates APCA
-  const apcaValue = contrast(fgArray, bgArray, undefined, "wcag3");
+  const apcaValue = contrast(fgArray, bgArray, undefined, 'wcag3');
   return Math.abs(apcaValue);
 }
 
@@ -68,12 +68,12 @@ export function calculateAPCA(foreground: string, background: string): number {
  */
 export function passesAPCA(
   contrast: number,
-  level: "body-text" | "large-text" | "ui" = "body-text"
+  level: 'body-text' | 'large-text' | 'ui' = 'body-text',
 ): boolean {
   const thresholds = {
-    "body-text": 75,
-    "large-text": 60,
-    ui: 45,
+    'body-text': 75,
+    'large-text': 60,
+    'ui': 45,
   };
   return Math.abs(contrast) >= thresholds[level];
 }
@@ -84,7 +84,7 @@ export function passesAPCA(
 export function analyzeContrast(
   foreground: string,
   background: string,
-  level: "body-text" | "large-text" | "ui" = "body-text"
+  level: 'body-text' | 'large-text' | 'ui' = 'body-text',
 ): ContrastInfo {
   const apca = calculateAPCA(foreground, background);
   return {
@@ -118,7 +118,7 @@ export function groupColorsByFamily(colors: ColorInfo[]): Record<string, ColorIn
   const grouped: Record<string, ColorInfo[]> = {};
 
   for (const color of colors) {
-    const [family] = color.name.split("-");
+    const [family] = color.name.split('-');
     if (!grouped[family]) {
       grouped[family] = [];
     }
