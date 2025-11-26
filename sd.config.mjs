@@ -50,7 +50,7 @@ export default {
     css: {
       transformGroup: 'css',
       transforms: ['name/serok-kebab', 'color/oklch'],
-      buildPath: 'lib/styles/',
+      buildPath: 'lib/style/',
       files: [
         {
           destination: 'serok.css',
