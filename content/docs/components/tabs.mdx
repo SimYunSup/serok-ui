@@ -58,7 +58,7 @@ export function MyComponent() {
 ### Tabs Props
 
 | Prop | Type | 필수 | 기본값 | 설명 |
-|------|------|------|-------|------|
+| ------ | ------ | ------ | ------- | ------ |
 | `selectedKey` | `Key` | No | — | 제어된 선택 탭의 키 |
 | `defaultSelectedKey` | `Key` | No | — | 비제어 초기 선택 탭의 키 |
 | `onSelectionChange` | `(key: Key) => void` | No | — | 선택된 탭이 변경될 때 호출됨 |
@@ -78,7 +78,7 @@ export function MyComponent() {
 ### TabItem Props
 
 | Prop | Type | 필수 | 설명 |
-|------|------|------|------|
+| ------ | ------ | ------ | ------ |
 | `key` | `Key` | Yes | 탭/패널의 고유 식별자 |
 | `textValue` | `string` | No | 탭의 텍스트 표현 (접근성용) |
 | `children` | `ReactNode` | Yes | 탭 레이블 또는 패널 콘텐츠 |
@@ -88,7 +88,7 @@ export function MyComponent() {
 ### 방향
 
 | 방향 | Props | 사용 사례 |
-|------|-------|---------|
+| ------ | ------- | --------- |
 | 수평 | `orientation="horizontal"` | 기본, 탭이 상단에 가로로 배치 |
 | 수직 | `orientation="vertical"` | 사이드바 스타일, 탭이 측면에 세로로 배치 |
 
@@ -381,7 +381,7 @@ export function DynamicExample() {
 ### 키보드 지원
 
 | 키 | 동작 |
-|----|------|
+| ---- | ------ |
 | `Tab` | 탭 목록으로 포커스 이동 또는 다음 요소로 이동 |
 | `Arrow Left/Right` | 수평 방향에서 이전/다음 탭으로 이동 |
 | `Arrow Up/Down` | 수직 방향에서 이전/다음 탭으로 이동 |
