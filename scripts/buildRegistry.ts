@@ -14,10 +14,6 @@ const LIB_FOLDER = 'lib'; // 라이브러리 소스 파일이 있는 디렉토�
 const libDirectory = path.join(cwd, LIB_FOLDER);
 const OUTPUT_FILE = path.join(cwd, 'registry.json');
 
-interface ComponentFile {
-  path: string
-  type: string
-}
 // 최종 registry.json의 items 배열에 들어갈 항목의 구조
 interface RegistryItemEntry {
   name: string // 컴포넌트 이름 (소문자)
@@ -27,7 +23,7 @@ interface RegistryItemEntry {
   dependencies?: string[] // 외부 의존성 목록
   registryDependencies?: string[]
   css?: Record<string, any> // CSS 내용 (스타일 블록)
-  files: ComponentFile[]
+  files: Omit<RegistryItemEntry, 'files' | 'dependencies' | 'registryDependencies'>[]
 }
 
 const types = ['block', 'ui', 'lib', 'component', 'hook', 'file', 'style'] as const;
@@ -271,7 +267,7 @@ try {
             const dependencies = extractDependenciesFromCSS(content);
             const relativePath = path.relative(cwd, filePath).replace('lib/', '');
             fileData.push({
-              path: relativePath,
+              css: transformCssToJson(content),
               type: fileType ? `registry:${fileType}` : 'registry:component',
             });
             dependencies.forEach((dep) => {

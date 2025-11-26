@@ -1,6 +1,4 @@
-/* type: registry:ui
- * registryDependenies: ["menu"]
- */
+/* type: registry:ui */
 import { Picker as SpPicker } from '@react-spectrum/picker';
 import './styles.css';
 
