@@ -241,6 +241,31 @@ export function VerticalExample() {
 
 특정 탭을 비활성화하는 방법입니다.
 
+
+<PreviewWrapper>
+<Tabs disabledKeys={['premium', 'enterprise']}>
+      <TabList>
+        <TabItem key="free">무료</TabItem>
+        <TabItem key="premium">프리미엄</TabItem>
+        <TabItem key="enterprise">엔터프라이즈</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="free">
+          <h3>무료 플랜</h3>
+          <p>기본 기능에 액세스할 수 있습니다.</p>
+        </TabItem>
+        <TabItem key="premium">
+          <h3>프리미엄 플랜</h3>
+          <p>고급 기능 및 우선 지원이 제공됩니다.</p>
+        </TabItem>
+        <TabItem key="enterprise">
+          <h3>엔터프라이즈 플랜</h3>
+          <p>전체 기능 및 전담 지원이 포함됩니다.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+</PreviewWrapper>
+
 ```tsx
 import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
 
@@ -274,6 +299,23 @@ export function DisabledExample() {
 ### 컴팩트 밀도
 
 더 작은 간격의 컴팩트 탭입니다.
+
+<PreviewWrapper>
+<Tabs density="compact">
+      <TabList>
+        <TabItem key="dashboard">대시보드</TabItem>
+        <TabItem key="analytics">분석</TabItem>
+        <TabItem key="reports">보고서</TabItem>
+        <TabItem key="exports">내보내기</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="dashboard">대시보드 콘텐츠</TabItem>
+        <TabItem key="analytics">분석 콘텐츠</TabItem>
+        <TabItem key="reports">보고서 콘텐츠</TabItem>
+        <TabItem key="exports">내보내기 콘텐츠</TabItem>
+      </TabPanels>
+    </Tabs>
+</PreviewWrapper>
 
 ```tsx
 import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
@@ -363,8 +405,3 @@ export function DynamicExample() {
 - **React Spectrum 기반**: Yes (@react-spectrum/tabs)
 - **CSS 커스터마이징 가능**: Yes
 - **테스트**: `data-testid="tabs"` 사용
-
----
-
-**마지막 업데이트**: 2025-11-05
-**상태**: ✅ 완료 및 LLM 최적화됨
