@@ -1,6 +1,6 @@
 /* type: registry:ui */
-import { TextField as SpTextField } from "@react-spectrum/textfield";
-import "./styles.css";
+import { TextField as SpTextField } from '@react-spectrum/textfield';
+import './styles.css';
 
 interface InputProps extends React.ComponentProps<typeof SpTextField> { }
 

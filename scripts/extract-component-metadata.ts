@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Component Documentation Metadata Extractor
  *
@@ -17,22 +17,22 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 interface PropMetadata {
-  name: string;
-  type: string;
-  required: boolean;
-  default: string | null;
-  description: string;
+  name: string
+  type: string
+  required: boolean
+  default: string | null
+  description: string
 }
 
 interface ComponentMetadata {
-  name: string;
-  title: string;
-  path: string;
-  description: string;
-  props: PropMetadata[];
-  examples: { title: string; count: number }[];
-  sections: string[];
-  frontmatter: Record<string, any>;
+  name: string
+  title: string
+  path: string
+  description: string
+  props: PropMetadata[]
+  examples: { title: string, count: number }[]
+  sections: string[]
+  frontmatter: Record<string, any>
 }
 
 const DOCS_DIR = 'content/docs/components';
@@ -46,7 +46,7 @@ const colors = {
 /**
  * Parse YAML frontmatter from markdown content
  */
-function parseFrontmatter(content: string): { frontmatter: Record<string, any>; content: string } {
+function parseFrontmatter(content: string): { frontmatter: Record<string, any>, content: string } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
 
   if (!match) {
@@ -91,10 +91,10 @@ function extractProps(content: string): PropMetadata[] {
   }
 
   const tableContent = tableMatch[1];
-  const rows = tableContent.split('\n').filter((row) => row.startsWith('|'));
+  const rows = tableContent.split('\n').filter(row => row.startsWith('|'));
 
   rows.forEach((row) => {
-    const cells = row.split('|').map((cell) => cell.trim()).filter(Boolean);
+    const cells = row.split('|').map(cell => cell.trim()).filter(Boolean);
 
     if (cells.length === 5) {
       const [name, type, required, defaultVal, description] = cells;
@@ -115,8 +115,8 @@ function extractProps(content: string): PropMetadata[] {
 /**
  * Extract examples from markdown content
  */
-function extractExamples(content: string): { title: string; count: number }[] {
-  const examples: { title: string; count: number }[] = [];
+function extractExamples(content: string): { title: string, count: number }[] {
+  const examples: { title: string, count: number }[] = [];
 
   // Find all example sections (### Example Title)
   const exampleMatches = content.matchAll(/### (.+?)\n/g);
@@ -177,7 +177,8 @@ function extractComponentMetadata(filePath: string): ComponentMetadata | null {
       sections,
       frontmatter,
     };
-  } catch (error) {
+  }
+  catch (error) {
     console.error(
       `${colors.red}✗${colors.reset} Error processing ${filePath}:`,
       error instanceof Error ? error.message : String(error),
@@ -197,7 +198,7 @@ function extractAllComponentMetadata(): ComponentMetadata[] {
     process.exit(1);
   }
 
-  const files = fs.readdirSync(DOCS_DIR).filter((file) => file.endsWith('.mdx'));
+  const files = fs.readdirSync(DOCS_DIR).filter(file => file.endsWith('.mdx'));
 
   if (files.length === 0) {
     console.warn(`${colors.yellow}⚠${colors.reset} No component documentation files found in ${DOCS_DIR}`);
@@ -224,7 +225,7 @@ function generateReport(metadata: ComponentMetadata[]): void {
   console.log(`Total components: ${metadata.length}`);
 
   if (metadata.length > 0) {
-    console.log(`\nDocumented Components:`);
+    console.log('\nDocumented Components:');
     metadata.forEach((comp) => {
       const propCount = comp.props.length;
       const exampleCount = comp.examples.length;
@@ -263,7 +264,8 @@ function main(): void {
     if (componentMetadata) {
       metadata = [componentMetadata];
     }
-  } else {
+  }
+  else {
     // Extract metadata for all components
     metadata = extractAllComponentMetadata();
   }

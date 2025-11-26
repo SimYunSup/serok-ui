@@ -1,8 +1,8 @@
-import { UnifiedColorCharts } from "~/components/ColorPalette/UnifiedColorCharts";
-import { IntegratedAPCATable } from "~/components/ColorPalette/IntegratedAPCATable";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
-import { analyzeColorTokens, groupColorsByFamily } from "~/lib/utils/colorAnalysis";
-import colorTokens from "../../../tokens/colors.json";
+import { UnifiedColorCharts } from '~/components/ColorPalette/UnifiedColorCharts';
+import { IntegratedAPCATable } from '~/components/ColorPalette/IntegratedAPCATable';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { analyzeColorTokens, groupColorsByFamily } from '~/lib/utils/colorAnalysis';
+import colorTokens from '../../../tokens/colors.json';
 
 // Analyze all color tokens
 const allColors = analyzeColorTokens(colorTokens);
@@ -12,7 +12,6 @@ const colorsByFamily = groupColorsByFamily(allColors);
 const colorFamilies = Object.keys(colorsByFamily).sort();
 
 export default function ColorsPage() {
-
   return (
     <div className="min-h-screen px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

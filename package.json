@@ -16,7 +16,7 @@
     "build:registry": "tsx ./scripts/buildRegistry.ts",
     "build:sd": "style-dictionary build --config ./sd.config.mjs",
     "clean:sd": "style-dictionary clean --config ./sd.config.mjs",
-    "lint": "pnpm --filter @serok-ui/library lint",
+    "lint": "eslint -c eslint.config.mjs",
     "docs:lint": "markdownlint --config .markdownlintrc.json content/docs/components/*.mdx"
   },
   "dependencies": {

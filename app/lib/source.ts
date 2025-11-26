@@ -8,4 +8,4 @@ export const source = loader({
 export const llmSource = loader({
   source: llmDocs.toFumadocsSource(),
   baseUrl: '/llms.mdx',
-})
+});

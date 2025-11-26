@@ -1,10 +1,9 @@
-import type { Route } from './+types/home';
 import { HomeLayout } from 'fumadocs-ui/layouts/home';
 import { Link } from 'react-router';
 import { baseOptions } from '~/lib/layout.shared';
 import { Button } from '@/lib/ui/Button';
 
-export function meta({ }: Route.MetaArgs) {
+export function meta() {
   return [
     { title: 'Serok UI - 현대적인 컴포넌트 라이브러리' },
     { name: 'description', content: 'React Spectrum 기반의 접근성 있고 아름다운 컴포넌트 라이브러리' },
@@ -55,7 +54,7 @@ export default function Home() {
                 variant="accent"
                 size="l"
                 style="fill"
-                href={`/docs/start/install`}
+                href="/docs/start/install"
               >
                 시작하기 →
               </Button>
@@ -64,7 +63,7 @@ export default function Home() {
                 variant="secondary"
                 size="l"
                 style="fill"
-                href={`/docs/components/button`}
+                href="/docs/components/button"
               >
                 컴포넌트 보기
               </Button>
@@ -72,15 +71,21 @@ export default function Home() {
 
             <div className="flex flex-wrap justify-center gap-6 pt-8">
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">React Spectrum 기반</span> 컴포넌트
+                <span className="font-semibold text-gray-900 dark:text-gray-100">React Spectrum 기반</span>
+                {' '}
+                컴포넌트
               </div>
               <div className="w-px bg-gray-200 dark:bg-gray-700" />
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">완전한</span> TypeScript 지원
+                <span className="font-semibold text-gray-900 dark:text-gray-100">완전한</span>
+                {' '}
+                TypeScript 지원
               </div>
               <div className="w-px bg-gray-200 dark:bg-gray-700" />
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-gray-900 dark:text-gray-100">WCAG 2.1</span> 준수
+                <span className="font-semibold text-gray-900 dark:text-gray-100">WCAG 2.1</span>
+                {' '}
+                준수
               </div>
             </div>
           </div>
@@ -146,7 +151,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              {components.map((component) => (
+              {components.map(component => (
                 <Link
                   key={component.name}
                   to={`/docs/components/${component.name.toLowerCase()}`}
@@ -182,7 +187,9 @@ export default function Home() {
                 <button className="text-xs font-semibold text-gray-400 hover:text-gray-300">복사</button>
               </div>
               <code className="text-sm text-green-400 font-mono">
-                npx shadcn@latest add <span className="text-blue-400">https://serok.ethansup.net/r/provider.json</span>
+                npx shadcn@latest add
+                {' '}
+                <span className="text-blue-400">https://serok.ethansup.net/r/provider.json</span>
               </code>
             </div>
 
@@ -192,7 +199,7 @@ export default function Home() {
                 variant="accent"
                 size="l"
                 style="outline"
-                href={`/docs/start/install`}
+                href="/docs/start/install"
               >
                 설치 가이드 읽기
               </Button>

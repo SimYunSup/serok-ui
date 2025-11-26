@@ -18,7 +18,6 @@ export const llmDocs = defineDocs({
   },
 });
 
-
 export default defineConfig({
   mdxOptions: {
     remarkImageOptions: {

@@ -1,9 +1,9 @@
 /* type: registry:ui */
-import { Switch as SpSwitch } from "@react-spectrum/switch";
-import "./styles.css";
+import { Switch as SpSwitch } from '@react-spectrum/switch';
+import './styles.css';
 
-interface SwitchProps extends Omit<React.ComponentProps<typeof SpSwitch>, "isEmphasized"> {
-  variant: "default" | "accent" | "secondary";
+interface SwitchProps extends Omit<React.ComponentProps<typeof SpSwitch>, 'isEmphasized'> {
+  variant: 'default' | 'accent' | 'secondary'
 }
 
 export function Switch({
@@ -13,7 +13,7 @@ export function Switch({
   return (
     <SpSwitch
       {...props}
-      isEmphasized={variant !== "default"}
+      isEmphasized={variant !== 'default'}
       data-variant={variant}
     />
   );

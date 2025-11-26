@@ -58,7 +58,7 @@ export function MyComponent() {
 ### Tabs Props
 
 | Prop | Type | 필수 | 기본값 | 설명 |
-|------|------|------|-------|------|
+| ------ | ------ | ------ | ------- | ------ |
 | `selectedKey` | `Key` | No | — | 제어된 선택 탭의 키 |
 | `defaultSelectedKey` | `Key` | No | — | 비제어 초기 선택 탭의 키 |
 | `onSelectionChange` | `(key: Key) => void` | No | — | 선택된 탭이 변경될 때 호출됨 |
@@ -78,7 +78,7 @@ export function MyComponent() {
 ### TabItem Props
 
 | Prop | Type | 필수 | 설명 |
-|------|------|------|------|
+| ------ | ------ | ------ | ------ |
 | `key` | `Key` | Yes | 탭/패널의 고유 식별자 |
 | `textValue` | `string` | No | 탭의 텍스트 표현 (접근성용) |
 | `children` | `ReactNode` | Yes | 탭 레이블 또는 패널 콘텐츠 |
@@ -88,7 +88,7 @@ export function MyComponent() {
 ### 방향
 
 | 방향 | Props | 사용 사례 |
-|------|-------|---------|
+| ------ | ------- | --------- |
 | 수평 | `orientation="horizontal"` | 기본, 탭이 상단에 가로로 배치 |
 | 수직 | `orientation="vertical"` | 사이드바 스타일, 탭이 측면에 세로로 배치 |
 
@@ -241,6 +241,31 @@ export function VerticalExample() {
 
 특정 탭을 비활성화하는 방법입니다.
 
+
+<PreviewWrapper>
+<Tabs disabledKeys={['premium', 'enterprise']}>
+      <TabList>
+        <TabItem key="free">무료</TabItem>
+        <TabItem key="premium">프리미엄</TabItem>
+        <TabItem key="enterprise">엔터프라이즈</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="free">
+          <h3>무료 플랜</h3>
+          <p>기본 기능에 액세스할 수 있습니다.</p>
+        </TabItem>
+        <TabItem key="premium">
+          <h3>프리미엄 플랜</h3>
+          <p>고급 기능 및 우선 지원이 제공됩니다.</p>
+        </TabItem>
+        <TabItem key="enterprise">
+          <h3>엔터프라이즈 플랜</h3>
+          <p>전체 기능 및 전담 지원이 포함됩니다.</p>
+        </TabItem>
+      </TabPanels>
+    </Tabs>
+</PreviewWrapper>
+
 ```tsx
 import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
 
@@ -274,6 +299,23 @@ export function DisabledExample() {
 ### 컴팩트 밀도
 
 더 작은 간격의 컴팩트 탭입니다.
+
+<PreviewWrapper>
+<Tabs density="compact">
+      <TabList>
+        <TabItem key="dashboard">대시보드</TabItem>
+        <TabItem key="analytics">분석</TabItem>
+        <TabItem key="reports">보고서</TabItem>
+        <TabItem key="exports">내보내기</TabItem>
+      </TabList>
+      <TabPanels>
+        <TabItem key="dashboard">대시보드 콘텐츠</TabItem>
+        <TabItem key="analytics">분석 콘텐츠</TabItem>
+        <TabItem key="reports">보고서 콘텐츠</TabItem>
+        <TabItem key="exports">내보내기 콘텐츠</TabItem>
+      </TabPanels>
+    </Tabs>
+</PreviewWrapper>
 
 ```tsx
 import { Tabs, TabList, TabPanels, TabItem } from '@/components/ui/Tabs';
@@ -339,7 +381,7 @@ export function DynamicExample() {
 ### 키보드 지원
 
 | 키 | 동작 |
-|----|------|
+| ---- | ------ |
 | `Tab` | 탭 목록으로 포커스 이동 또는 다음 요소로 이동 |
 | `Arrow Left/Right` | 수평 방향에서 이전/다음 탭으로 이동 |
 | `Arrow Up/Down` | 수직 방향에서 이전/다음 탭으로 이동 |
@@ -363,8 +405,3 @@ export function DynamicExample() {
 - **React Spectrum 기반**: Yes (@react-spectrum/tabs)
 - **CSS 커스터마이징 가능**: Yes
 - **테스트**: `data-testid="tabs"` 사용
-
----
-
-**마지막 업데이트**: 2025-11-05
-**상태**: ✅ 완료 및 LLM 최적화됨
