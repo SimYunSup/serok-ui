@@ -13,9 +13,9 @@
     "typecheck": "react-router typegen && tsc",
     "postinstall": "react-router typegen",
     "build:shadcn": "shadcn build ../registry.json --output=../public/r/ --cwd=./lib",
-    "build:registry": "tsx ./scripts/buildRegistry.ts",
-    "build:sd": "style-dictionary build --config ./sd.config.mjs",
-    "clean:sd": "style-dictionary clean --config ./sd.config.mjs",
+    "build:registry": "node --import tsx/esm --env-file=.env ./scripts/buildRegistry.ts",
+    "build:sd": "node --import tsx/esm node_modules/style-dictionary/bin/style-dictionary.js build --config ./sd.config.mjs",
+    "clean:sd": "node --import tsx/esm node_modules/style-dictionary/bin/style-dictionary.js clean --config ./sd.config.mjs",
     "lint": "eslint -c eslint.config.mjs",
     "docs:lint": "markdownlint --config .markdownlintrc.json content/docs/components/*.mdx"
   },
