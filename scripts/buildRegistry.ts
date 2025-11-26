@@ -12,6 +12,7 @@ const LIB_FOLDER = 'lib'; // 라이브러리 소스 파일이 있는 디렉토�
 
 const libDirectory = path.join(cwd, LIB_FOLDER);
 const OUTPUT_FILE = path.join(cwd, 'registry.json');
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
 
 interface ComponentFile {
   path: string
@@ -249,24 +250,24 @@ try {
         const externalDependencies = new Set<string>();
         const registryDependencies = new Set<string>();
         for (const file of files) {
-          if (file.name === 'index.tsx' || file.name === 'index.ts') {
-            const filePath = path.join(componentPath, file.name);
-            const content = await fs.readFile(filePath, 'utf-8');
-            const registryDepsMatch = content.match(
-              /\/\*[\s\S]*registryDependencies:\s*\[([^\]]*)\][\s\S]*?\*\//,
-            );
-            if (registryDepsMatch) {
-              const depsArray = registryDepsMatch[1]
-                .split(',')
-                .map(dep => dep.trim().replace(/['"]/g, ''))
-                .filter(dep => dep.length > 0);
-              depsArray.forEach(dep => registryDependencies.add(`${process.env.BASE_URL}/r/${dep}.json`));
-            }
-          }
           if (file.isFile() && (file.name.endsWith('.ts') || file.name.endsWith('.tsx'))) {
             const filePath = path.join(componentPath, file.name);
             const content = await fs.readFile(filePath, 'utf-8');
-            const fileType = content.match(/\/\*[\s\S]*registry:([a-z]*)[\s\S]*?\*\//)?.[1];
+
+            if (file.name === 'index.tsx' || file.name === 'index.ts') {
+              const registryDepsMatch = content.match(
+                /\/\*[\s\S]*?registryDependencies:\s*\[([^\]]*)\][\s\S]*?\*\//,
+              );
+              if (registryDepsMatch) {
+                const depsArray = registryDepsMatch[1]
+                  .split(',')
+                  .map(dep => dep.trim().replace(/['"]/g, ''))
+                  .filter(dep => dep.length > 0);
+                depsArray.forEach(dep => registryDependencies.add(`${BASE_URL}/r/${dep}.json`));
+              }
+            }
+
+            const fileType = content.match(/\/\*[\s\S]*?registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromJS(content);
             const relativePath = path.relative(cwd, filePath).replace('lib/', '');
             fileData.push({
