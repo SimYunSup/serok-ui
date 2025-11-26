@@ -59,7 +59,7 @@ jobs:
           # Build shadcn components and Storybook
           pnpm build:shadcn
           pnpm build:docs
-        environment:
+        env:
           BASE_URL: ${{ secrets.BASE_URL }}
 
       - name: Upload artifact
