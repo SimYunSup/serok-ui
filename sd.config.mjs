@@ -40,7 +40,7 @@ StyleDictionary.registerFormat({
       .map(p => `    --${p.name}: ${p.value};`)
       .join('\n');
 
-    return ['/* registry:ui */', '@layer serok {', '  :root {', body, '  }', '}', ''].join('\n');
+    return ['@layer serok {', '  :root {', body, '  }', '}', ''].join('\n');
   },
 });
 
@@ -50,10 +50,10 @@ export default {
     css: {
       transformGroup: 'css',
       transforms: ['name/serok-kebab', 'color/oklch'],
-      buildPath: 'lib/ui/Provider/',
+      buildPath: 'lib/style/',
       files: [
         {
-          destination: 'colors.css',
+          destination: 'serok.css',
           format: 'css/color-variables',
         },
       ],

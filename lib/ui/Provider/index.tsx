@@ -1,7 +1,9 @@
-/* type: registry:ui */
+/* type: registry:ui
+  registryDependencies: ["serok"]
+*/
 import { Provider as SpProvider } from '@react-spectrum/provider';
 import { theme } from '@react-spectrum/theme-default';
-import './serok.css';
+import './style.css';
 
 export function SerokProvider(props: React.ComponentProps<typeof SpProvider>) {
   return (

@@ -1,7 +1,5 @@
 /* type: registry:ui */
 
-@import "./colors.css";
-
 :root .serok-provider.serok-provider {
   & * {
     font-family: var(--spectrum-sans-font-family-stack);

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // registry.json을 생성하는 스크립트
 // lib 폴더의 소스 파일을 직접 읽어 shadcn build 형식으로 생성합니다.
 
@@ -13,7 +12,12 @@ const LIB_FOLDER = 'lib'; // 라이브러리 소스 파일이 있는 디렉토�
 
 const libDirectory = path.join(cwd, LIB_FOLDER);
 const OUTPUT_FILE = path.join(cwd, 'registry.json');
+const BASE_URL = process.env.BASE_URL || 'http://localhost:5173';
 
+interface ComponentFile {
+  path: string
+  type: string
+}
 // 최종 registry.json의 items 배열에 들어갈 항목의 구조
 interface RegistryItemEntry {
   name: string // 컴포넌트 이름 (소문자)
@@ -23,7 +27,7 @@ interface RegistryItemEntry {
   dependencies?: string[] // 외부 의존성 목록
   registryDependencies?: string[]
   css?: Record<string, any> // CSS 내용 (스타일 블록)
-  files: Omit<RegistryItemEntry, 'files' | 'dependencies' | 'registryDependencies'>[]
+  files: ComponentFile[]
 }
 
 const types = ['block', 'ui', 'lib', 'component', 'hook', 'file', 'style'] as const;
@@ -244,12 +248,26 @@ try {
         const files = await fs.readdir(componentPath, { withFileTypes: true });
         const fileData: ComponentFile[] = [];
         const externalDependencies = new Set<string>();
-        const registryDependencies = new Set<string>(); // TODO: for ui / block.
+        const registryDependencies = new Set<string>();
         for (const file of files) {
           if (file.isFile() && (file.name.endsWith('.ts') || file.name.endsWith('.tsx'))) {
             const filePath = path.join(componentPath, file.name);
             const content = await fs.readFile(filePath, 'utf-8');
-            const fileType = content.match(/\/\*[\s\S]*registry:([a-z]*)[\s\S]*?\*\//)?.[1];
+
+            if (file.name === 'index.tsx' || file.name === 'index.ts') {
+              const registryDepsMatch = content.match(
+                /\/\*[\s\S]*?registryDependencies:\s*\[([^\]]*)\][\s\S]*?\*\//,
+              );
+              if (registryDepsMatch) {
+                const depsArray = registryDepsMatch[1]
+                  .split(',')
+                  .map(dep => dep.trim().replace(/['"]/g, ''))
+                  .filter(dep => dep.length > 0);
+                depsArray.forEach(dep => registryDependencies.add(`${BASE_URL}/r/${dep}.json`));
+              }
+            }
+
+            const fileType = content.match(/\/\*[\s\S]*?registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromJS(content);
             const relativePath = path.relative(cwd, filePath).replace('lib/', '');
             fileData.push({
@@ -267,7 +285,7 @@ try {
             const dependencies = extractDependenciesFromCSS(content);
             const relativePath = path.relative(cwd, filePath).replace('lib/', '');
             fileData.push({
-              css: transformCssToJson(content),
+              path: relativePath,
               type: fileType ? `registry:${fileType}` : 'registry:component',
             });
             dependencies.forEach((dep) => {
