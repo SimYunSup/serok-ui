@@ -311,26 +311,11 @@ export function CheckboxGroupExample() {
 
 ## CSS 커스터마이제이션
 
-### CSS 변수
+체크박스 컴포넌트는 CSS를 통해 스타일을 자유롭게 커스터마이징할 수 있습니다. **CSS 변수보다는 일반 CSS 속성을 직접 사용하는 것을 권장합니다.** 이 방법이 더 직관적이고 유지보수가 쉽습니다.
 
-체크박스는 다음과 같은 CSS 변수를 사용합니다:
+### 기본 CSS 커스터마이징
 
-```css
-/* 색상 변수 */
---serok-checkbox-color-default: #007bff;       /* 기본 색상 */
---serok-checkbox-color-accent: #ffc107;        /* 강조 색상 */
---serok-checkbox-color-secondary: #6c757d;     /* 보조 색상 */
-
-/* 상태별 설정 */
---serok-checkbox-opacity-disabled: 0.5;        /* 비활성 투명도 */
-
-/* 테두리 및 크기 */
---serok-checkbox-border-color: #d0d7de;        /* 테두리 색상 */
---serok-checkbox-border-radius: 0.25rem;       /* 테두리 반경 */
---serok-checkbox-size: 1.25rem;                /* 체크박스 크기 */
-```
-
-### CSS 변수로 스타일 커스터마이징
+`className`을 통해 체크박스에 커스텀 스타일을 적용할 수 있습니다:
 
 ```tsx
 import { Checkbox } from '@/components/ui/Checkbox';
@@ -343,8 +328,37 @@ export function CustomStyleExample() {
 
 ```css
 /* custom-checkbox-styles.css */
+.custom-accent input[type="checkbox"] {
+  accent-color: #e91e63;           /* 체크박스 강조 색상 */
+  width: 1.5rem;                   /* 체크박스 크기 */
+  height: 1.5rem;
+}
+
 .custom-accent {
-  --serok-checkbox-color-accent: #e91e63;      /* 분홍색으로 변경 */
+  color: #e91e63;                  /* 라벨 텍스트 색상 */
+  font-weight: 600;                /* 라벨 폰트 굵기 */
+}
+```
+
+### 인라인 스타일
+
+간단한 스타일 변경은 `style` 속성을 사용할 수도 있습니다:
+
+```tsx
+import { Checkbox } from '@/components/ui/Checkbox';
+
+export function InlineStyleExample() {
+  return (
+    <Checkbox
+      variant="default"
+      style={{
+        fontSize: '1.1rem',
+        fontWeight: 600
+      }}
+    >
+      중요한 옵션
+    </Checkbox>
+  );
 }
 ```
 
