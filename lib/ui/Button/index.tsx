@@ -4,7 +4,7 @@ import './styles.css';
 
 interface ButtonProps extends React.ComponentProps<typeof SpButton> {
   variant: 'primary' | 'secondary' | 'accent' | 'negative'
-  size?: 's' | 'm' | 'l' | 'xl'
+  size?: 's' | 'm' | 'l'
   href?: string
 }
 

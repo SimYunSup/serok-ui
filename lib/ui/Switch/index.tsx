@@ -13,6 +13,7 @@ export function Switch({
   return (
     <SpSwitch
       {...props}
+      UNSAFE_className="serok-switch"
       isEmphasized={variant !== 'default'}
       data-variant={variant}
     />
