@@ -53,11 +53,11 @@ export function MyComponent() {
 }
 ```
 
-## Props
+## Props (속성)
 
 ### Tabs Props
 
-| Prop | Type | 필수 | 기본값 | 설명 |
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
 | ------ | ------ | ------ | ------- | ------ |
 | `selectedKey` | `Key` | No | — | 제어된 선택 탭의 키 |
 | `defaultSelectedKey` | `Key` | No | — | 비제어 초기 선택 탭의 키 |
@@ -68,22 +68,15 @@ export function MyComponent() {
 | `density` | `"compact" \| "regular"` | No | `"regular"` | 탭 간격 밀도 |
 | `children` | `ReactNode` | Yes | — | TabList와 TabPanels 컴포넌트 |
 
-**추가 참고사항**:
-
-- 모든 props는 React Spectrum 명명 규칙을 따릅니다
-- Props는 대소문자를 구분합니다
-- 기본값은 코드에 나타나는 대로 정확하게 표시됩니다
-- React Spectrum의 `@react-spectrum/tabs` 컴포넌트의 모든 props를 확장합니다
-
 ### TabItem Props
 
-| Prop | Type | 필수 | 설명 |
+| 속성 | 타입 | 필수 | 설명 |
 | ------ | ------ | ------ | ------ |
 | `key` | `Key` | Yes | 탭/패널의 고유 식별자 |
 | `textValue` | `string` | No | 탭의 텍스트 표현 (접근성용) |
 | `children` | `ReactNode` | Yes | 탭 레이블 또는 패널 콘텐츠 |
 
-## 변형 & 상태
+## 변형 및 상태
 
 ### 방향
 
@@ -92,14 +85,40 @@ export function MyComponent() {
 | 수평 | `orientation="horizontal"` | 기본, 탭이 상단에 가로로 배치 |
 | 수직 | `orientation="vertical"` | 사이드바 스타일, 탭이 측면에 세로로 배치 |
 
-### 동작 상태
+<PreviewWrapper>
+  <Tabs orientation="horizontal">
+    <TabList>
+      <TabItem key="tab1">수평 탭 1</TabItem>
+      <TabItem key="tab2">수평 탭 2</TabItem>
+    </TabList>
+    <TabPanels>
+      <TabItem key="tab1">수평 방향 콘텐츠 1</TabItem>
+      <TabItem key="tab2">수평 방향 콘텐츠 2</TabItem>
+    </TabPanels>
+  </Tabs>
+</PreviewWrapper>
+
+```tsx
+<Tabs orientation="horizontal">
+  <TabList>
+    <TabItem key="tab1">수평 탭 1</TabItem>
+    <TabItem key="tab2">수평 탭 2</TabItem>
+  </TabList>
+  <TabPanels>
+    <TabItem key="tab1">수평 방향 콘텐츠 1</TabItem>
+    <TabItem key="tab2">수평 방향 콘텐츠 2</TabItem>
+  </TabPanels>
+</Tabs>
+```
+
+### 상태 종류
 
 - **활성화됨**: 정상 상호작용 가능
 - **선택됨**: 현재 활성 탭 및 표시되는 패널
 - **비활성화됨** (`isDisabled={true}`): 모든 탭 상호작용 불가능
 - **부분 비활성화** (`disabledKeys={["key1", "key2"]}`): 특정 탭만 비활성화
 
-## 예제
+## 사용 예제
 
 ### 기본 사용법
 
@@ -376,32 +395,17 @@ export function DynamicExample() {
 }
 ```
 
-## 접근성
-
-### 키보드 지원
-
-| 키 | 동작 |
-| ---- | ------ |
-| `Tab` | 탭 목록으로 포커스 이동 또는 다음 요소로 이동 |
-| `Arrow Left/Right` | 수평 방향에서 이전/다음 탭으로 이동 |
-| `Arrow Up/Down` | 수직 방향에서 이전/다음 탭으로 이동 |
-| `Home` | 첫 번째 탭으로 이동 |
-| `End` | 마지막 탭으로 이동 |
-| `Enter` 또는 `Space` | 포커스된 탭 활성화 |
-
 ## API 참고
 
-포괄적인 props 문서는 [React Spectrum Tabs 문서](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
+자세한 Props 문서는 [React Spectrum Tabs 문서](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참조하세요.
 
-모든 props는 React Spectrum의 Tabs 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props)를 참고하세요.
-
----
+모든 Props는 React Spectrum의 Tabs 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Tabs Props](https://react-spectrum.adobe.com/react-spectrum/Tabs.html#props) 문서에서 확인하실 수 있습니다.
 
 ## 컴포넌트 정보
 
 - **소스**: `lib/ui/Tabs/index.tsx`
 - **스타일**: `lib/ui/Tabs/styles.css`
-- **내보내기**: `@/components/ui/Tabs`에서 명명 내보내기
-- **React Spectrum 기반**: Yes (@react-spectrum/tabs)
-- **CSS 커스터마이징 가능**: Yes
-- **테스트**: `data-testid="tabs"` 사용
+- **내보내기**: `@/components/ui/Tabs`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/tabs)
+- **CSS 커스터마이징**: 지원
+- **테스팅**: `data-testid="tabs"` 사용

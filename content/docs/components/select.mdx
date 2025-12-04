@@ -58,7 +58,25 @@ export function MyComponent() {
 | `isDisabled` | `boolean` | No | `false` | 특정 옵션 비활성화 여부 |
 | `textValue` | `string` | No | — | 검색/필터링용 텍스트 |
 
-## 상태 종류
+## 변형 및 상태
+
+<PreviewWrapper>
+  <Select label="옵션 선택">
+    <SelectItem key="opt1">옵션 1</SelectItem>
+    <SelectItem key="opt2">옵션 2</SelectItem>
+    <SelectItem key="opt3">옵션 3</SelectItem>
+  </Select>
+</PreviewWrapper>
+
+```tsx
+<Select label="옵션 선택">
+  <SelectItem key="opt1">옵션 1</SelectItem>
+  <SelectItem key="opt2">옵션 2</SelectItem>
+  <SelectItem key="opt3">옵션 3</SelectItem>
+</Select>
+```
+
+### 상태 종류
 
 - **활성 (Enabled)**: 정상적으로 선택 가능
 - **비활성 (Disabled)** (`isDisabled={true}`): 선택 불가, 회색 처리됨

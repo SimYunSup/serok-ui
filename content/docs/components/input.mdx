@@ -58,7 +58,27 @@ export function MyComponent() {
 | 전화번호 | `type="tel"` | 전화번호 입력 |
 | URL | `type="url"` | 웹 주소 입력 |
 
+<PreviewWrapper>
+  <Input label="텍스트" type="text" placeholder="일반 텍스트" />
+  <Input label="이메일" type="email" placeholder="email@example.com" />
+  <Input label="비밀번호" type="password" placeholder="비밀번호 입력" />
+</PreviewWrapper>
+
+```tsx
+<Input label="텍스트" type="text" placeholder="일반 텍스트" />
+<Input label="이메일" type="email" placeholder="email@example.com" />
+<Input label="비밀번호" type="password" placeholder="비밀번호 입력" />
+```
+
 ### 상태 종류
+
+<PreviewWrapper>
+  <Input label="텍스트" type="text" defaultValue="기본값" />
+  <Input label="비활성화됨" type="text" isDisabled defaultValue="기본값" />
+  <Input label="읽기전용" type="text" isReadOnly defaultValue="기본값" />
+  <Input label="유효성 검사 실패" type="text" isInvalid errorMessage="잘못된 입력입니다" defaultValue="기본값" />
+  <Input label="미니멀" type="text" isQuiet defaultValue="기본값" />
+</PreviewWrapper>
 
 - **활성 (Enabled)**: 정상적으로 입력 가능
 - **비활성 (Disabled)** (`isDisabled={true}`): 입력 불가, 회색 처리됨

@@ -30,7 +30,7 @@ export function MyComponent() {
 | 속성 | 타입 | 필수 | 기본값 | 설명 |
 | ------ | ------ | ------ | -------- | ------ |
 | `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | Yes | — | 버튼의 색상 스타일 |
-| `size` | `"s" \| "m" \| "l" \| "xl"` | No | `"m"` | 버튼 크기 (작음, 중간, 큼, 매우큼) |
+| `size` | `"s" \| "m" \| "l"` | No | `"m"` | 버튼 크기 (작음, 중간, 큼) |
 | `isDisabled` | `boolean` | No | `false` | 버튼 비활성화 여부 |
 | `isPending` | `boolean` | No | `false` | 로딩/대기 중 상태 표시 |
 | `onPress` | `(e: PressEvent) => void` | No | — | 버튼을 눌렀을 때 호출되는 함수 |
@@ -48,14 +48,39 @@ export function MyComponent() {
 | Accent (강조색) | `variant="accent"` | 주목을 끌어야 하는 보조 액션 |
 | Negative (부정색) | `variant="negative"` | 삭제, 취소 등 위험한 작업 |
 
+<PreviewWrapper>
+  <Button variant="primary">주색 버튼</Button>
+  <Button variant="secondary">보조색 버튼</Button>
+  <Button variant="accent">강조색 버튼</Button>
+  <Button variant="negative">부정색 버튼</Button>
+</PreviewWrapper>
+
+```tsx
+<Button variant="primary">주색 버튼</Button>
+<Button variant="secondary">보조색 버튼</Button>
+<Button variant="accent">강조색 버튼</Button>
+<Button variant="negative">부정색 버튼</Button>
+```
+
 ### 크기 옵션
 
 | 크기 | Props | 사용 사례 |
 | ------ | ------- | ---------- |
 | 작음 | `size="s"` | 좁은 공간, 인라인 액션, 툴바 |
 | 중간 | `size="m"` | 표준 버튼, 가장 흔한 사용 (기본값) |
-| 큼 | `size="l"` | 눈에 띄는 버튼, 모바일 친화적 |
-| 매우 큼 | `size="xl"` | 메인 CTA, 히어로 섹션 |
+| 큼 | `size="l"` | 눈에 띄는 버튼, 모바일 친화적, 메인 CTA |
+
+<PreviewWrapper>
+  <Button variant="primary" size="s">작음</Button>
+  <Button variant="primary" size="m">중간</Button>
+  <Button variant="primary" size="l">큼</Button>
+</PreviewWrapper>
+
+```tsx
+<Button variant="primary" size="s">작음</Button>
+<Button variant="primary" size="m">중간</Button>
+<Button variant="primary" size="l">큼</Button>
+```
 
 ### 상태 종류
 
@@ -99,7 +124,7 @@ export function VariantsExample() {
 
 ### 모든 크기
 
-4가지 크기를 보여주는 예제입니다.
+3가지 크기를 보여주는 예제입니다.
 
 ```tsx
 import { Button } from '@/components/ui/Button';
@@ -110,7 +135,6 @@ export function SizesExample() {
       <Button variant="primary" size="s">작음</Button>
       <Button variant="primary" size="m">중간</Button>
       <Button variant="primary" size="l">큼</Button>
-      <Button variant="primary" size="xl">매우 큼</Button>
     </div>
   );
 }
@@ -519,7 +543,7 @@ export function AsyncActionExample() {
 | Props | 타입 | 기본값 | 설명 |
 | ------- | ------ | -------- | ------ |
 | `variant` | `"primary" \| "secondary" \| "accent" \| "negative"` | — | Serok UI 색상 변형 |
-| `size` | `"s" \| "m" \| "l" \| "xl"` | `"m"` | Serok UI 크기 옵션 |
+| `size` | `"s" \| "m" \| "l"` | `"m"` | Serok UI 크기 옵션 |
 
 나머지 모든 Props는 React Spectrum의 Button 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Button Props](https://react-spectrum.adobe.com/react-spectrum/Button.html#props) 문서에서 확인하실 수 있습니다.
 
