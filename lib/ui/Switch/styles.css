@@ -1,7 +1,7 @@
 /* type: registry:ui */
 @layer serok {
   :root .serok-provider .serok-switch {
-    &[data-variant="accent"][emphasized] {
+    & > input[data-variant="accent"] + span {
       --spectrum-switch-background-color-selected-default: var(--spectrum-accent-color-700);
       --spectrum-switch-background-color-selected-hover: var(--spectrum-accent-color-800);
       --spectrum-switch-background-color-selected-down: var(--spectrum-accent-color-800);
@@ -12,15 +12,15 @@
       --spectrum-switch-handle-border-color-selected-focus: var(--spectrum-accent-color-900);
     }
 
-    &[data-variant="secondary"][emphasized] {
-      --spectrum-switch-background-color-selected-default: var(--spectrum-secondary-color-700);
-      --spectrum-switch-background-color-selected-hover: var(--spectrum-secondary-color-800);
-      --spectrum-switch-background-color-selected-down: var(--spectrum-secondary-color-800);
-      --spectrum-switch-background-color-selected-focus: var(--spectrum-secondary-color-800);
-      --spectrum-switch-handle-border-color-selected-default: var(--spectrum-secondary-color-800);
-      --spectrum-switch-handle-border-color-selected-hover: var(--spectrum-secondary-color-900);
-      --spectrum-switch-handle-border-color-selected-down: var(--spectrum-secondary-color-900);
-      --spectrum-switch-handle-border-color-selected-focus: var(--spectrum-secondary-color-900);
+    & > input[data-variant="secondary"] + span {
+      --spectrum-switch-emphasized-track-color-selected: var(--spectrum-secondary-color-900);
+      --spectrum-switch-emphasized-handle-border-color-selected: var(--spectrum-secondary-color-900);
+      --spectrum-switch-emphasized-track-color-selected-hover: var(--spectrum-secondary-color-1000);
+      --spectrum-switch-emphasized-handle-border-color-selected-hover: var(--spectrum-secondary-color-1000);
+      --spectrum-switch-emphasized-track-color-selected-key-focus: var(--spectrum-secondary-color-1000);
+      --spectrum-switch-emphasized-handle-border-color-selected-key-focus: var(--spectrum-secondary-color-1000);
+      --spectrum-switch-emphasized-track-color-selected-down: var(--spectrum-secondary-color-1100);
+      --spectrum-switch-emphasized-handle-border-color-selected-down: var(--spectrum-secondary-color-1100);
     }
   }
 }

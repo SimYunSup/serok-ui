@@ -7,10 +7,6 @@
       "Pretendard", 'Source Sans Pro', -apple-system,
       BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Trebuchet MS',
       'Lucida Grande', sans-serif;
-
-    &:focus-visible {
-      outline: 2px solid var(--spectrum-accent-color-800);
-    }
   }
 
   --white: #ffffff;
@@ -42,8 +38,6 @@
   --spectrum-accent-color-1200: var(--serok-purple-1200);
   --spectrum-accent-color-1300: var(--serok-purple-1300);
   --spectrum-accent-color-1400: var(--serok-purple-1400);
-  --spectrum-accent-color-1500: var(--serok-purple-1500);
-  --spectrum-accent-color-1600: var(--serok-purple-1600);
   --spectrum-secondary-color-100: var(--serok-yellow-100);
   --spectrum-secondary-color-200: var(--serok-yellow-200);
   --spectrum-secondary-color-300: var(--serok-yellow-300);
@@ -54,12 +48,10 @@
   --spectrum-secondary-color-800: var(--serok-yellow-800);
   --spectrum-secondary-color-900: var(--serok-yellow-900);
   --spectrum-secondary-color-1000: var(--serok-yellow-1000);
-  --spectrum-secondary-1100: var(--serok-yellow-1100);
-  --spectrum-secondary-1200: var(--serok-yellow-1200);
-  --spectrum-secondary-1300: var(--serok-yellow-1300);
-  --spectrum-secondary-1400: var(--serok-yellow-1400);
-  --spectrum-secondary-1500: var(--serok-yellow-1500);
-  --spectrum-secondary-1600: var(--serok-yellow-1600);
+  --spectrum-secondary-color-1100: var(--serok-yellow-1100);
+  --spectrum-secondary-color-1200: var(--serok-yellow-1200);
+  --spectrum-secondary-color-1300: var(--serok-yellow-1300);
+  --spectrum-secondary-color-1400: var(--serok-yellow-1400);
 
   --spectrum-negative-color-100: var(--serok-red-100);
   --spectrum-negative-color-200: var(--serok-red-200);
@@ -75,8 +67,6 @@
   --spectrum-negative-color-1200: var(--serok-red-1200);
   --spectrum-negative-color-1300: var(--serok-red-1300);
   --spectrum-negative-color-1400: var(--serok-red-1400);
-  --spectrum-negative-color-1500: var(--serok-red-1500);
-  --spectrum-negative-color-1600: var(--serok-red-1600);
 
   --spectrum-red-100: var(--serok-red-100);
   --spectrum-red-200: var(--serok-red-200);
@@ -92,8 +82,6 @@
   --spectrum-red-1200: var(--serok-red-1200);
   --spectrum-red-1300: var(--serok-red-1300);
   --spectrum-red-1400: var(--serok-red-1400);
-  --spectrum-red-1500: var(--serok-red-1500);
-  --spectrum-red-1600: var(--serok-red-1600);
 
 
   --spectrum-disabled-background-color: var(--spectrum-gray-100);
@@ -119,52 +107,4 @@
   --spectrum-negative-background-color-hover: var(--spectrum-negative-color-800);
   --spectrum-negative-background-color-down: var(--spectrum-negative-color-800);
   --spectrum-negative-background-color-key-focus: var(--spectrum-negative-color-800);
-
-  --spectrum-semantic-negative-color-background: var(--spectrum-negative-background-color-default);
-  --spectrum-semantic-negative-color-default: var(--serok-red-600);
-  --spectrum-semantic-negative-color-state-hover: var(--serok-red-800);
-  --spectrum-semantic-negative-color-dark: var(--serok-red-800);
-  --spectrum-semantic-negative-color-border: var(--serok-red-600);
-  --spectrum-semantic-negative-color-icon: var(--spectrum-negative-visual-color);
-  --spectrum-semantic-negative-color-status: var(--spectrum-negative-visual-color);
-  --spectrum-semantic-negative-color-text-large: var(--serok-red-600);
-  --spectrum-semantic-negative-color-text-small: var(--serok-red-600);
-  --spectrum-semantic-negative-color-state-down: var(--serok-red-800);
-  --spectrum-semantic-negative-color-state-focus: var(--serok-red-800);
-  --spectrum-semantic-notice-color-background: var(--spectrum-global-color-static-orange-600, #da7b11);
-  --spectrum-semantic-notice-color-default: var(--spectrum-orange-700);
-  --spectrum-semantic-notice-color-dark: var(--spectrum-orange-800);
-  --spectrum-semantic-notice-color-border: var(--spectrum-orange-600);
-  --spectrum-semantic-notice-color-icon: var(--spectrum-notice-visual-color);
-  --spectrum-semantic-notice-color-status: var(--spectrum-notice-visual-color);
-  --spectrum-semantic-notice-color-text-large: var(--spectrum-orange-700);
-  --spectrum-semantic-notice-color-text-small: var(--spectrum-orange-00);
-  --spectrum-semantic-notice-color-state-down: var(--spectrum-orange-900);
-  --spectrum-semantic-notice-color-state-focus: var(--spectrum-orange-600);
-  --spectrum-semantic-positive-color-background: var(--spectrum-positive-background-color-default);
-  --spectrum-semantic-positive-color-default: var(--serok-green-600);
-  --spectrum-semantic-positive-color-dark: var(--serok-green-800);
-  --spectrum-semantic-positive-color-border: var(--serok-green-600);
-  --spectrum-semantic-positive-color-icon: var(--spectrum-positive-visual-color);
-  --spectrum-semantic-positive-color-status: var(--spectrum-positive-visual-color);
-  --spectrum-semantic-positive-color-text-large: var(--serok-green-600);
-  --spectrum-semantic-positive-color-text-small: var(--serok-green-600);
-  --spectrum-semantic-positive-color-state-down: var(--serok-green-800);
-  --spectrum-semantic-positive-color-state-focus: var(--serok-green-700);
-  --spectrum-semantic-informative-color-background: var(--spectrum-informative-background-color-default);
-  --spectrum-semantic-informative-color-default: var(--serok-blue-600);
-  --spectrum-semantic-informative-color-dark: var(--serok-blue-800);
-  --spectrum-semantic-informative-color-border: var(--serok-blue-600);
-  --spectrum-semantic-informative-color-icon: var(--spectrum-informative-visual-color);
-  --spectrum-semantic-informative-color-status: var(--spectrum-informative-visual-color);
-  --spectrum-semantic-informative-color-text-large: var(--serok-blue-600);
-  --spectrum-semantic-informative-color-text-small: var(--serok-green-600);
-  --spectrum-semantic-informative-color-state-down: var(--serok-green-800);
-  --spectrum-semantic-informative-color-state-focus: var(--serok-green-700);
-  --spectrum-semantic-cta-color-background-default: var(--spectrum-accent-background-color-default);
-  --spectrum-semantic-cta-color-background-hover: var(--spectrum-accent-background-color-hover);
-  --spectrum-semantic-cta-color-background-down: var(--spectrum-accent-background-color-down);
-  --spectrum-semantic-cta-color-background-key-focus: var(--spectrum-accent-background-color-key-focus);
-  --spectrum-semantic-background-color-key-focus: var(--spectrum-global-color-static-blue-600);
-  --spectrum-semantic-gray-color-background: var(--spectrum-gray-subdued-background-color-default);
 }

@@ -25,9 +25,9 @@ export function MyComponent() {
 }
 ```
 
-## Props
+## Props (속성)
 
-| Prop | Type | 필수 | 기본값 | 설명 |
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
 | ------ | ------ | ------ | ------- | ------ |
 | `isSelected` | `boolean` | No | — | 제어된 선택 상태 |
 | `defaultSelected` | `boolean` | No | `false` | 비제어 초기 선택 상태 |
@@ -38,14 +38,7 @@ export function MyComponent() {
 | `isEmphasized` | `boolean` | No | `false` | 강조 스타일 적용 |
 | `children` | `ReactNode` | Yes | — | 스위치 라벨 텍스트 또는 콘텐츠 |
 
-**추가 참고사항**:
-
-- 모든 props는 React Spectrum 명명 규칙을 따릅니다
-- Props는 대소문자를 구분합니다
-- 기본값은 코드에 나타나는 대로 정확하게 표시됩니다
-- React Spectrum의 `@react-spectrum/switch` 컴포넌트의 모든 props를 확장합니다
-
-## 변형 & 상태
+## 변형 및 상태
 
 ### 시각적 변형
 
@@ -55,16 +48,33 @@ export function MyComponent() {
 | 강조 | `variant="accent"` | 중요한 토글, 강조된 스위치 |
 | 보조 | `variant="secondary"` | 덜 중요한 토글, 보조 선택 |
 
-### 동작 상태
+<PreviewWrapper>
+  <Switch variant="default">기본</Switch>
+  <Switch variant="accent">강조</Switch>
+  <Switch variant="secondary">보조</Switch>
+</PreviewWrapper>
+
+```tsx
+<Switch variant="default">기본</Switch>
+<Switch variant="accent">강조</Switch>
+<Switch variant="secondary">보조</Switch>
+```
+
+### 상태 종류
+
+
+<PreviewWrapper>
+  <Switch variant="accent" isDisabled isSelected>비활성화됨</Switch>
+  <Switch variant="accent" isReadOnly isSelected>읽기 전용</Switch>
+</PreviewWrapper>
 
 - **활성화됨**: 정상 상호작용 가능
 - **선택됨** (`isSelected={true}`): 스위치가 켜짐
 - **선택 안 됨** (`isSelected={false}`): 스위치가 꺼짐
-- **비활성화됨** (`isDisabled={true}`): 상호작용 불가능, 회색으로 표시
+- **비활성화됨** (`isDisabled={true}`): 상호작용 불가능, 회색 처리됨
 - **읽기 전용** (`isReadOnly={true}`): 상태를 표시하지만 상호작용 불가능
-- **강조됨** (`isEmphasized={true}`): 강조된 시각적 스타일
 
-## 예제
+## 사용 예제
 
 ### 기본 사용법
 
@@ -172,30 +182,7 @@ export function ReadOnlyExample() {
 }
 ```
 
-## 접근성
-
-### 키보드 지원
-
-| 키 | 동작 |
-| ---- | ------ |
-| `Space` | 스위치 켜기/끄기 |
-| `Tab` | 다음 요소로 포커스 이동 |
-| `Shift+Tab` | 이전 요소로 포커스 이동 |
-
-### ARIA
-
-- `role="switch"`: 스위치 컨트롤의 의미론적 역할
-- `aria-checked="true\|false"`: 현재 선택 상태
-- `aria-disabled="true"`: 비활성화 상태 표시
-- `aria-readonly="true"`: 읽기 전용 상태 표시
-
-### WCAG 준수
-
-- Level AA: 스위치는 키보드 네비게이션 및 스크린 리더를 지원합니다
-- 포커스 표시: 키보드 사용자를 위한 명확한 포커스 표시
-- 색상 독립적: 정보 전달을 위해 색상에만 의존하지 않습니다
-
-## CSS 커스터마이징
+## CSS 커스터마이제이션
 
 Switch 컴포넌트는 CSS를 통해 스타일을 자유롭게 커스터마이징할 수 있습니다. **CSS 변수보다는 일반 CSS 속성을 직접 사용하는 것을 권장합니다.** 이 방법이 더 직관적이고 유지보수가 쉽습니다.
 
@@ -248,50 +235,23 @@ export function InlineStyleExample() {
 }
 ```
 
-## 모범 사례
-
-- 스위치가 제어하는 내용을 명확하고 간결하게 설명하는 라벨을 사용하세요
-- 스위치를 제어하는 설정 근처에 배치하세요
-- 스위치가 상태를 변경할 때 피드백을 제공하세요 (예: 시각적 변경, 확인 메시지)
-- 추가 확인이 필요한 작업에는 스위치를 사용하지 마세요
-- 맥락을 고려하세요: 즉각적인 설정에는 스위치를 사용하고, 중요한 결정에는 사용하지 마세요
-
-## 일반적인 문제
-
-**문제**: 라벨을 클릭해도 스위치가 업데이트되지 않습니다
-**해결책**: 라벨이 별도의 라벨 요소가 아닌 자식 요소로 포함되어 있는지 확인하세요. React Spectrum은 라벨 연결을 내부적으로 처리합니다.
-
-**문제**: onChange 핸들러를 찾을 수 없습니다
-**해결책**: `onChange` prop을 사용하세요 (`onPress` 또는 `onCheck`가 아님). 부울 매개변수를 받습니다: `onChange={(isSelected) => ...}`
-
-**문제**: 비활성화된 스위치가 여전히 상호작용합니다
-**해결책**: `isDisabled` prop이 `true` (boolean)로 설정되어 있는지 확인하세요 (`"true"` 문자열이 아님).
-
 ## API 참고
 
 포괄적인 props 문서는 [React Spectrum Switch 문서](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props)를 참고하세요.
 
-### Serok UI 특정 Props
+### Serok UI 커스텀 Props
 
-| Prop | Type | 기본값 | 설명 |
-| ------ | ------ | ------- | ------ |
-| `variant` | `"default" \| "accent" \| "secondary"` | `"default"` | Serok UI 색상 변형 |
-| `isEmphasized` | `boolean` | `false` | 강조 스타일 적용 |
+| Props | 타입 | 기본값 | 설명 |
+| ------- | ------ | -------- | ------ |
+| `variant` | `"default" \| "accent" \| "secondary"` | `"default"` | Serok UI 시각적 변형 |
 
-기타 props는 React Spectrum의 Switch 컴포넌트에서 상속됩니다. 사용 가능한 props의 전체 목록은 [React Spectrum Switch Props](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props)를 참고하세요.
-
----
+나머지 모든 Props는 React Spectrum의 Switch 컴포넌트에서 상속받습니다. 전체 Props 목록은 [React Spectrum Switch Props](https://react-spectrum.adobe.com/react-spectrum/Switch.html#props) 문서에서 확인하실 수 있습니다.
 
 ## 컴포넌트 정보
 
 - **소스**: `lib/ui/Switch/index.tsx`
 - **스타일**: `lib/ui/Switch/styles.css`
-- **내보내기**: `@/components/ui/Switch`에서 명명 내보내기
-- **React Spectrum 기반**: Yes (@react-spectrum/switch)
-- **CSS 커스터마이징 가능**: Yes
-- **테스트**: `data-testid="switch"` 사용
-
----
-
-**마지막 업데이트**: 2025-10-31
-**상태**: ✅ 완료 및 LLM 최적화됨
+- **내보내기**: `@/components/ui/Switch`에서 이름 있는 내보내기 (named export)
+- **기반**: React Spectrum (@react-spectrum/switch)
+- **CSS 커스터마이징**: 지원
+- **테스팅**: `data-testid="switch"` 사용

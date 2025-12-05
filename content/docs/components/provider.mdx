@@ -49,6 +49,23 @@ export function App() {
 | 다크 | `colorScheme="dark"` | 어두운 배경에 밝은 텍스트 |
 | 자동 | `colorScheme="auto"` | 시스템 설정을 따라 자동 전환 |
 
+```tsx
+// 라이트 모드
+<SerokProvider colorScheme="light">
+  <App />
+</SerokProvider>
+
+// 다크 모드
+<SerokProvider colorScheme="dark">
+  <App />
+</SerokProvider>
+
+// 시스템 설정 따르기
+<SerokProvider colorScheme="auto">
+  <App />
+</SerokProvider>
+```
+
 ### 스케일 (Scale)
 
 전체 애플리케이션의 간격과 크기를 조정합니다:
