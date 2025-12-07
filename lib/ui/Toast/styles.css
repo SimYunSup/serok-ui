@@ -1,0 +1,45 @@
+/* type: registry:ui */
+
+:root [class*="react-spectrum-ToastContainer"] {
+  --spectrum-positive-background-color-default: var(--serok-gray-600);
+  --spectrum-negative-background-color-default: var(--serok-gray-600);
+  --spectrum-informative-background-color-default: var(--serok-gray-600);
+  --spectrum-neutral-background-color-default: var(--serok-gray-600);
+
+  & [class*="spectrum-ClearButton"] svg[class*="spectrum-Icon"] {
+    color: white;
+  }
+
+  & [class*="spectrum-Toast-body"] {
+    flex-wrap: nowrap;
+    align-items: c;
+    column-gap: var(--spectrum-global-dimension-size-200);
+  }
+
+  /* Direct icon color overrides using nested CSS */
+  [class*="spectrum-Toast--info"] {
+    [class*="spectrum-Icon"] {
+      color: var(--serok-yellow-600);
+    }
+  }
+
+  [class*="spectrum-Toast--positive"] {
+    [class*="spectrum-Icon"] {
+      color: var(--serok-green-600);
+    }
+  }
+
+  [class*="spectrum-Toast--negative"] {
+    [class*="spectrum-Icon"] {
+      color: var(--serok-red-600);
+    }
+  }
+
+  /* Adjust content padding when buttons are present */
+  --spectrum-toast-content-padding-right: 0;
+
+  /* Hide divider (border on buttons container) */
+  [class*="spectrum-Toast-buttons"] {
+    border: none;
+  }
+}

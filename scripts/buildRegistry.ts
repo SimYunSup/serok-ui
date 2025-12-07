@@ -269,7 +269,13 @@ try {
 
             const fileType = content.match(/\/\*[\s\S]*?registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromJS(content);
-            const relativePath = path.relative(cwd, filePath).replace('lib/', '');
+            let relativePath = path.relative(cwd, filePath).replace('lib/', '');
+
+            // registry:lib 타입인 경우 utils/ 경로로 변경
+            if (fileType === 'lib') {
+              relativePath = `utils/${file.name}`;
+            }
+
             fileData.push({
               path: relativePath,
               type: fileType ? `registry:${fileType}` : 'registry:component',

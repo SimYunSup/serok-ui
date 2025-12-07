@@ -11,6 +11,7 @@ import { RootProvider } from 'fumadocs-ui/provider/react-router';
 import type { Route } from './+types/root';
 import './app.css';
 import { SerokProvider } from '@/lib/ui/Provider';
+import { ToastContainer } from '@/lib/ui/Toast';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -71,6 +72,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           >
             {children}
           </RootProvider>
+          <ToastContainer />
         </SerokProvider>
         <ScrollRestoration />
         <Scripts />
