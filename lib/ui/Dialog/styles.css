@@ -1,0 +1,54 @@
+/* type: registry:ui */
+
+/* Dialog container */
+:root [class*="spectrum-Modal"] .serok-dialog {
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* Cancel button - outlined gray (all variants) */
+:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:first-child {
+  background-color: transparent;
+  border: 1px solid var(--serok-gray-300);
+  color: var(--serok-gray-700);
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+
+:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:first-child:hover {
+  background-color: var(--serok-gray-100);
+  border-color: var(--serok-gray-400);
+}
+
+/* Primary action button base styles */
+:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:last-child {
+  border-radius: 8px;
+  padding: 8px 20px;
+}
+
+/* Confirmation variant - purple filled button */
+:root [class*="spectrum-Modal"] .serok-dialog[class*="confirmation"] [class*="spectrum-ButtonGroup"] button:last-child {
+  background-color: var(--serok-purple-600);
+  border-color: var(--serok-purple-600);
+  color: white;
+}
+
+:root [class*="spectrum-Modal"] .serok-dialog[class*="confirmation"] [class*="spectrum-ButtonGroup"] button:last-child:hover {
+  background-color: var(--serok-purple-700);
+  border-color: var(--serok-purple-700);
+}
+
+/* Information & Destructive variants - purple outlined button */
+:root [class*="spectrum-Modal"] .serok-dialog[class*="information"] [class*="spectrum-ButtonGroup"] button:last-child,
+:root [class*="spectrum-Modal"] .serok-dialog[class*="destructive"] [class*="spectrum-ButtonGroup"] button:last-child {
+  background-color: transparent;
+  border: 1px solid var(--serok-purple-600);
+  color: var(--serok-purple-600);
+}
+
+:root [class*="spectrum-Modal"] .serok-dialog[class*="information"] [class*="spectrum-ButtonGroup"] button:last-child:hover,
+:root [class*="spectrum-Modal"] .serok-dialog[class*="destructive"] [class*="spectrum-ButtonGroup"] button:last-child:hover {
+  background-color: var(--serok-purple-100);
+  border-color: var(--serok-purple-700);
+  color: var(--serok-purple-700);
+}

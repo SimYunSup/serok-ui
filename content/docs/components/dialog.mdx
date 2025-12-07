@@ -1,0 +1,204 @@
+---
+title: Dialog
+componentName: Dialog
+status: stable
+lastUpdated: "2025-12-07"
+spectrumBased: true
+spectrumReference: "@react-spectrum/dialog"
+description: "사용자에게 중요한 정보를 표시하거나 확인을 요청하는 모달 컴포넌트입니다."
+---
+
+<CopyToMarkdown />
+
+## 개요
+
+Dialog는 사용자에게 중요한 정보를 표시하거나 확인을 요청하는 모달 컴포넌트입니다. AlertDialog를 사용하여 확인, 경고, 오류 등 다양한 상황에서 사용자의 주의를 끌고 응답을 요청할 수 있습니다.
+
+## 빠른 시작
+
+<PreviewWrapper>
+  <DialogTrigger>
+    <Button variant="primary">확인 필요</Button>
+    <AlertDialog
+      variant="confirmation"
+      title="게시글을 작성하려면 로그인이 필요해요."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      로그인 후 분실물 주인을 찾아주세요!
+    </AlertDialog>
+  </DialogTrigger>
+</PreviewWrapper>
+
+```tsx
+import { AlertDialog, DialogTrigger } from '@/components/ui/Dialog';
+import { Button } from '@/components/ui/Button';
+
+<DialogTrigger>
+  <Button variant="primary">확인 필요</Button>
+  <AlertDialog
+    variant="confirmation"
+    title="게시글을 작성하려면 로그인이 필요해요."
+    primaryActionLabel="확인"
+    cancelLabel="취소"
+  >
+    로그인 후 분실물 주인을 찾아주세요!
+  </AlertDialog>
+</DialogTrigger>
+```
+
+## Props (속성)
+
+### AlertDialog Props
+
+| 속성 | 타입 | 필수 | 기본값 | 설명 |
+|------|------|------|--------|------|
+| `variant` | `"confirmation" \| "information" \| "destructive" \| "error" \| "warning"` | No | `"confirmation"` | 다이얼로그 스타일 변형 |
+| `title` | `string` | Yes | — | 다이얼로그 제목 |
+| `children` | `ReactNode` | Yes | — | 다이얼로그 본문 내용 |
+| `primaryActionLabel` | `string` | Yes | — | 기본 액션 버튼 레이블 |
+| `cancelLabel` | `string` | No | — | 취소 버튼 레이블 |
+| `secondaryActionLabel` | `string` | No | — | 보조 액션 버튼 레이블 |
+| `onPrimaryAction` | `() => void` | No | — | 기본 액션 클릭 시 호출 |
+| `onSecondaryAction` | `() => void` | No | — | 보조 액션 클릭 시 호출 |
+| `onCancel` | `() => void` | No | — | 취소 클릭 시 호출 |
+| `autoFocusButton` | `"cancel" \| "primary" \| "secondary"` | No | — | 자동 포커스할 버튼 |
+| `isKeyboardDismissDisabled` | `boolean` | No | `false` | ESC 키로 닫기 비활성화 |
+
+## 변형 및 상태
+
+### Confirmation (확인)
+
+<PreviewWrapper>
+  <DialogTrigger>
+    <Button variant="primary">Confirmation</Button>
+    <AlertDialog
+      variant="confirmation"
+      title="게시글을 작성하려면 로그인이 필요해요."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      로그인 후 분실물 주인을 찾아주세요!
+    </AlertDialog>
+  </DialogTrigger>
+</PreviewWrapper>
+
+### Information (정보)
+
+<PreviewWrapper>
+  <DialogTrigger>
+    <Button variant="primary">Information</Button>
+    <AlertDialog
+      variant="information"
+      title="게시글을 작성하려면 로그인이 필요해요."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      로그인 후 분실물 주인을 찾아주세요!
+    </AlertDialog>
+  </DialogTrigger>
+</PreviewWrapper>
+
+### Destructive (파괴적)
+
+<PreviewWrapper>
+  <DialogTrigger>
+    <Button variant="negative">Destructive</Button>
+    <AlertDialog
+      variant="destructive"
+      title="게시글을 작성하려면 로그인이 필요해요."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      로그인 후 분실물 주인을 찾아주세요!
+    </AlertDialog>
+  </DialogTrigger>
+</PreviewWrapper>
+
+### 변형 종류
+
+| 변형 | Props | 사용 사례 |
+|------|-------|----------|
+| 확인 | `variant="confirmation"` | 일반 확인 요청 |
+| 정보 | `variant="information"` | 정보 전달 |
+| 파괴적 | `variant="destructive"` | 삭제 등 위험한 작업 |
+| 오류 | `variant="error"` | 오류 알림 |
+| 경고 | `variant="warning"` | 경고 메시지 |
+
+## 사용 예제
+
+### 기본 사용법
+
+```tsx
+export function BasicDialogExample() {
+  return (
+    <DialogTrigger>
+      <Button variant="primary">로그인 필요</Button>
+      <AlertDialog
+        variant="confirmation"
+        title="게시글을 작성하려면 로그인이 필요해요."
+        primaryActionLabel="확인"
+        cancelLabel="취소"
+      >
+        로그인 후 분실물 주인을 찾아주세요!
+      </AlertDialog>
+    </DialogTrigger>
+  );
+}
+```
+
+### 삭제 확인
+
+```tsx
+export function DestructiveDialogExample() {
+  return (
+    <DialogTrigger>
+      <Button variant="negative">삭제</Button>
+      <AlertDialog
+        variant="destructive"
+        title="정말 삭제하시겠습니까?"
+        primaryActionLabel="삭제"
+        cancelLabel="취소"
+        onPrimaryAction={() => console.log('삭제됨')}
+      >
+        이 작업은 되돌릴 수 없습니다.
+      </AlertDialog>
+    </DialogTrigger>
+  );
+}
+```
+
+### 제어 컴포넌트
+
+```tsx
+export function ControlledDialogExample() {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
+      <Button variant="primary">열기</Button>
+      <AlertDialog
+        variant="information"
+        title="알림"
+        primaryActionLabel="확인"
+        onPrimaryAction={() => setIsOpen(false)}
+      >
+        이것은 제어된 다이얼로그입니다.
+      </AlertDialog>
+    </DialogTrigger>
+  );
+}
+```
+
+## API 참고
+
+자세한 Props 문서는 [React Spectrum AlertDialog 문서](https://react-spectrum.adobe.com/react-spectrum/AlertDialog.html)를 참조하세요.
+
+---
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Dialog/index.tsx`
+- **스타일**: `lib/ui/Dialog/styles.css`
+- **내보내기**: `@/components/ui/Dialog`에서 명명 내보내기
+- **React Spectrum 기반**: Yes (`@react-spectrum/dialog`)

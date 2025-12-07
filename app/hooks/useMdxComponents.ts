@@ -7,6 +7,7 @@ import { Input } from '@/lib/ui/Input';
 import { Switch } from '@/lib/ui/Switch';
 import * as Example from '../components/Example';
 import * as Tabs from '@/lib/ui/Tabs';
+import * as Dialog from '@/lib/ui/Dialog';
 import { CopyToMarkdown } from '~/components/CopyToMarkdown';
 import ColorsPage from '~/components/ColorPalette';
 import { Steps, Step } from '~/components/steps';
@@ -20,6 +21,7 @@ const usingMdxComponents = {
   Switch,
   ...Example,
   ...Tabs,
+  ...Dialog,
   CopyToMarkdown,
   ColorsPage,
   Steps,
