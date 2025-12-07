@@ -67,8 +67,6 @@ import { Button } from '@/components/ui/Button';
 
 ## 변형 및 상태
 
-### Confirmation (확인)
-
 <PreviewWrapper>
   <DialogTrigger>
     <Button variant="primary">Confirmation</Button>
@@ -81,11 +79,6 @@ import { Button } from '@/components/ui/Button';
       로그인 후 분실물 주인을 찾아주세요!
     </AlertDialog>
   </DialogTrigger>
-</PreviewWrapper>
-
-### Information (정보)
-
-<PreviewWrapper>
   <DialogTrigger>
     <Button variant="primary">Information</Button>
     <AlertDialog
@@ -97,11 +90,6 @@ import { Button } from '@/components/ui/Button';
       로그인 후 분실물 주인을 찾아주세요!
     </AlertDialog>
   </DialogTrigger>
-</PreviewWrapper>
-
-### Destructive (파괴적)
-
-<PreviewWrapper>
   <DialogTrigger>
     <Button variant="negative">Destructive</Button>
     <AlertDialog
@@ -111,6 +99,28 @@ import { Button } from '@/components/ui/Button';
       cancelLabel="취소"
     >
       로그인 후 분실물 주인을 찾아주세요!
+    </AlertDialog>
+  </DialogTrigger>
+  <DialogTrigger>
+    <Button variant="negative">Error</Button>
+    <AlertDialog
+      variant="error"
+      title="오류가 발생했습니다."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      다시 시도해 주세요.
+    </AlertDialog>
+  </DialogTrigger>
+  <DialogTrigger>
+    <Button variant="primary">Warning</Button>
+    <AlertDialog
+      variant="warning"
+      title="주의가 필요합니다."
+      primaryActionLabel="확인"
+      cancelLabel="취소"
+    >
+      이 작업을 계속하시겠습니까?
     </AlertDialog>
   </DialogTrigger>
 </PreviewWrapper>

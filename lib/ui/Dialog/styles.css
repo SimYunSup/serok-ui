@@ -1,54 +1,114 @@
 /* type: registry:ui */
 
-/* Dialog container */
 :root [class*="spectrum-Modal"] .serok-dialog {
+  --spectrum-dialog-title-text-size: var(--spectrum-global-dimension-font-size-500);
   border-radius: 16px;
   padding: 24px;
-}
 
-/* Cancel button - outlined gray (all variants) */
-:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:first-child {
-  background-color: transparent;
-  border: 1px solid var(--serok-gray-300);
-  color: var(--serok-gray-700);
-  border-radius: 8px;
-  padding: 8px 20px;
-}
+  /* Hide divider */
+  [class*="spectrum-Dialog-divider"] {
+    display: none;
+  }
+  [class*="spectrum-Dialog-heading"] {
+    margin-bottom: var(--spectrum-global-dimension-size-160);
+  }
 
-:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:first-child:hover {
-  background-color: var(--serok-gray-100);
-  border-color: var(--serok-gray-400);
-}
+  /* Button group styles */
+  [class*="spectrum-ButtonGroup"] {
+    /* Cancel button - outlined gray (all variants) */
+    button:first-child {
+      background-color: transparent;
+      border: 1px solid var(--serok-gray-300);
+      color: var(--serok-gray-700);
+      border-radius: var(--spectrum-global-dimension-size-125);
+      padding: var(--spectrum-global-dimension-size-75) var(--spectrum-global-dimension-size-200);
 
-/* Primary action button base styles */
-:root [class*="spectrum-Modal"] .serok-dialog [class*="spectrum-ButtonGroup"] button:last-child {
-  border-radius: 8px;
-  padding: 8px 20px;
-}
+      &:hover {
+        background-color: var(--serok-gray-100);
+        border-color: var(--serok-gray-400);
+      }
+    }
 
-/* Confirmation variant - purple filled button */
-:root [class*="spectrum-Modal"] .serok-dialog[class*="confirmation"] [class*="spectrum-ButtonGroup"] button:last-child {
-  background-color: var(--serok-purple-600);
-  border-color: var(--serok-purple-600);
-  color: white;
-}
+    /* Primary action button base styles */
+    button:last-child {
+      border-radius: var(--spectrum-global-dimension-size-125);
+      padding: var(--spectrum-global-dimension-size-75) var(--spectrum-global-dimension-size-200);
+    }
+  }
 
-:root [class*="spectrum-Modal"] .serok-dialog[class*="confirmation"] [class*="spectrum-ButtonGroup"] button:last-child:hover {
-  background-color: var(--serok-purple-700);
-  border-color: var(--serok-purple-700);
-}
+  /* Confirmation variant - purple filled button */
+  &[class*="confirmation"] [class*="spectrum-ButtonGroup"] button:last-child {
+    background-color: var(--serok-purple-600);
+    border-color: var(--serok-purple-600);
+    color: white;
 
-/* Information & Destructive variants - purple outlined button */
-:root [class*="spectrum-Modal"] .serok-dialog[class*="information"] [class*="spectrum-ButtonGroup"] button:last-child,
-:root [class*="spectrum-Modal"] .serok-dialog[class*="destructive"] [class*="spectrum-ButtonGroup"] button:last-child {
-  background-color: transparent;
-  border: 1px solid var(--serok-purple-600);
-  color: var(--serok-purple-600);
-}
+    &:hover {
+      background-color: var(--serok-purple-700);
+      border-color: var(--serok-purple-700);
+    }
+  }
 
-:root [class*="spectrum-Modal"] .serok-dialog[class*="information"] [class*="spectrum-ButtonGroup"] button:last-child:hover,
-:root [class*="spectrum-Modal"] .serok-dialog[class*="destructive"] [class*="spectrum-ButtonGroup"] button:last-child:hover {
-  background-color: var(--serok-purple-100);
-  border-color: var(--serok-purple-700);
-  color: var(--serok-purple-700);
+  /* Information variant - purple outlined button */
+  &[class*="information"] [class*="spectrum-ButtonGroup"] button:last-child {
+    background-color: transparent;
+    border: 1px solid var(--serok-purple-600);
+    color: var(--serok-purple-600);
+
+    &:hover {
+      background-color: var(--serok-purple-100);
+      border-color: var(--serok-purple-700);
+      color: var(--serok-purple-700);
+    }
+  }
+
+  /* Destructive variant - red outlined button */
+  &[class*="destructive"] [class*="spectrum-ButtonGroup"] button:last-child {
+    background-color: transparent;
+    border: 1px solid var(--serok-red-600);
+    color: var(--serok-red-600);
+
+    &:hover {
+      background-color: var(--serok-red-100);
+      border-color: var(--serok-red-700);
+      color: var(--serok-red-700);
+    }
+  }
+
+  /* Error variant - purple filled button and purple icon */
+  &[class*="spectrum-Dialog--error"] {
+    [class*="spectrum-ButtonGroup"] button:last-child {
+      background-color: var(--serok-purple-600);
+      border-color: var(--serok-purple-600);
+      color: white;
+
+      &:hover {
+        background-color: var(--serok-purple-700);
+        border-color: var(--serok-purple-700);
+      }
+    }
+
+    /* Error icon color - red */
+    svg {
+      fill: var(--serok-red-700);
+    }
+  }
+
+  /* Warning variant - purple filled button and purple icon */
+  &[class*="warning"] {
+    [class*="spectrum-ButtonGroup"] button:last-child {
+      background-color: var(--serok-purple-600);
+      border-color: var(--serok-purple-600);
+      color: white;
+
+      &:hover {
+        background-color: var(--serok-purple-700);
+        border-color: var(--serok-purple-700);
+      }
+    }
+
+    /* Warning icon color - yellow */
+    svg {
+      fill: var(--serok-yellow-700);
+    }
+  }
 }
