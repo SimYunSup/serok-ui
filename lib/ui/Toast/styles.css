@@ -12,7 +12,7 @@
 
   & [class*="spectrum-Toast-body"] {
     flex-wrap: nowrap;
-    align-items: c;
+    align-items: center;
     column-gap: var(--spectrum-global-dimension-size-200);
   }
 
