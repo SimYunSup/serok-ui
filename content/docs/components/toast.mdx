@@ -9,12 +9,6 @@ spectrumReference: "@react-spectrum/toast"
 
 <CopyToMarkdown />
 
-## 미리보기
-
-<PreviewWrapper>
-  <ToastExample />
-</PreviewWrapper>
-
 ## 개요
 
 Toast는 사용자에게 짧은 알림 메시지를 표시하는 컴포넌트입니다. 작업 완료, 오류 발생, 정보 안내 등 다양한 상황에서 사용됩니다. Serok UI의 Toast 컴포넌트는 React Spectrum의 Toast를 기반으로 하며, 4가지 시맨틱 변형(neutral, info, positive, negative)을 제공합니다.
@@ -56,7 +50,9 @@ export function MyComponent() {
 }
 ```
 
-## ToastQueue 메서드
+## Props (속성)
+
+### ToastQueue 메서드
 
 | 메서드 | 설명 | 아이콘 |
 | ------ | ------ | ------ |
@@ -65,15 +61,36 @@ export function MyComponent() {
 | `ToastQueue.positive(message, options?)` | 성공 알림 | 초록색 체크 아이콘 |
 | `ToastQueue.negative(message, options?)` | 오류/경고 알림 | 빨간색 경고 아이콘 |
 
-## Options (옵션)
+### Options (옵션)
 
-| 옵션 | 타입 | 기본값 | 설명 |
-| ------ | ------ | -------- | ------ |
-| `actionLabel` | `string` | — | 액션 버튼에 표시될 텍스트 |
-| `onAction` | `() => void` | — | 액션 버튼 클릭 시 호출되는 함수 |
-| `shouldCloseOnAction` | `boolean` | `false` | 액션 버튼 클릭 시 Toast 자동 닫기 여부 |
-| `onClose` | `() => void` | — | Toast가 닫힐 때 호출되는 함수 |
-| `timeout` | `number` | `5000` | 자동 닫힘 시간 (ms, 최소 5000ms) |
+| 옵션 | 타입 | 필수 | 기본값 | 설명 |
+| ------ | ------ | ------ | -------- | ------ |
+| `actionLabel` | `string` | No | — | 액션 버튼에 표시될 텍스트 |
+| `onAction` | `() => void` | No | — | 액션 버튼 클릭 시 호출되는 함수 |
+| `shouldCloseOnAction` | `boolean` | No | `false` | 액션 버튼 클릭 시 Toast 자동 닫기 여부 |
+| `onClose` | `() => void` | No | — | Toast가 닫힐 때 호출되는 함수 |
+| `timeout` | `number` | No | `5000` | 자동 닫힘 시간 (ms, 최소 5000ms) |
+
+## 변형 및 상태
+
+### 시맨틱 변형
+
+| 변형 | 메서드 | 사용 사례 |
+| ------ | ------- | ---------- |
+| Neutral (일반) | `ToastQueue.neutral()` | 일반적인 알림, 중립적인 정보 |
+| Info (정보) | `ToastQueue.info()` | 정보성 알림, 팁, 안내 |
+| Positive (성공) | `ToastQueue.positive()` | 작업 완료, 성공 알림 |
+| Negative (오류) | `ToastQueue.negative()` | 오류, 경고, 실패 알림 |
+
+<PreviewWrapper>
+  <ToastExample />
+</PreviewWrapper>
+
+### 상태 종류
+
+- **표시됨**: Toast가 화면에 표시된 상태
+- **액션 있음**: 액션 버튼이 포함된 Toast (자동 닫힘 비활성화)
+- **자동 닫힘**: timeout 후 자동으로 사라짐 (기본 5초)
 
 ## 사용 예제
 
@@ -219,6 +236,45 @@ export function LongMessageExample() {
 }
 ```
 
+## CSS 커스터마이제이션
+
+Toast 컴포넌트는 CSS를 통해 스타일을 커스터마이징할 수 있습니다.
+
+### 기본 스타일 재정의
+
+```css
+/* custom-toast-styles.css */
+.serok-toast-container .spectrum-Toast {
+  /* 배경색 변경 */
+  --spectrum-toast-background-color: #1f2937;
+
+  /* 텍스트 색상 */
+  --spectrum-toast-font-color: #f9fafb;
+
+  /* 둥근 모서리 */
+  border-radius: 12px;
+}
+```
+
+### 변형별 아이콘 색상 커스터마이징
+
+```css
+/* Info 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--info .spectrum-Icon {
+  color: #3b82f6;
+}
+
+/* Positive 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--positive .spectrum-Icon {
+  color: #22c55e;
+}
+
+/* Negative 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--negative .spectrum-Icon {
+  color: #ef4444;
+}
+```
+
 ## 실제 사용 패턴
 
 ### 1. 폼 저장 성공
@@ -315,74 +371,6 @@ export function NetworkErrorExample() {
   );
 }
 ```
-
-## CSS 커스터마이제이션
-
-Toast 컴포넌트는 CSS를 통해 스타일을 커스터마이징할 수 있습니다.
-
-### 기본 스타일 재정의
-
-```css
-/* custom-toast-styles.css */
-.serok-toast-container .spectrum-Toast {
-  /* 배경색 변경 */
-  --spectrum-toast-background-color: #1f2937;
-
-  /* 텍스트 색상 */
-  --spectrum-toast-font-color: #f9fafb;
-
-  /* 둥근 모서리 */
-  border-radius: 12px;
-}
-```
-
-### 변형별 아이콘 색상 커스터마이징
-
-```css
-/* Info 아이콘 색상 */
-.serok-toast-container .spectrum-Toast--info .spectrum-Icon {
-  color: #3b82f6;
-}
-
-/* Positive 아이콘 색상 */
-.serok-toast-container .spectrum-Toast--positive .spectrum-Icon {
-  color: #22c55e;
-}
-
-/* Negative 아이콘 색상 */
-.serok-toast-container .spectrum-Toast--negative .spectrum-Icon {
-  color: #ef4444;
-}
-```
-
-## 자주 묻는 질문 (FAQ)
-
-### Q: Toast가 표시되지 않아요.
-
-A: `ToastContainer`가 앱의 루트에 추가되어 있는지 확인하세요:
-
-```tsx
-<SerokProvider>
-  {children}
-  <ToastContainer />
-</SerokProvider>
-```
-
-### Q: Toast의 자동 닫힘 시간을 변경할 수 있나요?
-
-A: 네, `timeout` 옵션을 사용하세요. 단, 접근성을 위해 최소 5000ms(5초)입니다:
-
-```tsx
-ToastQueue.info('메시지', { timeout: 10000 }); // 10초
-```
-
-### Q: 액션 버튼이 있는 Toast도 자동으로 닫히나요?
-
-A: 아니요, 액션 버튼이 있는 Toast는 자동으로 닫히지 않습니다. 사용자가 액션을 수행하거나 닫기 버튼을 클릭해야 합니다.
-
-### Q: 여러 개의 Toast를 동시에 표시할 수 있나요?
-
-A: 네, Toast는 큐(queue) 방식으로 관리되며, 여러 개를 동시에 표시할 수 있습니다.
 
 ## API 참고
 

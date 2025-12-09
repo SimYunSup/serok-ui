@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from '@/lib/ui/Switch';
 import { Button } from '@/lib/ui/Button';
-import { ToastQueue } from '@/lib/ui/Toast/toast';
+import { ToastQueue } from '@/lib/lib/toast';
 
 export function ControlledSwitchExample() {
   const [isSelected, setIsSelected] = React.useState(false);
