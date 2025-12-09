@@ -146,9 +146,9 @@
   --spectrum-semantic-informative-color-icon: var(--spectrum-informative-visual-color);
   --spectrum-semantic-informative-color-status: var(--spectrum-informative-visual-color);
   --spectrum-semantic-informative-color-text-large: var(--serok-blue-600);
-  --spectrum-semantic-informative-color-text-small: var(--serok-green-600);
-  --spectrum-semantic-informative-color-state-down: var(--serok-green-800);
-  --spectrum-semantic-informative-color-state-focus: var(--serok-green-700);
+  --spectrum-semantic-informative-color-text-small: var(--serok-blue-600);
+  --spectrum-semantic-informative-color-state-down: var(--serok-blue-800);
+  --spectrum-semantic-informative-color-state-focus: var(--serok-blue-700);
   --spectrum-semantic-cta-color-background-default: var(--spectrum-accent-background-color-default);
   --spectrum-semantic-cta-color-background-hover: var(--spectrum-accent-background-color-hover);
   --spectrum-semantic-cta-color-background-down: var(--spectrum-accent-background-color-down);
