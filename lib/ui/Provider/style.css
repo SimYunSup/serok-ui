@@ -1,6 +1,6 @@
 /* type: registry:ui */
 
-:root .serok-provider.serok-provider {
+:root .serok-provider.serok-provider, :root {
   & * {
     font-family: var(--spectrum-sans-font-family-stack);
     --spectrum-sans-font-family-stack: "Pretendard Variable",
@@ -107,4 +107,52 @@
   --spectrum-negative-background-color-hover: var(--spectrum-negative-color-800);
   --spectrum-negative-background-color-down: var(--spectrum-negative-color-800);
   --spectrum-negative-background-color-key-focus: var(--spectrum-negative-color-800);
+
+  --spectrum-semantic-negative-color-background: var(--spectrum-negative-background-color-default);
+  --spectrum-semantic-negative-color-default: var(--serok-red-600);
+  --spectrum-semantic-negative-color-state-hover: var(--serok-red-800);
+  --spectrum-semantic-negative-color-dark: var(--serok-red-800);
+  --spectrum-semantic-negative-color-border: var(--serok-red-600);
+  --spectrum-semantic-negative-color-icon: var(--spectrum-negative-visual-color);
+  --spectrum-semantic-negative-color-status: var(--spectrum-negative-visual-color);
+  --spectrum-semantic-negative-color-text-large: var(--serok-red-600);
+  --spectrum-semantic-negative-color-text-small: var(--serok-red-600);
+  --spectrum-semantic-negative-color-state-down: var(--serok-red-800);
+  --spectrum-semantic-negative-color-state-focus: var(--serok-red-800);
+  --spectrum-semantic-notice-color-background: var(--serok-orange-600);
+  --spectrum-semantic-notice-color-default: var(--serok-orange-700);
+  --spectrum-semantic-notice-color-dark: var(--serok-orange-800);
+  --spectrum-semantic-notice-color-border: var(--serok-orange-600);
+  --spectrum-semantic-notice-color-icon: var(--serok-orange-600);
+  --spectrum-semantic-notice-color-status: var(--serok-orange-600);
+  --spectrum-semantic-notice-color-text-large: var(--serok-orange-700);
+  --spectrum-semantic-notice-color-text-small: var(--serok-orange-700);
+  --spectrum-semantic-notice-color-state-down: var(--serok-orange-900);
+  --spectrum-semantic-notice-color-state-focus: var(--serok-orange-600);
+  --spectrum-semantic-positive-color-background: var(--spectrum-positive-background-color-default);
+  --spectrum-semantic-positive-color-default: var(--serok-green-600);
+  --spectrum-semantic-positive-color-dark: var(--serok-green-800);
+  --spectrum-semantic-positive-color-border: var(--serok-green-600);
+  --spectrum-semantic-positive-color-icon: var(--spectrum-positive-visual-color);
+  --spectrum-semantic-positive-color-status: var(--spectrum-positive-visual-color);
+  --spectrum-semantic-positive-color-text-large: var(--serok-green-600);
+  --spectrum-semantic-positive-color-text-small: var(--serok-green-600);
+  --spectrum-semantic-positive-color-state-down: var(--serok-green-800);
+  --spectrum-semantic-positive-color-state-focus: var(--serok-green-700);
+  --spectrum-semantic-informative-color-background: var(--spectrum-informative-background-color-default);
+  --spectrum-semantic-informative-color-default: var(--serok-blue-600);
+  --spectrum-semantic-informative-color-dark: var(--serok-blue-800);
+  --spectrum-semantic-informative-color-border: var(--serok-blue-600);
+  --spectrum-semantic-informative-color-icon: var(--spectrum-informative-visual-color);
+  --spectrum-semantic-informative-color-status: var(--spectrum-informative-visual-color);
+  --spectrum-semantic-informative-color-text-large: var(--serok-blue-600);
+  --spectrum-semantic-informative-color-text-small: var(--serok-blue-600);
+  --spectrum-semantic-informative-color-state-down: var(--serok-blue-800);
+  --spectrum-semantic-informative-color-state-focus: var(--serok-blue-700);
+  --spectrum-semantic-cta-color-background-default: var(--spectrum-accent-background-color-default);
+  --spectrum-semantic-cta-color-background-hover: var(--spectrum-accent-background-color-hover);
+  --spectrum-semantic-cta-color-background-down: var(--spectrum-accent-background-color-down);
+  --spectrum-semantic-cta-color-background-key-focus: var(--spectrum-accent-background-color-key-focus);
+  --spectrum-semantic-background-color-key-focus: var(--spectrum-global-color-static-blue-600);
+  --spectrum-semantic-gray-color-background: var(--spectrum-gray-subdued-background-color-default);
 }

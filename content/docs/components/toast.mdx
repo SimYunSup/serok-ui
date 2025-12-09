@@ -1,0 +1,393 @@
+---
+title: Toast
+componentName: Toast
+status: stable
+lastUpdated: "2025-12-05"
+spectrumBased: true
+spectrumReference: "@react-spectrum/toast"
+---
+
+<CopyToMarkdown />
+
+## 개요
+
+Toast는 사용자에게 짧은 알림 메시지를 표시하는 컴포넌트입니다. 작업 완료, 오류 발생, 정보 안내 등 다양한 상황에서 사용됩니다. Serok UI의 Toast 컴포넌트는 React Spectrum의 Toast를 기반으로 하며, 4가지 시맨틱 변형(neutral, info, positive, negative)을 제공합니다.
+
+## 빠른 시작
+
+Toast를 사용하려면 먼저 앱의 루트에 `ToastContainer`를 추가해야 합니다:
+
+```tsx
+// app/root.tsx 또는 최상위 레이아웃
+import { ToastContainer } from '@/components/ui/Toast';
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function Layout({ children }) {
+  return (
+    <SerokProvider>
+      {children}
+      <ToastContainer />
+    </SerokProvider>
+  );
+}
+```
+
+그 다음, 어디서든 `ToastQueue`를 사용하여 Toast를 표시할 수 있습니다:
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function MyComponent() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.positive('저장되었습니다!')}
+    >
+      저장하기
+    </Button>
+  );
+}
+```
+
+## Props (속성)
+
+### ToastQueue 메서드
+
+| 메서드 | 설명 | 아이콘 |
+| ------ | ------ | ------ |
+| `ToastQueue.neutral(message, options?)` | 일반 알림 (아이콘 없음) | — |
+| `ToastQueue.info(message, options?)` | 정보 알림 | 노란색 정보 아이콘 |
+| `ToastQueue.positive(message, options?)` | 성공 알림 | 초록색 체크 아이콘 |
+| `ToastQueue.negative(message, options?)` | 오류/경고 알림 | 빨간색 경고 아이콘 |
+
+### Options (옵션)
+
+| 옵션 | 타입 | 필수 | 기본값 | 설명 |
+| ------ | ------ | ------ | -------- | ------ |
+| `actionLabel` | `string` | No | — | 액션 버튼에 표시될 텍스트 |
+| `onAction` | `() => void` | No | — | 액션 버튼 클릭 시 호출되는 함수 |
+| `shouldCloseOnAction` | `boolean` | No | `false` | 액션 버튼 클릭 시 Toast 자동 닫기 여부 |
+| `onClose` | `() => void` | No | — | Toast가 닫힐 때 호출되는 함수 |
+| `timeout` | `number` | No | `5000` | 자동 닫힘 시간 (ms, 최소 5000ms) |
+
+## 변형 및 상태
+
+### 시맨틱 변형
+
+| 변형 | 메서드 | 사용 사례 |
+| ------ | ------- | ---------- |
+| Neutral (일반) | `ToastQueue.neutral()` | 일반적인 알림, 중립적인 정보 |
+| Info (정보) | `ToastQueue.info()` | 정보성 알림, 팁, 안내 |
+| Positive (성공) | `ToastQueue.positive()` | 작업 완료, 성공 알림 |
+| Negative (오류) | `ToastQueue.negative()` | 오류, 경고, 실패 알림 |
+
+<PreviewWrapper>
+  <ToastExample />
+</PreviewWrapper>
+
+### 상태 종류
+
+- **표시됨**: Toast가 화면에 표시된 상태
+- **액션 있음**: 액션 버튼이 포함된 Toast (자동 닫힘 비활성화)
+- **자동 닫힘**: timeout 후 자동으로 사라짐 (기본 5초)
+
+## 사용 예제
+
+### 기본 사용법
+
+가장 기본적인 Toast 사용 방법입니다.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function BasicExample() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.neutral('토스트 메시지 입력하기')}
+    >
+      Toast 표시
+    </Button>
+  );
+}
+```
+
+### 모든 변형
+
+4가지 시맨틱 변형을 보여주는 예제입니다.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.neutral('일반 알림 메시지')}
+      >
+        Neutral
+      </Button>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.info('정보 알림 메시지')}
+      >
+        Info
+      </Button>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.positive('성공 알림 메시지')}
+      >
+        Positive
+      </Button>
+      <Button
+        variant="negative"
+        onPress={() => ToastQueue.negative('오류 알림 메시지')}
+      >
+        Negative
+      </Button>
+    </div>
+  );
+}
+```
+
+### 액션 버튼 포함
+
+Toast에 액션 버튼을 추가하는 예제입니다.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function ActionExample() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.info('업데이트가 있습니다', {
+        actionLabel: '버튼',
+        onAction: () => console.log('액션 클릭!'),
+        shouldCloseOnAction: true,
+      })}
+    >
+      액션 버튼 Toast
+    </Button>
+  );
+}
+```
+
+### 프로그래밍 방식으로 닫기
+
+Toast를 프로그래밍 방식으로 닫는 예제입니다.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function ProgrammaticCloseExample() {
+  const [closeToast, setCloseToast] = useState<(() => void) | null>(null);
+
+  const handlePress = () => {
+    if (closeToast) {
+      closeToast();
+      setCloseToast(null);
+    } else {
+      const close = ToastQueue.info('이 Toast는 프로그래밍 방식으로 닫을 수 있습니다', {
+        onClose: () => setCloseToast(null),
+      });
+      setCloseToast(() => close);
+    }
+  };
+
+  return (
+    <Button variant="primary" onPress={handlePress}>
+      {closeToast ? 'Toast 닫기' : 'Toast 표시'}
+    </Button>
+  );
+}
+```
+
+### 긴 메시지
+
+긴 텍스트 메시지를 표시하는 예제입니다.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function LongMessageExample() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.positive(
+        '토스트 메시지 입력하기토스트 메시지 입력하기 토스트',
+        {
+          actionLabel: '버튼',
+          onAction: () => console.log('액션 클릭!'),
+        }
+      )}
+    >
+      긴 메시지 Toast
+    </Button>
+  );
+}
+```
+
+## CSS 커스터마이제이션
+
+Toast 컴포넌트는 CSS를 통해 스타일을 커스터마이징할 수 있습니다.
+
+### 기본 스타일 재정의
+
+```css
+/* custom-toast-styles.css */
+.serok-toast-container .spectrum-Toast {
+  /* 배경색 변경 */
+  --spectrum-toast-background-color: #1f2937;
+
+  /* 텍스트 색상 */
+  --spectrum-toast-font-color: #f9fafb;
+
+  /* 둥근 모서리 */
+  border-radius: 12px;
+}
+```
+
+### 변형별 아이콘 색상 커스터마이징
+
+```css
+/* Info 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--info .spectrum-Icon {
+  color: #3b82f6;
+}
+
+/* Positive 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--positive .spectrum-Icon {
+  color: #22c55e;
+}
+
+/* Negative 아이콘 색상 */
+.serok-toast-container .spectrum-Toast--negative .spectrum-Icon {
+  color: #ef4444;
+}
+```
+
+## 실제 사용 패턴
+
+### 1. 폼 저장 성공
+
+폼 제출 후 성공 메시지를 표시하는 패턴:
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function FormSaveExample() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      // API 호출 시뮬레이션
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      ToastQueue.positive('변경 사항이 저장되었습니다');
+    } catch (error) {
+      ToastQueue.negative('저장에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button variant="primary" isPending={isLoading} onPress={handleSave}>
+      저장하기
+    </Button>
+  );
+}
+```
+
+### 2. 실행 취소 기능
+
+실행 취소 액션이 있는 Toast:
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function UndoExample() {
+  const handleDelete = () => {
+    // 삭제 로직
+    console.log('항목 삭제됨');
+
+    ToastQueue.neutral('항목이 삭제되었습니다', {
+      actionLabel: '실행 취소',
+      onAction: () => {
+        // 실행 취소 로직
+        console.log('삭제 취소됨');
+        ToastQueue.positive('삭제가 취소되었습니다');
+      },
+      shouldCloseOnAction: true,
+    });
+  };
+
+  return (
+    <Button variant="negative" onPress={handleDelete}>
+      삭제하기
+    </Button>
+  );
+}
+```
+
+### 3. 네트워크 오류 처리
+
+네트워크 오류 시 재시도 옵션 제공:
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function NetworkErrorExample() {
+  const fetchData = async () => {
+    try {
+      // API 호출 시뮬레이션 (실패)
+      throw new Error('Network error');
+    } catch (error) {
+      ToastQueue.negative('네트워크 오류가 발생했습니다', {
+        actionLabel: '재시도',
+        onAction: () => fetchData(),
+        shouldCloseOnAction: true,
+      });
+    }
+  };
+
+  return (
+    <Button variant="primary" onPress={fetchData}>
+      데이터 가져오기
+    </Button>
+  );
+}
+```
+
+## API 참고
+
+자세한 API 문서는 [React Spectrum Toast 문서](https://react-spectrum.adobe.com/react-spectrum/toast.html)를 참조하세요.
+
+### 컴포넌트
+
+| 컴포넌트 | 설명 |
+| ------- | ------ |
+| `ToastContainer` | Toast를 렌더링하는 컨테이너. 앱 루트에 한 번만 추가 |
+| `ToastQueue` | Toast를 표시하기 위한 유틸리티 객체 |
+
+## 컴포넌트 정보
+
+- **소스**: `lib/ui/Toast/index.tsx`
+- **유틸리티**: `lib/ui/Toast/toast.ts`
+- **스타일**: `lib/ui/Toast/styles.css`
+- **내보내기**: `ToastContainer`는 `@/components/ui/Toast`, `ToastQueue`는 `@/utils/toast`에서
+- **기반**: React Spectrum (@react-spectrum/toast)
+- **CSS 커스터마이징**: 지원

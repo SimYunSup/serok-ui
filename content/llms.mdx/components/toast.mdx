@@ -1,0 +1,340 @@
+---
+title: Toast
+componentName: Toast
+status: stable
+lastUpdated: "2025-12-05"
+spectrumBased: true
+spectrumReference: "@react-spectrum/toast"
+description: "Notification component for displaying brief messages. Supports 4 semantic variants (neutral, info, positive, negative) with queue-based management and optional action buttons."
+---
+
+# Toast
+
+## Overview
+
+Toast is a notification component that displays brief, non-intrusive messages to users. Toasts are used for operation feedback, error alerts, and informational notifications. Serok UI's Toast component extends React Spectrum's Toast with a simplified API using ToastQueue methods.
+
+## Quick Start
+
+First, add `ToastContainer` to your app's root:
+
+```tsx
+// app/root.tsx or top-level layout
+import { ToastContainer } from '@/components/ui/Toast';
+import { SerokProvider } from '@/components/ui/Provider';
+
+export function Layout({ children }) {
+  return (
+    <SerokProvider>
+      {children}
+      <ToastContainer />
+    </SerokProvider>
+  );
+}
+```
+
+Then use `ToastQueue` anywhere to show toasts:
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function MyComponent() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.positive('Saved successfully!')}
+    >
+      Save
+    </Button>
+  );
+}
+```
+
+## Props
+
+### ToastQueue Methods
+
+| Method | Description | Icon |
+|--------|-------------|------|
+| `ToastQueue.neutral(message, options?)` | General notification (no icon) | — |
+| `ToastQueue.info(message, options?)` | Informational notification | Blue info icon |
+| `ToastQueue.positive(message, options?)` | Success notification | Green check icon |
+| `ToastQueue.negative(message, options?)` | Error/warning notification | Red warning icon |
+
+### Options
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `actionLabel` | `string` | No | — | Text for action button |
+| `onAction` | `() => void` | No | — | Callback when action button clicked |
+| `shouldCloseOnAction` | `boolean` | No | `false` | Auto-close toast on action click |
+| `onClose` | `() => void` | No | — | Callback when toast closes |
+| `timeout` | `number` | No | `5000` | Auto-dismiss time (ms, min 5000ms) |
+
+**Additional Notes**:
+- All methods return a `close()` function for programmatic dismissal
+- Toasts with action buttons do not auto-dismiss
+- Multiple toasts are managed in a queue
+
+## Variants & States
+
+### Semantic Variants
+
+| Variant | Method | Use Case |
+|---------|--------|----------|
+| Neutral | `ToastQueue.neutral()` | General notifications, neutral info |
+| Info | `ToastQueue.info()` | Informational alerts, tips, guidance |
+| Positive | `ToastQueue.positive()` | Success feedback, completion messages |
+| Negative | `ToastQueue.negative()` | Errors, warnings, failure notifications |
+
+### Behavioral States
+
+- **Visible**: Toast displayed on screen
+- **With Action**: Contains action button, no auto-dismiss
+- **Auto-dismiss**: Closes after timeout (default 5 seconds)
+
+## Examples
+
+### Basic Usage
+
+Simplest way to show a toast notification.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function BasicExample() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.neutral('Message here')}
+    >
+      Show Toast
+    </Button>
+  );
+}
+```
+
+### All Variants
+
+Example showing all four semantic variants.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function VariantsExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.neutral('General notification')}
+      >
+        Neutral
+      </Button>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.info('Info notification')}
+      >
+        Info
+      </Button>
+      <Button
+        variant="primary"
+        onPress={() => ToastQueue.positive('Success notification')}
+      >
+        Positive
+      </Button>
+      <Button
+        variant="negative"
+        onPress={() => ToastQueue.negative('Error notification')}
+      >
+        Negative
+      </Button>
+    </div>
+  );
+}
+```
+
+### With Action Button
+
+Toast with an action button for user interaction.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function ActionExample() {
+  return (
+    <Button
+      variant="primary"
+      onPress={() => ToastQueue.info('Update available', {
+        actionLabel: 'Update',
+        onAction: () => console.log('Action clicked!'),
+        shouldCloseOnAction: true,
+      })}
+    >
+      Toast with Action
+    </Button>
+  );
+}
+```
+
+### Programmatic Close
+
+Manually closing a toast using the returned close function.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function ProgrammaticCloseExample() {
+  const [closeToast, setCloseToast] = useState<(() => void) | null>(null);
+
+  const handlePress = () => {
+    if (closeToast) {
+      closeToast();
+      setCloseToast(null);
+    } else {
+      const close = ToastQueue.info('This toast can be closed programmatically', {
+        onClose: () => setCloseToast(null),
+      });
+      setCloseToast(() => close);
+    }
+  };
+
+  return (
+    <Button variant="primary" onPress={handlePress}>
+      {closeToast ? 'Close Toast' : 'Show Toast'}
+    </Button>
+  );
+}
+```
+
+### Async Operation Feedback
+
+Showing success/error toasts after async operations.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
+
+export function AsyncExample() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      ToastQueue.positive('Changes saved successfully');
+    } catch (error) {
+      ToastQueue.negative('Failed to save. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <Button variant="primary" isPending={isLoading} onPress={handleSave}>
+      Save
+    </Button>
+  );
+}
+```
+
+### Undo Pattern
+
+Toast with undo action for destructive operations.
+
+```tsx
+import { ToastQueue } from '@/utils/toast';
+import { Button } from '@/components/ui/Button';
+
+export function UndoExample() {
+  const handleDelete = () => {
+    console.log('Item deleted');
+
+    ToastQueue.neutral('Item deleted', {
+      actionLabel: 'Undo',
+      onAction: () => {
+        console.log('Delete undone');
+        ToastQueue.positive('Deletion undone');
+      },
+      shouldCloseOnAction: true,
+    });
+  };
+
+  return (
+    <Button variant="negative" onPress={handleDelete}>
+      Delete
+    </Button>
+  );
+}
+```
+
+## CSS Customization
+
+### CSS Variables
+
+The Toast component uses React Spectrum's toast variables:
+
+```css
+/* Base toast styling */
+.serok-toast-container .spectrum-Toast {
+  --spectrum-toast-background-color: #1f2937;
+  --spectrum-toast-font-color: #f9fafb;
+  border-radius: 12px;
+}
+```
+
+### Using CSS Variables
+
+```tsx
+import { ToastContainer } from '@/components/ui/Toast';
+import './custom-toast-styles.css';
+
+export function CustomToast() {
+  return <ToastContainer />;
+}
+```
+
+```css
+/* custom-toast-styles.css */
+.serok-toast-container .spectrum-Toast--info .spectrum-Icon {
+  color: #3b82f6;
+}
+
+.serok-toast-container .spectrum-Toast--positive .spectrum-Icon {
+  color: #22c55e;
+}
+
+.serok-toast-container .spectrum-Toast--negative .spectrum-Icon {
+  color: #ef4444;
+}
+```
+
+## API Reference
+
+For comprehensive documentation, refer to the [React Spectrum Toast documentation](https://react-spectrum.adobe.com/react-spectrum/toast.html).
+
+### Components
+
+| Component | Description |
+|-----------|-------------|
+| `ToastContainer` | Container for rendering toasts. Add once to app root |
+| `ToastQueue` | Utility object for showing toasts |
+
+All other functionality is inherited from React Spectrum's Toast system. Refer to [React Spectrum Toast](https://react-spectrum.adobe.com/react-spectrum/toast.html) for complete details.
+
+---
+
+## Component Information
+
+- **Source**: `lib/ui/Toast/index.tsx`
+- **Utility**: `lib/lib/toast.ts`
+- **Styles**: `lib/ui/Toast/styles.css`
+- **Export**: `ToastContainer` from `@/components/ui/Toast`, `ToastQueue` from `@/utils/toast`
+- **React Spectrum Base**: Yes (@react-spectrum/toast)
+- **CSS Customizable**: Yes

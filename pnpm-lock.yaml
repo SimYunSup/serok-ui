@@ -47,6 +47,9 @@ importers:
       '@react-spectrum/theme-default':
         specifier: ^3.5.22
         version: 3.5.22(react@19.2.1)
+      '@react-spectrum/toast':
+        specifier: ^3.1.4
+        version: 3.1.4(@react-spectrum/provider@3.10.11(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       culori:
         specifier: ^4.0.2
         version: 4.0.2
@@ -2314,6 +2317,13 @@ packages:
     resolution: {integrity: sha512-0i6bv4nAlRtBNO2QN2hk42KKYeffjPZEJK4YXzVLji0EpZwVjyq4JqtcOqeI5zZh4YlPhVbv59iaHycG0vHl1A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+
+  '@react-spectrum/toast@3.1.4':
+    resolution: {integrity: sha512-Efzfrci8xfjcjrO7B7VYS0p7mY7UnRNaavJmZLp5of1rZvgiqwYPiBcPsw0ry1x3MGU+t78d6zbbGY01UwcCjw==}
+    peerDependencies:
+      '@react-spectrum/provider': ^3.0.0
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
   '@react-spectrum/utils@3.12.9':
     resolution: {integrity: sha512-GQCa92OMaBS1vo5rNSbl70QgRz/FPVNqst2Xl1iRs+g4K0emSiHEpKvj0WnVa9wVwtN37YpNeWNY/mRtfx7U8g==}
@@ -9516,6 +9526,24 @@ snapshots:
       '@react-types/provider': 3.8.13(react@19.2.1)
       '@swc/helpers': 0.5.17
       react: 19.2.1
+
+  '@react-spectrum/toast@3.1.4(@react-spectrum/provider@3.10.11(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
+    dependencies:
+      '@react-aria/focus': 3.21.2(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-aria/i18n': 3.12.13(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-aria/overlays': 3.30.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-aria/toast': 3.0.8(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-aria/utils': 3.31.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-spectrum/button': 3.17.4(@react-spectrum/provider@3.10.11(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-spectrum/provider': 3.10.11(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-spectrum/utils': 3.12.9(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@react-stately/toast': 3.1.2(react@19.2.1)
+      '@react-types/shared': 3.32.1(react@19.2.1)
+      '@spectrum-icons/ui': 3.6.20(@react-spectrum/provider@3.10.11(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      '@swc/helpers': 0.5.17
+      react: 19.2.1
+      react-dom: 19.2.1(react@19.2.1)
+      use-sync-external-store: 1.6.0(react@19.2.1)
 
   '@react-spectrum/utils@3.12.9(react-dom@19.2.1(react@19.2.1))(react@19.2.1)':
     dependencies:

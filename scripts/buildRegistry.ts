@@ -270,6 +270,8 @@ try {
             const fileType = content.match(/\/\*[\s\S]*?registry:([a-z]*)[\s\S]*?\*\//)?.[1];
             const dependencies = extractDependenciesFromJS(content);
             const relativePath = path.relative(cwd, filePath).replace('lib/', '');
+
+
             fileData.push({
               path: relativePath,
               type: fileType ? `registry:${fileType}` : 'registry:component',
@@ -305,6 +307,42 @@ try {
               ? Array.from(registryDependencies)
               : undefined,
           files: fileData,
+        });
+      }
+    }
+  }
+
+  // name: 주석이 있는 개별 파일들을 해당 컴포넌트에 병합
+  for (const type of types) {
+    const typeDir = path.join(libDirectory, type);
+    const exists = await fs.access(typeDir).then(() => true).catch(() => false);
+
+    if (!exists) continue;
+
+    const items = await fs.readdir(typeDir, { withFileTypes: true });
+    for (const item of items) {
+      if (item.isFile() && (item.name.endsWith('.ts') || item.name.endsWith('.tsx'))) {
+        const filePath = path.join(typeDir, item.name);
+        const content = await fs.readFile(filePath, 'utf-8');
+
+        // /* name: componentName 또는 /* name; componentName 형식의 주석에서 name 추출
+        const nameMatch = content.match(/\/\*\s*name[;:]\s*(\w+)/);
+        if (!nameMatch) continue;
+
+        const targetName = nameMatch[1].toLowerCase();
+        const targetItem = registry.items.find(i => i.name === targetName);
+        if (!targetItem) continue;
+
+        const typeMatch = content.match(/\*\s*type:\s*registry:(\w+)/);
+        const fileType = typeMatch ? `registry:${typeMatch[1]}` : `registry:${type}`;
+        const dependencies = extractDependenciesFromJS(content);
+        const relativePath = path.relative(cwd, filePath).replace('lib/', '');
+
+        targetItem.files.push({ path: relativePath, type: fileType });
+        dependencies.forEach(dep => {
+          if (!targetItem.dependencies?.includes(dep)) {
+            targetItem.dependencies = [...(targetItem.dependencies || []), dep];
+          }
         });
       }
     }
